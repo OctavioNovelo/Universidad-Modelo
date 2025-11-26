@@ -1,0 +1,24 @@
+{
+    "empleados": [
+        {
+            "nombre": "Litzy Richaud",
+            "usrname": "LR",
+            "id": "001",
+            "password": "pepito123"
+        },
+        {
+            "nombre": "Aylin Ocampo",
+            "usrname": "AO",
+            "id": "002",
+            "password": "botellas123"
+        }
+    ],
+    "gerentes": [
+        {
+            "nombre": "Octavio Novelo",
+            "usrname": "ON",
+            "id": "001",
+            "password": "xdlollmao"
+        }
+    ]
+}
