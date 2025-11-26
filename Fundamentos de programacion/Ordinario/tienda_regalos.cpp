@@ -7,4 +7,4 @@ int main ()
     cout << "Hola uwu";
 }
 
-//ahuevo
+//ahuevo listo ya porfavoorrrrrr help
