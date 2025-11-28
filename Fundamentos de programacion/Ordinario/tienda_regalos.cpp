@@ -1,12 +1,45 @@
 #include <iostream>
 #include <fstream>
-// #include <jsoncpp/json/json.h>
+
 
 using namespace std;
 
-int main ()
+void abrirJson()
 {
     ifstream ifs("empleados.json");
+    /*
+    json j;
+    file >> j;
+    */ //Falta agregar la biblioteca
+}
+
+void accederDatos()
+{
+    /*
+    string nombre = j["nombre"];
+    string id = j["id"];
+    */
+
+}
+
+void modificarDatos()
+{
+    /*
+    j["nombre"] = j["nombre"].get<string>(Pepito);
+    j["birthday"] = "12/09/2006";
+    */
+}
+
+void guardarDatos()
+{
+    /*
+    ofstream out("empleados.json");
+    out << j.dump(4);
+    */
+}
+
+int main ()
+{
 }
 
 //ahuevo listo ya porfavoorrrrrr help
