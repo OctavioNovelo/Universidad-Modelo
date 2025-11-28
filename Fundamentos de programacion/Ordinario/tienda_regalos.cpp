@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 
+#include <nlohmann.json/include/nlohmann/json.hpp>
 
+using json = nlohmann::json;
 using namespace std;
 
 void abrirJson()
