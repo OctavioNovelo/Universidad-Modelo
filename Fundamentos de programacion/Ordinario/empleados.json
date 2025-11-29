@@ -2,23 +2,24 @@
     "empleados": [
         {
             "nombre": "Litzy Richaud",
-            "usrname": "LR",
-            "id": "001",
-            "password": "pepito123"
+            "username": "LR",
+            "id": 1,
+            "password": "pepito123",
+            "categoria": "empleado"
         },
         {
             "nombre": "Aili Ocampo",
-            "usrname": "AO",
-            "id": "002",
-            "password": "botellas123"
-        }
-    ],
-    "gerentes": [
+            "username": "AO",
+            "id": 2,
+            "password": "botellas123",
+            "categoria": "empleado"
+        },
         {
             "nombre": "Octavio Novelo",
-            "usrname": "ON",
-            "id": "001",
-            "password": "xdlollmao"
+            "username": "ON",
+            "id": 3,
+            "password": "xdlollmao",
+            "categoria": "gerente" 
         }
     ]
 }
