@@ -268,8 +268,7 @@ int main ()
     {
         return 0;
     }
-
-    if (categoria["categoria"] == "gerente")
+    else if (categoria["categoria"] == "gerente")
     {
         //Abrir pagina principal
         // Escoger entre:
