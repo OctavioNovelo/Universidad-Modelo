@@ -4,6 +4,9 @@
 -Hacer una funcion que abra los JSON
 -Hacer que el ID se coloque automaticamente
 */
+
+/* Correciones
+-*/
 #include <iostream>
 #include <fstream>
 
@@ -19,6 +22,7 @@ json usuario;
 int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
 
+
 void limpiarPantalla()
 {
     // Si es windows usa cls
@@ -30,12 +34,13 @@ void limpiarPantalla()
     #endif
 }
 
+
 json verificarId()
 {
-    cout << endl << "Iniciar Sesion\n";
+    cout << "Iniciar Sesion\n";
     cout << "Username: ";
     cin >> username;
-    cout << endl << "Password: ";
+    cout << "Password: ";
     cin >> password;
     cout << endl;
 
@@ -86,6 +91,7 @@ json abrirJson()
         cout << "1 - Productos.\n";
         cout << "2 - Empleados.\n";
         cout << "3 - Historial de ventas.\n";
+        cout << "4 - Regresar.\n";
         cin >> a;
         switch (a)
         {
@@ -112,7 +118,12 @@ json abrirJson()
                 limpiarPantalla();
                 return archivo = historial;
             }
-            
+            case 4:
+            {
+                // Regresar a la pantalla anterior
+                limpiarPantalla();
+                verificarId();
+            }
             default:
             {
                 limpiarPantalla();
@@ -125,6 +136,62 @@ json abrirJson()
 }
 
 
+void mostrarArchvio()
+{
+    limpiarPantalla();
+
+    switch (a)
+    {
+    case 1:
+        // Producto
+        cout << left
+             << setw(5) << "ID"
+             << setw(30) << "Nombre"
+             << setw(15) << "Cantidad"
+             << setw(15) << "Precio\n"
+             << string(75, '-') << '\n';
+
+        for (auto& pro : archivo["productos"])
+        {
+            cout << left;
+            cout << setw(5) << pro["id"].get<int>();
+            cout << setw(30) << pro["nombre"].get<string>();
+            cout << setw(15) << pro["stock"].get<int>();
+            cout << setw(15) << pro["precio"].get<int>();
+            cout << "\n";
+        }
+
+        cout << endl;
+        break;
+    case 2:
+        // Empleado
+        cout << left;
+        cout << setw(5) << "ID";
+        cout << setw(10) << "Usuario";
+        cout << setw(30) << "Nombre";
+        cout << setw(15) << "Categoria\n";
+        cout << string(75, '-') << endl;
+
+        for (auto& emp : archivo["empleados"])
+        {
+            cout << setw(5) << emp["id"].get<int>();
+            cout << setw(10) << emp["username"].get<string>();
+            cout << setw(30) << emp["nombre"].get<string>();
+            cout << setw(15) << emp["categoria"].get<string>();
+            cout << '\n';
+        }
+
+        cout << endl;
+        break;
+    case 3:
+        // Historial de ventas
+        break;
+    default:
+        break;
+    }
+}
+
+
 void seleccionarAccion()
 {
     if (usuario["categoria"] == "gerente")
@@ -133,33 +200,36 @@ void seleccionarAccion()
         {
         case 1:
         {
-            cout << archivo << endl;
+            mostrarArchvio();
             cout << "Que accion desea realizar ?\n";
             cout << "1 - Agregar producto.\n";
             cout << "2 - Eliminar producto.\n";
             cout << "3 - Modificar producto.\n";
+            cout << "4 - Regresar.\n";
             cin >> b;
             limpiarPantalla();
             break;
         }
         case 2:
         {
-            cout << archivo << endl;
+            mostrarArchvio();
             cout << "Que accion desea realizar ?\n";
             cout << "1 - Agregar empleado.\n";
             cout << "2 - Eliminar empleado.\n";
             cout << "3 - Modificar informacion del empleado.\n";
+            cout << "4 - Regresar.\n";
             cin >> b;
             limpiarPantalla();
             break;
         }
         case 3:
         {
-            cout << archivo << endl;
-            cout << "Que accion desea realizar ?\n" << endl;
-            cout << "1 - Descargar historial de venta.\n" << endl;
-            cout << "2 - Imprimir historial de venta.\n" << endl;
-            cout << "3 - Borrar historial de venta.\n" << endl;
+            mostrarArchvio();
+            cout << "Que accion desea realizar ?\n";
+            cout << "1 - Descargar historial de venta.\n";
+            cout << "2 - Imprimir historial de venta.\n";
+            cout << "3 - Borrar historial de venta.\n";;
+            cout << "4 - Regresar.\n";
             cin >> b;
             limpiarPantalla();
             break;
@@ -174,10 +244,10 @@ void seleccionarAccion()
     else if (usuario["categoria"] == "empleado")
     {
         cout << archivo << endl;
-        cout << "Que accion desea realizar ?\n" << endl;
-        cout << "1 - Agregar producto.\n" << endl;
-        cout << "2 - Eliminar producto.\n" << endl;
-        cout << "3 - Modificar producto.\n" << endl;
+        cout << "Que accion desea realizar ?\n";
+        cout << "1 - Agregar producto.\n";
+        cout << "2 - Eliminar producto.\n";
+        cout << "3 - Modificar producto.\n";
         cin >> b;
         limpiarPantalla();
     }
@@ -199,7 +269,7 @@ void modificarDatos()
     {
         if (a == 1) // Productos
         {
-            switch (b) // 1, 2, 3
+            switch (b) // 1, 2, 3, 4 
             {
                 case 1: 
                 {
@@ -240,6 +310,11 @@ void modificarDatos()
                 {
                     // Modificar
                     break;
+                }
+                case 4:
+                {
+                    //Regresar
+                    return;
                 }
             }
         }
