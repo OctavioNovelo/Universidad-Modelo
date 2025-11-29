@@ -134,10 +134,10 @@ void seleccionarAccion()
         case 1:
         {
             cout << archivo << endl;
-            cout << "Que accion desea realizar ?\n" << endl;
-            cout << "1 - Agregar producto.\n" << endl;
-            cout << "2 - Eliminar producto.\n" << endl;
-            cout << "3 - Modificar producto.\n" << endl;
+            cout << "Que accion desea realizar ?\n";
+            cout << "1 - Agregar producto.\n";
+            cout << "2 - Eliminar producto.\n";
+            cout << "3 - Modificar producto.\n";
             cin >> b;
             limpiarPantalla();
             break;
@@ -145,10 +145,10 @@ void seleccionarAccion()
         case 2:
         {
             cout << archivo << endl;
-            cout << "Que accion desea realizar ?\n" << endl;
-            cout << "1 - Agregar empleado.\n" << endl;
-            cout << "2 - Eliminar empleado.\n" << endl;
-            cout << "3 - Modificar informacion del empleado.\n" << endl;
+            cout << "Que accion desea realizar ?\n";
+            cout << "1 - Agregar empleado.\n";
+            cout << "2 - Eliminar empleado.\n";
+            cout << "3 - Modificar informacion del empleado.\n";
             cin >> b;
             limpiarPantalla();
             break;
@@ -186,7 +186,8 @@ void seleccionarAccion()
 
 void modificarDatos()
 {
-    string nombre;
+    string nombre_producto;
+    string nombre_empleado;
     string password;
     string categoria;
     int stock;
@@ -203,7 +204,8 @@ void modificarDatos()
                 case 1: 
                 {
                     cout << "Nombre del producto: ";
-                    cin >> nombre;
+                    cin.ignore();
+                    getline(cin, nombre_producto);
 
                     cout << "ID del producto: ";
                     cin >> id_producto;
@@ -216,7 +218,7 @@ void modificarDatos()
 
                     json nuevo_producto = {
                         {"id", id_producto},
-                        {"nombre", nombre},
+                        {"nombre", nombre_producto},
                         {"stock", stock},
                         {"precio", precio}
                     };
@@ -248,7 +250,8 @@ void modificarDatos()
                 case 1: 
                 {
                     cout << "Nombre del empleado: ";
-                    cin >> nombre;
+                    cin.ignore();
+                    getline(cin, nombre_empleado);
 
                     cout << "ID del empleado: ";
                     cin >> id_empleado;
@@ -264,7 +267,7 @@ void modificarDatos()
 
                     json nuevo_empleado = {
                         {"id", id_empleado},
-                        {"nombre", nombre},
+                        {"nombre", nombre_empleado},
                         {"username", username},
                         {"password", password},
                         {"categoria", categoria}
@@ -315,7 +318,7 @@ void modificarDatos()
                 case 1: 
                 {
                     cout << "Nombre del producto: ";
-                    cin >> nombre;
+                    cin >> nombre_producto;
 
                     cout << "ID del producto: ";
                     cin >> id_producto;
@@ -327,7 +330,7 @@ void modificarDatos()
                     cin >> precio;
 
                     json nuevo_objeto = {
-                        {"nombre", nombre},
+                        {"nombre", nombre_producto},
                         {"id", id_producto},
                         {"stock", stock},
                         {"precio", precio}
@@ -358,10 +361,12 @@ void modificarDatos()
 
 int main ()
 {
+    limpiarPantalla();
+    usuario = verificarId();
+    
     while (true)
     {
-        usuario = verificarId();
-
+        
         if (usuario.is_null()) {
             cout << "Informacion incorrecta. Intenta de nuevo.\n";
             continue;
