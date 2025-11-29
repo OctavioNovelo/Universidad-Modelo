@@ -16,7 +16,6 @@ string username;
 string password;
 json archivo;
 json usuario;
-int id_empleado; // 1 Gerente 0 Empleado
 int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
 
@@ -193,6 +192,7 @@ void modificarDatos()
     int stock;
     int precio;
     int id_producto;
+    int id_empleado;
 
     if (usuario["categoria"] == "gerente")
     {
@@ -226,14 +226,18 @@ void modificarDatos()
                     //Guardamos el archivo
                     ofstream out("productos.json");
                     out << archivo.dump(4);
+
+                    break;
                 }
                 case 2:
                 {
                     // Eliminar
+                    break;
                 }
                 case 3:
                 {
                     // Modificar
+                    break;
                 }
             }
         }
@@ -270,14 +274,18 @@ void modificarDatos()
 
                     ofstream out("empleados.json");
                     out << archivo.dump(4);
+                    
+                    break;
                 }
                 case 2:
                 {
                     // Eliminar
+                    break;
                 }
                 case 3:
                 {
                     // Modificar
+                    break;
                 }
             }
         }
@@ -330,14 +338,18 @@ void modificarDatos()
                     //Guardamos el archivo
                     ofstream out("productos.json");
                     out << archivo.dump(4);
+
+                    break;
                 }
                 case 2:
                 {
                     // Eliminar
+                    break;
                 }
                 case 3:
                 {
                     // Modificar
+                    break;
                 }
             }
     }
@@ -349,7 +361,17 @@ int main ()
     while (true)
     {
         usuario = verificarId();
+
+        if (usuario.is_null()) {
+            cout << "Informacion incorrecta. Intenta de nuevo.\n";
+            continue;
+        }
+
         archivo = abrirJson();
+
+        if (archivo.is_null()) {
+            continue;
+        }
         seleccionarAccion();
         modificarDatos();
     }
