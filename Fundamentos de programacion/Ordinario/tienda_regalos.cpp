@@ -6,7 +6,8 @@
 */
 
 /* Correciones
--*/
+- Cuando vuelvo a llamar verificarId() la sesion no cambia
+*/
 #include <iostream>
 #include <fstream>
 
@@ -75,12 +76,33 @@ json abrirJson()
     if (usuario["categoria"] == "empleado")
     {
         limpiarPantalla();
-        // El empleado solo puede acceder a los productos
+        // El empleado solo puede acceder a los productos y salir
         cout << "Bienvenido empleado " << usuario["nombre"] << endl;
-        ifstream f("productos.json");
-        json productos = json::parse(f);
-        limpiarPantalla();
-        return archivo = productos;
+        cout << "Que desea hacer ?\n";
+        cout << "1 - Productos.\n";
+        cout << "2 - Regresar.\n";
+        cin >> a;
+
+        switch (a)
+        {
+            case 1:
+            {
+                ifstream f("productos.json");
+                json productos = json::parse(f);
+                limpiarPantalla();
+                return archivo = productos;
+            }
+            case 2:
+            {
+                limpiarPantalla();
+                verificarId();
+            }
+            default:
+            {
+                limpiarPantalla();
+                return json();
+            }
+        }
     }
     else if (usuario["categoria"] == "gerente")
     {
@@ -140,54 +162,96 @@ void mostrarArchvio()
 {
     limpiarPantalla();
 
-    switch (a)
+    if (usuario["categoria"] == "gerente")
     {
-    case 1:
-        // Producto
-        cout << left
-             << setw(5) << "ID"
-             << setw(30) << "Nombre"
-             << setw(15) << "Cantidad"
-             << setw(15) << "Precio\n"
-             << string(75, '-') << '\n';
-
-        for (auto& pro : archivo["productos"])
+        switch (a)
         {
+        case 1:
+            // Producto
+            cout << left
+                << setw(5) << "ID"
+                << setw(30) << "Nombre"
+                << setw(15) << "Cantidad"
+                << setw(15) << "Precio\n"
+                << string(75, '-') << '\n';
+
+            for (auto& pro : archivo["productos"])
+            {
+                cout << left;
+                cout << setw(5) << pro["id"].get<int>();
+                cout << setw(30) << pro["nombre"].get<string>();
+                cout << setw(15) << pro["stock"].get<int>();
+                cout << setw(15) << pro["precio"].get<int>();
+                cout << "\n";
+            }
+
+            cout << endl;
+            break;
+        case 2:
+            // Empleado
             cout << left;
-            cout << setw(5) << pro["id"].get<int>();
-            cout << setw(30) << pro["nombre"].get<string>();
-            cout << setw(15) << pro["stock"].get<int>();
-            cout << setw(15) << pro["precio"].get<int>();
-            cout << "\n";
-        }
+            cout << setw(5) << "ID";
+            cout << setw(10) << "Usuario";
+            cout << setw(30) << "Nombre";
+            cout << setw(15) << "Categoria\n";
+            cout << string(75, '-') << endl;
 
-        cout << endl;
-        break;
-    case 2:
-        // Empleado
-        cout << left;
-        cout << setw(5) << "ID";
-        cout << setw(10) << "Usuario";
-        cout << setw(30) << "Nombre";
-        cout << setw(15) << "Categoria\n";
-        cout << string(75, '-') << endl;
+            for (auto& emp : archivo["empleados"])
+            {
+                cout << setw(5) << emp["id"].get<int>();
+                cout << setw(10) << emp["username"].get<string>();
+                cout << setw(30) << emp["nombre"].get<string>();
+                cout << setw(15) << emp["categoria"].get<string>();
+                cout << '\n';
+            }
 
-        for (auto& emp : archivo["empleados"])
+            cout << endl;
+            break;
+        case 3:
+            // Historial de ventas
+            break;
+        case 4:
         {
-            cout << setw(5) << emp["id"].get<int>();
-            cout << setw(10) << emp["username"].get<string>();
-            cout << setw(30) << emp["nombre"].get<string>();
-            cout << setw(15) << emp["categoria"].get<string>();
-            cout << '\n';
+            limpiarPantalla();
+            break;
         }
+        default:
+            break;
+        }
+    }
+    else if (usuario["categoria"] == "empleado")
+    {
+        switch (a)
+        {
+            case 1:
+            {
+                // Producto
+                cout << left
+                    << setw(5) << "ID"
+                    << setw(30) << "Nombre"
+                    << setw(15) << "Cantidad"
+                    << setw(15) << "Precio\n"
+                    << string(75, '-') << '\n';
 
-        cout << endl;
-        break;
-    case 3:
-        // Historial de ventas
-        break;
-    default:
-        break;
+                for (auto& pro : archivo["productos"])
+                {
+                    cout << left;
+                    cout << setw(5) << pro["id"].get<int>();
+                    cout << setw(30) << pro["nombre"].get<string>();
+                    cout << setw(15) << pro["stock"].get<int>();
+                    cout << setw(15) << pro["precio"].get<int>();
+                    cout << "\n";
+                }
+
+                cout << endl;
+                break;
+            }
+            case 2:
+            {
+                limpiarPantalla();
+                verificarId();
+            }
+        }
     }
 }
 
@@ -248,6 +312,7 @@ void seleccionarAccion()
         cout << "1 - Agregar producto.\n";
         cout << "2 - Eliminar producto.\n";
         cout << "3 - Modificar producto.\n";
+        cout << "4 - Regresar";
         cin >> b;
         limpiarPantalla();
     }
@@ -388,7 +453,7 @@ void modificarDatos()
     }
     else if (usuario["categoria"] == "empleado")
     {
-        switch (b) // 1, 2, 3
+        switch (b) // 1, 2, 3, 4
             {
                 case 1: 
                 {
@@ -428,6 +493,11 @@ void modificarDatos()
                 {
                     // Modificar
                     break;
+                }
+                case 4:
+                {
+                    limpiarPantalla();
+                    verificarId();
                 }
             }
     }
