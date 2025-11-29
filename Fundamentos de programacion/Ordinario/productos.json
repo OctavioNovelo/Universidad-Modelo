@@ -1,86 +1,86 @@
 {
     "productos": [
         {
+            "id": 1,
             "nombre": "Caja de regalo decorativa",
-            "id": "001",
             "stock": 10,
             "precio": 20
         },
         {
+            "id": 2,
             "nombre": "Bolsa de regalo decorativa",
-            "id": "0011",
             "stock": 10,
             "precio": 5
         },
         {
+            "id": 3,
             "nombre": "Globo de latex",
-            "id": "002",
             "stock": 10,
             "precio": 5
         },
         {
+            "id": 4,
             "nombre": "Peluche mini",
-            "id": "003",
             "stock": 10,
             "precio": 150
         },
         {
+            "id": 5,
             "nombre": "Peluche mediano",
-            "id": "0031",
             "stock": 10,
             "precio": 200
         },
         {
+            "id": 6,
             "nombre": "Peluche grande",
-            "id": "0032",
             "stock": 10,
             "precio": 300
         },
         {
+            "id": 7,
             "nombre": "Tarjeta de felicitacion",
-            "id": "004",
             "stock": 10,
             "precio": 55
         },
         {
+            "id": 8,
             "nombre": "Vela aromatica",
-            "id": "005",
             "stock": 10,
             "precio": 250
         },
         {
+            "id": 9,
             "nombre": "Taza",
-            "id": "006",
             "stock": 10,
             "precio": 150
         },
         {
+            "id": 10,
             "nombre": "Llavero",
-            "id": "007",
             "stock": 10,
             "precio": 65
         },
         {
+            "id": 11,
             "nombre": "Cojin",
-            "id": "008",
             "stock": 10,
             "precio": 150
         },
         {
+            "id": 12,
             "nombre": "Envoltura",
-            "id": "009",
             "stock": 10,
             "precio": 25
         },
         {
+            "id": 13,
             "nombre": "Sobres",
-            "id": "010",
             "stock": 10,
             "precio": 2
         },
         {
+            "id": 14,
             "nombre": "Sobre Pokemon",
-            "id": "011",
             "stock": 10,
             "precio": 99
         }

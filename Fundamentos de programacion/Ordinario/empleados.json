@@ -1,23 +1,23 @@
 {
     "empleados": [
         {
+            "id": 1,
             "nombre": "Litzy Richaud",
             "username": "LR",
-            "id": 1,
             "password": "pepito123",
             "categoria": "empleado"
         },
         {
+            "id": 2,
             "nombre": "Aili Ocampo",
             "username": "AO",
-            "id": 2,
             "password": "botellas123",
             "categoria": "empleado"
         },
         {
+            "id": 3,
             "nombre": "Octavio Novelo",
             "username": "ON",
-            "id": 3,
             "password": "xdlollmao",
             "categoria": "gerente" 
         }
