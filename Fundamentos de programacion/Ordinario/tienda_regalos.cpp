@@ -189,7 +189,7 @@ void modificarDatos()
 {
     string nombre;
     string password;
-    int categoria;
+    string categoria;
     int stock;
     int precio;
     int id_producto;

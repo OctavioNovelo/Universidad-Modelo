@@ -1,25 +1,32 @@
 {
     "empleados": [
         {
+            "categoria": "empleado",
             "id": 1,
             "nombre": "Litzy Richaud",
-            "username": "LR",
             "password": "pepito123",
-            "categoria": "empleado"
+            "username": "LR"
         },
         {
+            "categoria": "empleado",
             "id": 2,
             "nombre": "Aili Ocampo",
-            "username": "AO",
             "password": "botellas123",
-            "categoria": "empleado"
+            "username": "AO"
         },
         {
+            "categoria": "gerente",
             "id": 3,
             "nombre": "Octavio Novelo",
-            "username": "ON",
             "password": "xdlollmao",
-            "categoria": "gerente"
+            "username": "ON"
+        },
+        {
+            "categoria": 0,
+            "id": 3,
+            "nombre": "Gus",
+            "password": "123",
+            "username": "G"
         }
     ]
 }
