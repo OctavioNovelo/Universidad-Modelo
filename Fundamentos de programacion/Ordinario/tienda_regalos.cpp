@@ -57,6 +57,15 @@ void limpiarPantalla()
     #endif
 }
 
+void pausa(){
+    cout<<"Enter para continuar";
+    char ch;
+    while((ch = _getch()) != 13 && ch != 10){
+    }
+    cout<<endl;
+}
+
+
 //Lista
 json verificarId()
 {
@@ -519,6 +528,7 @@ bool venta(){
 
                 if (productoEncontrado==nullptr) {
                     cout<<"No existe ese producto\n"; //No hay en el Json eso
+                    pausa();
                     break;
                 }
 
@@ -530,11 +540,13 @@ bool venta(){
                     cout<<"Error: No hay suficiente stock\n";
                     cout<<"Stock disponible: "<<stockDisponible <<"\n";
                     cout<<"Cantidad solicitada: " <<cantidad <<"\n";
+                    pausa();
                     break; 
                 }
 
                 if(cantidad<=0){
                     cout<< "Error: La cantidad debe ser mayor a 0\n";
+                    pausa();
                     break;
                     }
 
@@ -562,6 +574,7 @@ bool venta(){
                 //Eliminar producto
                 if(carrito.empty()){ //Esta vacio y no se puede eliminar nada
                     cout<<"El carrito esta vacio\n";
+                    pausa();
                     break;
                 }
 
@@ -579,12 +592,14 @@ bool venta(){
 
                     if(cantidad<=0){
                         cout<<"Error, la cantidad debe ser mayor a 0\n";
+                        pausa();
                         break;
                     }
 
                     if(cantidad > carrito[i].cantidad){
                         cout<<"Error, no puedes eliminar mss de lo que hay en el carrito\n";
                         cout<<"Maximo a eliminar: " <<carrito[i].cantidad <<endl;
+                        pausa();
                         break;
                     }
 
@@ -602,6 +617,7 @@ bool venta(){
 
                 if(!encontrado){
                     cout<<"Producto no encontrado en el carrito\n";
+                    pausa();
                 }
                 break;
             }
@@ -610,6 +626,7 @@ bool venta(){
                  //Proceder al pago
                 if(carrito.empty()){ //Carrito vacio no se hace nada
                     cout<<"El carrito esta vacio\n";
+                    pausa();
                     break;
                 }
 
@@ -657,7 +674,7 @@ bool venta(){
             }
 
             default:
-            cout<<"Opción no valida\n";
+            cout<<"Opcion no valida\n";
             break;
 
         }
