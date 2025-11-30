@@ -10,10 +10,10 @@
 */
 #include <iostream>
 #include <fstream>
-
 #include <vector>
 #include <iomanip>
-
+#include <string>
+#include <conio.h>
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -50,12 +50,26 @@ void limpiarPantalla()
 //Lista
 json verificarId()
 {
-    cout << "Iniciar Sesion\n";
-    cout << "Username: ";
-    cin >> username;
-    cout << "Password: ";
-    cin >> password;
-    cout << endl;
+    cout<<"Iniciar Sesion\n";
+    cout<<"Username: ";
+    cin>>username;
+    cout<<"Password: ";
+    password="";
+    char ch;
+
+    while((ch = _getch()) != 13 && ch != 10){ 
+        if(ch == 8){ 
+            if(!password.empty()){
+                password.pop_back();
+                cout << "\b \b";
+            }
+        } 
+        else{
+            password+=ch;
+            cout<< '*';
+        }
+    }
+    cout<<endl;
 
     ifstream f("empleados.json");
     json empleados = json::parse(f);
@@ -69,11 +83,11 @@ json verificarId()
         {
             return emp;
         }
-    }
+    }   
     return nullptr;
 }
 
-//Lista // 77 - 171 mover 8 lineas
+//Lista 
 json abrirJson()
 {
 
@@ -88,32 +102,26 @@ json abrirJson()
     if (usuario["categoria"] == "empleado")
     {
         limpiarPantalla();
-        // El empleado solo puede acceder a los productos, carrito y salir
-        cout << "Bienvenido empleado " << usuario["nombre"] << '\n';
-        cout << "Aviso: Para navegar por la interfaz use el teclado numerico." << endl;
+        // El empleado solo puede acceder a los productos y salir
+        cout << "Bienvenido empleado " << usuario["nombre"] << endl;
         cout << "Que desea hacer ?\n";
-        cout << "1 - Carrito.\n";
-        cout << "2 - Productos.\n";
-        cout << "3 - Regresar.\n";
+        cout << "1 - Productos.\n";
+        cout << "2 - Regresar.\n";
         cin >> a;
 
         switch (a)
         {
             case 1:
             {
-                venta();
-            }
-            case 2:
-            {
                 ifstream f("productos.json");
                 json productos = json::parse(f);
                 limpiarPantalla();
                 return archivo = productos;
             }
-            case 3:
+            case 2:
             {
-                usuario = verificarId();
-                return usuario;
+                limpiarPantalla();
+                verificarId();
             }
             default:
             {
@@ -128,43 +136,41 @@ json abrirJson()
         // El gerente puede acceder a tres archvios distintos
         cout << "Bienvenido gerente " << usuario["nombre"] << endl;
         cout << endl << "Que desea revisar ?\n";
-        cout << "1 - Carrito.\n";
-        cout << "2 - Productos.\n";
-        cout << "3 - Empleados.\n";
-        cout << "4 - Historial de ventas.\n";
-        cout << "5 - Regresar.\n";
+        cout << "1 - Productos.\n";
+        cout << "2 - Empleados.\n";
+        cout << "3 - Historial de ventas.\n";
+        cout << "4 - Regresar.\n";
         cin >> a;
         switch (a)
         {
             case 1:
-            {
-                venta();
-            }
-            case 2:
             {
                 ifstream f("productos.json");
                 json productos = json::parse(f);
                 limpiarPantalla();
                 return archivo = productos;
             }
-            case 3:
+
+            case 2:
             {
                 ifstream f("empleados.json");
                 json empleados = json::parse(f);
                 limpiarPantalla();
                 return archivo = empleados;
             }
-            case 4:
+
+            case 3:
             {
                 ifstream f("historial.json");
                 json historial = json::parse(f);
                 limpiarPantalla();
                 return archivo = historial;
             }
-            case 5:
+            case 4:
             {
-                usuario = verificarId();
-                return usuario;
+                // Regresar a la pantalla anterior
+                limpiarPantalla();
+                verificarId();
             }
             default:
             {
@@ -186,7 +192,7 @@ void mostrarArchvio()
     {
         switch (a)
         {
-        case 2:
+        case 1:
             // Producto
             cout << left
                 << setw(5) << "ID"
@@ -207,7 +213,7 @@ void mostrarArchvio()
 
             cout << endl;
             break;
-        case 3:
+        case 2:
             // Empleado
             cout << left;
             cout << setw(5) << "ID";
@@ -227,24 +233,23 @@ void mostrarArchvio()
 
             cout << endl;
             break;
-        case 4:
+        case 3:
             // Historial de ventas
             break;
-        case 5:
+        case 4:
         {
-            return;
-        }
-        default:
-        {
+            limpiarPantalla();
             break;
         }
+        default:
+            break;
         }
     }
     else if (usuario["categoria"] == "empleado")
     {
         switch (a)
         {
-            case 2:
+            case 1:
             {
                 // Producto
                 cout << left
@@ -267,62 +272,63 @@ void mostrarArchvio()
                 cout << endl;
                 break;
             }
-            case 3:
+            case 2:
             {
-                return;
+                limpiarPantalla();
+                verificarId();
             }
         }
     }
 }
 
-// 271 - 332
-json seleccionarAccion()
+
+void seleccionarAccion()
 {
     if (usuario["categoria"] == "gerente")
     {
         switch (a)
         {
-            case 2: // Productos
-            {
-                mostrarArchvio();
-                cout << "Que accion desea realizar ?\n";
-                cout << "1 - Agregar producto.\n";
-                cout << "2 - Eliminar producto.\n";
-                cout << "3 - Modificar producto.\n";
-                cout << "4 - Regresar.\n";
-                cin >> b;
-                limpiarPantalla();
-                break;
-            }
-            case 3: // Empleados
-            {
-                mostrarArchvio();
-                cout << "Que accion desea realizar ?\n";
-                cout << "1 - Agregar empleado.\n";
-                cout << "2 - Eliminar empleado.\n";
-                cout << "3 - Modificar informacion del empleado.\n";
-                cout << "4 - Regresar.\n";
-                cin >> b;
-                limpiarPantalla();
-                break;
-            }
-            case 4: // Historial de ventas
-            {
-                mostrarArchvio();
-                cout << "Que accion desea realizar ?\n";
-                cout << "1 - Descargar historial de venta.\n";
-                cout << "2 - Imprimir historial de venta.\n";
-                cout << "3 - Borrar historial de venta.\n";;
-                cout << "4 - Regresar.\n";
-                cin >> b;
-                limpiarPantalla();
-                break;
-            }
-            default:
-            {
-                limpiarPantalla();
-                break;
-            }
+        case 1:
+        {
+            mostrarArchvio();
+            cout << "Que accion desea realizar ?\n";
+            cout << "1 - Agregar producto.\n";
+            cout << "2 - Eliminar producto.\n";
+            cout << "3 - Modificar producto.\n";
+            cout << "4 - Regresar.\n";
+            cin >> b;
+            limpiarPantalla();
+            break;
+        }
+        case 2:
+        {
+            mostrarArchvio();
+            cout << "Que accion desea realizar ?\n";
+            cout << "1 - Agregar empleado.\n";
+            cout << "2 - Eliminar empleado.\n";
+            cout << "3 - Modificar informacion del empleado.\n";
+            cout << "4 - Regresar.\n";
+            cin >> b;
+            limpiarPantalla();
+            break;
+        }
+        case 3:
+        {
+            mostrarArchvio();
+            cout << "Que accion desea realizar ?\n";
+            cout << "1 - Descargar historial de venta.\n";
+            cout << "2 - Imprimir historial de venta.\n";
+            cout << "3 - Borrar historial de venta.\n";;
+            cout << "4 - Regresar.\n";
+            cin >> b;
+            limpiarPantalla();
+            break;
+        }
+        default:
+        {
+            limpiarPantalla();
+            break;
+        }
         }
     }
     else if (usuario["categoria"] == "empleado")
@@ -334,10 +340,11 @@ json seleccionarAccion()
         cout << "3 - Modificar producto.\n";
         cout << "4 - Regresar";
         cin >> b;
+        limpiarPantalla();
     }
 }
 
-// 334 - 584
+
 json modificarDatos()
 {
     string nombre_producto;
@@ -351,7 +358,7 @@ json modificarDatos()
 
     if (usuario["categoria"] == "gerente")
     {
-        if (a == 2) // Productos
+        if (a == 1) // Productos
         {
             switch (b) // 1, 2, 3, 4 
             {
@@ -398,13 +405,13 @@ json modificarDatos()
                 case 4:
                 {
                     //Regresar
-                    return json();
+                    break;
                 }
             }
         }
-        else if (a == 3) // Empleados
+        else if (a == 2) // Empleados
         {
-            switch (b) // 1, 2, 3, 4
+            switch (b) // 1, 2, 3
             {
                 case 1: 
                 {
@@ -452,11 +459,11 @@ json modificarDatos()
                 case 4:
                 {
                     // Regresar
-                    return json();
+                    break;
                 }
             }
         }
-        else if (a == 4) //Historial de ventas
+        else if (a == 3) //Historial de ventas
         {
             switch (b) // 1, 2, 3
             {
@@ -475,14 +482,19 @@ json modificarDatos()
                 case 4:
                 {
                     // Regresar
-                    return json();
+                    return;
                 }
             }
+        }
+        else if (a == 4)
+        {
+            usuario = verificarId();
+            return usuario;
         }
     }
     else if (usuario["categoria"] == "empleado")
     {
-        if (a == 2)
+        if (a == 1)
         {
             switch (b) // 1, 2, 3, 4
             {
@@ -527,7 +539,57 @@ json modificarDatos()
                 }
                 case 4:
                 {
-                    return json();
+                    break;
+                }
+            }
+        }
+        else if (a == 2) // Carrito
+        {
+            switch (b) // 1, 2, 3, 4
+            {
+                case 1: 
+                {
+                    cout << "Nombre del producto: ";
+                    cin >> nombre_producto;
+
+                    cout << "ID del producto: ";
+                    cin >> id_producto;
+
+                    cout << "Cantidad del producto: ";
+                    cin >> stock;
+
+                    cout << "Precio unitario del producto: ";
+                    cin >> precio;
+
+                    json nuevo_objeto = {
+                        {"nombre", nombre_producto},
+                        {"id", id_producto},
+                        {"stock", stock},
+                        {"precio", precio}
+                    };
+
+                    archivo["productos"].push_back(nuevo_objeto);
+
+                    //Guardamos el archivo
+                    ofstream out("productos.json");
+                    out << archivo.dump(4);
+
+                    break;
+                }
+                case 2:
+                {
+                    // Eliminar
+                    break;
+                }
+                case 3:
+                {
+                    // Modificar
+                    break;
+                }
+                case 4:
+                {
+                    usuario = verificarId();
+                    return usuario;
                 }
             }
         }
