@@ -6,7 +6,8 @@
 */
 
 /* Correciones
-- Cuando vuelvo a llamar verificarId() la sesion no cambia
+-Hay un bug chistoso en el cual se imprimen archivos que no deberian y un bug visual del mensaje de IUNfomracion correcta.
+Esto sucede despues de regresar al Inicio de sesion por primera vez
 */
 #include <iostream>
 #include <fstream>
@@ -29,7 +30,8 @@ int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
 int pago=0; //Decide si se procede al pago
 
-struct ItemCarrito{
+struct ItemCarrito
+{
     int id;
     string nombre;
     int cantidad;
@@ -657,6 +659,7 @@ json abrirJson()
             }
             case 3:
             {
+                limpiarPantalla();
                 usuario = verificarId();
                 return usuario;
             }
@@ -708,6 +711,7 @@ json abrirJson()
             }
             case 5:
             {
+                limpiarPantalla();
                 usuario = verificarId();
                 return usuario;
             }
