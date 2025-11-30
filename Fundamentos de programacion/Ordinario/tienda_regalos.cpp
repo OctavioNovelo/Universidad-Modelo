@@ -515,8 +515,9 @@ void modificarDatos()
     }
 }
 
+
 //Modulo de venta
-void venta(){
+bool venta(){
     int id;
     int cantidad;
     float subtotal=0;
@@ -662,7 +663,7 @@ void venta(){
                 ofstream o("productos.json");
                 o << setw(4) << productos << endl; //Esto para mantener el mismo formato del json
 
-                pago=true;
+                return pago=true;
                 }
                 else{
                     cout<<"Compra cancelada\n";
@@ -695,7 +696,6 @@ int main ()
     
     while (true)
     {
-        
         if (usuario.is_null()) {
             cout << "Informacion incorrecta. Intenta de nuevo.\n";
             continue;
@@ -706,9 +706,8 @@ int main ()
         if (archivo.is_null()) { 
             continue;
         }
-        venta();
-        cout<<"\n";
+
+        mostrarArchvio();
         seleccionarAccion();
-        modificarDatos();
     }
 }
