@@ -28,7 +28,6 @@ json archivo;
 json usuario;
 int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
-int pago=0; //Decide si se procede al pago
 
 struct ItemCarrito
 {
@@ -456,6 +455,7 @@ bool venta(){
     bool existe=false;
     bool pago=false;
     char confirmar;
+    bool encontrado=false;
 
     do{
         limpiarPantalla(); //Limpiar antes de volver a poner todos los datos
@@ -488,6 +488,7 @@ bool venta(){
         cout<<"2. Eliminar producto\n";
         cout<<"3. Proceder al pago\n";
         cout<<"4. Cancelar todo\n";
+        cout<<"5. Regresar\n";
         cout<<"Selecciona una opcion: ";
         cin>>a;
 
@@ -559,12 +560,40 @@ bool venta(){
                 cout<<"Ingresa ID para eliminar: ";
                 cin >>id;
 
+                
                 for(int i=0; i<carrito.size(); i++){
-                    if(carrito[i].id==id){
-                        carrito.erase(carrito.begin()+i); //.begin apunta al primer elemento del vector, se le suma la posición para eliminar el producto deseado
-                        cout<<"Producto eliminado\n";
+                    if(carrito[i].id == id){
+                    encontrado=true;
+                    cout<<"Producto: " <<carrito[i].nombre <<endl;
+                    cout<<"Cantidad actual en carrito: " <<carrito[i].cantidad <<endl;
+                    cout<<"Cuantos quieres eliminar? ";
+                    cin>>cantidad;
+
+                    if(cantidad<=0){
+                        cout<<"Error, la cantidad debe ser mayor a 0\n";
                         break;
                     }
+
+                    if(cantidad > carrito[i].cantidad){
+                        cout<<"Error, no puedes eliminar mss de lo que hay en el carrito\n";
+                        cout<<"Maximo a eliminar: " <<carrito[i].cantidad <<endl;
+                        break;
+                    }
+
+                    if(cantidad == carrito[i].cantidad){ //Si elimina todo
+                        carrito.erase(carrito.begin()+i);//.begin apunta al primer elemento del vector, se le suma la posición para eliminar el producto deseado
+                        cout<<"Producto eliminado\n";
+                    }
+                    else {
+                       carrito[i].cantidad-=cantidad;
+                       cout<<"Se eliminaron " <<cantidad << "unidades\n";
+                    }
+                    break;
+                    }
+                }
+
+                if(!encontrado){
+                    cout<<"Producto no encontrado en el carrito\n";
                 }
                 break;
             }
@@ -610,6 +639,10 @@ bool venta(){
                 carrito.clear();
                 cout<<"Carrito vaciado\n";
                 break;
+
+            case 5: {
+                return json();
+            }
 
             default:
             cout<<"Opción no valida\n";
