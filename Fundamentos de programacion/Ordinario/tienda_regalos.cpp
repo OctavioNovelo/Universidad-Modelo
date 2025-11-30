@@ -56,24 +56,22 @@ json verificarId()
     cout << "Username: ";
     cin >> username;
     cout << "Password: ";
-    cin >> password;
-    cout << endl;
-
+    password = "";
     char ch;
 
-    while((ch = _getch()) != 13 && ch != 10){ 
-        if(ch == 8){ 
-            if(!password.empty()){
+    while ((ch = _getch()) != 13 && ch != 10) { 
+        if (ch == 8) { 
+            if (!password.empty()) {
                 password.pop_back();
                 cout << "\b \b";
             }
         } 
-        else{
-            password+=ch;
-            cout<< '*';
+        else {
+            password += ch;
+            cout << '*';
         }
     }
-    cout<<endl;
+    cout << endl;
 
     ifstream f("empleados.json");
     json empleados = json::parse(f);
