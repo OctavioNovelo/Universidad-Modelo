@@ -1,22 +1,22 @@
 /* Ideas:
 -Al momento de añadir el precio del producto agregar el IVA automaticamente (16%).
--Hacerle un hash las contraseñas
--Hacer una funcion que abra los JSON
--Hacer que el ID se coloque automaticamente
+-Hacerle un hash las contraseñas.
+-Hacer una funcion que abra los JSON.
+-Hacer que el ID se coloque automaticamente.
 */
 
 /* Correciones
 -Hay un bug chistoso en el cual se imprimen archivos que no deberian y un bug visual del mensaje de IUNfomracion correcta.
 Esto sucede despues de regresar al Inicio de sesion por primera vez
 */
+
 #include <iostream>
 #include <fstream>
 #include <string>
-
 #include <vector>
+
 #include <iomanip>
 #include <conio.h>
-
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
