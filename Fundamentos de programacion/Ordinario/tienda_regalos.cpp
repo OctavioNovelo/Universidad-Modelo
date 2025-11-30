@@ -331,7 +331,7 @@ void seleccionarAccion()
 }
 
 
-void modificarDatos()
+json modificarDatos()
 {
     string nombre_producto;
     string nombre_empleado;
@@ -391,7 +391,7 @@ void modificarDatos()
                 case 4:
                 {
                     //Regresar
-                    return;
+                    break;
                 }
             }
         }
@@ -442,6 +442,11 @@ void modificarDatos()
                     // Modificar
                     break;
                 }
+                case 4:
+                {
+                    // Regresar
+                    break;
+                }
             }
         }
         else if (a == 3) //Historial de ventas
@@ -460,12 +465,24 @@ void modificarDatos()
                 {
                     // Borrar
                 }
+                case 4:
+                {
+                    // Regresar
+                    return;
+                }
             }
+        }
+        else if (a == 4)
+        {
+            usuario = verificarId();
+            return usuario;
         }
     }
     else if (usuario["categoria"] == "empleado")
     {
-        switch (b) // 1, 2, 3, 4
+        if (a == 1)
+        {
+            switch (b) // 1, 2, 3, 4
             {
                 case 1: 
                 {
@@ -508,10 +525,60 @@ void modificarDatos()
                 }
                 case 4:
                 {
-                    limpiarPantalla();
-                    verificarId();
+                    break;
                 }
             }
+        }
+        else if (a == 2) // Carrito
+        {
+            switch (b) // 1, 2, 3, 4
+            {
+                case 1: 
+                {
+                    cout << "Nombre del producto: ";
+                    cin >> nombre_producto;
+
+                    cout << "ID del producto: ";
+                    cin >> id_producto;
+
+                    cout << "Cantidad del producto: ";
+                    cin >> stock;
+
+                    cout << "Precio unitario del producto: ";
+                    cin >> precio;
+
+                    json nuevo_objeto = {
+                        {"nombre", nombre_producto},
+                        {"id", id_producto},
+                        {"stock", stock},
+                        {"precio", precio}
+                    };
+
+                    archivo["productos"].push_back(nuevo_objeto);
+
+                    //Guardamos el archivo
+                    ofstream out("productos.json");
+                    out << archivo.dump(4);
+
+                    break;
+                }
+                case 2:
+                {
+                    // Eliminar
+                    break;
+                }
+                case 3:
+                {
+                    // Modificar
+                    break;
+                }
+                case 4:
+                {
+                    usuario = verificarId();
+                    return usuario;
+                }
+            }
+        }
     }
 }
 
@@ -689,14 +756,14 @@ bool venta(){
 }
 
 
-
 int main ()
 {
     limpiarPantalla();
+    
     usuario = verificarId();
     
     while (true)
-    {
+    { 
         if (usuario.is_null()) {
             cout << "Informacion incorrecta. Intenta de nuevo.\n";
             continue;
@@ -709,6 +776,5 @@ int main ()
         }
 
         mostrarArchvio();
-        seleccionarAccion();
     }
 }
