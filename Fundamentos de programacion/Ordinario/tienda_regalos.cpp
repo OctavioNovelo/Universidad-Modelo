@@ -38,6 +38,10 @@ struct ItemCarrito
     int precio;
 };
 vector<ItemCarrito>carrito;
+//declaracion de las funciones
+void guardarEnHistorial(float subtotal);
+void nuevoDia();
+bool venta();
 
 //Lista
 void limpiarPantalla()
@@ -242,7 +246,7 @@ json seleccionarAccion()
     }
     else if (usuario["categoria"] == "empleado")
     {
-        cout << archivo << endl;
+        // cout << archivo << endl;                checar lo quite
         cout << "Que accion desea realizar ?\n";
         cout << "1 - Agregar producto.\n";
         cout << "2 - Eliminar producto.\n";
@@ -644,7 +648,7 @@ bool venta(){
                 break;
 
             case 5: {
-                return json();
+                return false;
             }
 
             default:
@@ -661,11 +665,19 @@ void guardarEnHistorial(float subtotal){
     json historial;
     ifstream f("historial.json");
     if(f.good()){
-        historial=json::parse(f);
-    } 
+        f.seekg(0, ios::end);
+        if(f.tellg() == 0) {
+            historial["ventas"]=json::array();
+            historial["ultima_sesion"]=1;
+        } 
+        else {
+            f.seekg(0, ios::beg);
+            historial=json::parse(f);
+        }
+    }
     else{
         historial["ventas"] = json::array();
-        historial["ultima_sesion"] = 0; //contador para las sesiones
+        historial["ultima_sesion"] = 1;
     }
 
     if(historial.contains("ultima_sesion")){ //Cgecar la sesion en la que esta
@@ -706,20 +718,32 @@ void nuevoDia(){
     json historial;
     ifstream f("historial.json");
     if(f.good()){
-        historial=json::parse(f);
-
-        if(historial.contains("ultima_sesion")){
-            int ultima_sesion=historial["ultima_sesion"].get<int>();
-            historial["ultima_sesion"]=ultima_sesion+1;
-        } 
-        else{
+        f.seekg(0, ios::end);
+        if(f.tellg()==0){ //vacio
+            historial["ventas"]=json::array();
             historial["ultima_sesion"]=1;
         }
-
-        ofstream o("historial.json");
-        o<<setw(4) <<historial <<endl; //ordenar
-        sesion_iniciada=true;
+        else{
+            f.seekg(0, ios::beg);
+            historial=json::parse(f);
+        }
     }
+    else {
+        historial["ventas"]=json::array();
+        historial["ultima_sesion"]=1;
+    }
+
+    if(historial.contains("ultima_sesion")){
+        int ultima_sesion=historial["ultima_sesion"].get<int>();
+        historial["ultima_sesion"]=ultima_sesion+1;
+    } 
+    else{
+        historial["ultima_sesion"]=1;
+    }
+
+    ofstream o("historial.json");
+    o<<setw(4) <<historial <<endl;
+    sesion_iniciada=true;
 }
 
 //Lista // 77 - 171 mover 8 lineas
@@ -751,7 +775,11 @@ json abrirJson()
         {
             case 1:
             {
-                venta();
+                bool ventaRealizada = venta();
+                if(!ventaRealizada){
+                return json();
+                }
+                break;
             }
             case 2:
             {
@@ -789,7 +817,11 @@ json abrirJson()
         {
             case 1:
             {
-                venta();
+                bool ventaRealizada=venta();
+                if(!ventaRealizada){
+                return json();
+                }
+                break;
             }
             case 2:
             {
