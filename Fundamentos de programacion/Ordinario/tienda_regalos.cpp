@@ -7,7 +7,8 @@
 
 /* Correciones
 -Hay un bug chistoso en el cual se imprimen archivos que no deberian y un bug visual del mensaje de IUNfomracion correcta.
-Esto sucede despues de regresar al Inicio de sesion por primera vez
+Esto sucede despues de regresar al Inicio de sesion por primera vez     
+CORREGIDO
 */
 
 #include <iostream>
@@ -30,7 +31,8 @@ json usuario;
 int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
 bool sesion_iniciada=false;
-int error = 0;
+int error=0;
+bool regresar_al_menu=false; //:C
 
 struct ItemCarrito
 {
@@ -57,6 +59,7 @@ void limpiarPantalla()
     #endif
 }
 
+
 void pausa(){
     cout<<"Enter para continuar";
     char ch;
@@ -64,7 +67,6 @@ void pausa(){
     }
     cout<<endl;
 }
-
 
 //Lista
 json verificarId()
@@ -156,10 +158,56 @@ void mostrarArchvio()
 
             cout << endl;
             break;
-        case 4:
+        case 4:{
             // Historial de ventas
+            cout<<"Historial de ventas\n";
+            cout<<string(80, '=') << endl;
+
+            ifstream f("historial.json");
+            if(!f.good()){ //no exite el archivo?
+                cout<<"No hay historial de ventas\n";
+                pausa();
+                break;
+            }
+            f.seekg(0, ios::end);
+            if(f.tellg() == 0){ //esta vacio
+                cout<<"No hay ventas registradas\n";
+                pausa();
+                break;
+            }
+
+            f.seekg(0, ios::beg);
+            json historial=json::parse(f);
+
+            if(historial["ventas"].empty()){
+                cout<<"No hay ventas registradas en el historial\n";
+                pausa();
+                break;
+            }
+
+            cout<<left
+            <<setw(12) <<"Sesión"
+            <<setw(15) <<"Total"
+            <<setw(10) <<"Productos"
+            <<setw(40) <<"Detalles\n"
+            <<string(80, '-') <<'\n';
             
-            break;
+            for(auto& venta : historial["ventas"]){
+                cout<<setw(12) <<venta["sesion"].get<string>();
+                cout<<setw(15) <<"$" + to_string((int)venta["total"].get<float>());
+                cout<<setw(10) <<venta["productos"].size();
+                string detalles = "";
+                for(auto& producto : venta["productos"]){
+                    detalles += to_string(producto["cantidad"].get<int>()) + "x " + 
+                    producto["nombre"].get<string>() + ", ";
+                }
+                cout<<setw(40) <<detalles;
+                cout<<"\n";
+            }
+            cout<<endl;
+            pausa();
+            break; 
+        }
         case 5:
         {
             return;
@@ -652,6 +700,7 @@ bool venta(){
                 o << setw(4) << productos << endl; //Esto para mantener el mismo formato del json
 
                 carrito.clear();
+                regresar_al_menu=true;
                 return pago=true;
                 }
                 else{
@@ -669,6 +718,7 @@ bool venta(){
 
             case 5: {
                 carrito.clear();
+                regresar_al_menu=true;
                 return false;
 
             }
@@ -798,6 +848,7 @@ json abrirJson()
             {
                 bool ventaRealizada = venta();
                 if(!ventaRealizada){
+                regresar_al_menu = true;  
                 return json();
                 }
                 break;
@@ -812,6 +863,7 @@ json abrirJson()
             case 3:
             {
                 limpiarPantalla();
+                regresar_al_menu = false;
                 return json();
 
             }
@@ -838,8 +890,9 @@ json abrirJson()
         {
             case 1:
             {
-                bool ventaRealizada=venta();
+                bool ventaRealizada = venta();
                 if(!ventaRealizada){
+                regresar_al_menu = true;  
                 return json();
                 }
                 break;
@@ -868,6 +921,7 @@ json abrirJson()
             case 5:
             {
                 limpiarPantalla();
+                regresar_al_menu = false;
                 return json();
 
             }
@@ -915,7 +969,13 @@ int main ()
             archivo=abrirJson();
 
             if(archivo.is_null()) { 
-                break;  
+               if (regresar_al_menu) {
+               regresar_al_menu = false;  
+               continue;                  
+               }   
+               else{
+               break;  // Volver al login
+               } 
             }
 
             mostrarArchvio();

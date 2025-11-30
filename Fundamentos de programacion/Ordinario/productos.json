@@ -16,25 +16,25 @@
             "id": 3,
             "nombre": "Globo de latex",
             "precio": 5,
-            "stock": 9
+            "stock": 4
         },
         {
             "id": 4,
             "nombre": "Peluche mini",
             "precio": 150,
-            "stock": 7
+            "stock": 5
         },
         {
             "id": 5,
             "nombre": "Peluche mediano",
             "precio": 200,
-            "stock": 4
+            "stock": 3
         },
         {
             "id": 6,
             "nombre": "Peluche grande",
             "precio": 300,
-            "stock": 5
+            "stock": 4
         },
         {
             "id": 7,
