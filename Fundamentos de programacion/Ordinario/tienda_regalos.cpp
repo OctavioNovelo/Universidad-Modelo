@@ -527,6 +527,7 @@ bool venta(){
 
     do{
         limpiarPantalla(); //Limpiar antes de volver a poner todos los datos
+        subtotal=0;
         cout<<"Carrito:\n";
 
         if(carrito.empty()){ //Si esta vacio, cada vez que se inicia una venta
