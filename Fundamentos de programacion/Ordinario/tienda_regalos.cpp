@@ -707,6 +707,7 @@ int main ()
             continue;
         }
         venta();
+        cout<<"\n";
         seleccionarAccion();
         modificarDatos();
     }
