@@ -521,10 +521,11 @@ void venta(){
     int cantidad;
     float subtotal=0;
     bool existe=false;
+    bool pago=false;
 
     do{
         limpiarPantalla(); //Limpiar antes de volver a poner todos los datos
-        cout<<"Carrito:\n"
+        cout<<"Carrito:\n";
 
         if(carrito.empty()){ //Si esta vacio, cada vez que se inicia una venta
             cout<<"El carrito esta vacio\n";
@@ -543,9 +544,9 @@ void venta(){
                 cout << setw(15) << item.cantidad; //Checar cantidad importante
                 cout << setw(15) << item.precio;
                 cout << "\n";
-                total=total+(item.cantidad * item.precio);
+                subtotal=subtotal+(item.cantidad * item.precio);
             }
-            cout<<"\nSubtotal: $" <<total <<"\n";
+            cout<<"\nSubtotal: $" <<subtotal <<"\n";
         }
 
         cout<<"1. Agregar producto\n";
@@ -556,7 +557,7 @@ void venta(){
         cin>>a;
 
         switch(a){
-            case 1: 
+            case 1: {
                 // Agregar producto
                 cout << "Ingresa ID: ";
                 cin >> id;
@@ -579,7 +580,7 @@ void venta(){
 
                 cout<<"Ingresa cantidad: ";
                 cin>>cantidad;
-                
+                existe=false;
                 for(auto& item : carrito){  //Si ya esta en el carrito se suma la cantidad del producto
                     if(item.id==id) {
                         item.cantidad=item.cantidad+cantidad;
@@ -597,8 +598,9 @@ void venta(){
                     });
                 }
                  break;
+            }
 
-            case 2:
+            case 2: {
                 //Eliminar producto
                 if(carrito.empty()){ //Esta vacio y no se puede eliminar nada
                     cout<<"El carrito esta vacio\n";
@@ -616,6 +618,7 @@ void venta(){
                     }
                 }
                 break;
+            }
 
             case 3:
                  //Proceder al pago
