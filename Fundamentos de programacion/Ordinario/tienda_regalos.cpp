@@ -14,6 +14,7 @@ Esto sucede despues de regresar al Inicio de sesion por primera vez
 #include <fstream>
 #include <string>
 #include <vector>
+#include <limits>
 
 #include <iomanip>
 #include <conio.h>
@@ -29,6 +30,7 @@ json usuario;
 int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
 bool sesion_iniciada=false;
+int error = 0;
 
 struct ItemCarrito
 {
@@ -632,6 +634,7 @@ bool venta(){
                 ofstream o("productos.json");
                 o << setw(4) << productos << endl; //Esto para mantener el mismo formato del json
 
+                carrito.clear();
                 return pago=true;
                 }
                 else{
@@ -648,7 +651,9 @@ bool venta(){
                 break;
 
             case 5: {
+                carrito.clear();
                 return false;
+
             }
 
             default:
@@ -721,7 +726,7 @@ void nuevoDia(){
         f.seekg(0, ios::end);
         if(f.tellg()==0){ //vacio
             historial["ventas"]=json::array();
-            historial["ultima_sesion"]=1;
+            historial["ultima_sesion"]=0;
         }
         else{
             f.seekg(0, ios::beg);
@@ -757,7 +762,6 @@ json abrirJson()
         limpiarPantalla();
         return json();
     }
-    nuevoDia(); //Cambia la sesión 
 
     if (usuario["categoria"] == "empleado")
     {
@@ -791,8 +795,8 @@ json abrirJson()
             case 3:
             {
                 limpiarPantalla();
-                usuario = verificarId();
-                return usuario;
+                return json();
+
             }
             default:
             {
@@ -847,8 +851,8 @@ json abrirJson()
             case 5:
             {
                 limpiarPantalla();
-                usuario = verificarId();
-                return usuario;
+                return json();
+
             }
             default:
             {
@@ -864,37 +868,42 @@ json abrirJson()
 
 int main ()
 {
-    int error = 0;
-    limpiarPantalla();
-    
-    do
+    while (true)  
     {
+        error=0;  
         limpiarPantalla();
-        if (error >= 1)
-        {
-            cout << "Informacion incorrecta. Intenta de nuevo.\n";
-        }
 
-        usuario = verificarId();
-    
-        if (usuario.is_null())
+        do
         {
-            error ++;
-        }
+            limpiarPantalla();
+            if(error>=1)
+            {
+                cout<<"Informacion incorrecta. Intenta de nuevo.\n";
+            }
 
-    } while (usuario.is_null());
-    
-    while (true)
-    { 
+            usuario=verificarId();
         
-        archivo = abrirJson();
+            if(usuario.is_null())
+            {
+                error++;
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
 
-        if (archivo.is_null()) { 
-            continue;
+        } while(usuario.is_null());
+
+        nuevoDia();
+        
+        while(true)
+        { 
+            archivo=abrirJson();
+
+            if(archivo.is_null()) { 
+                break;  
+            }
+
+            mostrarArchvio();
+            seleccionarAccion();
+            modificarDatos();
         }
-
-        mostrarArchvio();
-        seleccionarAccion();
-        modificarDatos();
     }
-}
+} //Aqui
