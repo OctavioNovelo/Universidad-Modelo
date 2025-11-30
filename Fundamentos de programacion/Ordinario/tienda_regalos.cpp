@@ -143,6 +143,7 @@ void mostrarArchvio()
             break;
         case 4:
             // Historial de ventas
+            
             break;
         case 5:
         {
