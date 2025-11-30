@@ -11,6 +11,9 @@
 #include <iostream>
 #include <fstream>
 
+#include <vector>
+#include <iomanip>
+
 #include <nlohmann/json.hpp>
 
 using json = nlohmann::json;
@@ -22,6 +25,15 @@ json archivo;
 json usuario;
 int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
+int pago=0; //Decide si se procede al pago
+
+struct ItemCarrito{
+    int id;
+    string nombre;
+    int cantidad;
+    int precio;
+};
+vector<ItemCarrito>carrito;
 
 //Lista
 void limpiarPantalla()
@@ -503,6 +515,178 @@ void modificarDatos()
     }
 }
 
+//Modulo de venta
+void venta(){
+    int id;
+    int cantidad;
+    float subtotal=0;
+    bool existe=false;
+    bool pago=false;
+    char confirmar;
+
+    do{
+        limpiarPantalla(); //Limpiar antes de volver a poner todos los datos
+        cout<<"Carrito:\n";
+
+        if(carrito.empty()){ //Si esta vacio, cada vez que se inicia una venta
+            cout<<"El carrito esta vacio\n";
+        } 
+        else{
+            cout << left //Tabla
+            << setw(5) << "ID"
+            << setw(30) << "Nombre"
+            << setw(15) << "Cantidad"
+            << setw(15) << "Precio\n"
+            << string(75, '-') << '\n';
+
+            for (const auto& item : carrito) {
+                cout << setw(5) << item.id;
+                cout << setw(30) << item.nombre;
+                cout << setw(15) << item.cantidad; //Checar cantidad importante
+                cout << setw(15) << item.precio;
+                cout << "\n";
+                subtotal=subtotal+(item.cantidad * item.precio);
+            }
+        cout<<"\nSubtotal: $" <<subtotal <<"\n\n";
+        }
+
+        cout<<"1. Agregar producto\n";
+        cout<<"2. Eliminar producto\n";
+        cout<<"3. Proceder al pago\n";
+        cout<<"4. Cancelar todo\n";
+        cout<<"Selecciona una opcion: ";
+        cin>>a;
+
+        switch(a){
+            case 1: {
+                // Agregar producto
+                cout << "Ingresa ID: ";
+                cin >> id;
+
+                ifstream f("productos.json"); //Buscar el producto en el Json
+                json productos=json::parse(f);
+                json productoEncontrado=nullptr;
+
+                for(auto& pro : productos["productos"]){
+                    if(pro["id"].get<int>()==id) {
+                        productoEncontrado=pro;
+                        break; //ya se encontro, se sale de aca
+                    }
+                }
+
+                if (productoEncontrado==nullptr) {
+                    cout<<"No existe ese producto\n"; //No hay en el Json eso
+                    break;
+                }
+
+                cout<<"Ingresa cantidad: ";
+                cin>>cantidad;
+
+                int stockDisponible=productoEncontrado["stock"].get<int>(); //Validar que si se pueda agarrar esa cantidad
+                if(cantidad>stockDisponible){
+                    cout<<"Error: No hay suficiente stock\n";
+                    cout<<"Stock disponible: "<<stockDisponible <<"\n";
+                    cout<<"Cantidad solicitada: " <<cantidad <<"\n";
+                    break; 
+                }
+
+                if(cantidad<=0){
+                    cout<< "Error: La cantidad debe ser mayor a 0\n";
+                    break;
+                    }
+
+                existe=false;
+                for(auto& item : carrito){  //Si ya esta en el carrito se suma la cantidad del producto
+                    if(item.id==id) {
+                        item.cantidad=item.cantidad+cantidad;
+                        existe=true;
+                        break;
+                    }
+                }
+
+                if (!existe){ //Si no existe se agrega al vector para mostrarlo
+                    carrito.push_back({
+                        id,
+                        productoEncontrado["nombre"].get<string>(),
+                        cantidad,
+                        productoEncontrado["precio"].get<int>()
+                    });
+                }
+                 break;
+            }
+
+            case 2: {
+                //Eliminar producto
+                if(carrito.empty()){ //Esta vacio y no se puede eliminar nada
+                    cout<<"El carrito esta vacio\n";
+                    break;
+                }
+
+                cout<<"Ingresa ID para eliminar: ";
+                cin >>id;
+
+                for(int i=0; i<carrito.size(); i++){
+                    if(carrito[i].id==id){
+                        carrito.erase(carrito.begin()+i); //.begin apunta al primer elemento del vector, se le suma la posición para eliminar el producto deseado
+                        cout<<"Producto eliminado\n";
+                        break;
+                    }
+                }
+                break;
+            }
+
+            case 3: {
+                 //Proceder al pago
+                if(carrito.empty()){ //Carrito vacio no se hace nada
+                    cout<<"El carrito esta vacio\n";
+                    break;
+                }
+
+                cout<<"Confirmar compra(s/n): ";
+                cin>>confirmar;
+
+                if(confirmar=='s' || confirmar=='S'){ //Se actualiza el stock aca
+                ifstream f("productos.json");   
+                json productos= json::parse(f);
+
+                for(auto& item : carrito){
+                   for(auto& pro : productos["productos"]){
+                      if (pro["id"].get<int>()== item.id){
+                        int stockActual=pro["stock"].get<int>(); //para ver cuanto tiene ahora
+                        pro["stock"]=stockActual-item.cantidad; //restarle la cantidad que se ocupo en el carrito
+                        break;
+                      }
+                    }
+                }
+
+                ofstream o("productos.json");
+                o << setw(4) << productos << endl; //Esto para mantener el mismo formato del json
+
+                pago=true;
+                }
+                else{
+                    cout<<"Compra cancelada\n";
+                }
+
+                break;
+            }
+
+            case 4:
+                //Cancelar todo
+                carrito.clear();
+                cout<<"Carrito vaciado\n";
+                break;
+
+            default:
+            cout<<"Opción no valida\n";
+            break;
+
+        }
+
+    }while(pago==false);
+}
+
+
 
 int main ()
 {
@@ -519,9 +703,11 @@ int main ()
 
         archivo = abrirJson();
 
-        if (archivo.is_null()) {
+        if (archivo.is_null()) { 
             continue;
         }
+        venta();
+        cout<<"\n";
         seleccionarAccion();
         modificarDatos();
     }

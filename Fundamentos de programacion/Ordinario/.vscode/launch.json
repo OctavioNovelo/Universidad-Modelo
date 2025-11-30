@@ -1,0 +1,24 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/litzy/OneDrive/Documentos/1° Semestre Modelo/Programacion/Tienda_regalitos/Universidad-Modelo/Fundamentos de programacion/Ordinario",
+      "program": "c:/Users/litzy/OneDrive/Documentos/1° Semestre Modelo/Programacion/Tienda_regalitos/Universidad-Modelo/Fundamentos de programacion/Ordinario/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
