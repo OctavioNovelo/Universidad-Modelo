@@ -546,7 +546,7 @@ void venta(){
                 cout << "\n";
                 subtotal=subtotal+(item.cantidad * item.precio);
             }
-            cout<<"\nSubtotal: $" <<subtotal <<"\n";
+        cout<<"\nSubtotal: $" <<subtotal <<"\n\n";
         }
 
         cout<<"1. Agregar producto\n";
