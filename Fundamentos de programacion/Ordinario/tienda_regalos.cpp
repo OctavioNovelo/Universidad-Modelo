@@ -28,6 +28,7 @@ json archivo;
 json usuario;
 int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
+bool sesion_iniciada=false;
 
 struct ItemCarrito
 {
@@ -609,6 +610,7 @@ bool venta(){
                 cin>>confirmar;
 
                 if(confirmar=='s' || confirmar=='S'){ //Se actualiza el stock aca
+                guardarEnHistorial(subtotal); //Para el historial
                 ifstream f("productos.json");   
                 json productos= json::parse(f);
 
@@ -653,6 +655,72 @@ bool venta(){
     }while(pago==false);
 }
 
+void guardarEnHistorial(float subtotal){
+    int sesion_actual;
+    json historial;
+    ifstream f("historial.json");
+    if(f.good()){
+        historial=json::parse(f);
+    } 
+    else{
+        historial["ventas"] = json::array();
+        historial["ultima_sesion"] = 0; //contador para las sesiones
+    }
+
+    if(historial.contains("ultima_sesion")){ //Cgecar la sesion en la que esta
+        sesion_actual=historial["ultima_sesion"].get<int>();
+    } 
+    else{
+        sesion_actual=1;
+        historial["ultima_sesion"]=sesion_actual;
+    }
+
+    json venta;
+    venta["sesion"]="Sesión "+to_string(sesion_actual);
+    venta["total"]=subtotal;
+    venta["productos"]=json::array();
+
+    for(const auto& item : carrito){  //Agregarlo
+        json producto;
+        producto["id"]=item.id;
+        producto["nombre"]=item.nombre;
+        producto["cantidad"]=item.cantidad;
+        producto["precio_unitario"]=item.precio;
+        producto["subtotal"]=item.cantidad*item.precio;
+        
+        venta["productos"].push_back(producto);
+    }
+    historial["ventas"].push_back(venta);
+    ofstream o("historial.json");
+    o<<setw(4) <<historial <<endl; //Ponerlo en orden
+
+    cout<<"Venta guardada\n";
+}
+
+void iniciarNuevaSesion(){
+    if(sesion_iniciada){
+        return; 
+    }
+
+    json historial;
+    ifstream f("historial.json");
+    if(f.good()){
+        historial=json::parse(f);
+
+        if(historial.contains("ultima_sesion")){
+            int ultima_sesion=historial["ultima_sesion"].get<int>();
+            historial["ultima_sesion"]=ultima_sesion+1;
+        } 
+        else{
+            historial["ultima_sesion"]=1;
+        }
+
+        ofstream o("historial.json");
+        o<<setw(4) <<historial <<endl; //ordenar
+        sesion_iniciada=true;
+    }
+}
+
 //Lista // 77 - 171 mover 8 lineas
 json abrirJson()
 {
@@ -664,7 +732,8 @@ json abrirJson()
         limpiarPantalla();
         return json();
     }
-    
+    iniciarNuevaSesion(); //Cambia la sesión checar
+
     if (usuario["categoria"] == "empleado")
     {
         limpiarPantalla();
