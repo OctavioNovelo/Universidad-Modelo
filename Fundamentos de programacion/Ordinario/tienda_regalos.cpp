@@ -23,7 +23,7 @@ json usuario;
 int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
 
-
+//Lista
 void limpiarPantalla()
 {
     // Si es windows usa cls
@@ -35,7 +35,7 @@ void limpiarPantalla()
     #endif
 }
 
-
+//Lista
 json verificarId()
 {
     cout << "Iniciar Sesion\n";
@@ -61,7 +61,7 @@ json verificarId()
     return nullptr;
 }
 
-
+//Lista 
 json abrirJson()
 {
 
