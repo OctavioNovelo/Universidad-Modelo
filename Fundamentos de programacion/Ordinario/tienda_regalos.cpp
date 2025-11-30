@@ -697,7 +697,7 @@ void guardarEnHistorial(float subtotal){
     cout<<"Venta guardada\n";
 }
 
-void iniciarNuevaSesion(){
+void nuevoDia(){
     if(sesion_iniciada){
         return; 
     }
@@ -732,7 +732,7 @@ json abrirJson()
         limpiarPantalla();
         return json();
     }
-    iniciarNuevaSesion(); //Cambia la sesión checar
+    nuevoDia(); //Cambia la sesión 
 
     if (usuario["categoria"] == "empleado")
     {
