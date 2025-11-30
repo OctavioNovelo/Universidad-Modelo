@@ -553,7 +553,7 @@ void venta(){
         cout<<"2. Eliminar producto\n";
         cout<<"3. Proceder al pago\n";
         cout<<"4. Cancelar todo\n";
-        cout<<"Selecciona una opción: ";
+        cout<<"Selecciona una opcion: ";
         cin>>a;
 
         switch(a){
@@ -580,6 +580,20 @@ void venta(){
 
                 cout<<"Ingresa cantidad: ";
                 cin>>cantidad;
+
+                int stockDisponible=productoEncontrado["stock"].get<int>(); //Validar que si se pueda agarrar esa cantidad
+                if(cantidad>stockDisponible){
+                    cout<<"Error: No hay suficiente stock\n";
+                    cout<<"Stock disponible: "<<stockDisponible <<"\n";
+                    cout<<"Cantidad solicitada: " <<cantidad <<"\n";
+                    break; 
+                }
+
+                if(cantidad<=0){
+                    cout<< "Error: La cantidad debe ser mayor a 0\n";
+                    break;
+                    }
+
                 existe=false;
                 for(auto& item : carrito){  //Si ya esta en el carrito se suma la cantidad del producto
                     if(item.id==id) {
