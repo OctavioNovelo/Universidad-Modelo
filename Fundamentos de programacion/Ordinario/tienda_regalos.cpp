@@ -522,6 +522,7 @@ void venta(){
     float subtotal=0;
     bool existe=false;
     bool pago=false;
+    char confirmar;
 
     do{
         limpiarPantalla(); //Limpiar antes de volver a poner todos los datos
@@ -634,17 +635,41 @@ void venta(){
                 break;
             }
 
-            case 3:
+            case 3: {
                  //Proceder al pago
                 if(carrito.empty()){ //Carrito vacio no se hace nada
                     cout<<"El carrito esta vacio\n";
                     break;
                 }
+
+                cout<<"Confirmar compra(s/n): ";
+                cin>>confirmar;
+
+                if(confirmar=='s' || confirmar=='S'){ //Se actualiza el stock aca
+                ifstream f("productos.json");   
+                json productos= json::parse(f);
+
+                for(auto& item : carrito){
+                   for(auto& pro : productos["productos"]){
+                      if (pro["id"].get<int>()== item.id){
+                        int stockActual=pro["stock"].get<int>(); //para ver cuanto tiene ahora
+                        pro["stock"]=stockActual-item.cantidad; //restarle la cantidad que se ocupo en el carrito
+                        break;
+                      }
+                    }
+                }
+
+                ofstream o("productos.json");
+                o << setw(4) << productos << endl; //Esto para mantener el mismo formato del json
+
+                pago=true;
+                }
                 else{
-                    pago=1;
+                    cout<<"Compra cancelada\n";
                 }
 
                 break;
+            }
 
             case 4:
                 //Cancelar todo
@@ -658,7 +683,7 @@ void venta(){
 
         }
 
-    }while(pago!=1);
+    }while(pago==false);
 }
 
 
