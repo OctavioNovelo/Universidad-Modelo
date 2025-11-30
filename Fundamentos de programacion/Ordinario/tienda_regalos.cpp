@@ -35,7 +35,7 @@ struct ItemCarrito{
 };
 vector<ItemCarrito>carrito;
 
-
+//Lista
 void limpiarPantalla()
 {
     // Si es windows usa cls
@@ -47,7 +47,7 @@ void limpiarPantalla()
     #endif
 }
 
-
+//Lista
 json verificarId()
 {
     cout << "Iniciar Sesion\n";
@@ -73,7 +73,7 @@ json verificarId()
     return nullptr;
 }
 
-
+//Lista 
 json abrirJson()
 {
 
