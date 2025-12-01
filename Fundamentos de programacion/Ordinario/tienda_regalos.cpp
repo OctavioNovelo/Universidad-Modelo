@@ -186,8 +186,9 @@ void mostrarArchvio()
             <<setw(12) <<"Sesion"
             <<setw(15) <<"Total"
             <<setw(10) <<"Productos"
-            <<setw(40) <<"Detalles\n"
-            <<string(80, '-') <<'\n';
+            <<setw(40) <<"Detalles"
+            <<"\n";
+            cout<<string(77,'-')<<"\n";
             
             for(auto& venta : historial["ventas"]){
                 cout<<setw(12) <<venta["sesion"].get<string>();
@@ -757,7 +758,7 @@ void guardarEnHistorial(float subtotal){
     }
 
     json venta;
-    venta["sesion"]="Sesión "+to_string(sesion_actual);
+    venta["sesion"]="Sesion "+to_string(sesion_actual);
     venta["total"]=subtotal;
     venta["productos"]=json::array();
 
