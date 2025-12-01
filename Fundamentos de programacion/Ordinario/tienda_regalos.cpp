@@ -24,6 +24,8 @@ CORREGIDO
 using json = nlohmann::json;
 using namespace std;
 
+// Declaracion de las funciones
+// Octavio
 string username;
 string password;
 json archivo;
@@ -34,6 +36,14 @@ bool sesion_iniciada=false;
 int error=0;
 bool regresar_al_menu=false; //:C
 
+// Declaracion de las funciones
+// Litzy
+void guardarEnHistorial(float subtotal);
+void nuevoDia();
+bool venta();
+
+
+// Check
 struct ItemCarrito
 {
     int id;
@@ -41,13 +51,13 @@ struct ItemCarrito
     int cantidad;
     int precio;
 };
-vector<ItemCarrito>carrito;
-//declaracion de las funciones
-void guardarEnHistorial(float subtotal);
-void nuevoDia();
-bool venta();
 
-//Lista
+
+// El carrito
+vector<ItemCarrito>carrito;
+
+
+// Check
 void limpiarPantalla()
 {
     // Si es windows usa cls
@@ -59,7 +69,7 @@ void limpiarPantalla()
     #endif
 }
 
-
+// Check
 void pausa(){
     cout<<"Enter para continuar";
     char ch;
