@@ -301,7 +301,7 @@ json seleccionarAccion()
     }
     else if (usuario["categoria"] == "empleado")
     {
-        // cout << archivo << endl;                checar lo quite
+        //cout << archivo << endl;                checar lo quite
         cout << "Que accion desea realizar ?\n";
         cout << "1 - Agregar producto.\n";
         cout << "2 - Eliminar producto.\n";
