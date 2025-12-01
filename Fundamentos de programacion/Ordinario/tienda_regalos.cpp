@@ -166,13 +166,11 @@ void mostrarArchvio()
             ifstream f("historial.json");
             if(!f.good()){ //no exite el archivo?
                 cout<<"No hay historial de ventas\n";
-                pausa();
                 break;
             }
             f.seekg(0, ios::end);
             if(f.tellg() == 0){ //esta vacio
                 cout<<"No hay ventas registradas\n";
-                pausa();
                 break;
             }
 
@@ -181,12 +179,11 @@ void mostrarArchvio()
 
             if(historial["ventas"].empty()){
                 cout<<"No hay ventas registradas en el historial\n";
-                pausa();
                 break;
             }
 
             cout<<left
-            <<setw(12) <<"Sesión"
+            <<setw(12) <<"Sesion"
             <<setw(15) <<"Total"
             <<setw(10) <<"Productos"
             <<setw(40) <<"Detalles\n"
@@ -205,7 +202,6 @@ void mostrarArchvio()
                 cout<<"\n";
             }
             cout<<endl;
-            pausa();
             break; 
         }
         case 5:
