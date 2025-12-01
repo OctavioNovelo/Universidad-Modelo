@@ -83,6 +83,12 @@
             "nombre": "Sobre Pokemon",
             "precio": 99,
             "stock": 10
+        },
+        {
+            "id": 16,
+            "nombre": "Shampoo",
+            "precio": 35,
+            "stock": 10
         }
     ]
 }
