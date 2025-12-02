@@ -1,14 +1,11 @@
 /* Ideas:
 -Al momento de añadir el precio del producto agregar el IVA automaticamente (16%).
 -Hacerle un hash las contraseñas.
--Hacer una funcion que abra los JSON.
 -Hacer que el ID se coloque automaticamente.
 */
 
 /* Correciones
--Hay un bug chistoso en el cual se imprimen archivos que no deberian y un bug visual del mensaje de IUNfomracion correcta.
-Esto sucede despues de regresar al Inicio de sesion por primera vez     
-CORREGIDO
+
 */
 
 #include <iostream>
@@ -32,15 +29,15 @@ json archivo;
 json usuario;
 int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
-bool sesion_iniciada=false;
-int error=0;
-bool regresar_al_menu=false; //:C
 
 // Declaracion de las funciones
 // Litzy
 void guardarEnHistorial(float subtotal);
 void nuevoDia();
 bool venta();
+bool sesion_iniciada = false;
+int error = 0;
+bool regresar_al_menu = false;
 
 
 // Check
@@ -69,6 +66,7 @@ void limpiarPantalla()
     #endif
 }
 
+
 // Check
 void pausa(){
     cout<<"Enter para continuar";
@@ -78,7 +76,8 @@ void pausa(){
     cout<<endl;
 }
 
-//Lista
+
+// Check
 json verificarId()
 {
     cout << "Iniciar Sesion\n";
@@ -119,6 +118,7 @@ json verificarId()
 }
 
 
+// Check
 void mostrarArchvio()
 {
     limpiarPantalla();
@@ -128,7 +128,8 @@ void mostrarArchvio()
         switch (a)
         {
         case 2:
-            // Producto
+        // Producto
+        {
             cout << left
                 << setw(5) << "ID"
                 << setw(30) << "Nombre"
@@ -148,8 +149,10 @@ void mostrarArchvio()
 
             cout << endl;
             break;
+        }
         case 3:
-            // Empleado
+        // Empleado
+        {
             cout << left;
             cout << setw(5) << "ID";
             cout << setw(10) << "Usuario";
@@ -168,8 +171,10 @@ void mostrarArchvio()
 
             cout << endl;
             break;
-        case 4:{
-            // Historial de ventas
+        }
+        case 4:
+        // Historial de ventas
+        {
             cout<<"Historial de ventas\n";
             cout<<string(80, '=') << endl;
 
@@ -215,10 +220,6 @@ void mostrarArchvio()
             cout<<endl;
             break; 
         }
-        case 5:
-        {
-            return;
-        }
         default:
         {
             break;
@@ -230,8 +231,8 @@ void mostrarArchvio()
         switch (a)
         {
             case 2:
+            // Producto
             {
-                // Producto
                 cout << left
                     << setw(5) << "ID"
                     << setw(30) << "Nombre"
@@ -252,22 +253,24 @@ void mostrarArchvio()
                 cout << endl;
                 break;
             }
-            case 3:
+            default:
             {
-                return;
+                break;
             }
         }
     }
 }
 
-// 271 - 332
+
+// Check
 json seleccionarAccion()
 {
     if (usuario["categoria"] == "gerente")
     {
         switch (a)
         {
-            case 2: // Productos
+            case 2:
+            // Productos
             {
                 mostrarArchvio();
                 cout << "Que accion desea realizar ?\n";
@@ -276,10 +279,10 @@ json seleccionarAccion()
                 cout << "3 - Modificar producto.\n";
                 cout << "4 - Regresar.\n";
                 cin >> b;
-                limpiarPantalla();
                 break;
             }
-            case 3: // Empleados
+            case 3: 
+            // Empleados
             {
                 mostrarArchvio();
                 cout << "Que accion desea realizar ?\n";
@@ -288,10 +291,10 @@ json seleccionarAccion()
                 cout << "3 - Modificar informacion del empleado.\n";
                 cout << "4 - Regresar.\n";
                 cin >> b;
-                limpiarPantalla();
                 break;
             }
-            case 4: // Historial de ventas
+            case 4:
+            // Historial de ventas
             {
                 mostrarArchvio();
                 cout << "Que accion desea realizar ?\n";
@@ -300,7 +303,6 @@ json seleccionarAccion()
                 cout << "3 - Borrar historial de venta.\n";;
                 cout << "4 - Regresar.\n";
                 cin >> b;
-                limpiarPantalla();
                 break;
             }
             default:
@@ -312,23 +314,26 @@ json seleccionarAccion()
     }
     else if (usuario["categoria"] == "empleado")
     {
-       // cout << archivo << endl;                //checar lo quite
+        // Producto
+        mostrarArchvio();
         cout << "Que accion desea realizar ?\n";
         cout << "1 - Agregar producto.\n";
         cout << "2 - Eliminar producto.\n";
         cout << "3 - Modificar producto.\n";
-        cout << "4 - Regresar";
+        cout << "4 - Regresar.\n";
         cin >> b;
     }
 }
 
-// 334 - 584
+
+//
 json modificarDatos()
 {
     string nombre_producto;
     string nombre_empleado;
     string password;
     string categoria;
+    char confirmacion;
     int stock;
     int precio;
     int id_producto;
@@ -367,12 +372,61 @@ json modificarDatos()
                     //Guardamos el archivo
                     ofstream out("productos.json");
                     out << archivo.dump(4);
-
                     break;
                 }
                 case 2:
                 {
-                    // Eliminar
+                    cout << "Ingresa ID para eliminar: ";
+                    cin >> id_producto;
+
+                    bool encontrado = false;
+
+                    // Principio apunta al principio de archivo["productos"] y mientras no llegue al final se le aumentara el valor para recorrer todo el archivo
+                    for (auto principio = archivo["productos"].begin(); principio != archivo["productos"].end(); ++principio)
+                    {
+
+                        // *principio es como un puntero al elemento
+                        if ((*principio)["id"] == id_producto)
+                        {
+                            encontrado = true;
+
+                            cout << "Eliminar: " << (*principio)["nombre"] << endl;
+                            cout << "Stock: " << (*principio)["stock"] << endl;
+
+                            cout << "Cuantos quieres eliminar? ";
+                            cin >> stock;
+
+                            int disponible = (*principio)["stock"];
+
+                            if (stock > disponible)
+                            {
+                                cout << "Advertencia, quieres eliminar todo el stock ?\n Esto eliminara el producto del inventario (s/n).\n";
+                                cin >> confirmacion;
+
+                                if (confirmacion == 's')
+                                {
+                                    archivo["productos"].erase(principio);
+                                }
+
+                            }
+                            else if (stock == disponible)
+                            {
+                                archivo["productos"].erase(principio);
+                            }
+                            else
+                            {
+                                (*principio)["stock"] = disponible - stock;
+                                cout << "Se eliminaron " << stock << " unidades.\n";
+                            }
+                            break;
+                        }
+                    }
+                    if (!encontrado)
+                    {
+                        cout << "No se encontro un producto con ese ID.\n";
+                    }
+                    ofstream out("productos.json");
+                    out << archivo.dump(4);
                     break;
                 }
                 case 3:
@@ -384,6 +438,7 @@ json modificarDatos()
                 {
                     //Regresar
                     return json();
+                    break;
                 }
             }
         }
@@ -393,8 +448,7 @@ json modificarDatos()
             {
                 case 1: 
                 {
-                    cout << "Nombre del empleado: ";
-                    cin.ignore();
+                    cout << "Nombre del empleado: \n";
                     getline(cin, nombre_empleado);
 
                     cout << "ID del empleado: ";
@@ -418,7 +472,6 @@ json modificarDatos()
                     };
 
                     archivo["empleados"].push_back(nuevo_empleado);
-
                     ofstream out("empleados.json");
                     out << archivo.dump(4);
                     
@@ -426,7 +479,38 @@ json modificarDatos()
                 }
                 case 2:
                 {
-                    // Eliminar
+                    cout << "Ingresa ID del empleado: ";
+                    cin >> id_empleado;
+
+                    bool encontrado = false;
+
+                    for (auto it = archivo["empleados"].begin(); it != archivo["empleados"].end(); ++it)
+                    {
+                        if ((*it)["id"] == id_empleado)
+                        {
+                            encontrado = true;
+
+                            cout << "Dese eliminar al empleado: " << (*it)["nombre"] << " (s/n) ?" << endl;
+                            cin >> confirmacion;
+
+                            if (confirmacion == 's')
+                            {
+                                archivo["empleados"].erase(it);
+                                cout << "Empleado eliminado.\n";
+                            }
+                            else
+                            {
+                                cout << "Cancelado.\n";
+                            }
+                            break;
+                        }
+                    }
+
+                    if (!encontrado)
+                        cout << "No se encontro un empleado con ese ID.\n";
+
+                    ofstream out("empleados.json");
+                    out << archivo.dump(4);
                     break;
                 }
                 case 3:
@@ -438,6 +522,7 @@ json modificarDatos()
                 {
                     // Regresar
                     return json();
+                    break;
                 }
             }
         }
@@ -448,19 +533,22 @@ json modificarDatos()
                 case 1: 
                 {
                     // Descargar
+                    break;
                 }
                 case 2:
                 {
                     // Imprimir
+                    break;
                 }
                 case 3:
                 {
                     // Borrar
+                    break;
                 }
                 case 4:
                 {
                     // Regresar
-                    return json();
+                    break;
                 }
             }
         }
@@ -474,7 +562,8 @@ json modificarDatos()
                 case 1: 
                 {
                     cout << "Nombre del producto: ";
-                    cin >> nombre_producto;
+                    cin.ignore();
+                    getline(cin, nombre_producto);
 
                     cout << "ID del producto: ";
                     cin >> id_producto;
@@ -502,7 +591,57 @@ json modificarDatos()
                 }
                 case 2:
                 {
-                    // Eliminar
+                    cout << "Ingresa ID para eliminar: ";
+                    cin >> id_producto;
+
+                    bool encontrado = false;
+
+                    // Principio apunta al principio de archivo["productos"] y mientras no llegue al final se le aumentara el valor para recorrer todo el archivo
+                    for (auto principio = archivo["productos"].begin(); principio != archivo["productos"].end(); ++principio)
+                    {
+
+                        // *principio es como un puntero al elemento
+                        if ((*principio)["id"] == id_producto)
+                        {
+                            encontrado = true;
+
+                            cout << "Ingresa ID del producto: " << (*principio)["nombre"] << endl;
+                            cout << "Stock: " << (*principio)["stock"] << endl;
+
+                            cout << "Cuantos quieres eliminar? ";
+                            cin >> stock;
+
+                            int disponible = (*principio)["stock"];
+
+                            if (stock > disponible)
+                            {
+                                cout << "Advertencia, quieres eliminar todo el stock ?\n Esto eliminara el producto del inventario (s/n).\n";
+                                cin >> confirmacion;
+
+                                if (confirmacion == 's')
+                                {
+                                    archivo["productos"].erase(principio);
+                                }
+
+                            }
+                            else if (stock == disponible)
+                            {
+                                archivo["productos"].erase(principio);
+                            }
+                            else
+                            {
+                                (*principio)["stock"] = disponible - stock;
+                                cout << "Se eliminaron " << stock << " unidades.\n";
+                            }
+                            break;
+                        }
+                    }
+                    if (!encontrado)
+                    {
+                        cout << "No se encontro un producto con ese ID.\n";
+                    }
+                    ofstream out("productos.json");
+                    out << archivo.dump(4);
                     break;
                 }
                 case 3:
@@ -512,38 +651,45 @@ json modificarDatos()
                 }
                 case 4:
                 {
-                    return json();
+                    break;
                 }
             }
         }
     }
+    return json();
 }
 
-//Modulo de venta
-bool venta(){
+
+// Modulo de venta
+// Check
+bool venta()
+{
     int id;
     int cantidad;
-    float subtotal=0;
-    bool existe=false;
-    bool pago=false;
+    float subtotal = 0;
+    bool existe = false;
+    bool pago = false;
     char confirmar;
-    bool encontrado=false;
+    bool encontrado = false;
 
-    do{
+    do
+    {
         limpiarPantalla(); //Limpiar antes de volver a poner todos los datos
-        subtotal=0;
-        cout<<"Carrito:\n";
+        subtotal = 0;
+        cout << "Carrito:\n" << endl;
 
-        if(carrito.empty()){ //Si esta vacio, cada vez que se inicia una venta
-            cout<<"El carrito esta vacio\n";
+        if(carrito.empty()) //Si esta vacio, cada vez que se inicia una venta
+        { 
+            cout << "El carrito esta vacio\n" << endl;
         } 
-        else{
+        else
+        {
             cout << left //Tabla
-            << setw(5) << "ID"
-            << setw(30) << "Nombre"
-            << setw(15) << "Cantidad"
-            << setw(15) << "Precio\n"
-            << string(75, '-') << '\n';
+                << setw(5) << "ID"
+                << setw(30) << "Nombre"
+                << setw(15) << "Cantidad"
+                << setw(15) << "Precio\n"
+                << string(75, '-') << '\n';
 
             for (const auto& item : carrito) {
                 cout << setw(5) << item.id;
@@ -551,281 +697,332 @@ bool venta(){
                 cout << setw(15) << item.cantidad; //Checar cantidad importante
                 cout << setw(15) << item.precio;
                 cout << "\n";
-                subtotal=subtotal+(item.cantidad * item.precio);
+                subtotal = subtotal + (item.cantidad * item.precio);
             }
-        cout<<"\nSubtotal: $" <<subtotal <<"\n\n";
+            cout << "\nSubtotal: $" << subtotal << "\n\n";
         }
 
-        cout<<"1. Agregar producto\n";
-        cout<<"2. Eliminar producto\n";
-        cout<<"3. Proceder al pago\n";
-        cout<<"4. Cancelar todo\n";
-        cout<<"5. Regresar\n";
-        cout<<"Selecciona una opcion: ";
-        cin>>a;
+        cout << "1. Agregar producto\n";
+        cout << "2. Eliminar producto\n";
+        cout << "3. Proceder al pago\n";
+        cout << "4. Cancelar todo\n";
+        cout << "5. Regresar\n";
+        cout << "Selecciona una opcion: ";
+        cin >> a;
 
-        switch(a){
-            case 1: {
+        switch(a)
+        {
+            case 1: 
+            {
                 // Agregar producto
                 cout << "Ingresa ID: ";
                 cin >> id;
 
-                ifstream f("productos.json"); //Buscar el producto en el Json
+                ifstream f("productos.json"); // Buscar el producto en el Json
                 json productos=json::parse(f);
                 json productoEncontrado=nullptr;
 
-                for(auto& pro : productos["productos"]){
-                    if(pro["id"].get<int>()==id) {
+                for (auto& pro : productos["productos"])
+                {
+                    if (pro["id"].get<int>()==id)
+                    {
                         productoEncontrado=pro;
-                        break; //ya se encontro, se sale de aca
+                        break; // Ya se encontro, se sale de aca
                     }
                 }
 
-                if (productoEncontrado==nullptr) {
-                    cout<<"No existe ese producto\n"; //No hay en el Json eso
+                if (productoEncontrado==nullptr)
+                {
+                    cout << "No existe ese producto\n"; // No hay en el Json eso
                     pausa();
                     break;
                 }
 
-                cout<<"Ingresa cantidad: ";
-                cin>>cantidad;
+                cout << "Ingresa cantidad: ";
+                cin >> cantidad;
 
-                int stockDisponible=productoEncontrado["stock"].get<int>(); //Validar que si se pueda agarrar esa cantidad
-                if(cantidad>stockDisponible){
-                    cout<<"Error: No hay suficiente stock\n";
-                    cout<<"Stock disponible: "<<stockDisponible <<"\n";
-                    cout<<"Cantidad solicitada: " <<cantidad <<"\n";
+                int stockDisponible=productoEncontrado["stock"].get<int>(); // Validar que si se pueda agarrar esa cantidad
+                if (cantidad>stockDisponible)
+                {
+                    cout << "Error: No hay suficiente stock\n";
+                    cout << "Stock disponible: "<< stockDisponible << "\n";
+                    cout << "Cantidad solicitada: " << cantidad << "\n";
                     pausa();
                     break; 
                 }
 
-                if(cantidad<=0){
-                    cout<< "Error: La cantidad debe ser mayor a 0\n";
+                if (cantidad <= 0)
+                {
+                    cout << "Error: La cantidad debe ser mayor a 0\n";
                     pausa();
                     break;
                     }
 
-                existe=false;
-                for(auto& item : carrito){  //Si ya esta en el carrito se suma la cantidad del producto
-                    if(item.id==id) {
-                        item.cantidad=item.cantidad+cantidad;
-                        existe=true;
+                existe = false;
+                for (auto& item : carrito)  // Si ya esta en el carrito se suma la cantidad del producto
+                {
+                    if (item.id==id)
+                    {
+                        item.cantidad = item.cantidad + cantidad;
+                        existe = true;
                         break;
                     }
                 }
 
-                if (!existe){ //Si no existe se agrega al vector para mostrarlo
-                    carrito.push_back({
+                if (!existe)  // Si no existe se agrega al vector para mostrarlo
+                {
+                    carrito.push_back(
+                        {
                         id,
                         productoEncontrado["nombre"].get<string>(),
                         cantidad,
                         productoEncontrado["precio"].get<int>()
-                    });
+                    }
+                    );
                 }
                  break;
             }
-
-            case 2: {
-                //Eliminar producto
-                if(carrito.empty()){ //Esta vacio y no se puede eliminar nada
-                    cout<<"El carrito esta vacio\n";
+            case 2:
+            {
+                // Eliminar producto
+                if (carrito.empty())
+                { // Esta vacio y no se puede eliminar nada
+                    cout << "El carrito esta vacio\n";
                     pausa();
                     break;
                 }
 
-                cout<<"Ingresa ID para eliminar: ";
-                cin >>id;
+                cout << "Ingresa ID para eliminar: ";
+                cin >> id;
 
                 
-                for(int i=0; i<carrito.size(); i++){
-                    if(carrito[i].id == id){
-                    encontrado=true;
-                    cout<<"Producto: " <<carrito[i].nombre <<endl;
-                    cout<<"Cantidad actual en carrito: " <<carrito[i].cantidad <<endl;
-                    cout<<"Cuantos quieres eliminar? ";
-                    cin>>cantidad;
+                for (int i=0; i<carrito.size(); i++)
+                {
+                    if (carrito[i].id == id)
+                    {
+                    encontrado = true;
+                    cout << "Producto: " << carrito[i].nombre << endl;
+                    cout << "Cantidad actual en carrito: " << carrito[i].cantidad << endl;
+                    cout << "Cuantos quieres eliminar? ";
+                    cin >> cantidad;
 
-                    if(cantidad<=0){
-                        cout<<"Error, la cantidad debe ser mayor a 0\n";
+                    if (cantidad <= 0)
+                    {
+                        cout << "Error, la cantidad debe ser mayor a 0\n";
                         pausa();
                         break;
                     }
 
-                    if(cantidad > carrito[i].cantidad){
-                        cout<<"Error, no puedes eliminar mss de lo que hay en el carrito\n";
-                        cout<<"Maximo a eliminar: " <<carrito[i].cantidad <<endl;
+                    if (cantidad > carrito[i].cantidad)
+                    {
+                        cout << "Error, no puedes eliminar mss de lo que hay en el carrito\n";
+                        cout << "Maximo a eliminar: " << carrito[i].cantidad << endl;
                         pausa();
                         break;
                     }
 
-                    if(cantidad == carrito[i].cantidad){ //Si elimina todo
-                        carrito.erase(carrito.begin()+i);//.begin apunta al primer elemento del vector, se le suma la posición para eliminar el producto deseado
-                        cout<<"Producto eliminado\n";
+                    if(cantidad == carrito[i].cantidad) // Si elimina todo
+                    {
+                        carrito.erase(carrito.begin()+i); // .begin apunta al primer elemento del vector, se le suma la posición para eliminar el producto deseado
+                        cout << "Producto eliminado\n";
                     }
-                    else {
-                       carrito[i].cantidad-=cantidad;
-                       cout<<"Se eliminaron " <<cantidad << "unidades\n";
+                    else 
+                    {
+                       carrito[i].cantidad -= cantidad;
+                       cout << "Se eliminaron " << cantidad << "unidades\n";
                     }
+
                     break;
+
                     }
                 }
-
-                if(!encontrado){
-                    cout<<"Producto no encontrado en el carrito\n";
+                if (!encontrado)
+                {
+                    cout << "Producto no encontrado en el carrito\n";
                     pausa();
                 }
+
                 break;
             }
 
-            case 3: {
-                 //Proceder al pago
-                if(carrito.empty()){ //Carrito vacio no se hace nada
-                    cout<<"El carrito esta vacio\n";
+            case 3:
+            {
+                // roceder al pago
+                if (carrito.empty()) // Carrito vacio no se hace nada
+                {
+                    cout << "El carrito esta vacio\n";
                     pausa();
                     break;
                 }
 
-                cout<<"Confirmar compra(s/n): ";
-                cin>>confirmar;
+                cout << "Confirmar compra(s/n): ";
+                cin >> confirmar;
 
-                if(confirmar=='s' || confirmar=='S'){ //Se actualiza el stock aca
-                guardarEnHistorial(subtotal); //Para el historial
+                if (confirmar=='s' || confirmar=='S') // Se actualiza el stock aca
+                {
+                guardarEnHistorial(subtotal); // Para el historial
                 ifstream f("productos.json");   
                 json productos= json::parse(f);
 
-                for(auto& item : carrito){
-                   for(auto& pro : productos["productos"]){
-                      if (pro["id"].get<int>()== item.id){
-                        int stockActual=pro["stock"].get<int>(); //para ver cuanto tiene ahora
-                        pro["stock"]=stockActual-item.cantidad; //restarle la cantidad que se ocupo en el carrito
+                for (auto& item : carrito)
+                {
+                   for(auto& pro : productos["productos"])
+                   {
+                      if (pro["id"].get<int>()== item.id)
+                      {
+                        int stockActual = pro["stock"].get<int>(); // Para ver cuanto tiene ahora
+                        pro["stock"] = stockActual-item.cantidad; // Restarle la cantidad que se ocupo en el carrito
                         break;
                       }
                     }
                 }
 
                 ofstream o("productos.json");
-                o << setw(4) << productos << endl; //Esto para mantener el mismo formato del json
+                o << setw(4) << productos << endl; // Esto para mantener el mismo formato del json
 
                 carrito.clear();
-                regresar_al_menu=true;
-                return pago=true;
+                regresar_al_menu = true;
+                return pago = true;
                 }
-                else{
-                    cout<<"Compra cancelada\n";
+                else
+                {
+                    cout << "Compra cancelada\n";
                 }
 
                 break;
             }
 
             case 4:
-                //Cancelar todo
+            {
+                // Cancelar todo
                 carrito.clear();
-                cout<<"Carrito vaciado\n";
+                cout << "Carrito vaciado\n";
                 break;
-
-            case 5: {
+            }
+            case 5:
+            {
                 carrito.clear();
-                regresar_al_menu=true;
+                regresar_al_menu = true;
                 return false;
 
             }
-
             default:
-            cout<<"Opcion no valida\n";
+            cout << "Opcion no valida\n";
             break;
 
         }
 
-    }while(pago==false);
+    } while (pago == false);
 }
 
-void guardarEnHistorial(float subtotal){
+
+// Check
+void guardarEnHistorial(float subtotal)
+{
     int sesion_actual;
     json historial;
     ifstream f("historial.json");
-    if(f.good()){
+
+    if(f.good())
+    {
         f.seekg(0, ios::end);
-        if(f.tellg() == 0) {
+        if(f.tellg() == 0)
+        {
             historial["ventas"]=json::array();
             historial["ultima_sesion"]=1;
         } 
-        else {
+        else
+        {
             f.seekg(0, ios::beg);
             historial=json::parse(f);
         }
     }
-    else{
+    else
+    {
         historial["ventas"] = json::array();
         historial["ultima_sesion"] = 1;
     }
 
-    if(historial.contains("ultima_sesion")){ //Cgecar la sesion en la que esta
-        sesion_actual=historial["ultima_sesion"].get<int>();
+    if (historial.contains("ultima_sesion")) // Checar la sesion en la que esta
+    {
+        sesion_actual = historial["ultima_sesion"].get<int>();
     } 
-    else{
+    else
+    {
         sesion_actual=1;
-        historial["ultima_sesion"]=sesion_actual;
+        historial["ultima_sesion"] = sesion_actual;
     }
 
     json venta;
-    venta["sesion"]="Sesion "+to_string(sesion_actual);
-    venta["total"]=subtotal;
-    venta["productos"]=json::array();
+    venta["sesion"] = "Sesion "+ to_string(sesion_actual);
+    venta["total"] = subtotal;
+    venta["productos"] = json::array();
 
-    for(const auto& item : carrito){  //Agregarlo
+    for (const auto& item : carrito) // Agregarlo
+    {
         json producto;
-        producto["id"]=item.id;
-        producto["nombre"]=item.nombre;
-        producto["cantidad"]=item.cantidad;
-        producto["precio_unitario"]=item.precio;
-        producto["subtotal"]=item.cantidad*item.precio;
-        
+        producto["id"] = item.id;
+        producto["nombre"] = item.nombre;
+        producto["cantidad"] = item.cantidad;
+        producto["precio_unitario"] = item.precio;
+        producto["subtotal"] = item.cantidad * item.precio;
         venta["productos"].push_back(producto);
     }
     historial["ventas"].push_back(venta);
     ofstream o("historial.json");
-    o<<setw(4) <<historial <<endl; //Ponerlo en orden
+    o<<setw(4) << historial << endl; // Ponerlo en orden
 
-    cout<<"Venta guardada\n";
+    cout << "Venta guardada\n";
 }
 
-void nuevoDia(){
-    if(sesion_iniciada){
+
+// Check
+void nuevoDia()
+{
+    if (sesion_iniciada)
+    {
         return; 
     }
 
     json historial;
     ifstream f("historial.json");
-    if(f.good()){
+    if (f.good())
+    {
         f.seekg(0, ios::end);
-        if(f.tellg()==0){ //vacio
+        if(f.tellg()==0) // Vacio
+        {
             historial["ventas"]=json::array();
-            historial["ultima_sesion"]=0;
+            historial["ultima_sesion"] = 0;
         }
-        else{
+        else
+        {
             f.seekg(0, ios::beg);
             historial=json::parse(f);
         }
     }
-    else {
+    else
+    {
         historial["ventas"]=json::array();
-        historial["ultima_sesion"]=1;
+        historial["ultima_sesion"] = 1;
     }
 
-    if(historial.contains("ultima_sesion")){
-        int ultima_sesion=historial["ultima_sesion"].get<int>();
-        historial["ultima_sesion"]=ultima_sesion+1;
+    if (historial.contains("ultima_sesion"))
+    {
+        int ultima_sesion = historial["ultima_sesion"].get<int>();
+        historial["ultima_sesion"] = ultima_sesion+1;
     } 
-    else{
-        historial["ultima_sesion"]=1;
+    else
+    {
+        historial["ultima_sesion"] = 1;
     }
 
     ofstream o("historial.json");
-    o<<setw(4) <<historial <<endl;
-    sesion_iniciada=true;
+    o<<setw(4) << historial << endl;
+    sesion_iniciada = true;
 }
 
-//Lista // 77 - 171 mover 8 lineas
+
+// Check
 json abrirJson()
 {
 
@@ -948,46 +1145,48 @@ int main ()
 {
     while (true)  
     {
-        error=0;  
+        error = 0;  
         limpiarPantalla();
 
         do
         {
             limpiarPantalla();
-            if(error>=1)
+            if(error >= 1)
             {
                 cout<<"Informacion incorrecta. Intenta de nuevo.\n";
             }
 
-            usuario=verificarId();
+            usuario = verificarId();
         
-            if(usuario.is_null())
+            if (usuario.is_null())
             {
                 error++;
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
             }
 
-        } while(usuario.is_null());
+        } while (usuario.is_null());
 
         nuevoDia();
         
-        while(true)
+        while (true)
         { 
             archivo=abrirJson();
 
-            if(archivo.is_null()) { 
-               if (regresar_al_menu) {
+            if (archivo.is_null())
+            { 
+               if (regresar_al_menu)
+               {
                regresar_al_menu = false;  
                continue;                  
                }   
-               else{
+               else
+               {
                break;  // Volver al login
                } 
             }
-
             mostrarArchvio();
             seleccionarAccion();
             modificarDatos();
         }
     }
-} //Aqui
+}
