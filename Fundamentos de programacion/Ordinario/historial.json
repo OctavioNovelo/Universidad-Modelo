@@ -1,0 +1,25 @@
+{
+    "ultima_sesion": 2,
+    "ventas": [
+        {
+            "productos": [
+                {
+                    "cantidad": 2,
+                    "id": 5,
+                    "nombre": "Peluche mediano",
+                    "precio_unitario": 200,
+                    "subtotal": 400
+                },
+                {
+                    "cantidad": 1,
+                    "id": 8,
+                    "nombre": "Vela aromatica",
+                    "precio_unitario": 250,
+                    "subtotal": 250
+                }
+            ],
+            "sesion": "Sesion 2",
+            "total": 650.0
+        }
+    ]
+}

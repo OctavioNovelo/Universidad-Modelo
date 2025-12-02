@@ -28,7 +28,7 @@
             "id": 5,
             "nombre": "Peluche mediano",
             "precio": 200,
-            "stock": 3
+            "stock": 1
         },
         {
             "id": 6,
@@ -46,7 +46,7 @@
             "id": 8,
             "nombre": "Vela aromatica",
             "precio": 250,
-            "stock": 10
+            "stock": 9
         },
         {
             "id": 9,

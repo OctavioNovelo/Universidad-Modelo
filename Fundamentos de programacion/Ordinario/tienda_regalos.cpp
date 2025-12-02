@@ -34,7 +34,7 @@ int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
 bool sesion_iniciada=false;
 int error=0;
-bool regresar_al_menu=false; //:C
+bool regresar_al_menu=false; 
 
 // Declaracion de las funciones
 // Litzy
