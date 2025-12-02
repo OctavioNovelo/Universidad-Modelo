@@ -331,7 +331,7 @@ json seleccionarAccion()
 }
 
 
-//
+// Check
 json modificarDatos()
 {
     string nombre_producto;
@@ -1356,6 +1356,7 @@ json abrirJson()
 }
 
 
+// Check
 int main ()
 {
     while (true)  
