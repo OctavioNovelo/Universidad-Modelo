@@ -411,7 +411,13 @@ json modificarDatos()
                             }
                             else if (stock == disponible)
                             {
-                                archivo["productos"].erase(principio);
+                                cout << "Advertencia, quieres eliminar todo el stock ?\n Esto eliminara el producto del inventario (s/n).\n";
+                                cin >> confirmacion;
+
+                                if (confirmacion == 's')
+                                {
+                                    archivo["productos"].erase(principio);
+                                }
                             }
                             else
                             {
@@ -448,7 +454,8 @@ json modificarDatos()
             {
                 case 1: 
                 {
-                    cout << "Nombre del empleado: \n";
+                    cout << "Nombre del empleado: ";
+                    cin.ignore();
                     getline(cin, nombre_empleado);
 
                     cout << "ID del empleado: ";
@@ -479,7 +486,7 @@ json modificarDatos()
                 }
                 case 2:
                 {
-                    cout << "Ingresa ID del empleado: ";
+                    cout << "Ingresa ID del empleado: \n";
                     cin >> id_empleado;
 
                     bool encontrado = false;
@@ -520,7 +527,6 @@ json modificarDatos()
                 }
                 case 4:
                 {
-                    // Regresar
                     return json();
                     break;
                 }
@@ -605,7 +611,7 @@ json modificarDatos()
                         {
                             encontrado = true;
 
-                            cout << "Ingresa ID del producto: " << (*principio)["nombre"] << endl;
+                            cout << "Eliminar: " << (*principio)["nombre"] << endl;
                             cout << "Stock: " << (*principio)["stock"] << endl;
 
                             cout << "Cuantos quieres eliminar? ";
@@ -626,7 +632,13 @@ json modificarDatos()
                             }
                             else if (stock == disponible)
                             {
-                                archivo["productos"].erase(principio);
+                                cout << "Advertencia, quieres eliminar todo el stock ?\n Esto eliminara el producto del inventario (s/n).\n";
+                                cin >> confirmacion;
+
+                                if (confirmacion == 's')
+                                {
+                                    archivo["productos"].erase(principio);
+                                }
                             }
                             else
                             {
@@ -651,6 +663,7 @@ json modificarDatos()
                 }
                 case 4:
                 {
+                    return json();
                     break;
                 }
             }
@@ -660,7 +673,6 @@ json modificarDatos()
 }
 
 
-// Modulo de venta
 // Check
 bool venta()
 {
@@ -1039,7 +1051,7 @@ json abrirJson()
         limpiarPantalla();
         // El empleado solo puede acceder a los productos, carrito y salir
         cout << "Bienvenido empleado " << usuario["nombre"] << '\n';
-        cout << "Aviso: Para navegar por la interfaz use el teclado numerico." << endl;
+        cout << "Aviso: Para navegar por la interfaz use el teclado numerico.\n" << endl;
         cout << "Que desea hacer ?\n";
         cout << "1 - Carrito.\n";
         cout << "2 - Productos.\n";
@@ -1083,6 +1095,7 @@ json abrirJson()
         limpiarPantalla();
         // El gerente puede acceder a tres archvios distintos
         cout << "Bienvenido gerente " << usuario["nombre"] << endl;
+        cout << "Aviso: Para navegar por la interfaz use el teclado numerico." << endl;
         cout << endl << "Que desea revisar ?\n";
         cout << "1 - Carrito.\n";
         cout << "2 - Productos.\n";
@@ -1170,7 +1183,7 @@ int main ()
         
         while (true)
         { 
-            archivo=abrirJson();
+            archivo = abrirJson();
 
             if (archivo.is_null())
             { 
