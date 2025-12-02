@@ -29,19 +29,16 @@ json archivo;
 json usuario;
 int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
+int c;
 bool sesion_iniciada=false;
 int error=0;
-bool regresar_al_menu=false; //:C
+bool regresar_al_menu=false; 
 
 // Declaracion de las funciones
 // Litzy
 void guardarEnHistorial(float subtotal);
 void nuevoDia();
 bool venta();
-bool sesion_iniciada = false;
-int error = 0;
-bool regresar_al_menu = false;
-
 
 // Check
 struct ItemCarrito
@@ -455,7 +452,7 @@ json modificarDatos()
                         {
                             encontrado = true;
 
-                            cout << "Qué deseas modificar?\n";
+                            cout << "Que deseas modificar?\n";
                             cout << "1 - Nombre\n";
                             cout << "2 - Stock\n";
                             cout << "3 - Precio\n";

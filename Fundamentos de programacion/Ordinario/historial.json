@@ -1,0 +1,18 @@
+{
+    "ultima_sesion": 1,
+    "ventas": [
+        {
+            "productos": [
+                {
+                    "cantidad": 5,
+                    "id": 6,
+                    "nombre": "Peluche grande",
+                    "precio_unitario": 300,
+                    "subtotal": 1500
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 1500.0
+        }
+    ]
+}
