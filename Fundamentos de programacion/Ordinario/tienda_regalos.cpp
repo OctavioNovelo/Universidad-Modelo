@@ -29,6 +29,7 @@ json archivo;
 json usuario;
 int a; // Seleccion de archivo
 int b; // Seleccion de accion a realizar con los archivos
+int c; // Opcion para la modificacion
 
 // Declaracion de las funciones
 // Litzy
@@ -279,6 +280,7 @@ json seleccionarAccion()
                 cout << "3 - Modificar producto.\n";
                 cout << "4 - Regresar.\n";
                 cin >> b;
+                cout << endl;
                 break;
             }
             case 3: 
@@ -291,6 +293,7 @@ json seleccionarAccion()
                 cout << "3 - Modificar informacion del empleado.\n";
                 cout << "4 - Regresar.\n";
                 cin >> b;
+                cout << endl;
                 break;
             }
             case 4:
@@ -303,6 +306,7 @@ json seleccionarAccion()
                 cout << "3 - Borrar historial de venta.\n";;
                 cout << "4 - Regresar.\n";
                 cin >> b;
+                cout << endl;
                 break;
             }
             default:
@@ -321,6 +325,7 @@ json seleccionarAccion()
         cout << "2 - Eliminar producto.\n";
         cout << "3 - Modificar producto.\n";
         cout << "4 - Regresar.\n";
+        cout << endl;
         cin >> b;
     }
 }
@@ -435,9 +440,64 @@ json modificarDatos()
                     out << archivo.dump(4);
                     break;
                 }
-                case 3:
+                case 3: // Modificar
                 {
-                    // Modificar
+                    cout << "Ingresa ID del producto a modificar: ";
+                    cin >> id_producto;
+
+                    bool encontrado = false;
+
+                    for (auto& prod : archivo["productos"])
+                    {
+                        if (prod["id"] == id_producto)
+                        {
+                            encontrado = true;
+
+                            cout << "Qué deseas modificar?\n";
+                            cout << "1 - Nombre\n";
+                            cout << "2 - Stock\n";
+                            cout << "3 - Precio\n";
+                            cin >> c;
+                            cin.ignore();  
+
+                            switch (c)
+                            {
+                                case 1:
+                                {
+                                    string nuevoNombre;
+                                    cout << "Nuevo nombre: ";
+                                    getline(cin, nuevoNombre);
+                                    prod["nombre"] = nuevoNombre;
+                                    break;
+                                }
+                                case 2:
+                                {
+                                    int nuevoStock;
+                                    cout << "Nuevo stock: ";
+                                    cin >> nuevoStock;
+                                    prod["stock"] = nuevoStock;
+                                    break;
+                                }
+                                case 3:
+                                {
+                                    float nuevoPrecio;
+                                    cout << "Nuevo precio: ";
+                                    cin >> nuevoPrecio;
+                                    prod["precio"] = nuevoPrecio;
+                                    break;
+                                }
+                                default:
+                                    cout << "Opcion no valida.\n";
+                            }
+                            break;
+                        }
+                    }
+
+                    if (!encontrado)
+                        cout << "No se encontro un producto con ese ID.\n";
+
+                    ofstream out("productos.json");
+                    out << archivo.dump(4);
                     break;
                 }
                 case 4:
@@ -520,9 +580,93 @@ json modificarDatos()
                     out << archivo.dump(4);
                     break;
                 }
-                case 3:
+                case 3: 
+                // Modificar
                 {
-                    // Modificar
+                    cout << "Ingresa ID del empleado: ";
+                    cin >> id_empleado;
+                    cout << endl;
+
+                    bool encontrado = false;
+
+                    for (auto& emp : archivo["empleados"])
+                    {
+                        if (emp["id"] == id_empleado)
+                        {
+                            encontrado = true;
+
+                            cout << "Que deseas modificar?\n";
+                            cout << "1 - Nombre\n";
+                            cout << "2 - Usuario\n";
+                            cout << "3 - Categoria\n";
+                            cout << "4 - Password\n";
+                            cin >> c;
+                            cout << endl;
+                            cin.ignore();  
+
+                            switch (c)
+                            {
+                                case 1:
+                                {
+                                    string nuevoNombre;
+                                    cout << "Nuevo nombre: ";
+                                    getline(cin, nuevoNombre);
+                                    emp["nombre"] = nuevoNombre;
+                                    break;
+                                }
+                                case 2:
+                                {
+                                    string nuevoUsuario;
+                                    cout << "Nuevo usuario: ";
+                                    cin >> nuevoUsuario;
+                                    emp["username"] = nuevoUsuario;
+                                    break;
+                                }
+                                case 3:
+                                {
+                                    string nuevaCategoria;
+                                    cout << "Nueva categoria (gerente o empleado): ";
+                                    cin >> nuevaCategoria;
+                                    emp["categoria"] = nuevaCategoria;
+                                    break;
+                                }
+                                case 4:
+                                {
+                                    string newPassword;
+                                    cout << "Ingresa tu password actual: \n";
+                                    cin >> newPassword;
+
+                                    if (newPassword == emp["password"])
+                                    {
+                                        cout << "Correcto.";
+                                        continue;
+                                    }
+                                    else if (newPassword != emp["pasword"])
+                                    {
+                                        cout << "Incorrecto. Intente de nuevo";
+                                        pausa();
+                                        break;
+                                    }
+
+                                    cout << "New Password: ";
+                                    cin >> newPassword;
+
+                                    emp["password"] = newPassword;
+                                    break;
+                                }
+                                default:
+                                    cout << "Opcion no valida.\n";
+                            }
+                            break;
+                        }
+                    }
+
+                    if (!encontrado)
+                    {
+                        cout << "No se encontro a un empleado con ese ID.\n";
+                    }
+                    ofstream out("empleados.json");
+                    out << archivo.dump(4);
                     break;
                 }
                 case 4:
@@ -656,9 +800,64 @@ json modificarDatos()
                     out << archivo.dump(4);
                     break;
                 }
-                case 3:
+                case 3: // Modificar
                 {
-                    // Modificar
+                    cout << "Ingresa ID del producto a modificar: ";
+                    cin >> id_producto;
+
+                    bool encontrado = false;
+
+                    for (auto& prod : archivo["productos"])
+                    {
+                        if (prod["id"] == id_producto)
+                        {
+                            encontrado = true;
+
+                            cout << "Qué deseas modificar?\n";
+                            cout << "1 - Nombre\n";
+                            cout << "2 - Stock\n";
+                            cout << "3 - Precio\n";
+                            cin >> c;
+                            cin.ignore();  
+
+                            switch (c)
+                            {
+                                case 1:
+                                {
+                                    string nuevoNombre;
+                                    cout << "Nuevo nombre: ";
+                                    getline(cin, nuevoNombre);
+                                    prod["nombre"] = nuevoNombre;
+                                    break;
+                                }
+                                case 2:
+                                {
+                                    int nuevoStock;
+                                    cout << "Nuevo stock: ";
+                                    cin >> nuevoStock;
+                                    prod["stock"] = nuevoStock;
+                                    break;
+                                }
+                                case 3:
+                                {
+                                    float nuevoPrecio;
+                                    cout << "Nuevo precio: ";
+                                    cin >> nuevoPrecio;
+                                    prod["precio"] = nuevoPrecio;
+                                    break;
+                                }
+                                default:
+                                    cout << "Opcion no valida.\n";
+                            }
+                            break;
+                        }
+                    }
+
+                    if (!encontrado)
+                        cout << "No se encontro un producto con ese ID.\n";
+
+                    ofstream out("productos.json");
+                    out << archivo.dump(4);
                     break;
                 }
                 case 4:
@@ -1057,6 +1256,7 @@ json abrirJson()
         cout << "2 - Productos.\n";
         cout << "3 - Regresar.\n";
         cin >> a;
+        cout << endl;
 
         switch (a)
         {
@@ -1103,6 +1303,8 @@ json abrirJson()
         cout << "4 - Historial de ventas.\n";
         cout << "5 - Regresar.\n";
         cin >> a;
+        cout << endl;
+
         switch (a)
         {
             case 1:
