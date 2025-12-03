@@ -165,7 +165,7 @@ void mostrarArchivo()
     }
 }
 
-void guardarEnHistorial(float subtotal)
+void guardarEnHistorial(float total)
 {
     int sesion_actual;
     json historial;
@@ -203,7 +203,7 @@ void guardarEnHistorial(float subtotal)
 
     json venta;
     venta["sesion"] = "Sesion "+ to_string(sesion_actual);
-    venta["total"] = subtotal;
+    venta["total"] = total;
     venta["productos"] = json::array();
 
     for (const auto& item : carrito) // Agregarlo
@@ -213,7 +213,7 @@ void guardarEnHistorial(float subtotal)
         producto["nombre"] = item.nombre;
         producto["cantidad"] = item.cantidad;
         producto["precio_unitario"] = item.precio;
-        producto["subtotal"] = item.cantidad * item.precio;
+        producto["total"] = item.cantidad * item.precio;
         venta["productos"].push_back(producto);
     }
     historial["ventas"].push_back(venta);
