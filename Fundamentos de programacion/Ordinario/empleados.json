@@ -20,6 +20,13 @@
             "nombre": "Octavio Novelo",
             "password": "xdlollmao",
             "username": "ON"
+        },
+        {
+            "categoria": "empleado",
+            "id": 4,
+            "nombre": "Alejandro",
+            "password": "123456",
+            "username": "AX"
         }
     ]
 }
