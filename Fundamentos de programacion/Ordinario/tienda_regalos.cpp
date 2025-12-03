@@ -50,6 +50,8 @@ float total;
 float dineroFalt;
 int diferencia;
 
+
+// Carrito
 // Check
 struct ItemCarrito
 {
@@ -60,10 +62,11 @@ struct ItemCarrito
 };
 
 
+//Carrito
 // El carrito
 vector<ItemCarrito>carrito;
 
-
+// General
 // Check
 void limpiarPantalla()
 {
@@ -76,7 +79,7 @@ void limpiarPantalla()
     #endif
 }
 
-
+// General
 // Check
 void pausa(){
     cout<<"Enter para continuar";
@@ -86,7 +89,7 @@ void pausa(){
     cout<<endl;
 }
 
-
+// Jsons
 // Check
 json verificarId()
 {
@@ -127,7 +130,7 @@ json verificarId()
     return nullptr;
 }
 
-
+// General
 // Check
 void mostrarArchvio()
 {
@@ -271,7 +274,7 @@ void mostrarArchvio()
     }
 }
 
-
+// Jsons
 // Check
 json seleccionarAccion()
 {
@@ -335,7 +338,7 @@ json seleccionarAccion()
     }
 }
 
-
+// Jsons
 // Check
 json modificarDatos()
 {
@@ -725,7 +728,7 @@ json modificarDatos()
     return json();
 }
 
-
+// Venta
 // Propina
 float propina(float subtotal)
 {
@@ -767,7 +770,7 @@ float propina(float subtotal)
     return total;
 }
 
-
+//
 // Check
 bool venta()
 {
@@ -1071,7 +1074,7 @@ bool venta()
     } while (pago == false);
 }
 
-
+// 
 // Check
 void guardarEnHistorial(float subtotal)
 {
@@ -1132,6 +1135,7 @@ void guardarEnHistorial(float subtotal)
 }
 
 
+//
 // Check
 void nuevoDia()
 {
@@ -1178,6 +1182,7 @@ void nuevoDia()
 }
 
 
+// Jsons
 // Check
 json abrirJson()
 {
