@@ -40,6 +40,16 @@ void guardarEnHistorial(float subtotal);
 void nuevoDia();
 bool venta();
 
+// Declaracion de las funciones
+// Aili
+int d; //seleccion de metodo de pago
+char e;
+int dineroEf;
+float cambio;
+float total;
+float dineroFalt;
+int diferencia;
+
 // Check
 struct ItemCarrito
 {
@@ -870,6 +880,46 @@ json modificarDatos()
     return json();
 }
 
+// Propina
+float propina(float subtotal)
+{
+    float propPersonalizada;
+    int propina;
+
+    cout << "Gracias! Ingresa tu porcentaje de propina\n";
+    cout << "1. 10%\n";
+    cout << "2. 15%";
+    cout << "3. Propina personalizada";
+    cin >> propina;
+
+    switch (propina)
+    {
+    case 1:
+        total = (subtotal)*(0.9);
+        break;
+
+    case 2:
+        total = (subtotal)*(0.85);
+        break;
+
+    case 3:
+        cout << "Ingresa la cantidad";
+        cin >> propPersonalizada;
+        total = subtotal + propPersonalizada;
+        if (propPersonalizada <= 0) {
+            cout << "No se agregó propina a la cuenta total";
+            total = subtotal;
+        } else {
+            total = subtotal + propPersonalizada;
+        }            
+        break;
+    
+    default:
+        cout << "Error. Selecciona una opción válida";
+        break;
+    }
+    return total;
+}
 
 // Check
 bool venta()
@@ -1057,7 +1107,7 @@ bool venta()
 
             case 3:
             {
-                // roceder al pago
+                // Proceder al pago
                 if (carrito.empty()) // Carrito vacio no se hace nada
                 {
                     cout << "El carrito esta vacio\n";
@@ -1073,6 +1123,55 @@ bool venta()
                 guardarEnHistorial(subtotal); // Para el historial
                 ifstream f("productos.json");   
                 json productos= json::parse(f);
+
+                cout << "Selecciona tu metodo de pago\n";
+                cout << "1. Pago en efectivo\n";
+                cout << "2. Pago por tarjeta\n";
+
+                switch (d) 
+                {
+                    case 1:
+                    {
+                        cout << "Le gustaría dejar propina?(s/n)\n";
+                        cin >> e;
+
+                        if ((e == 's') || (e == 'S')) {
+                            float total = propina(subtotal);
+                            std::cout << "Tu total es de $" << total;
+                        } else if ((e == 'n') || (e == 'N')) {
+                        } else {
+                            cout << "Respuesta no válida";
+                            return pago = true;
+                        }
+
+                        cout << "Ingresa el dinero";
+                        cin >> dineroEf;
+
+                        if (dineroEf >= total) {
+                            if (dineroEf == total) {
+                                cout << "El pago ha sido realizado correctamente\n";
+                            } else if (dineroEf > total) {
+                                cambio = dineroEf - total;
+                                cout << "El pago ha sido realizado correctamente\n";
+                                cout << "Tu cambio es de $" << cambio;
+                            }
+                        } else {
+                            for (int i = 0; i >= total; i++) 
+                            {
+                                dineroFalt = total - dineroEf;
+                                cout << "Saldo insuficiente. Faltan $" << dineroFalt;
+                                cin >> diferencia;
+                                dineroEf = dineroEf + diferencia;        
+                            }
+                        }
+                        break;
+                    }
+
+                    case 2:
+                    {
+                        break;
+                    }
+                }
 
                 for (auto& item : carrito)
                 {
