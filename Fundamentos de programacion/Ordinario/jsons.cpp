@@ -1,16 +1,7 @@
-#include "json.hpp"
+#include "jsons.hpp"
 #include "general.hpp"
+#include <fstream>
 
-#include <iostream>
-#include <string>
-#include "json.hpp"
-
-using json = nlohmann::json;
-using namespace std;
-
-//Variables globales
-json archivo;
-json usuario;
 
 // Funciones
 json abrirJson()
@@ -522,7 +513,6 @@ json modificarDatos()
     return json();
 }
 
-
 json seleccionarAccion()
 {
     if (usuario["categoria"] == "gerente")
@@ -532,7 +522,7 @@ json seleccionarAccion()
             case 2:
             // Productos
             {
-                mostrarArchvio();
+                mostrarArchivo();
                 cout << "Que accion desea realizar ?\n";
                 cout << "1 - Agregar producto.\n";
                 cout << "2 - Eliminar producto.\n";
@@ -545,7 +535,7 @@ json seleccionarAccion()
             case 3: 
             // Empleados
             {
-                mostrarArchvio();
+                mostrarArchivo();
                 cout << "Que accion desea realizar ?\n";
                 cout << "1 - Agregar empleado.\n";
                 cout << "2 - Eliminar empleado.\n";
@@ -558,7 +548,7 @@ json seleccionarAccion()
             case 4:
             // Historial de ventas
             {
-                mostrarArchvio();
+                mostrarArchivo();
                 cout << "Que accion desea realizar ?\n";
                 cout << "1 - Descargar historial de venta.\n";
                 cout << "2 - Imprimir historial de venta.\n";
@@ -578,7 +568,7 @@ json seleccionarAccion()
     else if (usuario["categoria"] == "empleado")
     {
         // Producto
-        mostrarArchvio();
+        mostrarArchivo();
         cout << "1 - Regresar.\n";
         cout << endl;
         cin >> b;

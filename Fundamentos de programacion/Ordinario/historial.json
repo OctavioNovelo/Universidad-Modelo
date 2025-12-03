@@ -1,5 +1,5 @@
 {
-    "ultima_sesion": 3,
+    "ultima_sesion": 4,
     "ventas": [
         {
             "productos": [
@@ -39,6 +39,19 @@
             ],
             "sesion": "Sesion 3",
             "total": 8.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 2,
+                    "id": 12,
+                    "nombre": "Envoltura",
+                    "precio_unitario": 25,
+                    "subtotal": 50
+                }
+            ],
+            "sesion": "Sesion 4",
+            "total": 50.0
         }
     ]
 }
