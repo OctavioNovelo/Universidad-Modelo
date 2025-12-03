@@ -329,11 +329,7 @@ json seleccionarAccion()
     {
         // Producto
         mostrarArchvio();
-        cout << "Que accion desea realizar ?\n";
-        cout << "1 - Agregar producto.\n";
-        cout << "2 - Eliminar producto.\n";
-        cout << "3 - Modificar producto.\n";
-        cout << "4 - Regresar.\n";
+        cout << "1 - Regresar.\n";
         cout << endl;
         cin >> b;
     }
@@ -716,160 +712,9 @@ json modificarDatos()
     {
         if (a == 2)
         {
-            switch (b) // 1, 2, 3, 4
+            switch (b) // 2
             {
-                case 1: 
-                {
-                    cout << "Nombre del producto: ";
-                    cin.ignore();
-                    getline(cin, nombre_producto);
-
-                    cout << "ID del producto: ";
-                    cin >> id_producto;
-
-                    cout << "Cantidad del producto: ";
-                    cin >> stock;
-
-                    cout << "Precio unitario del producto: ";
-                    cin >> precio;
-
-                    json nuevo_objeto = {
-                        {"nombre", nombre_producto},
-                        {"id", id_producto},
-                        {"stock", stock},
-                        {"precio", precio}
-                    };
-
-                    archivo["productos"].push_back(nuevo_objeto);
-
-                    //Guardamos el archivo
-                    ofstream out("productos.json");
-                    out << archivo.dump(4);
-
-                    break;
-                }
-                case 2:
-                {
-                    cout << "Ingresa ID para eliminar: ";
-                    cin >> id_producto;
-
-                    bool encontrado = false;
-
-                    // Principio apunta al principio de archivo["productos"] y mientras no llegue al final se le aumentara el valor para recorrer todo el archivo
-                    for (auto principio = archivo["productos"].begin(); principio != archivo["productos"].end(); ++principio)
-                    {
-
-                        // *principio es como un puntero al elemento
-                        if ((*principio)["id"] == id_producto)
-                        {
-                            encontrado = true;
-
-                            cout << "Eliminar: " << (*principio)["nombre"] << endl;
-                            cout << "Stock: " << (*principio)["stock"] << endl;
-
-                            cout << "Cuantos quieres eliminar? ";
-                            cin >> stock;
-
-                            int disponible = (*principio)["stock"];
-
-                            if (stock > disponible)
-                            {
-                                cout << "Advertencia, quieres eliminar todo el stock ?\n Esto eliminara el producto del inventario (s/n).\n";
-                                cin >> confirmacion;
-
-                                if (confirmacion == 's')
-                                {
-                                    archivo["productos"].erase(principio);
-                                }
-
-                            }
-                            else if (stock == disponible)
-                            {
-                                cout << "Advertencia, quieres eliminar todo el stock ?\n Esto eliminara el producto del inventario (s/n).\n";
-                                cin >> confirmacion;
-
-                                if (confirmacion == 's')
-                                {
-                                    archivo["productos"].erase(principio);
-                                }
-                            }
-                            else
-                            {
-                                (*principio)["stock"] = disponible - stock;
-                                cout << "Se eliminaron " << stock << " unidades.\n";
-                            }
-                            break;
-                        }
-                    }
-                    if (!encontrado)
-                    {
-                        cout << "No se encontro un producto con ese ID.\n";
-                    }
-                    ofstream out("productos.json");
-                    out << archivo.dump(4);
-                    break;
-                }
-                case 3: // Modificar
-                {
-                    cout << "Ingresa ID del producto a modificar: ";
-                    cin >> id_producto;
-
-                    bool encontrado = false;
-
-                    for (auto& prod : archivo["productos"])
-                    {
-                        if (prod["id"] == id_producto)
-                        {
-                            encontrado = true;
-
-                            cout << "Qué deseas modificar?\n";
-                            cout << "1 - Nombre\n";
-                            cout << "2 - Stock\n";
-                            cout << "3 - Precio\n";
-                            cin >> c;
-                            cin.ignore();  
-
-                            switch (c)
-                            {
-                                case 1:
-                                {
-                                    string nuevoNombre;
-                                    cout << "Nuevo nombre: ";
-                                    getline(cin, nuevoNombre);
-                                    prod["nombre"] = nuevoNombre;
-                                    break;
-                                }
-                                case 2:
-                                {
-                                    int nuevoStock;
-                                    cout << "Nuevo stock: ";
-                                    cin >> nuevoStock;
-                                    prod["stock"] = nuevoStock;
-                                    break;
-                                }
-                                case 3:
-                                {
-                                    float nuevoPrecio;
-                                    cout << "Nuevo precio: ";
-                                    cin >> nuevoPrecio;
-                                    prod["precio"] = nuevoPrecio;
-                                    break;
-                                }
-                                default:
-                                    cout << "Opcion no valida.\n";
-                            }
-                            break;
-                        }
-                    }
-
-                    if (!encontrado)
-                        cout << "No se encontro un producto con ese ID.\n";
-
-                    ofstream out("productos.json");
-                    out << archivo.dump(4);
-                    break;
-                }
-                case 4:
+                case 1:
                 {
                     return json();
                     break;
@@ -879,6 +724,7 @@ json modificarDatos()
     }
     return json();
 }
+
 
 // Propina
 float propina(float subtotal)
@@ -920,6 +766,7 @@ float propina(float subtotal)
     }
     return total;
 }
+
 
 // Check
 bool venta()

@@ -1,5 +1,5 @@
 {
-    "ultima_sesion": 1,
+    "ultima_sesion": 3,
     "ventas": [
         {
             "productos": [
@@ -13,6 +13,32 @@
             ],
             "sesion": "Sesion 1",
             "total": 1500.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 2,
+                    "id": 13,
+                    "nombre": "Sobres",
+                    "precio_unitario": 2,
+                    "subtotal": 4
+                }
+            ],
+            "sesion": "Sesion 2",
+            "total": 4.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 4,
+                    "id": 13,
+                    "nombre": "Sobres",
+                    "precio_unitario": 2,
+                    "subtotal": 8
+                }
+            ],
+            "sesion": "Sesion 3",
+            "total": 8.0
         }
     ]
 }
