@@ -1,5 +1,5 @@
 {
-    "ultima_sesion": 2,
+    "ultima_sesion": 1,
     "ventas": [
         {
             "productos": [
@@ -13,26 +13,6 @@
             ],
             "sesion": "Sesion 1",
             "total": 1500.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 15,
-                    "nombre": "meme",
-                    "precio_unitario": 999999,
-                    "subtotal": 999999
-                },
-                {
-                    "cantidad": 1,
-                    "id": 5,
-                    "nombre": "Peluche mediano",
-                    "precio_unitario": 200,
-                    "subtotal": 200
-                }
-            ],
-            "sesion": "Sesion 2",
-            "total": 1000199.0
         }
     ]
 }
