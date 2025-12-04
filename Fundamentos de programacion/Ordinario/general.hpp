@@ -55,4 +55,5 @@ void guardarEnHistorial(float subtotal);
 void nuevoDia();
 bool idEmpleadoExiste(int id_empleado);
 bool idProductoExiste(int id_producto);
+int validarMayorACero();
 #endif
