@@ -168,16 +168,19 @@ json modificarDatos()
                 }
 
                 //verificacion
-                id_valido=false;
-                while(!id_valido){
+                id_valido = false;
+                while (!id_valido)
+                {
                     cout << "ID del producto: ";
                     cin >> id_producto;
 
-                    if(idProductoExiste(id_producto)){
-                        cout<<"Error el id ya existe";
+                    if (idProductoExiste(id_producto))
+                    {
+                        cout << "Error el id ya existe";
                     }
-                    else{
-                        id_valido=true;
+                    else
+                    {
+                        id_valido = true;
                     }
                 }
 
@@ -188,11 +191,13 @@ json modificarDatos()
                 cout << "Precio unitario del producto: ";
                 cin >> precio;
 
-                json nuevo_producto = {
+                json nuevo_producto = 
+                {
                     {"id", id_producto},
                     {"nombre", nombre_producto},
                     {"stock", stock},
-                    {"precio", precio}};
+                    {"precio", precio}
+                };
 
                 archivo["productos"].push_back(nuevo_producto);
 
@@ -366,17 +371,20 @@ json modificarDatos()
                     }
                 }
 
-                id_valido=false;
-                while(!id_valido){
-                cout << "ID del empleado: ";
-                cin >> id_empleado;
+                id_valido = false;
+                while (!id_valido)
+                {
+                    cout << "ID del empleado: ";
+                    cin >> id_empleado;
 
-                if(idEmpleadoExiste(id_empleado)){
-                    cout<<"Error ya existe ese id";
-                }
-                else{
-                    id_valido=true;
-                }
+                    if (idEmpleadoExiste(id_empleado))
+                    {
+                        cout<<"Error ya existe ese id";
+                    }
+                    else
+                    {
+                        id_valido=true;
+                    }
                 }
 
                 si_o_no = false;
@@ -397,12 +405,14 @@ json modificarDatos()
                     }
                 }
 
-                json nuevo_empleado = {
+                json nuevo_empleado = 
+                {
                     {"id", id_empleado},
                     {"nombre", nombre_empleado},
                     {"username", username},
                     {"password", password},
-                    {"categoria", categoria}};
+                    {"categoria", categoria}
+                };
 
                 archivo["empleados"].push_back(nuevo_empleado);
                 ofstream out("empleados.json");
@@ -629,6 +639,7 @@ json modificarDatos()
     return json();
 }
 
+
 json seleccionarAccion()
 {
     if (usuario["categoria"] == "gerente" || usuario["categoria"] == "Gerente")
@@ -643,8 +654,7 @@ json seleccionarAccion()
                 cout << "1 - Agregar producto.\n";
                 cout << "2 - Eliminar producto.\n";
                 cout << "3 - Modificar producto.\n";
-                cout << "4 - Regresar.\n"
-                     << endl;
+                cout << "4 - Regresar.\n" << endl;
                 cout << "Opcion: ";
                 cin >> b;
                 cout << endl;
@@ -658,8 +668,7 @@ json seleccionarAccion()
                 cout << "1 - Agregar empleado.\n";
                 cout << "2 - Eliminar empleado.\n";
                 cout << "3 - Modificar informacion del empleado.\n";
-                cout << "4 - Regresar.\n"
-                     << endl;
+                cout << "4 - Regresar.\n" << endl;
                 cout << "Opcion: ";
                 cin >> b;
                 cout << endl;
@@ -694,11 +703,11 @@ json seleccionarAccion()
     }
 }
 
+
 json verificarId()
 {
     cout << "Iniciar Sesion\n";
-    cout << "Para salir del programa, use Ctrl + C\n"
-         << endl;
+    cout << "Para salir del programa, use Ctrl + C\n" << endl;
     cout << "Username: ";
     cin >> username;
     cout << "Password: ";
@@ -738,6 +747,7 @@ json verificarId()
     }
     return nullptr;
 }
+
 
 //Funciones Aili
 json verificarTarjeta()
