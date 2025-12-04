@@ -308,7 +308,8 @@ int validarMayorACero(){
             cout << "Error; debe ingresar un numero\n";
         } */
         if (valor<=0){
-            cout<<"Error, debe ser mayor a 0\n";
+            cout<<"\nError, debe ser mayor a 0.\n";
+            cout<<"Ingresar denuevo: ";
         } 
         else{
             return valor;
