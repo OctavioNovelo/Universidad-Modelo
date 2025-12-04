@@ -335,6 +335,7 @@ bool venta()
                             if (saldoTarjeta["saldo"] > total)
                             {
                                 cout << "Pago realizado con exito\n";
+                                saldoTarjeta["saldo"] = saldoTarjeta["saldo"] - total;
                                 cout << "Saldo final: $" << saldoTarjeta["saldo"] << endl;
                             }
                             else if (saldoTarjeta["saldo"] == total)
