@@ -38,8 +38,9 @@ void mostrarArchivo()
                 << setw(5) << "ID"
                 << setw(30) << "Nombre"
                 << setw(15) << "Cantidad"
-                << setw(15) << "Precio\n"
-                << string(75, '-') << '\n';
+                << setw(15) << "Precio"
+                << "\n";
+            cout<< string(66, '-') << "\n";
 
             for (auto& pro : archivo["productos"])
             {
@@ -61,8 +62,9 @@ void mostrarArchivo()
             cout << setw(5) << "ID";
             cout << setw(10) << "Usuario";
             cout << setw(30) << "Nombre";
-            cout << setw(15) << "Categoria\n";
-            cout << string(75, '-') << endl;
+            cout << setw(15) << "Categoria";
+            cout <<"\n";
+            cout << string(62, '-') << endl;
 
             for (auto& emp : archivo["empleados"])
             {
@@ -107,7 +109,7 @@ void mostrarArchivo()
             <<setw(10) <<"Productos"
             <<setw(40) <<"Detalles"
             <<"\n";
-            cout<<string(77,'-')<<"\n";
+            cout<<string(80,'-')<<"\n";
             
             for(auto& venta : historial["ventas"]){
                 cout<<setw(12) <<venta["sesion"].get<string>();
@@ -141,8 +143,9 @@ void mostrarArchivo()
                     << setw(5) << "ID"
                     << setw(30) << "Nombre"
                     << setw(15) << "Cantidad"
-                    << setw(15) << "Precio\n"
-                    << string(75, '-') << '\n';
+                    << setw(15) << "Precio"
+                    << "\n";
+                cout << string(66, '-') << "\n";
 
                 for (auto& pro : archivo["productos"])
                 {
