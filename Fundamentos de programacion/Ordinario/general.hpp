@@ -13,6 +13,7 @@ using namespace std;
 // Variables Globales
 extern json archivo;
 extern json usuario;
+extern json saldoTarjeta;
 extern int a; // Seleccion de archivo
 extern bool regresar_al_menu;
 extern string username;
@@ -56,4 +57,5 @@ void nuevoDia();
 bool idEmpleadoExiste(int id_empleado);
 bool idProductoExiste(int id_producto);
 int validarMayorACero();
+
 #endif
