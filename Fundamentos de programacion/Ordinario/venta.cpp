@@ -84,12 +84,12 @@ bool venta()
             cout << "\nSubtotal: $" << subtotal << "\n\n";
         }
 
-        cout << "1. Agregar producto\n";
-        cout << "2. Eliminar producto\n";
-        cout << "3. Proceder al pago\n";
-        cout << "4. Cancelar todo\n";
-        cout << "5. Regresar\n";
-        cout << "Selecciona una opcion: ";
+        cout << "1. Agregar producto.\n";
+        cout << "2. Eliminar producto.\n";
+        cout << "3. Proceder al pago.\n";
+        cout << "4. Cancelar todo.\n";
+        cout << "5. Regresar.\n" <<endl;
+        cout << "Opcion: ";
         cin >> a;
 
         switch(a)
