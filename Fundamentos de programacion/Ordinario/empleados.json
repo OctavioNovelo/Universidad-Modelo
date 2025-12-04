@@ -1,7 +1,7 @@
 {
     "empleados": [
         {
-            "categoria": "empleado",
+            "categoria": "Gerente",
             "id": 1,
             "nombre": "Litzy Richaud",
             "password": "pepito123",

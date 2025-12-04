@@ -201,7 +201,7 @@ json modificarDatos()
                                 cout << "Advertencia, quieres eliminar todo el stock ?\n Esto eliminara el producto del inventario (s/n).\n";
                                 cin >> confirmacion;
 
-                                if (confirmacion == 's')
+                                if (confirmacion == 's' || confirmacion == 'S')
                                 {
                                     archivo["productos"].erase(principio);
                                 }
@@ -212,7 +212,7 @@ json modificarDatos()
                                 cout << "Advertencia, quieres eliminar todo el stock ?\n Esto eliminara el producto del inventario (s/n).\n";
                                 cin >> confirmacion;
 
-                                if (confirmacion == 's')
+                                if (confirmacion == 's' || confirmacion == 'S')
                                 {
                                     archivo["productos"].erase(principio);
                                 }
@@ -392,7 +392,8 @@ json modificarDatos()
                             cout << "1 - Nombre\n";
                             cout << "2 - Usuario\n";
                             cout << "3 - Categoria\n";
-                            cout << "4 - Password\n";
+                            cout << "4 - Password" << endl;
+                            cout << "Opcion: ";
                             cin >> c;
                             cout << endl;
                             cin.ignore();  
@@ -411,21 +412,41 @@ json modificarDatos()
                                 {
                                     string nuevoUsuario;
                                     cout << "Nuevo usuario: ";
-                                    cin >> nuevoUsuario;
+                                    getline(cin, nuevoUsuario);
                                     emp["username"] = nuevoUsuario;
                                     break;
                                 }
                                 case 3:
                                 {
                                     string nuevaCategoria;
-                                    cout << "Nueva categoria (gerente o empleado): ";
-                                    cin >> nuevaCategoria;
-                                    emp["categoria"] = nuevaCategoria;
+                                    bool si_o_no = false;
+                                    char confirmacion;
+
+                                    while (si_o_no == false)
+                                    {
+                                        cout << "Nueva categoria (gerente o empleado): ";
+                                        cin >> nuevaCategoria;
+                                        if (nuevaCategoria == "gerente" || nuevaCategoria == "Gerente" || nuevaCategoria == "empleado" || nuevaCategoria == "Empleado")
+                                        {
+                                            si_o_no = true;
+                                        }
+                                    }
+                                    
+                                    cout << "Esta seguro de cambiar de categoria a " << usuario["nombre"] << " a la categoria de " << nuevaCategoria << " ? (S/N)" << endl;
+                                    cin >> confirmacion;
+                                    
+                                    if (confirmacion == 'S' || confirmacion == 's')
+                                    {
+                                        emp["categoria"] = nuevaCategoria;
+                                    }
                                     break;
                                 }
                                 case 4:
                                 {
                                     string newPassword;
+                                    string newPassword1;
+                                    char confirmacion;
+
                                     cout << "Ingresa tu password actual: \n";
                                     cin >> newPassword;
 
@@ -443,8 +464,24 @@ json modificarDatos()
 
                                     cout << "New Password: ";
                                     cin >> newPassword;
+                                    cout << "Confirm password: ";
+                                    cin >> newPassword1;
 
-                                    emp["password"] = newPassword;
+                                    if (newPassword1 == newPassword)
+                                    {
+                                        cout << "Are you sure about to change the password ? (S/N)" << endl;
+                                        cin >> confirmacion;
+                                        
+                                        if (confirmacion == 'S' || confirmacion == 's')
+                                        {
+                                            emp["password"] = newPassword;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        cout << "Passwords not match. Try Again" << endl;
+                                        pausa();
+                                    }
                                     break;
                                 }
                                 default:
@@ -527,7 +564,8 @@ json seleccionarAccion()
                 cout << "1 - Agregar producto.\n";
                 cout << "2 - Eliminar producto.\n";
                 cout << "3 - Modificar producto.\n";
-                cout << "4 - Regresar.\n";
+                cout << "4 - Regresar." << endl;
+                cout << "Opcion: ";
                 cin >> b;
                 cout << endl;
                 break;
@@ -540,7 +578,8 @@ json seleccionarAccion()
                 cout << "1 - Agregar empleado.\n";
                 cout << "2 - Eliminar empleado.\n";
                 cout << "3 - Modificar informacion del empleado.\n";
-                cout << "4 - Regresar.\n";
+                cout << "4 - Regresar." << endl;
+                cout << "Opcion: ";
                 cin >> b;
                 cout << endl;
                 break;
@@ -553,7 +592,8 @@ json seleccionarAccion()
                 cout << "1 - Descargar historial de venta.\n";
                 cout << "2 - Imprimir historial de venta.\n";
                 cout << "3 - Borrar historial de venta.\n";;
-                cout << "4 - Regresar.\n";
+                cout << "4 - Regresar." << endl;
+                cout << "Opcion: ";
                 cin >> b;
                 cout << endl;
                 break;
@@ -569,8 +609,10 @@ json seleccionarAccion()
     {
         // Producto
         mostrarArchivo();
+        cout << endl;
         cout << "1 - Regresar.\n";
         cout << endl;
+        cout << "Opcion: ";
         cin >> b;
     }
 }
@@ -578,6 +620,7 @@ json seleccionarAccion()
 json verificarId()
 {
     cout << "Iniciar Sesion\n";
+    cout << "Para salir del programa, use Ctrl + C" << endl;
     cout << "Username: ";
     cin >> username;
     cout << "Password: ";
