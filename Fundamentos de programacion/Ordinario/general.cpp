@@ -269,3 +269,31 @@ void nuevoDia()
     o<<setw(4) << historial << endl;
     sesion_iniciada = true;
 }
+
+bool idProductoExiste(int id_producto) {
+    ifstream f("productos.json");
+    if(!f.good()) return false; // Si el archivo no existe pues el id no existe tampoco
+    
+    json productos=json::parse(f);
+    
+    for(auto& producto : productos["productos"]){
+        if(producto["id"].get<int>() == id){
+            return true; // ID encontrado
+        }
+    }
+    return false; // ID no encontrado
+}
+
+bool idEmpleadoExiste(int id_empleado) {
+    ifstream f("empleados.json");
+    if(!f.good()) return false; // Si el archivo no existe pues el id no existe tampoco
+    
+    json empleados=json::parse(f);
+    
+    for(auto& empleado : empleados["empleados"]){
+        if (empleado["id"].get<int>() == id) {
+            return true; // ID encontrado
+        }
+    }
+    return false; // ID no encontrado
+}
