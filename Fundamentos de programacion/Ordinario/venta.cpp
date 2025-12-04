@@ -334,15 +334,18 @@ bool venta()
                             saldoTarjeta = verificarTarjeta();
                             if (saldoTarjeta["saldo"] > total)
                             {
-
+                                cout << "Pago realizado con exito\n";
+                                cout << "Saldo final: $" << saldoTarjeta["saldo"] << endl;
                             }
                             else if (saldoTarjeta["saldo"] == total)
                             {
-
+                                cout << "Pago realizado con exito\n";
+                                cout << "Tu saldo final es de $0\n";
                             }
                             else if (saldoTarjeta["saldo"] < total)
                             {
-
+                                cout << "El saldo es insuficiente\n";
+                                cout << "Tu saldo es de $" << saldoTarjeta["saldo"] << endl;
                             }
                             break;
                         }

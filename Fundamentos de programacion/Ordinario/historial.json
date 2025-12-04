@@ -1924,6 +1924,19 @@
             ],
             "sesion": "Sesion 4",
             "total": 600.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 3,
+                    "id": 5,
+                    "nombre": "Peluche mediano",
+                    "precio_unitario": 200,
+                    "total": 600
+                }
+            ],
+            "sesion": "Sesion 4",
+            "total": 600.0
         }
     ]
 }
