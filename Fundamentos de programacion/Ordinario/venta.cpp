@@ -2,6 +2,7 @@
 #include "general.hpp"
 #include <vector>
 #include <fstream>
+#include "jsons.hpp"
 
 float propina(float subtotal)
 {
@@ -43,41 +44,7 @@ float propina(float subtotal)
     return total;
 }
 
-
 //Funciones
-void getJasonTarjeta()
-{
-    ifstream archivo("banco.json");
-    json datos;
-
-    if(!archivo.is_open()){
-        cout << "Error al abrir el archivo" << endl;
-        exit(1);
-    }
-
-    archivo >> datos;
-    archivo.close();
-
-    for (int i = 0; i < datos["cuentas"].size(); i++)
-    {
-        cout << "Número de tarjeta: " << datos["cuentas"][i]["tarjeta"] << endl;
-        cout << "NIP: " << datos["cuentas"][i]["nip"] << endl;
-        cout << "Saldo: " << datos["cuentas"][i]["saldo"] << endl;
-    }
-    
-}
-
-void añadirTarjeta()
-{
-    ifstream archivo("banco.json");
-    json datos;
-
-    archivo >> datos;
-    archivo.close();
-
-    
-}
-
 json verificarTarjeta()
 {
     cout << "Datos de pago\n";
@@ -85,6 +52,18 @@ json verificarTarjeta()
     cin >> nTarjeta;
     cout << "Nip: " << endl;
     cin >> nip;
+
+    ifstream y("banco.json");
+    json tarjetas = json::parse(y);
+
+    for (auto &tarj : tarjetas["cuentas"])
+    {
+        if (nTarjeta == tarj["tarjeta"] && nip == tarj["nip"])
+        {
+            return tarj;
+        }
+    }
+    return nullptr;
 }
 
 bool venta()
@@ -367,26 +346,19 @@ bool venta()
 
                         cout << "Selecciona una opcion \n";
                         cout << "1. Pagar con tarjeta existente\n";
-                        cout << "2. Añadir nueva tarjeta\n";
-                        cout << "3. Regresar\n";
+                        cout << "2. Regresar \n";
                         cin >> f;
 
                         switch (f)
                         {
                         case 1:
                         {
-                            getJasonTarjeta();
+                            verificarTarjeta();
                             pausa();
                             break;
                         }
 
                         case 2:
-                        {
-                            /* code */
-                            break;
-                        }
-
-                        case 3:
                         {
                             carrito.clear();
                             regresar_al_menu = true;

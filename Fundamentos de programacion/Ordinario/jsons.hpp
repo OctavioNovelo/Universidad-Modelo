@@ -12,5 +12,6 @@ json seleccionarAccion();
 json modificarDatos();
 json abrirJson();
 bool venta();
+json verificarTarjeta();
 
 #endif
