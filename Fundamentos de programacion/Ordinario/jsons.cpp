@@ -140,6 +140,8 @@ json modificarDatos()
     int stock;
     int precio;
     bool id_valido=false;
+    int id_producto;
+    int id_empleado;
 
     if (usuario["categoria"] == "gerente" || usuario["categoria"] == "Gerente")
     {
