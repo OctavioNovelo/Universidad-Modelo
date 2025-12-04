@@ -121,7 +121,7 @@ bool venta()
                 }
 
                 cout << "Ingresa cantidad: ";
-                cin >> cantidad;
+                cantidad = validarMayorACero();
 
                 int stockDisponible=productoEncontrado["stock"].get<int>(); // Validar que si se pueda agarrar esa cantidad
                 if (cantidad>stockDisponible)

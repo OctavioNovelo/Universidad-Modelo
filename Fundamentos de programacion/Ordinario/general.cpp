@@ -301,7 +301,7 @@ bool idEmpleadoExiste(int id_empleado) {
 int validarMayorACero(){
     int valor;
     while(true) {
-        cin>>valor;
+        cin >> valor;
         /* if(cin.fail()){  //por si escribe letras 
             cin.clear();  
             cin.ignore(numeric_limits<streamsize>::max(), '\n');  //limpia
