@@ -193,7 +193,7 @@ json modificarDatos()
 
                     if (idProductoExiste(id_producto))
                     {
-                        cout << "Error el id ya existe";
+                        cout << "Error el id ya existe\n";
                     }
                     else
                     {
@@ -402,7 +402,7 @@ json modificarDatos()
 
                     if (idEmpleadoExiste(id_empleado))
                     {
-                        cout << "Error ya existe ese id";
+                        cout << "Error ya existe ese id\n";
                     }
                     else
                     {
