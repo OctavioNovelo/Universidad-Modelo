@@ -1,14 +1,14 @@
 {
     "empleados": [
         {
-            "categoria": "empleado",
+            "categoria": "Gerente",
             "id": 1,
             "nombre": "Litzy Richaud",
             "password": "pepito123",
             "username": "LR"
         },
         {
-            "categoria": "empleado",
+            "categoria": "Empleado",
             "id": 2,
             "nombre": "Aili Ocampo",
             "password": "botellas123",
@@ -20,13 +20,6 @@
             "nombre": "Octavio Novelo",
             "password": "xdlollmao",
             "username": "ON"
-        },
-        {
-            "categoria": "empleado",
-            "id": 4,
-            "nombre": "Alejandro",
-            "password": "123456",
-            "username": "AX"
         }
     ]
 }
