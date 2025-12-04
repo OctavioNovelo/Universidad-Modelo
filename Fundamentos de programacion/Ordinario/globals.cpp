@@ -27,3 +27,4 @@ bool banderaCambio = false;
 int nTarjeta;
 int nip;
 float saldo;
+bool coincide = false;

@@ -739,12 +739,15 @@ json verificarId()
     return nullptr;
 }
 
-//Funciones
+//Funciones Aili
 json verificarTarjeta()
 {
+
+    std::cin.ignore();
+
     cout << "Datos de pago\n";
     cout << "Número de tarjeta: " << endl;
-    cin >> nTarjeta;
+    cin.get(nTarjeta);
     cout << "Nip: " << endl;
     cin >> nip;
 
@@ -756,10 +759,12 @@ json verificarTarjeta()
         if (nTarjeta == tarj["tarjeta"] && nip == tarj["nip"])
         {
             cout << "Tarjeta confirmada\n";
-            cout << "Saldo: " << datos["cuentas"][i]["saldo"] << endl;
+            cout << "Saldo: " << tarj["saldo"] << endl;
+            coincide = true;
         } else
         {
             cout << "Tarjeta inexistente\n";
+            coincide = false;
         }
         
     }

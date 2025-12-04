@@ -35,6 +35,7 @@ extern int nip;
 extern float saldo;
 extern int id_producto;
 extern int id_empleado;
+extern bool coincide;
 
 struct ItemCarrito
 {
