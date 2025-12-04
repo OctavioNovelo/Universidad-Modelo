@@ -18,17 +18,16 @@ float propina(float subtotal)
     switch (propina)
     {
     case 1:
-        total = (subtotal)*(0.9);
+        total = subtotal+(subtotal)*(0.1);
         break;
 
     case 2:
-        total = (subtotal)*(0.85);
+        total = subtotal+(subtotal)*(0.15);
         break;
 
     case 3:
         cout << "Ingresa la cantidad: $";
         cin >> propPersonalizada;
-        total = subtotal + propPersonalizada;
         if (propPersonalizada <= 0) {
             cout << endl << "No se agrego propina a la cuenta total\n";
             total = subtotal;
@@ -38,7 +37,7 @@ float propina(float subtotal)
         break;
     
     default:
-        cout << "Error. Selecciona una opción válida \n";
+        cout << "Error. Selecciona una opcion valida \n";
         break;
     }
     return total;
@@ -400,9 +399,16 @@ bool venta()
             }
             case 5:
             {
+                cout<<"Seguro que desea regresar?";
+                cin >> confirmar;
+                if(confirmar=='s' || confirmar=='S'){
                 carrito.clear();
                 regresar_al_menu = true;
                 return false;
+                }
+                else{
+                    break;
+                }
 
             }
             default:
