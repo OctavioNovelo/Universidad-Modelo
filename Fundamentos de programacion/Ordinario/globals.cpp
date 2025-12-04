@@ -23,3 +23,7 @@ float cambio = 0;
 float dineroFalt = 0;
 int diferencia = 0;
 bool banderaCambio = false;
+
+int nTarjeta;
+int nip;
+float saldo;

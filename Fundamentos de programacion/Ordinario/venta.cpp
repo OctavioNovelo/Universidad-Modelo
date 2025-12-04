@@ -43,6 +43,50 @@ float propina(float subtotal)
     return total;
 }
 
+
+//Funciones
+void getJasonTarjeta()
+{
+    ifstream archivo("banco.json");
+    json datos;
+
+    if(!archivo.is_open()){
+        cout << "Error al abrir el archivo" << endl;
+        exit(1);
+    }
+
+    archivo >> datos;
+    archivo.close();
+
+    for (int i = 0; i < datos["cuentas"].size(); i++)
+    {
+        cout << "Número de tarjeta: " << datos["cuentas"][i]["tarjeta"] << endl;
+        cout << "NIP: " << datos["cuentas"][i]["nip"] << endl;
+        cout << "Saldo: " << datos["cuentas"][i]["saldo"] << endl;
+    }
+    
+}
+
+void añadirTarjeta()
+{
+    ifstream archivo("banco.json");
+    json datos;
+
+    archivo >> datos;
+    archivo.close();
+
+    
+}
+
+json verificarTarjeta()
+{
+    cout << "Datos de pago\n";
+    cout << "Número de tarjeta: " << endl;
+    cin >> nTarjeta;
+    cout << "Nip: " << endl;
+    cin >> nip;
+}
+
 bool venta()
 {
     int id;
@@ -331,7 +375,8 @@ bool venta()
                         {
                         case 1:
                         {
-                            /* code */
+                            getJasonTarjeta();
+                            pausa();
                             break;
                         }
 

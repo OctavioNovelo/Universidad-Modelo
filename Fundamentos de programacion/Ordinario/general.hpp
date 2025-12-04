@@ -30,6 +30,9 @@ extern float dineroFalt;
 extern int diferencia;
 extern bool banderaCambio;
 extern int f;
+extern int nTarjeta;
+extern int nip;
+extern float saldo;
 
 struct ItemCarrito
 {
