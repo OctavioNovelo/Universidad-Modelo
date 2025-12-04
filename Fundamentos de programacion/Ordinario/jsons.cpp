@@ -606,22 +606,7 @@ json modificarDatos()
             {
             case 1:
             {
-                // Descargar
-                break;
-            }
-            case 2:
-            {
-                // Imprimir
-                break;
-            }
-            case 3:
-            {
-                // Borrar
-                break;
-            }
-            case 4:
-            {
-                // Regresar
+                return json();
                 break;
             }
             }
@@ -684,13 +669,7 @@ json seleccionarAccion()
             // Historial de ventas
             {
                 mostrarArchivo();
-                cout << "Que accion desea realizar ?\n";
-                cout << "1 - Descargar historial de venta.\n";
-                cout << "2 - Imprimir historial de venta.\n";
-                cout << "3 - Borrar historial de venta.\n";
-                ;
-                cout << "4 - Regresar.\n"
-                     << endl;
+                cout << "1 - Regresar.\n" << endl;
                 cout << "Opcion: ";
                 cin >> b;
                 cout << endl;
@@ -756,6 +735,33 @@ json verificarId()
         {
             return emp;
         }
+    }
+    return nullptr;
+}
+
+//Funciones
+json verificarTarjeta()
+{
+    cout << "Datos de pago\n";
+    cout << "Número de tarjeta: " << endl;
+    cin >> nTarjeta;
+    cout << "Nip: " << endl;
+    cin >> nip;
+
+    ifstream y("banco.json");
+    json tarjetas = json::parse(y);
+
+    for (auto &tarj : tarjetas["cuentas"])
+    {
+        if (nTarjeta == tarj["tarjeta"] && nip == tarj["nip"])
+        {
+            cout << "Tarjeta confirmada\n";
+            cout << "Saldo: " << datos["cuentas"][i]["saldo"] << endl;
+        } else
+        {
+            cout << "Tarjeta inexistente\n";
+        }
+        
     }
     return nullptr;
 }

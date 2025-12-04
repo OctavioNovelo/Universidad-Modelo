@@ -44,32 +44,6 @@ float propina(float subtotal)
     return total;
 }
 
-//Funciones
-json verificarTarjeta()
-{
-    cout << "Datos de pago\n";
-    cout << "Número de tarjeta: " << endl;
-    cin >> nTarjeta;
-    cout << "Nip: " << endl;
-    cin >> nip;
-
-    ifstream y("banco.json");
-    json tarjetas = json::parse(y);
-
-    for (auto &tarj : tarjetas["cuentas"])
-    {
-        if (nTarjeta == tarj["tarjeta"] && nip == tarj["nip"])
-        {
-            cout << "Tarjeta confirmada\n";
-            cout << "Saldo: " << datos["cuentas"][i]["saldo"] << endl;
-        } else
-        {
-            cout << "Tarjeta inexistente\n";
-        }
-        
-    }
-    return nullptr;
-}
 
 bool venta()
 {
