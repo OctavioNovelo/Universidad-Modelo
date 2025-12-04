@@ -84,7 +84,7 @@ bool venta()
                  << setw(30) << "Nombre"
                  << setw(15) << "Cantidad"
                  << setw(15) << "Precio\n"
-                 << string(75, '-') << '\n';
+                 << string(66, '-') << '\n';
 
             for (const auto &item : carrito)
             {
@@ -264,7 +264,7 @@ bool venta()
                 break;
             }
 
-            cout << "Confirmar compra(s/n): ";
+            cout << "Confirmar compra (S/N): ";
             cin >> confirmar;
 
             if (confirmar == 's' || confirmar == 'S') // Se actualiza el stock aca
@@ -277,7 +277,7 @@ bool venta()
                 cout << "Selecciona tu metodo de pago: \n";
                 cout << "1. Pago en efectivo\n";
                 cout << "2. Pago por tarjeta\n";
-                cout << "3. Regresar\n";
+                cout << "3. Regresar\n" << endl;
                 cout << "Opcion: ";
                 cin >> d;
                 //
@@ -289,12 +289,13 @@ bool venta()
                     pausa();
                 }
                 //
+                limpiarPantalla();
 
                 switch (d)
                 {
                 case 1:
                 {
-                    cout << "Le gustaria dejar propina?(s/n): ";
+                    cout << "Le gustaria dejar propina? (S/N): ";
                     cin >> e;
 
                     if ((e == 's') || (e == 'S'))
@@ -317,6 +318,7 @@ bool venta()
 
                     while (banderaCambio == false)
                     {
+                    
                         cout << endl
                              << "Ingresa el dinero: $";
                         cin >> dineroEf;
@@ -326,7 +328,7 @@ bool venta()
                         {
                             if (dineroEf == total)
                             {
-                                cout << "El pago ha sido realizado correctamente\n";
+                                cout << "El pago ha sido realizado correctamente\n" << endl;
                                 banderaCambio = true;
                                 guardarEnHistorial(total); // Para el historial
                                 ifstream f("productos.json");

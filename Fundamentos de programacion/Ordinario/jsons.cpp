@@ -415,8 +415,24 @@ json modificarDatos()
                 cout << "Usuario del empleado: ";
                 cin >> username;
 
-                cout << "Password: ";
-                cin >> password;
+                string Password1;
+
+                while (si_o_no == false)
+                {
+                    cout << "Password: ";
+                    cin >> password;
+                    cout << "Confirm password: ";
+                    cin >> Password1;
+                    if (password != Password1)
+                    {
+                        cout << "Passwords not match. Try again.\n" << endl;
+                    }
+                    else
+                    {
+                        si_o_no = true;
+                    }
+                }
+                si_o_no = false;
 
                 while (si_o_no == false)
                 {
