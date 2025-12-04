@@ -14,6 +14,14 @@ float propina(float subtotal)
     cout << "2. 15%\n";
     cout << "3. Propina personalizada\n";
     cin >> propina;
+    //
+    if (cin.fail())
+    { // por si escribe letras
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia
+        cout << "Error, debe ingresar un numero\n";
+    }
+    //
 
     switch (propina)
     {
@@ -98,6 +106,14 @@ bool venta()
              << endl;
         cout << "Opcion: ";
         cin >> a;
+        //
+        if (cin.fail())
+        { // por si escribe letras
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia
+            cout << "Error, debe ingresar un numero\n";
+        }
+        //
 
         switch (a)
         {
@@ -150,14 +166,14 @@ bool venta()
             existe = false;
             for (auto &item : carrito) // Si ya esta en el carrito se suma la cantidad del producto
             {
-                if (item.id==id)
+                if (item.id == id)
                 {
                     int cantidadTotalEnCarrito = item.cantidad + cantidad;
-                    if(cantidadTotalEnCarrito > stockDisponible)
+                    if (cantidadTotalEnCarrito > stockDisponible)
                     {
                         cout << "Error, no hay suficiente stock\n";
                         pausa();
-                        existe = true; 
+                        existe = true;
                         break;
                     }
 
@@ -263,6 +279,14 @@ bool venta()
                 cout << "2. Pago por tarjeta\n";
                 cout << "3. Regresar\n";
                 cin >> d;
+                //
+                if (cin.fail())
+                { // por si escribe letras
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia
+                    cout << "Error, debe ingresar un numero\n";
+                }
+                //
 
                 switch (d)
                 {
@@ -395,6 +419,14 @@ bool venta()
                     cout << "1. Pagar con tarjeta existente\n";
                     cout << "2. Regresar \n";
                     cin >> f;
+                    //
+                    if (cin.fail())
+                    { // por si escribe letras
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia
+                        cout << "Error, debe ingresar un numero\n";
+                    }
+                    //
 
                     switch (f)
                     {
@@ -520,6 +552,7 @@ bool venta()
         }
         default:
             cout << "Opcion no valida\n";
+            pausa();
             break;
         }
 

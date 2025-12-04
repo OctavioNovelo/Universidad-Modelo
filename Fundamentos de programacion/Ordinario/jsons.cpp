@@ -28,7 +28,14 @@ json abrirJson()
              << endl;
         cout << "Opcion: ";
         cin >> a;
-        cout << endl;
+        //
+        if (cin.fail())
+        { // por si escribe letras
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia
+            cout << "Error, debe ingresar un numero\n";
+        }
+        //
 
         switch (a)
         {
@@ -57,8 +64,10 @@ json abrirJson()
         }
         default:
         {
-            limpiarPantalla();
-            return json();
+            cout << "Opcion invalida\n";
+            pausa();
+            regresar_al_menu = true;
+            break;
         }
         }
     }
@@ -78,6 +87,14 @@ json abrirJson()
              << endl;
         cout << "Opcion: ";
         cin >> a;
+        //
+        if (cin.fail())
+        { // por si escribe letras
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia
+            cout << "Error, debe ingresar un numero\n";
+        }
+        //
         cout << endl;
 
         switch (a)
@@ -129,7 +146,6 @@ json abrirJson()
     return json();
 }
 
-
 json modificarDatos()
 {
     string nombre_producto;
@@ -140,7 +156,7 @@ json modificarDatos()
     char confirmacion;
     int stock;
     int precio;
-    bool id_valido=false;
+    bool id_valido = false;
     int id_producto;
     int id_empleado;
 
@@ -168,7 +184,7 @@ json modificarDatos()
                     }
                 }
 
-                //verificacion
+                // verificacion
                 id_valido = false;
                 while (!id_valido)
                 {
@@ -185,20 +201,18 @@ json modificarDatos()
                     }
                 }
 
-
                 cout << "Cantidad del producto: ";
                 cin >> stock;
 
                 cout << "Precio unitario del producto: ";
                 cin >> precio;
 
-                json nuevo_producto = 
-                {
-                    {"id", id_producto},
-                    {"nombre", nombre_producto},
-                    {"stock", stock},
-                    {"precio", precio}
-                };
+                json nuevo_producto =
+                    {
+                        {"id", id_producto},
+                        {"nombre", nombre_producto},
+                        {"stock", stock},
+                        {"precio", precio}};
 
                 archivo["productos"].push_back(nuevo_producto);
 
@@ -234,7 +248,7 @@ json modificarDatos()
                         if (stock > disponible)
                         {
                             cout << "Advertencia, quieres eliminar todo el stock ?\n"
-                                << "Esto eliminara el producto del inventario (S/N).\n";
+                                 << "Esto eliminara el producto del inventario (S/N).\n";
                             cin >> confirmacion;
 
                             if (confirmacion == 's' || confirmacion == 'S')
@@ -244,8 +258,8 @@ json modificarDatos()
                         }
                         else if (stock == disponible)
                         {
-                            cout << "Advertencia, quieres eliminar todo el stock ?\n" 
-                                << "Esto eliminara el producto del inventario (S/N).\n";
+                            cout << "Advertencia, quieres eliminar todo el stock ?\n"
+                                 << "Esto eliminara el producto del inventario (S/N).\n";
                             cin >> confirmacion;
 
                             if (confirmacion == 's' || confirmacion == 'S')
@@ -287,6 +301,14 @@ json modificarDatos()
                         cout << "2 - Stock\n";
                         cout << "3 - Precio\n";
                         cin >> c;
+                        //
+                        if (cin.fail())
+                        { // por si escribe letras
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia
+                            cout << "Error, debe ingresar un numero\n";
+                        }
+                        //
                         cin.ignore();
 
                         switch (c)
@@ -380,11 +402,11 @@ json modificarDatos()
 
                     if (idEmpleadoExiste(id_empleado))
                     {
-                        cout<<"Error ya existe ese id";
+                        cout << "Error ya existe ese id";
                     }
                     else
                     {
-                        id_valido=true;
+                        id_valido = true;
                     }
                 }
 
@@ -406,14 +428,13 @@ json modificarDatos()
                     }
                 }
 
-                json nuevo_empleado = 
-                {
-                    {"id", id_empleado},
-                    {"nombre", nombre_empleado},
-                    {"username", username},
-                    {"password", password},
-                    {"categoria", categoria}
-                };
+                json nuevo_empleado =
+                    {
+                        {"id", id_empleado},
+                        {"nombre", nombre_empleado},
+                        {"username", username},
+                        {"password", password},
+                        {"categoria", categoria}};
 
                 archivo["empleados"].push_back(nuevo_empleado);
                 ofstream out("empleados.json");
@@ -553,7 +574,8 @@ json modificarDatos()
 
                                 if (newPassword == emp["password"])
                                 {
-                                    cout << "Correcto.\n" << endl;
+                                    cout << "Correcto.\n"
+                                         << endl;
                                 }
                                 else if (newPassword != emp["pasword"])
                                 {
@@ -579,7 +601,8 @@ json modificarDatos()
                                 }
                                 else
                                 {
-                                    cout << endl << "Passwords not match. Try Again" << endl;
+                                    cout << endl
+                                         << "Passwords not match. Try Again" << endl;
                                     pausa();
                                 }
                                 break;
@@ -640,7 +663,6 @@ json modificarDatos()
     return json();
 }
 
-
 json seleccionarAccion()
 {
     if (usuario["categoria"] == "gerente" || usuario["categoria"] == "Gerente")
@@ -655,9 +677,19 @@ json seleccionarAccion()
                 cout << "1 - Agregar producto.\n";
                 cout << "2 - Eliminar producto.\n";
                 cout << "3 - Modificar producto.\n";
-                cout << "4 - Regresar.\n" << endl;
+                cout << "4 - Regresar.\n"
+                     << endl;
                 cout << "Opcion: ";
                 cin >> b;
+                //
+                if (cin.fail())
+                { // por si escribe letras
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia
+                    cout << "Error, debe ingresar un numero\n";
+                    pausa();
+                }
+                //
                 cout << endl;
                 break;
             }
@@ -669,9 +701,18 @@ json seleccionarAccion()
                 cout << "1 - Agregar empleado.\n";
                 cout << "2 - Eliminar empleado.\n";
                 cout << "3 - Modificar informacion del empleado.\n";
-                cout << "4 - Regresar.\n" << endl;
+                cout << "4 - Regresar.\n"
+                     << endl;
                 cout << "Opcion: ";
                 cin >> b;
+                //
+                if (cin.fail())
+                { // por si escribe letras
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia
+                    cout << "Error, debe ingresar un numero\n";
+                }
+                //
                 cout << endl;
                 break;
             }
@@ -679,7 +720,8 @@ json seleccionarAccion()
             // Historial de ventas
             {
                 mostrarArchivo();
-                cout << "1 - Regresar.\n" << endl;
+                cout << "1 - Regresar.\n"
+                     << endl;
                 cout << "Opcion: ";
                 cin >> b;
                 cout << endl;
@@ -704,11 +746,11 @@ json seleccionarAccion()
     }
 }
 
-
 json verificarId()
 {
     cout << "Iniciar Sesion\n";
-    cout << "Para salir del programa, use Ctrl + C\n" << endl;
+    cout << "Para salir del programa, use Ctrl + C\n"
+         << endl;
     cout << "Username: ";
     cin >> username;
     cout << "Password: ";
@@ -749,8 +791,7 @@ json verificarId()
     return nullptr;
 }
 
-
-//Funciones Aili
+// Funciones Aili
 json verificarTarjeta()
 {
     limpiarPantalla();
@@ -761,16 +802,16 @@ json verificarTarjeta()
     cin >> nip;
 
     ifstream y("banco.json");
-    json tarjetas=json::parse(y);
+    json tarjetas = json::parse(y);
 
-    for(auto &tarj : tarjetas["cuentas"])
+    for (auto &tarj : tarjetas["cuentas"])
     {
-        if(nTarjeta == tarj["tarjeta"].get<long long>() && nip == tarj["nip"].get<int>())
+        if (nTarjeta == tarj["tarjeta"].get<long long>() && nip == tarj["nip"].get<int>())
         {
             cout << "Tarjeta confirmada\n";
             return tarj;
         }
     }
-    cout<< "Tarjeta o NIP incorrectos\n";
+    cout << "Tarjeta o NIP incorrectos\n";
     return nullptr;
 }

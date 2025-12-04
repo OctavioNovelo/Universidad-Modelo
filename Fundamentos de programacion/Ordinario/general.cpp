@@ -302,11 +302,11 @@ int validarMayorACero(){
     int valor;
     while(true) {
         cin >> valor;
-        /* if(cin.fail()){  //por si escribe letras 
+         if(cin.fail()){  //por si escribe letras 
             cin.clear();  
             cin.ignore(numeric_limits<streamsize>::max(), '\n');  //limpia
             cout << "Error; debe ingresar un numero\n";
-        } */
+        } 
         if (valor<=0){
             cout<<"\nError, debe ser mayor a 0.\n";
             cout<<"Ingresar denuevo: ";

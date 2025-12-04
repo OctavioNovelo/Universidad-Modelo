@@ -5,27 +5,14 @@
             "productos": [
                 {
                     "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
+                    "id": 1,
+                    "nombre": "Caja de regalo decorativa",
+                    "precio_unitario": 20,
+                    "total": 20
                 }
             ],
             "sesion": "Sesion 1",
-            "total": 5.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 15,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 75
-                }
-            ],
-            "sesion": "Sesion 1",
-            "total": 75.0
+            "total": 20.0
         }
     ]
 }
