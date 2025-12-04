@@ -38,7 +38,7 @@ float propina(float subtotal)
         break;
     
     default:
-        cout << "Error. Selecciona una opción válida\n";
+        cout << "Error. Selecciona una opción válida \n";
         break;
     }
     return total;
@@ -60,8 +60,13 @@ json verificarTarjeta()
     {
         if (nTarjeta == tarj["tarjeta"] && nip == tarj["nip"])
         {
-            return tarj;
+            cout << "Tarjeta confirmada\n";
+            cout << "Saldo: " << datos["cuentas"][i]["saldo"] << endl;
+        } else
+        {
+            cout << "Tarjeta inexistente\n";
         }
+        
     }
     return nullptr;
 }
@@ -279,7 +284,7 @@ bool venta()
                 {
                     case 1:
                     {
-                        cout << "Le gustaría dejar propina?(s/n): ";
+                        cout << "Le gustaria dejar propina?(s/n): ";
                         cin >> e;
 
                         if ((e == 's') || (e == 'S')) {
@@ -289,7 +294,7 @@ bool venta()
                             total = subtotal;
                             cout << "Tu total es de $" << total << endl;
                         } else {
-                            cout << "Respuesta no válida";
+                            cout << "Respuesta no valida";
                             pausa();
                         }
 
@@ -330,7 +335,7 @@ bool venta()
                     }
                     case 2:
                     {
-                        cout << "Le gustaría dejar propina?(s/n): ";
+                        cout << "Le gustaria dejar propina?(s/n): ";
                         cin >> e;
 
                         if ((e == 's') || (e == 'S')) {
@@ -340,7 +345,7 @@ bool venta()
                             total = subtotal;
                             cout << "Tu total es de $" << total << endl;
                         } else {
-                            cout << "Respuesta no válida";
+                            cout << "Respuesta no valida";
                             pausa();
                         }
 
