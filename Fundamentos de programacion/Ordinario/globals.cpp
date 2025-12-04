@@ -16,8 +16,10 @@ vector<ItemCarrito>carrito;
 
 float total = 0;
 int d = 0;
+int f = 0;
 char e;
 int dineroEf = 0;
 float cambio = 0;
 float dineroFalt = 0;
 int diferencia = 0;
+bool banderaCambio = false;

@@ -4,25 +4,25 @@
             "id": 1,
             "nombre": "Caja de regalo decorativa",
             "precio": 20,
-            "stock": 8
+            "stock": 0
         },
         {
             "id": 2,
             "nombre": "Bolsa de regalo decorativa",
             "precio": 5,
-            "stock": 10
+            "stock": 4
         },
         {
             "id": 3,
             "nombre": "Globo de latex",
             "precio": 5,
-            "stock": 10
+            "stock": -115
         },
         {
             "id": 4,
             "nombre": "Peluche mini",
             "precio": 150,
-            "stock": 10
+            "stock": 7
         },
         {
             "id": 5,
@@ -34,7 +34,7 @@
             "id": 6,
             "nombre": "Peluche grande",
             "precio": 300,
-            "stock": 5
+            "stock": 3
         },
         {
             "id": 7,
