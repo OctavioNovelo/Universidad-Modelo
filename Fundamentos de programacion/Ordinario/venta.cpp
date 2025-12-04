@@ -332,9 +332,17 @@ bool venta()
                         case 1:
                         {
                             saldoTarjeta = verificarTarjeta();
-                            if (saldoTarjeta["saldo"] >= total)
+                            if (saldoTarjeta["saldo"] > total)
                             {
-                                
+
+                            }
+                            else if (saldoTarjeta["saldo"] == total)
+                            {
+
+                            }
+                            else if (saldoTarjeta["saldo"] < total)
+                            {
+
                             }
                             break;
                         }
