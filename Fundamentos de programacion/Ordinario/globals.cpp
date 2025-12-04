@@ -2,6 +2,7 @@
 
 json archivo;
 json usuario;
+json saldoTarjeta;
 string username;
 string password;
 
