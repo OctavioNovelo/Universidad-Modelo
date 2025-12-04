@@ -28,6 +28,8 @@ extern float cambio;
 extern float total;
 extern float dineroFalt;
 extern int diferencia;
+extern bool banderaCambio;
+extern int f;
 
 struct ItemCarrito
 {

@@ -10,8 +10,8 @@ float propina(float subtotal)
 
     cout << "Gracias! Ingresa tu porcentaje de propina\n";
     cout << "1. 10%\n";
-    cout << "2. 15%";
-    cout << "3. Propina personalizada";
+    cout << "2. 15%\n";
+    cout << "3. Propina personalizada\n";
     cin >> propina;
 
     switch (propina)
@@ -25,11 +25,11 @@ float propina(float subtotal)
         break;
 
     case 3:
-        cout << "Ingresa la cantidad";
+        cout << "Ingresa la cantidad: $";
         cin >> propPersonalizada;
         total = subtotal + propPersonalizada;
         if (propPersonalizada <= 0) {
-            cout << "No se agregó propina a la cuenta total";
+            cout << endl << "No se agrego propina a la cuenta total\n";
             total = subtotal;
         } else {
             total = subtotal + propPersonalizada;
@@ -37,7 +37,7 @@ float propina(float subtotal)
         break;
     
     default:
-        cout << "Error. Selecciona una opción válida";
+        cout << "Error. Selecciona una opción válida\n";
         break;
     }
     return total;
@@ -241,59 +241,135 @@ bool venta()
 
                 if (confirmar=='s' || confirmar=='S') // Se actualiza el stock aca
                 {
-                guardarEnHistorial(subtotal); // Para el historial
-                ifstream f("productos.json");   
-                json productos= json::parse(f);
 
-                cout << "Selecciona tu metodo de pago\n";
+                limpiarPantalla();
+                
+                cout << "Tu subtotal es de $" << subtotal << endl;
+
+                cout << "Selecciona tu metodo de pago: \n"; 
                 cout << "1. Pago en efectivo\n";
                 cout << "2. Pago por tarjeta\n";
+                cout << "3. Regresar\n";
+                cin >> d;
 
                 switch (d) 
                 {
                     case 1:
                     {
-                        cout << "Le gustaría dejar propina?(s/n)\n";
+                        cout << "Le gustaría dejar propina?(s/n): ";
                         cin >> e;
 
                         if ((e == 's') || (e == 'S')) {
-                            float total = propina(subtotal);
-                            std::cout << "Tu total es de $" << total;
+                            total = propina(subtotal);
+                            cout << "Tu total es de $" << total << endl;
                         } else if ((e == 'n') || (e == 'N')) {
+                            total = subtotal;
+                            cout << "Tu total es de $" << total << endl;
                         } else {
                             cout << "Respuesta no válida";
-                            return pago = true;
+                            pausa();
                         }
 
-                        cout << "Ingresa el dinero";
+                        while (banderaCambio==false)
+                        {
+                        cout << endl << "Ingresa el dinero: $";
                         cin >> dineroEf;
+                        dineroEf = dineroEf + cambio;
 
-                        if (dineroEf >= total) {
+                          if (dineroEf >= total) {
                             if (dineroEf == total) {
                                 cout << "El pago ha sido realizado correctamente\n";
-                            } else if (dineroEf > total) {
-                                cambio = dineroEf - total;
-                                cout << "El pago ha sido realizado correctamente\n";
-                                cout << "Tu cambio es de $" << cambio;
-                            }
-                        } else {
-                            for (int i = 0; i >= total; i++) 
+                                banderaCambio = true;
+                                carrito.clear();
+                                pausa();
+                                } else if (dineroEf > total) {
+                                    cambio = dineroEf - total;
+                                    cout << "El pago ha sido realizado correctamente\n";
+                                    cout << "Tu cambio es de $" << cambio << endl;
+                                    banderaCambio = true;
+                                    pausa();
+                                }
+                            } else
                             {
-                                dineroFalt = total - dineroEf;
-                                cout << "Saldo insuficiente. Faltan $" << dineroFalt;
-                                cin >> diferencia;
-                                dineroEf = dineroEf + diferencia;        
-                            }
+                                if ((dineroEf < total) && (dineroEf > 0))
+                                {
+                                    dineroFalt = total - dineroEf;
+                                    cout << "Saldo insuficiente. Faltan $" << dineroFalt << endl;
+                                    cambio = dineroEf;
+                                } else
+                                {
+                                    cout << "Error. Ingresa una cantidad positiva\n";
+                                    pausa();
+                                }
+                            }  
                         }
                         break;
                     }
-
                     case 2:
                     {
+                        cout << "Le gustaría dejar propina?(s/n): ";
+                        cin >> e;
+
+                        if ((e == 's') || (e == 'S')) {
+                            total = propina(subtotal);
+                            cout << "Tu total es de $" << total << endl;
+                        } else if ((e == 'n') || (e == 'N')) {
+                            total = subtotal;
+                            cout << "Tu total es de $" << total << endl;
+                        } else {
+                            cout << "Respuesta no válida";
+                            pausa();
+                        }
+
+                        cout << "Selecciona una opcion \n";
+                        cout << "1. Pagar con tarjeta existente\n";
+                        cout << "2. Añadir nueva tarjeta\n";
+                        cout << "3. Regresar\n";
+                        cin >> f;
+
+                        switch (f)
+                        {
+                        case 1:
+                        {
+                            /* code */
+                            break;
+                        }
+
+                        case 2:
+                        {
+                            /* code */
+                            break;
+                        }
+
+                        case 3:
+                        {
+                            carrito.clear();
+                            regresar_al_menu = true;
+                            return pago = true;
+                        }
+                            
+                        default:
+                        {
+                            cout << "Error. Ingresa una opcion valida";
+                            pausa();
+                            break;
+                        }
+                        }
+
                         break;
                     }
-                }
-
+                    case 3:
+                    {
+                        carrito.clear();
+                        regresar_al_menu = true;
+                        return pago = true;
+                    }
+                } 
+                
+                guardarEnHistorial(total); // Para el historial
+                ifstream f("productos.json");   
+                json productos= json::parse(f);
+                
                 for (auto& item : carrito)
                 {
                    for(auto& pro : productos["productos"])
@@ -309,10 +385,6 @@ bool venta()
 
                 ofstream o("productos.json");
                 o << setw(4) << productos << endl; // Esto para mantener el mismo formato del json
-
-                carrito.clear();
-                regresar_al_menu = true;
-                return pago = true;
                 }
                 else
                 {
@@ -320,6 +392,7 @@ bool venta()
                 }
 
                 break;
+            
             }
 
             case 4:
@@ -343,4 +416,6 @@ bool venta()
         }
 
     } while (pago == false);
+    return pago;
+
 }
