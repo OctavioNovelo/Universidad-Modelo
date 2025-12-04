@@ -301,14 +301,15 @@ bool idEmpleadoExiste(int id_empleado) {
 int validarMayorACero(){
     int valor;
     while(true) {
-        cin>>valor;
-        if(cin.fail()){  //por si escribe letras 
+        cin >> valor;
+        /* if(cin.fail()){  //por si escribe letras 
             cin.clear();  
             cin.ignore(numeric_limits<streamsize>::max(), '\n');  //limpia
             cout << "Error; debe ingresar un numero\n";
-        } 
-        else if (valor<=0){
-            cout<<"Error, debe ser mayor a 0\n";
+        } */
+        if (valor<=0){
+            cout<<"\nError, debe ser mayor a 0.\n";
+            cout<<"Ingresar denuevo: ";
         } 
         else{
             return valor;
