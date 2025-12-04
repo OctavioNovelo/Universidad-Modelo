@@ -25,7 +25,7 @@ float dineroFalt = 0;
 int diferencia = 0;
 bool banderaCambio = false;
 
-int nTarjeta;
+long long nTarjeta;
 int nip;
 float saldo;
 bool coincide = false;

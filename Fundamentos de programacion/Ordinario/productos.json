@@ -4,13 +4,13 @@
             "id": 1,
             "nombre": "Caja de regalo decorativa",
             "precio": 20,
-            "stock": 5
+            "stock": 3
         },
         {
             "id": 2,
             "nombre": "Bolsa de regalo decorativa",
             "precio": 5,
-            "stock": -139
+            "stock": 9
         },
         {
             "id": 3,

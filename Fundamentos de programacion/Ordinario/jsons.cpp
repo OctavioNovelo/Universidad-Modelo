@@ -753,11 +753,8 @@ json verificarId()
 //Funciones Aili
 json verificarTarjeta()
 {
-
-    std::cin.ignore();
-
     cout << "Datos de pago\n";
-    cout << "Número de tarjeta: " << endl;
+    cout << "Numero de tarjeta: " << endl;
     cin >> nTarjeta;
     cout << "Nip: " << endl;
     cin >> nip;
@@ -765,7 +762,7 @@ json verificarTarjeta()
     ifstream y("banco.json");
     json tarjetas = json::parse(y);
 
-    for (auto &tarj : tarjetas["cuentas"])
+    for (auto& tarj : tarjetas["cuentas"])
     {
         if (nTarjeta == tarj["tarjeta"] && nip == tarj["nip"])
         {

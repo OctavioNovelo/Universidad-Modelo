@@ -31,7 +31,7 @@ extern float dineroFalt;
 extern int diferencia;
 extern bool banderaCambio;
 extern int f;
-extern int nTarjeta;
+extern long long nTarjeta;
 extern int nip;
 extern float saldo;
 extern int id_producto;

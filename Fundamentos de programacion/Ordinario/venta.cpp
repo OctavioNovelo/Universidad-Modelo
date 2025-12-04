@@ -331,22 +331,31 @@ bool venta()
                         {
                         case 1:
                         {
-                            saldoTarjeta = verificarTarjeta();
+                            json saldoTarjeta = verificarTarjeta();
+                            int saldoActual = 0;
                             if (saldoTarjeta["saldo"] > total)
                             {
                                 cout << "Pago realizado con exito\n";
-                                saldoTarjeta["saldo"] = saldoTarjeta["saldo"] - total;
-                                cout << "Saldo final: $" << saldoTarjeta["saldo"] << endl;
+                                saldoActual = saldoTarjeta["saldo"];
+                                saldoActual -= total;
+                                saldoTarjeta["saldo"] = saldoActual;
+                                cout << "Saldo final: $" << saldoActual << endl;
+                                pausa();
+                                break;
                             }
                             else if (saldoTarjeta["saldo"] == total)
                             {
                                 cout << "Pago realizado con exito\n";
                                 cout << "Tu saldo final es de $0\n";
+                                pausa();
+                                break;
                             }
                             else if (saldoTarjeta["saldo"] < total)
                             {
                                 cout << "El saldo es insuficiente\n";
                                 cout << "Tu saldo es de $" << saldoTarjeta["saldo"] << endl;
+                                pausa();
+                                break;
                             }
                             break;
                         }

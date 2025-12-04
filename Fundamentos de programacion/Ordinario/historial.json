@@ -1,1942 +1,525 @@
 {
-    "ultima_sesion": 7,
+    "ultima_sesion": 4,
     "ventas": [
         {
             "productos": [
                 {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
                 }
             ],
             "sesion": "Sesion 1",
-            "total": 5.0
+            "total": 594.0
         },
         {
             "productos": [
                 {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
                 }
             ],
             "sesion": "Sesion 1",
-            "total": 5.0
+            "total": 594.0
         },
         {
             "productos": [
                 {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 6,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 594
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 594.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 5,
+                    "id": 14,
+                    "nombre": "Sobres Pokemon",
+                    "precio_unitario": 99,
+                    "total": 495
                 }
             ],
             "sesion": "Sesion 2",
+            "total": 495.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 2,
+                    "id": 1,
+                    "nombre": "Caja de regalo decorativa",
+                    "precio_unitario": 20,
+                    "total": 40
+                }
+            ],
+            "sesion": "Sesion 3",
+            "total": 46.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 1,
+                    "id": 2,
+                    "nombre": "Bolsa de regalo decorativa",
+                    "precio_unitario": 5,
+                    "total": 5
+                }
+            ],
+            "sesion": "Sesion 4",
             "total": 5.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 1,
-                    "id": 2,
-                    "nombre": "Bolsa de regalo decorativa",
-                    "precio_unitario": 5,
-                    "total": 5
-                }
-            ],
-            "sesion": "Sesion 3",
-            "total": 0.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 3,
-                    "id": 5,
-                    "nombre": "Peluche mediano",
-                    "precio_unitario": 200,
-                    "total": 600
-                }
-            ],
-            "sesion": "Sesion 4",
-            "total": 600.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 3,
-                    "id": 5,
-                    "nombre": "Peluche mediano",
-                    "precio_unitario": 200,
-                    "total": 600
-                }
-            ],
-            "sesion": "Sesion 4",
-            "total": 600.0
         }
     ]
 }
