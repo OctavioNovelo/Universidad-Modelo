@@ -278,6 +278,7 @@ bool venta()
                 cout << "1. Pago en efectivo\n";
                 cout << "2. Pago por tarjeta\n";
                 cout << "3. Regresar\n";
+                cout << "Opcion: ";
                 cin >> d;
                 //
                 if (cin.fail())
@@ -285,6 +286,7 @@ bool venta()
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpia
                     cout << "Error, debe ingresar un numero\n";
+                    pausa();
                 }
                 //
 
@@ -531,9 +533,17 @@ bool venta()
         case 4:
         {
             // Cancelar todo
+            cout << "Seguro que desea regresar?(s/n): ";
+            cin >> confirmar;
+            if (confirmar == 's' || confirmar == 'S')
+            {
             carrito.clear();
             cout << "Carrito vaciado\n";
             break;
+            }
+            else{
+                break;
+            }
         }
         case 5:
         {
