@@ -1,31 +1,10 @@
 {
-    "ultima_sesion": 3,
+    "ultima_sesion": 2,
     "ventas": [
         {
-            "productos": [
-                {
-                    "cantidad": 5,
-                    "id": 6,
-                    "nombre": "Peluche grande",
-                    "precio_unitario": 300,
-                    "subtotal": 1500
-                }
-            ],
+            "productos": [],
             "sesion": "Sesion 1",
-            "total": 1500.0
-        },
-        {
-            "productos": [
-                {
-                    "cantidad": 2,
-                    "id": 1,
-                    "nombre": "Caja de regalo decorativa",
-                    "precio_unitario": 20,
-                    "total": 40
-                }
-            ],
-            "sesion": "Sesion 2",
-            "total": 40.0
+            "total": 305.0
         }
     ]
 }

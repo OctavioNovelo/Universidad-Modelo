@@ -4,7 +4,7 @@
             "id": 1,
             "nombre": "Caja de regalo decorativa",
             "precio": 20,
-            "stock": 8
+            "stock": 5
         },
         {
             "id": 2,
@@ -22,19 +22,19 @@
             "id": 4,
             "nombre": "Peluche mini",
             "precio": 150,
-            "stock": 10
+            "stock": 8
         },
         {
             "id": 5,
             "nombre": "Peluche mediano",
             "precio": 200,
-            "stock": 9
+            "stock": 10
         },
         {
             "id": 6,
             "nombre": "Peluche grande",
             "precio": 300,
-            "stock": 5
+            "stock": 10
         },
         {
             "id": 7,
@@ -46,13 +46,13 @@
             "id": 8,
             "nombre": "Vela aromatica",
             "precio": 250,
-            "stock": 9
+            "stock": 10
         },
         {
             "id": 9,
             "nombre": "Taza",
             "precio": 150,
-            "stock": 5
+            "stock": 10
         },
         {
             "id": 10,
@@ -70,25 +70,19 @@
             "id": 12,
             "nombre": "Envoltura",
             "precio": 25,
-            "stock": 8
+            "stock": 10
         },
         {
             "id": 13,
             "nombre": "Sobres",
             "precio": 2,
-            "stock": 4
+            "stock": 10
         },
         {
             "id": 14,
             "nombre": "Sobres Pokemon",
             "precio": 99,
             "stock": 10
-        },
-        {
-            "id": 15,
-            "nombre": "meme",
-            "precio": 999999,
-            "stock": 99999998
         }
     ]
 }
