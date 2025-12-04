@@ -27,7 +27,7 @@ void mostrarArchivo()
 {
     limpiarPantalla();
 
-    if (usuario["categoria"] == "gerente")
+    if (usuario["categoria"] == "gerente" || usuario["categoria"] == "Gerente")
     {
         switch (a)
         {
@@ -132,7 +132,7 @@ void mostrarArchivo()
         }
         }
     }
-    else if (usuario["categoria"] == "empleado")
+    else if (usuario["categoria"] == "empleado" || usuario["categoria"] == "Empleado")
     {
         switch (a)
         {
