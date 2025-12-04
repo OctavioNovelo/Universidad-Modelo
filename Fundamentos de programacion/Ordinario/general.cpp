@@ -277,7 +277,7 @@ bool idProductoExiste(int id_producto) {
     json productos=json::parse(f);
     
     for(auto& producto : productos["productos"]){
-        if(producto["id"].get<int>() == id){
+        if(producto["id"].get<int>() == id_producto){
             return true; // ID encontrado
         }
     }
@@ -291,7 +291,7 @@ bool idEmpleadoExiste(int id_empleado) {
     json empleados=json::parse(f);
     
     for(auto& empleado : empleados["empleados"]){
-        if (empleado["id"].get<int>() == id) {
+        if (empleado["id"].get<int>() == id_empleado) {
             return true; // ID encontrado
         }
     }

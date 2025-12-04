@@ -139,8 +139,7 @@ json modificarDatos()
     char confirmacion;
     int stock;
     int precio;
-    int id_producto;
-    int id_empleado;
+    bool id_valido=false;
 
     if (usuario["categoria"] == "gerente" || usuario["categoria"] == "Gerente")
     {
@@ -165,8 +164,21 @@ json modificarDatos()
                         si_o_no = true;
                     }
                 }
-                cout << "ID del producto: ";
-                cin >> id_producto;
+
+                //verificacion
+                id_valido=false;
+                while(!id_valido){
+                    cout << "ID del producto: ";
+                    cin >> id_producto;
+
+                    if(idProductoExiste(id_producto)){
+                        cout<<"Error el id ya existe";
+                    }
+                    else{
+                        id_valido=true;
+                    }
+                }
+
 
                 cout << "Cantidad del producto: ";
                 cin >> stock;
@@ -352,8 +364,18 @@ json modificarDatos()
                     }
                 }
 
+                id_valido=false;
+                while(!id_valido){
                 cout << "ID del empleado: ";
                 cin >> id_empleado;
+
+                if(idEmpleadoExiste(id_empleado)){
+                    cout<<"Error ya existe ese id";
+                }
+                else{
+                    id_valido=true;
+                }
+                }
 
                 si_o_no = false;
 

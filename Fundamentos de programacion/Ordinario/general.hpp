@@ -33,6 +33,8 @@ extern int f;
 extern int nTarjeta;
 extern int nip;
 extern float saldo;
+extern int id_producto;
+extern int id_empleado;
 
 struct ItemCarrito
 {
@@ -50,4 +52,6 @@ void pausa();
 void mostrarArchivo();
 void guardarEnHistorial(float subtotal);
 void nuevoDia();
+bool idEmpleadoExiste(int id_empleado);
+bool idProductoExiste(int id_producto);
 #endif
