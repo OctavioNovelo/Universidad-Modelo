@@ -335,6 +335,7 @@ json modificarDatos()
             {
             case 1:
             {
+                si_o_no = false;
                 cin.ignore();
                 while (si_o_no == false)
                 {
@@ -517,8 +518,7 @@ json modificarDatos()
 
                                 if (newPassword == emp["password"])
                                 {
-                                    cout << "Correcto.";
-                                    continue;
+                                    cout << "Correcto.\n" << endl;
                                 }
                                 else if (newPassword != emp["pasword"])
                                 {
@@ -544,7 +544,7 @@ json modificarDatos()
                                 }
                                 else
                                 {
-                                    cout << "Passwords not match. Try Again" << endl;
+                                    cout << endl << "Passwords not match. Try Again" << endl;
                                     pausa();
                                 }
                                 break;
