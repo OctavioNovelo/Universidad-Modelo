@@ -1,5 +1,5 @@
 {
-    "ultima_sesion": 6,
+    "ultima_sesion": 7,
     "ventas": [
         {
             "productos": [
@@ -13,6 +13,19 @@
             ],
             "sesion": "Sesion 1",
             "total": 20.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 10,
+                    "id": 2,
+                    "nombre": "Bolsa de regalo decorativa",
+                    "precio_unitario": 5,
+                    "total": 50
+                }
+            ],
+            "sesion": "Sesion 7",
+            "total": 50.0
         }
     ]
 }
