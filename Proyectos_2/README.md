@@ -33,6 +33,12 @@ I am using a structure that make the software a full modular architecture.
         __init__.py
         This file contain declares the first variables used by validator.py.
 
+        compiler.py
+        This file compiles the tools.
+
+        executor.py
+        This file executes the tools.
+
         input_validator.py
         This file validates the input structure and validate if the command can run or if is a dangerous operation.
 
@@ -44,7 +50,7 @@ I am using a structure that make the software a full modular architecture.
         __init__.py
         This file contain declares the firsts variables used by command_line.py.
 
-        command_line.py
+        CLI.py
         Collects user input and display the result.
 
     The frontend communicates only with 'core' and 'tools'.
@@ -55,6 +61,12 @@ I am using a structure that make the software a full modular architecture.
     The tools folder contains the followings files:
         __init__.py
         This file contain declares the firsts variables used by the diferents tools.
+
+        tools_bin
+        This folder contains the binarys of the tools that compiler.py make.
+
+        tools_src
+        This folder contains source code for the diferents tools that the compiler.py need to compile the tools. 
 
     utils:
     This folder contains extra functions like a logger that allows to register, events, errors, executions, etc.
