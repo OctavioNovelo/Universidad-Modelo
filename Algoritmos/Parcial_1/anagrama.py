@@ -7,9 +7,9 @@ def anagrama(palabra1, palabra2):
     resultado2 += sum(ord(char) for char in palabra2)
 
     if resultado1 == resultado2:
-        print("Son anagramas")
+        return True
     else:
-        print("No son anagramas")
+        return False
 
 
-anagrama(palabra1 = "atun", palabra2 = "tuna")
+print(anagrama(palabra1 = ", ", palabra2 = ", "))
