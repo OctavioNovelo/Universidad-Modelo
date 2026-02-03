@@ -16,7 +16,7 @@ Implemented / In progress:
 - Project structure
 - CLI-based user interface
 - Input validation layer
-- Tool execution layer (starting with Nmap)
+- Tool execution layer
 
 
 I am using a structure that make the software a full modular architecture. 
@@ -80,6 +80,6 @@ I am using a structure that make the software a full modular architecture.
 
 ## Ethical Notice
 
-No one follow me in github but i think is important to declare that This software must only be used on systems you own and ystems you have explicit permission to audit.
+No one follow me in github but i think is important to declare that this software must only be used on systems you own and systems you have explicit permission to audit.
 
 Unauthorized network scanning is illegal.
