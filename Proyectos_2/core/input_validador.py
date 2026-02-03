@@ -1,0 +1,1 @@
+# We going to use this file to implement validation functions for the inputdata.
