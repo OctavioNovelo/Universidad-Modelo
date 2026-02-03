@@ -7,15 +7,15 @@ import os
 class ToolCompiler:
     def __init__(self, base_dir: Path):
         self.base_dir = base_dir
-        self.src_dir = base_dir / "tools_src"
-        self.bin_dir = base_dir / "tools_bin"
+        self.src_dir = base_dir / "tools" / "tools_src"
+        self.bin_dir = base_dir / "tools" / "tools_bin"
 
     def compile_nmap(self):
         bin_path = self.bin_dir / "nmap" / "nmap"
         if bin_path.exists():
             return  # ya compilado
 
-        src_tar = self.src_dir / "nmap" / "nmap-7.95.tar.bz2"
+        src_tar = self.src_dir / "nmap" / "nmap-7.98.tar.bz2"
         build_dir = self.src_dir / "nmap" / "build"
 
         build_dir.mkdir(parents=True, exist_ok=True)
