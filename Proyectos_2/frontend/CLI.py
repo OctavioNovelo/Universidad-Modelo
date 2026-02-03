@@ -1,9 +1,10 @@
-# frontend/cli.py
-from tools.nmap import NmapCommands
+from tools.nmap import NmapCommands # Lo comandos de nmap.py
 from core.executor import ToolExecutor
 from pathlib import Path
 
+# Inicializamos interfaz
 class CLI:
+    # Ejecuta el ejecutor
     def __init__(self):
         self.executor = ToolExecutor(Path(__file__).parent.parent)
 

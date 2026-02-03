@@ -1,6 +1,6 @@
-# tools/nmap.py
 class NmapCommands:
 
+# Comandos de nmap.
     COMMANDS = {
         1: lambda target: ["-F", target],
         2: lambda target: ["-sV", target],
@@ -8,6 +8,7 @@ class NmapCommands:
         4: lambda target: ["-A", "-p-", target],
     }
 
+# Se verifica si la opcion se encuentra en COMMANDS
     @classmethod
     def build(cls, option: int, target: str):
         if option not in cls.COMMANDS:
