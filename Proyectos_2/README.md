@@ -1,6 +1,5 @@
 This project is a **modular network auditing frontend written in Python**.
-Its goal is to allow users to run well-known open-source security tools
-(e.g. Nmap) **without directly using commands or a terminal**, by interacting
+Its goal is to allow users to run well-known open-source security tools **without directly using commands or a terminal**, by interacting
 with a structured interface.
 
 The software acts as an **orchestrator**:
