@@ -1,6 +1,6 @@
 This project is a **modular network auditing frontend written in Python**.
 Its goal is to allow users to run well-known open-source security tools **without directly using commands or a terminal**, by interacting
-with a structured interface.
+with a structured interface. This software bundles and executes locally compiled open-source tools.
 
 The software acts as an **orchestrator**:
 - It collects user input through a UI
@@ -41,8 +41,6 @@ I am using a structure that make the software a full modular architecture.
 
         input_validator.py
         This file validates the input structure and validate if the command can run or if is a dangerous operation.
-
-    This layer does not execute tools directly, only verify if the input is correct. 
 
     frontend:
     This contains the UI stuff, at the moment we use the terminal as a UI, but whit time we're going to add a user friendly UI.
