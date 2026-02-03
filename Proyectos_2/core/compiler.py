@@ -37,7 +37,7 @@ class ToolCompiler:
             "--without-zenmap",
             "--with-libpcap=included",
             "--with-liblua=included",
-        ], check=True)
+        ], check = True)
 
-        subprocess.run(["make", "-j4"], check=True)
-        subprocess.run(["make", "install"], check=True)
+        subprocess.run(["make", "-j4"], check = True)
+        subprocess.run(["make", "install"], check = True)

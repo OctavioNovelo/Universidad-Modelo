@@ -22,8 +22,8 @@ class ToolExecutor:
         # Se guarda el output 
         result = subprocess.run(
             [str(binary)] + args,
-            capture_output=True,
-            text=True
+            capture_output = True,
+            text = True
         )
 
         return {
