@@ -1,0 +1,31 @@
+{
+    "ultima_sesion": 1,
+    "ventas": [
+        {
+            "productos": [
+                {
+                    "cantidad": 10,
+                    "id": 6,
+                    "nombre": "Peluche grande",
+                    "precio_unitario": 300,
+                    "total": 3000
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 3000.0
+        },
+        {
+            "productos": [
+                {
+                    "cantidad": 5,
+                    "id": 1,
+                    "nombre": "Caja de regalo decorativa",
+                    "precio_unitario": 20,
+                    "total": 100
+                }
+            ],
+            "sesion": "Sesion 1",
+            "total": 110.0
+        }
+    ]
+}
