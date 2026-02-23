@@ -1,33 +1,47 @@
-import subprocess
-from pathlib import Path
-import os
+import subprocess #Ejecutar programas externos/comandos del sistema
+from pathlib import Path #Manejo de rutas de archivos
+import os #Acceso a funciones del sistema operativo
 
-# Ejecuta el programa
-class ToolExecutor:
-    # El path del binario
-    def __init__(self, base_dir: Path):
-        self.bin_dir = base_dir / "tools_bin"
+def ejecutar_segun_os(os_name, tool):
+    # Aqui buscamos la carpeta con el nombre del sistema y el archivo
+    config_os = {
+        'linux': {'folder': 'Linux', 'bin_name': 'nmap'},
+        'windows': {'folder': 'Windows', 'bin_name': 'nmap.exe'},
+        'macos': {'folder': 'macos', 'bin_name': 'nmap'}
+    }
     
-    # Definicion de la herramiento que se va a usar (en este caso solo es nmap)
-    def run(self, tool: str, args: list[str]):
-        binary = self.bin_dir / tool / tool
-
-        # Si no esta, suelta error
-        if not binary.exists():
-            raise RuntimeError(f"{tool} no está compilado")
-        
-        # Le da permisos de execucion
-        os.chmod(binary, 0o755)
-
-        # Se guarda el output 
-        result = subprocess.run(
-            [str(binary)] + args,
+    # aqui si el nombre contiene win se ocupa la configuracion de windows y asi (asegura por asi decirlo)
+    if 'win' in os_name:
+        config = config_os['windows']
+    elif 'macos' in os_name or 'mac' in os_name:
+        config = config_os['macos']
+    elif 'linux' in os_name:
+        config = config_os['linux']
+    else:
+        print(f"No existe")
+        return None
+    
+    #ruta
+    base_path = Path(__file__).parent #Obtiene la ruta del directorio donde está guardado este archivo, y agarra el padre que seria hasta tools(creo)
+    bin_path = base_path / "Proyectos_2" / "config" / "tools" / "tools_bin" / tool / config['folder'] / config['bin_name': tool]
+    
+    os.chmod(777, bin_path)
+    
+    #Si no existe el archivo
+    if not bin_path.exists():
+        print(f"No se encontro en: {bin_path}")
+        return None
+    
+    #Esto es para verificar algun error (gracias chat por)
+    try:
+        print(f"Ejecutando desde: {bin_path}")
+        resultado = subprocess.run(
+            [str(bin_path), "--version"],  # Ejemplo: mostrar versión
             capture_output = True,
             text = True
         )
-
-        return {
-            "returncode": result.returncode,
-            "stdout": result.stdout,
-            "stderr": result.stderr
-        }
+        return resultado
+    
+    except Exception as e:
+        print(f"Error: {e}")
+        return None

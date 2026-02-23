@@ -1,18 +1,12 @@
 # This is the beginning of the Auditor project
-from frontend.CLI import CLI
+from frontend import Input
+from core import executor
 import sys
-from core.compiler import ToolCompiler
 from pathlib import Path
 
 def main():
-    # Use the --compile argument to compile the program(s)
-    if "--compile" in sys.argv:
-        print("[*] Compiling tools...")
-        ToolCompiler(Path(__file__).parent).compile_nmap()
-        return
-    
-    # Run the CLI
-    CLI().run()
+    so = Input.obtener_sistema_operativo()
+    executor.ejecutar_segun_os(so, tool)
 
 # Es para ejecutar el programa
 if __name__ == "__main__":
