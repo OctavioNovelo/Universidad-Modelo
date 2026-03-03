@@ -1,5 +1,5 @@
 # This is the beginning of the Auditor project
-from frontend import Input
+from utils import Input
 from core import executor
 import sys
 from pathlib import Path
