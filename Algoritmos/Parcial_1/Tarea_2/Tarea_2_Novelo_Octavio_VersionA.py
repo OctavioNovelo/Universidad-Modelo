@@ -172,10 +172,10 @@ for i in people2:
 
 
 lista = [
-   Student("Octavio", "Novelo", 5, 1, 2006),
-   Student("Litzy", "Richaud", 3, 2, 2007),
-   Student("Aili", "Ocampo", 5, 3, 2007),
-   Student("Pepito", "Patata", 1, 4, 2005)
+   Student("Octavio", "Novelo", 20, 1, 2006),
+   Student("Litzy", "Richaud", 18, 2, 2007),
+   Student("Aili", "Ocampo", 20, 3, 2007),
+   Student("Pepito", "Patata", 15, 4, 2005)
 ]
 
 print('\n >>> Inestabilidad \n')
