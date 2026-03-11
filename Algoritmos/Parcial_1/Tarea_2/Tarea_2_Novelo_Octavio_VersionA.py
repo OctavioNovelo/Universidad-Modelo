@@ -118,36 +118,42 @@ for i in people2:
 
 #SELECTION SORT---------------------------------------------------------------------------------------------------
 print('\n ********** Selection sort ********** \n')
-# COMPROBAR ESTABILIDAD
+# COMPROBAR INESTABILIDAD
 
+
+# [5a, 3, 5b, 1]
 # Mismo asunto, data, key, reverse
 def selection_sort(data, key, reverse = True):    
    n = len(data)
    for i in range(n - 1):
-      # n = 10 i = 0 i <= 9
-      # mini = 0
-      mini = i
-      for j in range(i + 1, n):
+      # n = 5 ; i = 0 ; i <= 3 ; mini = 0
+      mini = i # [5a]
+      for j in range(i + 1, n): # (1 <= j <= 4)
          # j = 1
-         # 1 <= j <= 10
          if reverse:
             if key(data[j]) < key(data[mini]):
-               mini = j
+               # 3 < 5a -----> SIIIIIIII
+               mini = j # [3] 
          else:
             if key(data[j]) > key(data[mini]):
+               # 3 > 5a -----> NOOOOOOOO
                mini = j 
-
+      
+      # 5a , 3 = 3, 5a
       data[i], data[mini] = data[mini], data[i] # intercambio de tuplas ya tu sabe
-      yield data
+
    return data
+
+   # Al final de la iteracion la lista acaba ciendo [1, 3, 5b, 5a]
+   # Antes 5a iba antes que 5b y ahora 5b va antes que 5a, eso demuestra la Inestabilidad
 
 
 # Ordenar usando un valor numerico, en este caso por id
 print('\n >>> Atributo numerico \n')
 # REVISAR, estoy seguro que debe recibir una variable para que tenga chiste el lambda, pero implicaria que no esten todos los ejemplos en el mismo doc
 selection_sort(movies, lambda s: s.id, False) # reverse = False 
-# for i in movies: # Imprimir la lista
-#   print(i)
+for i in movies: # Imprimir la lista
+   print(i)
 
 
 # Ordenar usando un valor string, en este caso por genero
