@@ -9,6 +9,11 @@
 
 # Estructura de los estudiantes 
 # Todos los estudiantes tienen un nombre, un apellido, edad. un id y fecha de registro
+
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import random
+
 class Student:
    def __init__(self, name, lastname, age, id, year):   
       self.name = name  
@@ -133,7 +138,7 @@ def selection_sort(data, key, reverse = True):
                mini = j 
 
       data[i], data[mini] = data[mini], data[i] # intercambio de tuplas ya tu sabe
-
+      yield data
    return data
 
 
@@ -141,8 +146,8 @@ def selection_sort(data, key, reverse = True):
 print('\n >>> Atributo numerico \n')
 # REVISAR, estoy seguro que debe recibir una variable para que tenga chiste el lambda, pero implicaria que no esten todos los ejemplos en el mismo doc
 selection_sort(movies, lambda s: s.id, False) # reverse = False 
-for i in movies: # Imprimir la lista
-   print(i)
+# for i in movies: # Imprimir la lista
+#   print(i)
 
 
 # Ordenar usando un valor string, en este caso por genero
