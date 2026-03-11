@@ -30,7 +30,7 @@ people = [
    Student('Martha', 'Alvarez', 20, '816505', '2006'),
    Student('Erick', 'Perez', 32, '563188', '1992'),
    Student('Pedro', 'Montejo', 45, '235474', '1987'),
-   Student('Laura', 'Cisneros', 37, '937125', '1990'),
+   Student('Laura', 'Cisneros', 20, '937125', '2006'),
    Student('Juan', 'Parra', 18, '754638', '2009'),
 ]
 people2 = [
@@ -68,7 +68,7 @@ movies = [
 # Nota: El valor de n puse 10 solo como ejemplo
 
 #BUBLE SORT --------------------------------------------------------------------------------------------------------
-print('\n ********** Buble sort ********** \n')
+print('\n ********** Buble sort **********')
 
 # La funcion recibe un data (cualquiera dato pero en este caso nuestras listas), una key
 # que basicamente es el PARAMETRO que usara para la comparacion (edad, apellido, genero, id, etc)
@@ -117,7 +117,7 @@ for i in people2:
 
 
 #SELECTION SORT---------------------------------------------------------------------------------------------------
-print('\n ********** Selection sort ********** \n')
+print('\n ********** Selection sort **********')
 # COMPROBAR INESTABILIDAD
 
 
@@ -171,8 +171,27 @@ for i in people2:
 
 
 
+lista = [
+   Student("Octavio", "Novelo", 5, 1, 2006),
+   Student("Litzy", "Richaud", 3, 2, 2007),
+   Student("Aili", "Ocampo", 5, 3, 2007),
+   Student("Pepito", "Patata", 1, 4, 2005)
+]
+
+print('\n >>> Inestabilidad \n')
+print('***** Orden original ***** \n')
+for i in lista:
+   print(i)
+   # Sabemos [Octavio(20), Litzy(18), Aili(18)]
+
+selection_sort(lista, lambda s: (s.age))
+print('\n ***** Nuevo orden ***** \n')
+for i in lista:
+   print(i)
+   # El orden sera
+
 #INSERTION SORT---------------------------------------------------------------------------------------------------
-print('\n ********** Insertion sort ********** \n')
+print('\n ********** Insertion sort **********')
 
 def insertion_sort(data, key, reverse = True):  
    n = len(data)
