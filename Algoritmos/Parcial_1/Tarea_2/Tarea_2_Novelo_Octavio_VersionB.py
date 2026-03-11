@@ -38,6 +38,9 @@ movies3 = [
 ]
 
 #BUBLE SORT --------------------------------------------------------------------------------------------------------
+# En esta version las funciones reciben un nuevo parametro llamado cmp
+# Este parametro es el resultado de una operacion
+print('\n ********** Bubble Sort ********** \n')
 def bubble_sort(data, cmp, reverse = True):
    n = len(data)
    for i in range( n - 1):
@@ -93,7 +96,7 @@ selection_sort(movies3, lambda a, b: a.year - b.year)
 for i in movies3:
    print(i)
 
-print('\n >>> Atributo tipo texto\ n')
+print('\n >>> Atributo tipo texto \n')
 selection_sort(movies3, lambda a, b: (a.type > b.type)- (a.type < b.type ),False)
 for i in movies3:
    print(i)
