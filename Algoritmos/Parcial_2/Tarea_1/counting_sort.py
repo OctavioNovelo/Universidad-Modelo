@@ -3,6 +3,7 @@ import matplotlib.animation as animation
 import random
 
 #Couting sort
+# REVISAR !!!
 def counting_sort(data):
     n = len(data) # n = 50
 
