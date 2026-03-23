@@ -3,7 +3,6 @@ import matplotlib.animation as animation
 import random
 
 #Couting sort
-# REVISAR !!!
 # data = [41, 68, 3, 90, 89, 53]
 def counting_sort(data):
     n = len(data) # n = 6
@@ -15,29 +14,37 @@ def counting_sort(data):
 
     for num in data:
         count[num] += 1  # Cuenta la frecuencia de los elementos
-        # num = 0, data[0] = 41
-        # count[0] += 1
+        # num = 41, data[0] = 41
+        # count[41] += 1
 
         # Tarde poquito en entender, pero en esencia lo que se hace es que count es un arreglo de tamano n,
         # esto con el fin de que el indice de este arreglo haga referencia directa al valor que aparece en el arrelgo.
-        # count[3] hace referencia al valor 3, no entiendo como funciona en este caso ya que se usan valores del 1 al 51 por lo que
-        # cada valor se repita una sola vez, tampoco veo un comparacion para saber cual es el valor que se evalua
+        # count[41] hace referencia al valor 41, se suma 1 en el arrelgo de frecuencia cada vez que aparece.
 
+
+    # IDK #######################################################
     for i in range(1, len(count)):
         count[i] += count[i - 1]  # Hace la suma de la frecuencia
-        # i = 1, 1 al 50
+        # i = 1, 1 al 90
         # count[1] += count[1 - 1] 
+    #############################################################
 
     output = [0] * n
-    # output = [{0}0, {0}1, {0}..., {0}n]
-    # Un arreglo llamado output con listas de valor 0 del tamano n = 50
+    # output = [{0}0, {0}1, {0}..., {0}6]
+    # Un arreglo llamado output con listas de valor 0 del tamano n = 6
+
+    # Este arreglo es del mismo tamano que el original ya que aqui se guardaran los valores
+    # originales ya ordenados por su frecuencia, a diferencia de count que es de tamano valor_max
+    # para poder contalizar las apariciones de cada dato.
 
 
-    for i in range(n - 1, -1, -1): #Desde n-1, hasta -1, con paso de -1
-        a = data[i] # Elemento actual
-        b = count[a] - 1 # count[elemento actual - 1]
-        output[b] = a # Output[b] = elemento actual
-        count[a] -= 1 # Output[a] -= 1
+    # IDK #################################
+    for i in range(n - 1, -1, -1):
+        a = data[i]
+        b = count[a] - 1
+        output[b] = a 
+        count[a] -= 1
+    ######################################
 
         # Lo de la animacion
         temp = data.copy()
@@ -50,6 +57,8 @@ def counting_sort(data):
 
 data = [random.randint(1, 50) for _ in range(50)]
 random.shuffle(data)
+
+
 
 # Lo de la animacion
 # Nota: Estas son funciones para la animacion
