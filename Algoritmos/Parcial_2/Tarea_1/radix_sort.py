@@ -5,15 +5,18 @@ import random
 #Radix sort
 def radix_sort(data):
     def countingdigit_sort(data, exp):
-        n = len(data)
-        count = [0] * 10
+        n = len(data) # n = 50
+        count = [0] * 10 # ???
 
         for num in data:
-            d = (num // exp) % 10
-            count[d] += 1
+            i = (num // exp) % 10
+            # i = (0 // ???) % 10 = 
+            count[i] += 1
+            # count[i] += 1
 
         for i in range(1, 10):
-            count[i] += count[i-1]
+            count[i] += count[i - 1]
+            # count [1] += count[1 - 1] 
 
         output = [0] * n
 
