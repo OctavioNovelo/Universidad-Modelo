@@ -37,18 +37,34 @@ def bucket_sort(data):
     
     # valor_max = 50, valor_min = 1.
     valor_max, valor_min = max(data), min(data) #Valor maximo y valor minimo
-    num_buckets = n # Las cubetas seran las mismas que el tamano de elementos del data REVISAR!!!
-    # num_buckets = 50
+
+    # n = elementos
+    # k = cubetas
+    # n / k = elementos por cubeta
+
+    # Como usamos insertion sort y ademas creamos cubetas la complejidad total es:
+    # n^2 / k + k = 0
+
+    # Aqui es magia (matematicas)
+    # n^2 / k = k
+    # n^2 = k^2
+    # k = n ** 0.5 (raiz cuadrada)
+    # cubetas = raiz cuadrada de n
+    # Lei que es eleccion personal escoger cuantas cubetas se crearan, para el caso en el que se usa insertion sort
+    # la mejor forma para saber cuatas cubetas usar era con raiz cuadrada
     
-    # (50 - 1) / 50 + 1 --> 0.9607
+    num_buckets = int(n ** 0.5)
+    # num_buckets = 7.071
+    
+    # (50 - 1) / 7.071 + 1 --> 7.9297
     rango_buckets = (valor_max - valor_min) / num_buckets + 1
-    
-    # Nota: aparentemente se puede usar "_" en vez una variable ("i") para indicar
-    # que no se usara el valor del iterador.
+    # rango_buckets = 1-7
+
+
     buckets = [[] for _ in range(num_buckets)] 
-    # Se crea una lista (buckets) de tamano n que guarde listas vacias
+    # Se crea una lista (buckets) de tamano num_buckets que guarde listas vacias
     
-    # buckets = [{}1, {}2, ..., {}50]
+    # buckets = [{}0, {}1, ..., {}6]
     
     # buckets = []
     # for _ in range(num_buckets):
@@ -56,28 +72,36 @@ def bucket_sort(data):
 
 
     for i in data:
+        # i es el valor actual de data
+
         index = int((i - valor_min) // rango_buckets)
-        # Calculamos en que rango donde va cada numero. 
-        # index = int((0 - 1) // 0.9607) = 1
+        # Calculamos en que cubeta va cada valor. 
+        # index = int((i - 1) // 7) = 0
         
         buckets[index].append(i)
-        # buckets[1].append(1)
+        # buckets[0].append(i)
+
         # Es importante usar el append por que si no re escribiremos las listas y 
-        # no agregaremos a las listas, iyk yk 
+        # no agregaremos los valores a las listas, iyk yk.
+        # Date cuenta que cuando i = 8 index cambia a 1 ya que se pasa del rango por cubeta, 
+        # lo que no permite que este en la cubeta 0 y si en la 1.
+
 
     sorted_arr = []
 
     # Ordenar las cubetas
     for cubeta in buckets:
         # cubeta = 0
-        # buckets = 1 al 50
+        # buckets = 0 al 6
         for j in insertion_sort(cubeta):
             # j = 0
-            # insertion_sort(0)
+            # insertion_sort(cubeta[0])
             # Aqui se guardan los valores ya ordenados de la cubeta en la variable j, para posteriormente agregarla a 
-            # sorted_arr.
+            # sorted_arr
             sorted_arr.append(j)
 
+
+            ########################################################
             # Esto es para la animacion, nada q ver con el algoritmo
             for i in range(len(sorted_arr)):
                 data[i] = sorted_arr[i]
@@ -89,7 +113,7 @@ def bucket_sort(data):
 
 
 # Lo que se evaluara
-data = list(range(-100, 51))
+data = [random.randint(1, 50) for _ in range(50)]
 random.shuffle(data)
 
 
