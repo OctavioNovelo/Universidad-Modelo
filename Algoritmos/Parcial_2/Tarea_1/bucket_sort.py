@@ -158,7 +158,7 @@ def bucket_sort(data):
             for i in range(len(sorted_arr)):
                 data[i] = sorted_arr[i]
 
-            # Verde para los ya ordenados, rojo para el recien colocado
+            # Default: Cuando no se estan comparando esos valores
             colors = [COLOR_DEFAULT] * n
             for k in range(len(sorted_arr) - 1):
                 colors[k] = COLOR_SORTED
