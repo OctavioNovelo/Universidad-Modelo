@@ -181,7 +181,7 @@ def bucket_sort(data):
 
 
 # Lo que se evaluara
-data = [random.randint(1, 50) for _ in range(50)]
+data = list(range(1, 51))
 random.shuffle(data)
 
 
