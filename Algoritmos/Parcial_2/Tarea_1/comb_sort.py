@@ -45,8 +45,8 @@ def play_piano(value, n=50, duration=0.55, sample_rate=44100):
 
 
 # Comb sort
-def comb_sort(array):
-    n = len(array) # tamaño del arreglo
+def comb_sort(data):
+    n = len(data) # tamaño del arreglo
     gap = n # diferencia inicial
     swapped = True # indica si hubieron intercambios
 
@@ -55,8 +55,8 @@ def comb_sort(array):
         swapped = True
 
         for i in range(n-gap): # recorridos para ordenar
-            if array[i] > array[i+gap]: # ¿el valor de la posición es mayor a la dada por el gap?
-                array[i], array[i+gap] = array[i+gap], array[i] # si es así hace un intercambio
+            if data[i] > data[i+gap]: # ¿el valor de la posición es mayor a la dada por el gap?
+                data[i], data[i+gap] = data[i+gap], data[i] # si es así hace un intercambio
                 swapped = False # para reiniciar dentro del while
 
             ########################################################
@@ -64,7 +64,7 @@ def comb_sort(array):
             colors = [COLOR_DEFAULT] * n
             colors[i]      = COLOR_COMPARE
             colors[i + gap] = COLOR_COMPARE
-            yield array, colors[:]
+            yield data, colors[:]
             ########################################################
 
         gap = int(gap / 1.3) # actualiza dividiendo el gap actual entre el factor de encogimiento
@@ -74,7 +74,7 @@ def comb_sort(array):
         ########################################################
         # Default: Cuando no se estan comparando esos valores
         colors = [COLOR_DEFAULT] * n
-        yield array, colors[:]
+        yield data, colors[:]
         ########################################################
 
 
@@ -82,16 +82,16 @@ def comb_sort(array):
     # Gris: Ya todos ordenados
     colors = [COLOR_DONE] * n
     for _ in range(10):
-        yield array, colors[:]
+        yield data, colors[:]
 
     # Verde uwu: verde de izquierda a derecha para mostrar que ya se ordeno todo
     for i in range(n):
         colors[i] = COLOR_SORTED
-        yield array, colors[:]
+        yield data, colors[:]
     ########################################################
 
-array = [random.randint(1, 50) for _ in range(50)]
-random.shuffle(array)
+data = list(range(1, 51))
+random.shuffle(data)
 
 
 # Animacion
@@ -100,7 +100,7 @@ BG = '#0d0d0d'
 fig, ax = plt.subplots(facecolor=BG)
 ax.set_facecolor(BG)
 
-bars = ax.bar(range(len(array)), array, color=COLOR_DEFAULT, edgecolor='none')
+bars = ax.bar(range(len(data)), data, color=COLOR_DEFAULT, edgecolor='none')
 
 ax.set_title("Comb Sort", color='white', fontsize=14, fontweight='bold', pad=12)
 
@@ -143,7 +143,7 @@ def update(frame):
 ani = animation.FuncAnimation(
     fig,
     update,
-    frames=comb_sort(array),
+    frames=comb_sort(data),
     repeat=False,
     interval=100
 )
