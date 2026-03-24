@@ -7,10 +7,10 @@ import sounddevice as sd
 import threading
 
 # Colores para la animacion
-COLOR_DEFAULT = '#4a90d9'  # azul  — sin procesar
+COLOR_DEFAULT = '#95a5a6'  # azul  — sin procesar
 COLOR_COMPARE = '#e74c3c'  # rojo  — siendo comparados
 COLOR_SORTED  = '#2ecc71'  # verde — ya ordenado
-COLOR_DONE    = '#95a5a6'  # gris  — antes del piano
+COLOR_DONE    = '#4a90d9'  # gris  — antes del piano
 
 # Sonido: genera y reproduce un tono segun el valor de la barra (no bloquea el hilo principal)
 def play_tone(value, n=50, duration=0.07, sample_rate=44100):
@@ -23,7 +23,7 @@ def play_tone(value, n=50, duration=0.07, sample_rate=44100):
 
 # Sonido piano: fundamental + armonicos con decay tipo piano (efecto final)
 def play_piano(value, n=50, duration=0.55, sample_rate=44100):
-    freq = 220 + (value / n) * 880         # rango A3 → A5 aprox
+    freq = 180 + (value / n) * 900
     t    = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
     # Armonicos con amplitudes decrecientes (simula timbre de piano)
     wave  = 0.00 * np.ones(len(t))
@@ -205,7 +205,6 @@ for spine in ['bottom', 'left']:
  
 # Simbologia (leyenda)
 leyenda = [
-    mpatches.Patch(color=COLOR_DEFAULT, label='Sin procesar'),
     mpatches.Patch(color=COLOR_COMPARE, label='Comparando'),
     mpatches.Patch(color=COLOR_SORTED,  label='Ordenado'),
     mpatches.Patch(color=COLOR_DONE,    label='Completo'),
