@@ -3,14 +3,16 @@ import matplotlib.animation as animation
 import random
 
 #Radix sort
+# data = [12, 150, 3, 31]
 def radix_sort(data):
     def countingdigit_sort(data, exp):
-        n = len(data) # n = 50
-        count = [0] * 10 # ???
+        n = len(data) # n = 4
+        count = [0] * 10
+        # count[10] = [{0}0, {0}1, ..., {0}9]
 
         for num in data:
             i = (num // exp) % 10
-            # i = (0 // ???) % 10 = 
+            # i = (data[0] // exp) % 10 = 
             count[i] += 1
             # count[i] += 1
 
@@ -20,7 +22,7 @@ def radix_sort(data):
 
         output = [0] * n
 
-        for i in range(n-1, -1, -1):
+        for i in range(n - 1, -1, -1):
             a = data[i]
             d = (a // exp) % 10
             b = count[d] - 1
