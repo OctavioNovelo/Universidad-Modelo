@@ -7,10 +7,10 @@ import sounddevice as sd
 import threading
 
 # Colores para la animacion
-COLOR_DEFAULT = '#95a5a6'  # azul  — sin procesar
-COLOR_COMPARE = '#e74c3c'  # rojo  — siendo comparados
-COLOR_SORTED  = '#2ecc71'  # verde — ya ordenado
-COLOR_DONE    = '#4a90d9'  # gris  — antes del piano
+COLOR_DEFAULT = '#95a5a6'  # gris  — sin procesar
+COLOR_COMPARE = '#e74c3c'  # rojo  — comparaciones
+COLOR_SORTED  = '#2ecc71'  # verde — uwu
+COLOR_DONE    = '#4a90d9'  # azul  — ordenado
 
 #### Lo del sonido la neta se lo pedi a chat jeje #########################################################
 # Sonido: genera y reproduce un tono segun el valor de la barra (no bloquea el hilo principal)

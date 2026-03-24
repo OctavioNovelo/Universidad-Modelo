@@ -12,6 +12,8 @@ COLOR_COMPARE = '#e74c3c'  # rojo  — siendo comparados
 COLOR_SORTED  = '#2ecc71'  # verde — ya ordenado
 COLOR_DONE    = '#4a90d9'  # gris  — antes del piano
 
+
+#### Lo del sonido la neta se lo pedi a chat jeje #########################################################
 # Sonido suave: onda seno con volumen bajo y fade suave (comparaciones / colocacion)
 def play_tone(value, n=50, duration=0.08, sample_rate=44100):
     freq  = 180 + (value / n) * 900        # 180 Hz (grave) → 1080 Hz (agudo)
@@ -37,6 +39,9 @@ def play_piano(value, n=50, duration=0.55, sample_rate=44100):
     env   = np.exp(-t * 5)
     wave *= env
     threading.Thread(target=sd.play, args=(wave.astype(np.float32), sample_rate), daemon=True).start()
+########################################################################################################
+
+
 
 # Comb sort
 def comb_sort(array):
@@ -107,7 +112,7 @@ for spine in ['top', 'right']:
 for spine in ['bottom', 'left']:
     ax.spines[spine].set_color('#444444')
 
-# Simbologia (leyenda)
+# Simbologia
 leyenda = [
     mpatches.Patch(color=COLOR_COMPARE, label='Comparando'),
     mpatches.Patch(color=COLOR_SORTED,  label='Ordenado'),
@@ -120,7 +125,7 @@ ax.legend(handles=leyenda, loc='upper left', facecolor='#1a1a1a',
 audio_state = {'prev_green': 0}
 
 def update(frame):
-    data, colors = frame                          # <-- desempacar colores
+    data, colors = frame                          
     for bar, val, color in zip(bars, data, colors):
         bar.set_height(val)
         bar.set_facecolor(color)
