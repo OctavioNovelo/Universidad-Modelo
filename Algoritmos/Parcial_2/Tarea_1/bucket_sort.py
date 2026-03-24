@@ -12,6 +12,18 @@ COLOR_COMPARE = '#e74c3c'  # rojo  — comparaciones
 COLOR_SORTED  = '#2ecc71'  # verde — uwu
 COLOR_DONE    = '#4a90d9'  # azul  — ordenado
 
+# <-- FIX: forzar dispositivo por defecto (Windows suele fallar aquí)
+try:
+    sd.default.device = sd.query_devices(kind='output')['name']
+except Exception as e:
+    print("Audio device error:", e)
+
+# Colores para la animacion
+COLOR_DEFAULT = '#95a5a6'  # gris  — sin procesar
+COLOR_COMPARE = '#e74c3c'  # rojo  — comparaciones
+COLOR_SORTED  = '#2ecc71'  # verde — uwu
+COLOR_DONE    = '#4a90d9'  # azul  — ordenado
+
 #### Lo del sonido la neta se lo pedi a chat jeje #########################################################
 # Cola de audio: un solo hilo worker reproduce sonidos para evitar crashes en Windows
 # (sd.play no es thread-safe; llamarlo desde multiples hilos corrompe los buffers de PortAudio)
@@ -27,9 +39,10 @@ def _audio_worker():
         try:
             sd.play(wave, sample_rate)
             sd.wait()          # espera a que termine antes de aceptar el siguiente
-        except Exception:
-            pass               # ignorar errores de audio para no crashear la animacion
+        except Exception as e:
+            print("Audio error:", e)   # <-- FIX: ver errores reales
 
+# <-- FIX: iniciar el hilo de audio
 threading.Thread(target=_audio_worker, daemon=True).start()
 
 # Sonido suave: onda seno con volumen bajo y fade suave (comparaciones / colocacion)
