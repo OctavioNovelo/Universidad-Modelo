@@ -60,7 +60,7 @@ def comb_sort(array):
                 swapped = False # para reiniciar dentro del while
 
             ########################################################
-            # Fase roja: marcar los dos elementos que se comparan
+            # Rojo: Se marcan los elementos de la cubeta actual (los que se compararan)
             colors = [COLOR_DEFAULT] * n
             colors[i]      = COLOR_COMPARE
             colors[i + gap] = COLOR_COMPARE
@@ -72,19 +72,19 @@ def comb_sort(array):
             gap = 1
 
         ########################################################
-        # Entre pasadas: sin comparacion activa, todo default
+        # Default: Cuando no se estan comparando esos valores
         colors = [COLOR_DEFAULT] * n
         yield array, colors[:]
         ########################################################
 
 
     ########################################################
-    # Fase gris: pausa antes del piano
+    # Gris: Ya todos ordenados
     colors = [COLOR_DONE] * n
     for _ in range(10):
         yield array, colors[:]
 
-    # Efecto piano: verde de izquierda a derecha
+    # Verde uwu: verde de izquierda a derecha para mostrar que ya se ordeno todo
     for i in range(n):
         colors[i] = COLOR_SORTED
         yield array, colors[:]
