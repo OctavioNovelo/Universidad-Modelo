@@ -85,12 +85,12 @@ def counting_sort(data):
         # count[41] hace referencia al valor 41, se suma 1 en el arrelgo de frecuencia cada vez que aparece.
 
 
-    # IDK #######################################################
+    # Convierte arreglo de conteo en arreglo de posiciones
     for i in range(1, len(count)):
-        count[i] += count[i - 1]  # Hace la suma de la frecuencia
+        count[i] += count[i - 1]  # Va haciendo la acumulación de cada índice con el anterior
         # i = 1, 1 al 90
-        # count[1] += count[1 - 1] 
-    #############################################################
+        # al valor de count[índice 1] += se le suma el valor de count[índice 0] 
+
 
     output = [0] * n
     # output = [{0}0, {0}1, {0}..., {0}6]
@@ -101,13 +101,13 @@ def counting_sort(data):
     # para poder contalizar las apariciones de cada dato.
 
 
-    # IDK #################################
-    for i in range(n - 1, -1, -1):
-        a = data[i]
-        b = count[a] - 1
-        output[b] = a 
-        count[a] -= 1
-    ######################################
+    # Ordenamiento
+    for i in range(n - 1, -1, -1): # recorre el arreglo de der a izq
+        a = data[i]  # número actual 
+        b = count[a] - 1  # a su contador correspondiente le resta 1 para saber posición
+        output[b] = a  # b ya indica su debido índice y pone al num en output
+        count[a] -= 1  # bajar el contador del número
+
 
 
 
