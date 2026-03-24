@@ -39,6 +39,8 @@ def play_piano(value, n=50, duration=0.55, sample_rate=44100):
     threading.Thread(target=sd.play, args=(wave.astype(np.float32), sample_rate), daemon=True).start()
 ###########################################################################################################
 
+
+
 # Insertion Sort
 def insertion_sort(data, reverse = True):  
    n = len(data)
@@ -152,8 +154,7 @@ def bucket_sort(data):
 
 
 
-####################################################################
-            # Esto es para la animacion, nada q ver con el algoritmo
+##### Esto es para la animacion, nada q ver con el algoritmo ########
             for i in range(len(sorted_arr)):
                 data[i] = sorted_arr[i]
 
@@ -174,7 +175,7 @@ def bucket_sort(data):
     for i in range(n):
         colors[i] = COLOR_SORTED
         yield data.copy(), colors[:]
-#################################################################
+##################################################################
             
     return data
 
