@@ -77,9 +77,9 @@ def comb_sort(data):
         i = 0 
         swapped = True
 
-        for i in range(n-gap): # recorridos para ordenar
-            if data[i] > data[i+gap]: # ¿el valor de la posición es mayor a la dada por el gap?
-                data[i], data[i+gap] = data[i+gap], data[i] # si es así hace un intercambio
+        # Shrink Factor
+        for i in range(n - gap): # Si gap = n y aqui estamos haciendo n - gap eso no da 0 ? Eectivamente, en la primera ronda no hace nada xdxdxd
+            if data[i] > data[i + gap]: # ¿el valor de la posición es mayor a la dada por el gap?
                 swapped = False # para reiniciar dentro del while
 
             ########################################################
@@ -90,7 +90,7 @@ def comb_sort(data):
             yield data, colors[:]
             ########################################################
 
-        gap = int(gap / 1.3) # actualiza dividiendo el gap actual entre el factor de encogimiento
+        gap = int(gap / 1.3) # actualiza dividiendo el gap actual entre el factor de encogimiento  Es para que se vaya haciendo mas chico no ?
         if gap < 1: # asegura que gap != 0
             gap = 1
 
