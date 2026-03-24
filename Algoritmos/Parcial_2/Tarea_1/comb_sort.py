@@ -7,10 +7,11 @@ import sounddevice as sd
 import threading
 
 # Colores para la animacion
-COLOR_DEFAULT = '#95a5a6'  # azul  — sin procesar
-COLOR_COMPARE = '#e74c3c'  # rojo  — siendo comparados
-COLOR_SORTED  = '#2ecc71'  # verde — ya ordenado
-COLOR_DONE    = '#4a90d9'  # gris  — antes del piano
+# Colores para la animacion
+COLOR_DEFAULT = '#95a5a6'  # gris  — sin procesar
+COLOR_COMPARE = '#e74c3c'  # rojo  — comparaciones
+COLOR_SORTED  = '#2ecc71'  # verde — uwu
+COLOR_DONE    = '#4a90d9'  # azul  — ordenado
 
 
 #### Lo del sonido la neta se lo pedi a chat jeje #########################################################
@@ -89,10 +90,11 @@ def comb_sort(array):
         yield array, colors[:]
     ########################################################
 
-# Animación
-array = list(range(1, 51))
+array = [random.randint(1, 50) for _ in range(50)]
 random.shuffle(array)
 
+
+# Animacion
 # Fondo negro
 BG = '#0d0d0d'
 fig, ax = plt.subplots(facecolor=BG)
@@ -102,15 +104,13 @@ bars = ax.bar(range(len(array)), array, color=COLOR_DEFAULT, edgecolor='none')
 
 ax.set_title("Comb Sort", color='white', fontsize=14, fontweight='bold', pad=12)
 
-# Ejes
+# Info
 ax.set_xlabel("Índice del elemento", color='white', labelpad=8)
 ax.set_ylabel("Valor", color='white', labelpad=8)
 ax.tick_params(colors='white')
 ax.set_ylim(0, 58)
-for spine in ['top', 'right']:
-    ax.spines[spine].set_visible(False)
-for spine in ['bottom', 'left']:
-    ax.spines[spine].set_color('#444444')
+for spine in ['top', 'right']: ax.spines[spine].set_visible(False)
+for spine in ['bottom', 'left']: ax.spines[spine].set_color('#444444')
 
 # Simbologia
 leyenda = [
@@ -118,8 +118,7 @@ leyenda = [
     mpatches.Patch(color=COLOR_SORTED,  label='Ordenado'),
     mpatches.Patch(color=COLOR_DONE,    label='Completo'),
 ]
-ax.legend(handles=leyenda, loc='upper left', facecolor='#1a1a1a',
-          edgecolor='#444444', labelcolor='white', fontsize=9)
+ax.legend(handles=leyenda, loc='upper left', facecolor='#1a1a1a', edgecolor='#444444', labelcolor='white', fontsize=9)
 
 # Estado para detectar cambios en el piano y no spamear sonidos
 audio_state = {'prev_green': 0}
