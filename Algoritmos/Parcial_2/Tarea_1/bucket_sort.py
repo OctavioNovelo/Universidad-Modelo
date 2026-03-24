@@ -13,6 +13,24 @@ COLOR_SORTED  = '#2ecc71'  # verde — uwu
 COLOR_DONE    = '#4a90d9'  # azul  — ordenado
 
 #### Lo del sonido la neta se lo pedi a chat jeje #########################################################
+# Cola de audio: un solo hilo worker reproduce sonidos para evitar crashes en Windows
+# (sd.play no es thread-safe; llamarlo desde multiples hilos corrompe los buffers de PortAudio)
+import queue as _queue
+_audio_queue = _queue.Queue(maxsize=10)
+ 
+def _audio_worker():
+    while True:
+        item = _audio_queue.get()
+        if item is None:
+            break
+        wave, sample_rate = item
+        try:
+            sd.play(wave, sample_rate)
+            sd.wait()          # espera a que termine antes de aceptar el siguiente
+        except Exception:
+            pass               # ignorar errores de audio para no crashear la animacion
+ 
+threading.Thread(target=_audio_worker, daemon=True).start()
 # Sonido: genera y reproduce un tono segun el valor de la barra (no bloquea el hilo principal)
 def play_tone(value, n=50, duration=0.07, sample_rate=44100):
     freq = 180 + (value / n) * 900      # 180 Hz (grave) → 1280 Hz (agudo)
