@@ -6,12 +6,6 @@ import numpy as np
 import sounddevice as sd
 import threading
 
-# Colores para la animacion
-COLOR_DEFAULT = '#95a5a6'  # gris  — sin procesar
-COLOR_COMPARE = '#e74c3c'  # rojo  — comparaciones
-COLOR_SORTED  = '#2ecc71'  # verde — uwu
-COLOR_DONE    = '#4a90d9'  # azul  — ordenado
-
 # <-- FIX: forzar dispositivo por defecto (Windows suele fallar aquí)
 try:
     sd.default.device = sd.query_devices(kind='output')['name']
