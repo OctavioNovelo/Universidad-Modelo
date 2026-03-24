@@ -97,8 +97,8 @@ def counting_sort(data):
             if output[j] != 0:
                 temp[j] = output[j]
 
-        # Rojo: Se marcan los elementos de la cubeta actual (los que se compararan)
-        # Default: Cuando no se estan comparando esos valores
+        # Rojo: Elemento que se acaba de colocar (posicion b)
+        # Default: Posiciones de output ya llenadas anteriormente
         colors = [COLOR_DEFAULT] * n
         for j in range(n):
             if output[j] != 0:
