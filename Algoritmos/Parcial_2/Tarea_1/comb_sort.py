@@ -80,6 +80,7 @@ def comb_sort(data):
         # Shrink Factor
         for i in range(n - gap): # Si gap = n y aqui estamos haciendo n - gap eso no da 0 ? Eectivamente, en la primera ronda no hace nada xdxdxd
             if data[i] > data[i + gap]: # ¿el valor de la posición es mayor a la dada por el gap?
+                data[i], data[i+gap] = data[i+gap], data[i] # si es así hace un intercambio
                 swapped = False # para reiniciar dentro del while
 
             ########################################################

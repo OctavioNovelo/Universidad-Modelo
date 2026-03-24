@@ -69,20 +69,30 @@ def play_piano(value, n=50, duration=0.55, sample_rate=44100):
 #Radix sort
 # data = [12, 150, 3, 31]
 def radix_sort(data):
+
+##############################################################################################
     def countingdigit_sort(data, exp):
+        # Es un counting sort primero
+
         n = len(data) # n = 4
         count = [0] * 10
         # count[10] = [{0}0, {0}1, ..., {0}9]
+        # Los digitos que compararan primero son unidades (0-9)
 
         for num in data:
             i = (num // exp) % 10
-            # i = (data[0] // exp) % 10 = 
+            # Esta linea nos da el digito exacto de la posicion exp
+            # i = (12 // 1) % 10 = 2 (el digito de unidades del 12 es 2)
+            # Si exp fuera 10, i = 1 (el digito de decenas del 12 es 1)
+            # Si exp fuera 100, i = 0 (el digito de centenas del 12 es 0 (012))
             count[i] += 1
-            # count[i] += 1
+            # count[2] += 1
+            # Justo como en el counting sort
 
         for i in range(1, 10):
             count[i] += count[i - 1]
-            # count [1] += count[1 - 1] 
+            # i = 3
+            # count [3] += count[3 - 1] 
 
         output = [0] * n
 
@@ -99,7 +109,7 @@ def radix_sort(data):
                 if output[j] != 0:
                     temp[j] = output[j]
 
-            ########################################################
+            ############################################################################
             # Rojo: elemento recien colocado en output[b]
             # Default: Cuando no se estan comparando esos valores
             colors = [COLOR_DEFAULT] * n
@@ -107,26 +117,35 @@ def radix_sort(data):
                 if output[j] != 0:
                     colors[j] = COLOR_SORTED
             colors[b] = COLOR_COMPARE   # el recien colocado va en rojo encima del gris
-            ########################################################
+            ############################################################################
+
 
             yield temp, colors[:]
 
         return output
+###############################################################################################
+
 
     valor_max = max(data)
     exp = 1
 
     while valor_max // exp > 0:
+        # 150 // 1 > 0 = True
+
+        ###################################################################################
         gen = countingdigit_sort(data, exp)
 
         for frame in gen:
             yield frame  
 
-        data = list(gen)[-1] if False else sorted(data, key=lambda x: (x // exp) % 10)
+        data = list(gen)[-1] if False else sorted(data, key = lambda x: (x // exp) % 10)
+        ###################################################################################
 
+        
+        # El exp va aumentano por 10 (1, 10, 100, 1000, etc)
         exp *= 10
 
-    ########################################################
+    ############################################################################
     # Azul: Ya todos ordenados
     n = len(data)
     colors_done = [COLOR_DONE] * n
@@ -137,12 +156,13 @@ def radix_sort(data):
     for k in range(n):
         colors_done[k] = COLOR_SORTED
         yield data, colors_done[:]
-    ########################################################
 
     yield data, [COLOR_SORTED] * len(data)
+    ############################################################################
 
 
-data = list(range(1, 51))
+
+data = [random.randint(1, 50) for _ in range(50)]
 random.shuffle(data)
 
 
