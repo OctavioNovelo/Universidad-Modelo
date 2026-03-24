@@ -60,7 +60,7 @@ def comb_sort(array):
                 swapped = False # para reiniciar dentro del while
 
             ########################################################
-            # Rojo: Se marcan los elementos de la cubeta actual (los que se compararan)
+            # Rojo: Se marcan los elementos que se comparan
             colors = [COLOR_DEFAULT] * n
             colors[i]      = COLOR_COMPARE
             colors[i + gap] = COLOR_COMPARE
