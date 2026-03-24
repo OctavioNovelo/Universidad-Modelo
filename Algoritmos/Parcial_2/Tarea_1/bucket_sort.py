@@ -30,19 +30,22 @@ def _audio_worker():
         except Exception:
             pass               # ignorar errores de audio para no crashear la animacion
  
-threading.Thread(target=_audio_worker, daemon=True).start()
-# Sonido: genera y reproduce un tono segun el valor de la barra (no bloquea el hilo principal)
-def play_tone(value, n=50, duration=0.07, sample_rate=44100):
-    freq = 180 + (value / n) * 900      # 180 Hz (grave) → 1280 Hz (agudo)
-    t    = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
-    wave = 0.10 * np.sin(2 * np.pi * freq * t)
+# Sonido suave: onda seno con volumen bajo y fade suave (comparaciones / colocacion)
+def play_tone(value, n=50, duration=0.08, sample_rate=44100):
+    freq  = 180 + (value / n) * 900        # 180 Hz (grave) → 1080 Hz (agudo)
+    t     = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
+    wave  = 0.10 * np.sin(2 * np.pi * freq * t)   # volumen mas bajo que antes
+    # Envelope suave: attack rapido, decay exponencial
     env   = np.exp(-t * 30)
-    wave *= env   # fade-out para evitar clicks
-    threading.Thread(target=sd.play, args=(wave.astype(np.float32), sample_rate), daemon=True).start()
-
+    wave *= env
+    try:
+        _audio_queue.put_nowait((wave.astype(np.float32), sample_rate))
+    except _queue.Full:
+        pass                   # descartar si la cola esta llena, no bloquear la animacion
+ 
 # Sonido piano: fundamental + armonicos con decay tipo piano (efecto final)
 def play_piano(value, n=50, duration=0.55, sample_rate=44100):
-    freq = 180 + (value / n) * 900
+    freq = 180 + (value / n) * 900         # misma tonalidad que play_tone
     t    = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
     # Armonicos con amplitudes decrecientes (simula timbre de piano)
     wave  = 0.00 * np.ones(len(t))
@@ -54,7 +57,10 @@ def play_piano(value, n=50, duration=0.55, sample_rate=44100):
     # Envelope tipo piano: attack instantaneo, decay exponencial largo
     env   = np.exp(-t * 5)
     wave *= env
-    threading.Thread(target=sd.play, args=(wave.astype(np.float32), sample_rate), daemon=True).start()
+    try:
+        _audio_queue.put_nowait((wave.astype(np.float32), sample_rate))
+    except _queue.Full:
+        pass                   # descartar si la cola esta llena, no bloquear la animacion
 ###########################################################################################################
 
 
