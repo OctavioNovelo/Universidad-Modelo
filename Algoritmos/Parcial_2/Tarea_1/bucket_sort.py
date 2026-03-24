@@ -29,7 +29,9 @@ def _audio_worker():
             sd.wait()          # espera a que termine antes de aceptar el siguiente
         except Exception:
             pass               # ignorar errores de audio para no crashear la animacion
- 
+
+threading.Thread(target=_audio_worker, daemon=True).start()
+
 # Sonido suave: onda seno con volumen bajo y fade suave (comparaciones / colocacion)
 def play_tone(value, n=50, duration=0.08, sample_rate=44100):
     freq  = 180 + (value / n) * 900        # 180 Hz (grave) → 1080 Hz (agudo)
