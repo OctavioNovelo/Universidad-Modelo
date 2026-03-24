@@ -195,15 +195,13 @@ bars = ax.bar(range(len(data)), data, color=COLOR_DEFAULT, edgecolor='none')
  
 ax.set_title("Bucket Sort", color='white', fontsize=14, fontweight='bold', pad=12) # Titulo
  
-# Ejes
+# Info
 ax.set_xlabel("Índice del elemento", color='white', labelpad=8)
 ax.set_ylabel("Valor", color='white', labelpad=8)
 ax.tick_params(colors='white')
 ax.set_ylim(0, 58)
-for spine in ['top', 'right']:
-    ax.spines[spine].set_visible(False)
-for spine in ['bottom', 'left']:
-    ax.spines[spine].set_color('#444444')
+for spine in ['top', 'right']: ax.spines[spine].set_visible(False)
+for spine in ['bottom', 'left']: ax.spines[spine].set_color('#444444')
  
 # Simbologia
 leyenda = [
