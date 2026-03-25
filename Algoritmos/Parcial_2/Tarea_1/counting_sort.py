@@ -14,23 +14,6 @@ COLOR_DONE    = '#4a90d9'  # azul  — ordenado
 
 
 #### Lo del sonido la neta se lo pedi a chat jeje #########################################################
-# Cola de audio: un solo hilo worker reproduce sonidos para evitar crashes en Windows
-# (sd.play no es thread-safe; llamarlo desde multiples hilos corrompe los buffers de PortAudio)
-import queue as _queue
-_audio_queue = _queue.Queue(maxsize=10)
- 
-def _audio_worker():
-    while True:
-        item = _audio_queue.get()
-        if item is None:
-            break
-        wave, sample_rate = item
-        try:
-            sd.play(wave, sample_rate)
-            sd.wait()          # espera a que termine antes de aceptar el siguiente
-        except Exception:
-            pass               # ignorar errores de audio para no crashear la animacion
- 
 # Sonido suave: onda seno con volumen bajo y fade suave (comparaciones / colocacion)
 def play_tone(value, n=50, duration=0.08, sample_rate=44100):
     freq  = 180 + (value / n) * 900        # 180 Hz (grave) → 1080 Hz (agudo)
@@ -39,12 +22,10 @@ def play_tone(value, n=50, duration=0.08, sample_rate=44100):
     # Envelope suave: attack rapido, decay exponencial
     env   = np.exp(-t * 30)
     wave *= env
-    try:
-        _audio_queue.put_nowait((wave.astype(np.float32), sample_rate))
-    except _queue.Full:
-        pass                   # descartar si la cola esta llena, no bloquear la animacion
- 
+    threading.Thread(target=sd.play, args=(wave.astype(np.float32), sample_rate), daemon=True).start()
+
 # Sonido piano: fundamental + armonicos con decay tipo piano (efecto final)
+
 def play_piano(value, n=50, duration=0.55, sample_rate=44100):
     freq = 180 + (value / n) * 900         # misma tonalidad que play_tone
     t    = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
@@ -58,11 +39,9 @@ def play_piano(value, n=50, duration=0.55, sample_rate=44100):
     # Envelope tipo piano: attack instantaneo, decay exponencial largo
     env   = np.exp(-t * 5)
     wave *= env
-    try:
-        _audio_queue.put_nowait((wave.astype(np.float32), sample_rate))
-    except _queue.Full:
-        pass                   # descartar si la cola esta llena, no bloquear la animacion
+    threading.Thread(target=sd.play, args=(wave.astype(np.float32), sample_rate), daemon=True).start()
 ###########################################################################################################
+
 
 
 #Couting sort
@@ -85,12 +64,12 @@ def counting_sort(data):
         # count[41] hace referencia al valor 41, se suma 1 en el arrelgo de frecuencia cada vez que aparece.
 
 
-    # Convierte arreglo de conteo en arreglo de posiciones
+    # IDK #######################################################
     for i in range(1, len(count)):
-        count[i] += count[i - 1]  # Va haciendo la acumulación de cada índice con el anterior
+        count[i] += count[i - 1]  # Hace la suma de la frecuencia
         # i = 1, 1 al 90
-        # al valor de count[índice 1] += se le suma el valor de count[índice 0] 
-
+        # count[1] += count[1 - 1] 
+    #############################################################
 
     output = [0] * n
     # output = [{0}0, {0}1, {0}..., {0}6]
@@ -101,13 +80,13 @@ def counting_sort(data):
     # para poder contalizar las apariciones de cada dato.
 
 
-    # Ordenamiento
-    for i in range(n - 1, -1, -1): # recorre el arreglo de der a izq
-        a = data[i]  # número actual 
-        b = count[a] - 1  # a su contador correspondiente le resta 1 para saber posición
-        output[b] = a  # b ya indica su debido índice y pone al num en output
-        count[a] -= 1  # bajar el contador del número
-
+    # IDK #################################
+    for i in range(n - 1, -1, -1):
+        a = data[i]
+        b = count[a] - 1
+        output[b] = a 
+        count[a] -= 1
+    ######################################
 
 
 
