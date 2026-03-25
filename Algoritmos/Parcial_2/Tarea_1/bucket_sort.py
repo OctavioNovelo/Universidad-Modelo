@@ -13,18 +13,29 @@ COLOR_SORTED  = '#2ecc71'  # verde — uwu
 COLOR_DONE    = '#4a90d9'  # azul  — ordenado
 
 #### Lo del sonido la neta se lo pedi a chat jeje #########################################################
-# Sonido: genera y reproduce un tono segun el valor de la barra (no bloquea el hilo principal)
-def play_tone(value, n=50, duration=0.07, sample_rate=44100):
-    freq = 180 + (value / n) * 900      # 180 Hz (grave) → 1280 Hz (agudo)
-    t    = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
-    wave = 0.10 * np.sin(2 * np.pi * freq * t)
+# Lock de audio: protege sd.stop()+sd.play() para que sean atomicos y no crasheen en Windows
+# Cada sonido nuevo cancela el anterior inmediatamente — sin cola, sin desincronizacion
+_audio_lock = threading.Lock()
+
+def _play_async(wave, sample_rate):
+    # Se llama en un hilo separado para no bloquear la animacion
+    with _audio_lock:
+        sd.stop()                              # cancela el sonido anterior al instante
+        sd.play(wave, sample_rate)             # arranca el nuevo sin esperar a que termine
+
+# Sonido suave: onda seno con volumen bajo y fade suave (comparaciones / colocacion)
+def play_tone(value, n=50, duration=0.08, sample_rate=44100):
+    freq  = 180 + (value / n) * 900        # 180 Hz (grave) → 1080 Hz (agudo)
+    t     = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
+    wave  = 0.10 * np.sin(2 * np.pi * freq * t)   # volumen mas bajo que antes
+    # Envelope suave: attack rapido, decay exponencial
     env   = np.exp(-t * 30)
-    wave *= env   # fade-out para evitar clicks
-    threading.Thread(target=sd.play, args=(wave.astype(np.float32), sample_rate), daemon=True).start()
+    wave *= env
+    threading.Thread(target=_play_async, args=(wave.astype(np.float32), sample_rate), daemon=True).start()
 
 # Sonido piano: fundamental + armonicos con decay tipo piano (efecto final)
 def play_piano(value, n=50, duration=0.55, sample_rate=44100):
-    freq = 180 + (value / n) * 900
+    freq = 180 + (value / n) * 900         # misma tonalidad que play_tone
     t    = np.linspace(0, duration, int(sample_rate * duration), endpoint=False)
     # Armonicos con amplitudes decrecientes (simula timbre de piano)
     wave  = 0.00 * np.ones(len(t))
@@ -36,7 +47,7 @@ def play_piano(value, n=50, duration=0.55, sample_rate=44100):
     # Envelope tipo piano: attack instantaneo, decay exponencial largo
     env   = np.exp(-t * 5)
     wave *= env
-    threading.Thread(target=sd.play, args=(wave.astype(np.float32), sample_rate), daemon=True).start()
+    threading.Thread(target=_play_async, args=(wave.astype(np.float32), sample_rate), daemon=True).start()
 ###########################################################################################################
 
 
@@ -181,7 +192,7 @@ def bucket_sort(data):
 
 
 # Lo que se evaluara
-data = list(range(1, 51))
+data = [random.randint(1, 50) for _ in range(50)]
 random.shuffle(data)
 
 
