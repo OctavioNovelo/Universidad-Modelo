@@ -8,7 +8,7 @@ The software acts as an **orchestrator**:
 - Executes security tools internally
 - Captures and processes their output
 
-In later stages, the output will be analyzed using AI (DeepSeak) to provide
+In later stages, the output will be analyzed using AI to provide
 focused and actionable insights for network auditing.
 
 ## Current Scope
@@ -22,12 +22,8 @@ Implemented / In progress:
 I am using a structure that make the software a full modular architecture. 
 
     config:
-    This folder contains the main configuration for global variables.
-    The config folder contains the following files:
-        __init__.py
-
     core:
-    Core logic that **protects the system from invalid or unsafe execution**. Basically is our protect layer for inputs, flags ando UI abuse.
+    Core logic that **protects the system from invalid or unsafe execution**. Basically is our protect layer for inputs, flags and UI abuse.
     The core folder contains the following files:
 
         executor.py
@@ -37,11 +33,8 @@ I am using a structure that make the software a full modular architecture.
     This contains the UI stuff, at the moment we use the terminal as a UI, but whit time we're going to add a user friendly UI.
     The frontend folder contains the following files:
 
-        Input.py
-        Collects user input.
-
-        Output.py
-        Display the output
+        CLI.py
+        Command Line Inteface.
 
     The frontend communicates only with 'core' and 'tools'.
     This layer does not execute tools directly.
@@ -51,14 +44,14 @@ I am using a structure that make the software a full modular architecture.
     The tools folder contains the followings files:
 
         tools_bin
-        This folder contains the binarys of the tools that compiler.py make.
+        This folder contains the binarys of the tools that we'll use.
 
     utils:
     This folder contains extra functions like a logger that allows to register, events, errors, executions, etc.
     The utils folder contains the followings files:
 
         runner.py
-        This script run the commands using de input provide by Input.py
+        This script run the commands using de input provide by CLI.py
 
         logger.py
         This file allows to tracks executions, errors, and audit history.
