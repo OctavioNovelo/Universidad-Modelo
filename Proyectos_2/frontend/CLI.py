@@ -1,23 +1,17 @@
-from tools.nmap import NmapCommands # Lo comandos de nmap.py
-from core.executor import ToolExecutor
+#from tools.nmap import NmapCommands # Lo comandos de nmap.py
+#from core.executor import ToolExecutor
 from pathlib import Path
+import platform
+from frontend.option import opciones
 
 # Inicializamos interfaz
-class CLI:
-    # Ejecuta el ejecutor
-    def __init__(self):
-        self.executor = ToolExecutor(Path(__file__).parent.parent)
+def cli ():
+    print("Que desea hacer ?\n")
 
-    def run(self):
-        print("1) Fast scan")
-        print("2) Version scan")
-        print("3) OS scan")
-        print("4) Aggressive scan")
+    print("1) Escaneo de Red\n")
+    print("2) Revision de seguridad\n")
+    print("3) Luego veo\n")
 
-        opt = int(input("> "))
-        target = input("Target: ")
-
-        args = NmapCommands.build(opt, target)
-        result = self.executor.run("nmap", args)
-
-        print(result["stdout"])
+    opcion = int(input())
+    opciones(opcion)
+    

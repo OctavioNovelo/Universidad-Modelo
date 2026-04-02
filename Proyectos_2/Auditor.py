@@ -1,13 +1,13 @@
 # This is the beginning of the Auditor project
-from utils import Input
 from core import executor
+from frontend import CLI
 import sys
+import subprocess
 from pathlib import Path
 
-def main():
-    so = Input.obtener_sistema_operativo()
-    executor.ejecutar_segun_os(so, tool)
+def main ():
+    CLI.cli()
+    if executor.confirm == True:
+        print("\n Confirmamos \n")
 
-# Es para ejecutar el programa
-if __name__ == "__main__":
-    main()
+main()

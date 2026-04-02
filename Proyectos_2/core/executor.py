@@ -2,6 +2,8 @@ import subprocess #Ejecutar programas externos/comandos del sistema
 from pathlib import Path #Manejo de rutas de archivos
 import os #Acceso a funciones del sistema operativo
 
+confirm = False
+
 def ejecutar_segun_os(os_name, tool):
     # Aqui buscamos la carpeta con el nombre del sistema y el archivo
     config_os = {
@@ -11,21 +13,21 @@ def ejecutar_segun_os(os_name, tool):
     }
     
     # aqui si el nombre contiene win se ocupa la configuracion de windows y asi (asegura por asi decirlo)
-    if 'win' in os_name:
+    if 'Win' in os_name:
         config = config_os['windows']
-    elif 'macos' in os_name or 'mac' in os_name:
+    elif 'Dar' in os_name or 'mac' in os_name:
         config = config_os['macos']
-    elif 'linux' in os_name:
+    elif 'Linux' in os_name:
         config = config_os['linux']
     else:
         print(f"No existe")
         return None
     
     #ruta
-    base_path = Path(__file__).parent #Obtiene la ruta del directorio donde está guardado este archivo, y agarra el padre que seria hasta tools(creo)
-    bin_path = base_path / "Proyectos_2" / "config" / "tools" / "tools_bin" / tool / config['folder'] / config['bin_name': tool]
+    base_path = Path(__file__).parent.parent #Obtiene la ruta del directorio donde está guardado este archivo, y agarra el padre que seria hasta tools(creo)
+    bin_path = base_path / "tools" / "tools_bin" / config['folder'] / tool / config['bin_name']
     
-    os.chmod(777, bin_path)
+    os.chmod(bin_path, 0o777)
     
     #Si no existe el archivo
     if not bin_path.exists():
@@ -35,11 +37,8 @@ def ejecutar_segun_os(os_name, tool):
     #Esto es para verificar algun error (gracias chat por)
     try:
         print(f"Ejecutando desde: {bin_path}")
-        resultado = subprocess.run(
-            [str(bin_path), "--version"],  # Ejemplo: mostrar versión
-            capture_output = True,
-            text = True
-        )
+        resultado = subprocess.run([str(bin_path), "--version"], capture_output = True, text = True)
+        print(resultado.stdout.strip())
         return resultado
     
     except Exception as e:
