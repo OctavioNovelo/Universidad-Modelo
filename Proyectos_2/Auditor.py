@@ -1,13 +1,12 @@
 # This is the beginning of the Auditor project
-from core import executor
-from frontend import CLI
+import core.executor
+import frontend.CLI
 import sys
 import subprocess
-from pathlib import Path
+
 
 def main ():
-    CLI.cli()
-    if executor.confirm == True:
-        print("\n Confirmamos \n")
+    subprocess.run(["clear"])
+    frontend.CLI.cli()
 
 main()

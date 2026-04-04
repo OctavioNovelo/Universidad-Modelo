@@ -2,9 +2,9 @@ import subprocess #Ejecutar programas externos/comandos del sistema
 from pathlib import Path #Manejo de rutas de archivos
 import os #Acceso a funciones del sistema operativo
 
-confirm = False
 
 def ejecutar_segun_os(os_name, tool):
+    subprocess.run(["clear"])
     # Aqui buscamos la carpeta con el nombre del sistema y el archivo
     config_os = {
         'linux': {'folder': 'Linux', 'bin_name': 'nmap'},
@@ -38,7 +38,7 @@ def ejecutar_segun_os(os_name, tool):
     try:
         print(f"Ejecutando desde: {bin_path}")
         resultado = subprocess.run([str(bin_path), "--version"], capture_output = True, text = True)
-        print(resultado.stdout.strip())
+        print(resultado.stdout.strip(), "\n")
         return resultado
     
     except Exception as e:
