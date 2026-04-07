@@ -1,6 +1,6 @@
 *.log
 .vscode/*
 *.exe
-tienda_regalos
 __pycache__/
 *.pyc
+*.txt

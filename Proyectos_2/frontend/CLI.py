@@ -9,6 +9,12 @@ import tools
 def obtener_os():
     return platform.system()
 
+def limpiar_pantalla():
+    if obtener_os() == "Windows":
+        subprocess.run(['cls'], shell=True)
+    else:
+        subprocess.run(['clear'])
+
 def cli():
     os_name = obtener_os()  # el OS se obtiene aquí, cuando se necesita
     print("¿Qué desea hacer?\n")
@@ -26,7 +32,7 @@ def cli():
 
 
 def nmap_cli(contexto):
-    subprocess.run(['clear'])
+    limpiar_pantalla()
     print("\n¿Qué problema quieres resolver?\n")
     print("1) Internet Lento\n") # Si no se reconoce un dipositivo o servicio podria eliminarlo. 
     print("2) Internet Fallando\n") # Si tiene alguna vulnerabilidad actual deberia formatear y actualizar el dispositivo o servicio.
@@ -39,11 +45,11 @@ def nmap_cli(contexto):
 
     match opcion:
         case 1:
-            subprocess.run(['clear'])
+            limpiar_pantalla()
             context = ejec.ejecutar_herramienta(contexto["tool"], contexto["os_folder"])
             tools.nmap.internet_lento(context)
         case 2:
-            subprocess.run(['clear'])
+            limpiar_pantalla()
             context = ejec.ejecutar_herramienta(contexto["tool"], contexto["os_folder"])
             tools.nmap.internet_fallando(context)
         case 3:
@@ -53,11 +59,11 @@ def nmap_cli(contexto):
         case 5:
             pass
         case 6:
-            subprocess.run(['clear'])
+            limpiar_pantalla()
             cli()
 
 def nmap_detalles (contexto):
-    subprocess.run(["clear"])
+    limpiar_pantalla()
     print("\n A countinuacion encontramos los detalles de cada opcion del menu principal \n")
     print("\n 1) Internet Lento \n")
     print("Si sientes que tu internet esta lento (no confundir con fallando, checa su descripcion), " \
@@ -75,8 +81,8 @@ def nmap_detalles (contexto):
 
     match opcion:
         case 1:
-            subprocess.run(["clear"])
+            limpiar_pantalla()
             nmap_cli(contexto)
         case _:
-            subprocess.run(["clear"])
+            limpiar_pantalla()
             nmap_cli(contexto)

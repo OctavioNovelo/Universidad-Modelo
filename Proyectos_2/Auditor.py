@@ -4,7 +4,7 @@ import subprocess
 
 
 def main ():
-    subprocess.run(["clear"])
+    frontend.CLI.limpiar_pantalla()
     frontend.CLI.cli()
 
 main()
