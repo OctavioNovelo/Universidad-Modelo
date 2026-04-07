@@ -1,46 +1,43 @@
-import subprocess #Ejecutar programas externos/comandos del sistema
-from pathlib import Path #Manejo de rutas de archivos
-import os #Acceso a funciones del sistema operativo
+# core/executor.py
+import subprocess
+import platform
+import os
+from pathlib import Path
+from tools.nmap import nmap_bin
 
+def obtener_sistema_operativo():
+    return platform.system()
 
-def ejecutar_segun_os(os_name, tool):
-    subprocess.run(["clear"])
-    # Aqui buscamos la carpeta con el nombre del sistema y el archivo
-    config_os = {
-        'linux': {'folder': 'Linux', 'bin_name': 'nmap'},
-        'windows': {'folder': 'Windows', 'bin_name': 'nmap.exe'},
-        'macos': {'folder': 'macos', 'bin_name': 'nmap'}
-    }
-    
-    # aqui si el nombre contiene win se ocupa la configuracion de windows y asi (asegura por asi decirlo)
+def obtener_carpeta_os(os_name):
     if 'Win' in os_name:
-        config = config_os['windows']
-    elif 'Dar' in os_name or 'mac' in os_name:
-        config = config_os['macos']
+        return 'Windows'
+    elif 'Darwin' in os_name or 'mac' in os_name:
+        return 'macos'
     elif 'Linux' in os_name:
-        config = config_os['linux']
+        return 'Linux'
     else:
-        print(f"No existe")
-        return None
-    
-    #ruta
-    base_path = Path(__file__).parent.parent #Obtiene la ruta del directorio donde está guardado este archivo, y agarra el padre que seria hasta tools(creo)
-    bin_path = base_path / "tools" / "tools_bin" / config['folder'] / tool / config['bin_name']
-    
-    os.chmod(bin_path, 0o777)
-    
-    #Si no existe el archivo
+        raise ValueError(f"Sistema operativo no soportado: {os_name}")
+
+def obtener_ruta_binario(tool, os_folder):
+    base_path = Path(__file__).parent.parent
+    bin_name = nmap_bin[os_folder.lower()]['bin_name']
+    return base_path / "tools" / "tools_bin" / os_folder / tool / bin_name
+
+def obtener_ruta_resultado(tool, os_folder, nombre_archivo):
+    base_path = Path(__file__).parent.parent
+    return base_path / "utils" / "Resultados" / os_folder / tool / nombre_archivo
+
+def ejecutar_herramienta(tool, os_folder):
+    base_path = Path(__file__).parent.parent
+    bin_name  = nmap_bin[os_folder.lower()]['bin_name']
+    bin_path  = base_path / "tools" / "tools_bin" / os_folder / tool / bin_name
+
     if not bin_path.exists():
-        print(f"No se encontro en: {bin_path}")
-        return None
-    
-    #Esto es para verificar algun error (gracias chat por)
-    try:
-        print(f"Ejecutando desde: {bin_path}")
-        resultado = subprocess.run([str(bin_path), "--version"], capture_output = True, text = True)
-        print(resultado.stdout.strip(), "\n")
-        return resultado
-    
-    except Exception as e:
-        print(f"Error: {e}")
-        return None
+        raise FileNotFoundError(f"Binario no encontrado: {bin_path}")
+
+    os.chmod(bin_path, 0o755)
+
+    ip_result = subprocess.run("ip route | grep kernel | grep -vE 'docker|br-' | awk '{print $1}'", shell = True, capture_output = True, text = True)
+    redes = ip_result.stdout.strip().split("\n")
+
+    return {"bin_path": bin_path, "os_folder": os_folder, "redes": redes}

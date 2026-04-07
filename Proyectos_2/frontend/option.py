@@ -1,28 +1,19 @@
-# Aqui reciviremos el primer input para ejecutar la herramienta.
-import core.executor
+# frontend/option.py
+from core.executor import obtener_carpeta_os, obtener_ruta_binario
 import platform
-import frontend.CLI
 
 def obtener_sistema_operativo():
     return platform.system()
 
 os = obtener_sistema_operativo()
 
-def opciones (opcion = lambda s: s):
+
+def opciones(opcion, os_name):
     match opcion:
         case 1:
-            print("\n Abriendo Nmap \n")
-            tool = "Nmap"
-            core.executor.ejecutar_segun_os(os, tool)
-            if (os == "Linux"):
-                {
-                    frontend.CLI.nmap_lin_cli()
-                }
-            elif (os == "Windows"):
-                {
-                    # frontend.CLI.nmap_win_cli()
-                }
+            os_folder = obtener_carpeta_os(os_name)
+            return {"tool": "Nmap", "os_folder": os_folder}
         case 2:
-            print("\n Abriendo J.T.R \n")
+            return {"tool": "JTR", "os_folder": obtener_carpeta_os(os_name)}
         case 3:
-            print("\n Luego Vemos \n")
+            return None

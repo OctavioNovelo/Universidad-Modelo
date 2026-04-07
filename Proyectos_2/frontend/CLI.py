@@ -1,53 +1,62 @@
-#from tools.nmap import NmapCommands # Lo comandos de nmap.py
-#from core.executor import ToolExecutor
-from pathlib import Path
+# frontend/CLI.py
 import platform
-import frontend.option
 import subprocess
-import tools.nmap
+import frontend.option
+import core.executor as ejec
+import tools
 
-# Inicializamos interfaz
-def cli ():
-    print("Que desea hacer ?\n")
 
-    print("1) Escaneo de Red\n")
-    print("2) Revision de seguridad\n")
+def obtener_os():
+    return platform.system()
+
+def cli():
+    os_name = obtener_os()  # el OS se obtiene aquí, cuando se necesita
+    print("¿Qué desea hacer?\n")
+    print("1) Escaneo de Red\n") # El escaneo de red nos permitira ver quien y que estan haciendo en la red
+    print("2) Revisión de seguridad\n") # Esto servira para poner a prueba la seguridad de nuestra propia infrestructura
     print("3) Luego veo\n")
 
     opcion = int(input())
-    frontend.option.opciones(opcion)
+    contexto = frontend.option.opciones(opcion, os_name)
 
-# Estaba cansado, pero la interfaz es irrelevante si es 
-# windows o linux, HACER la diferencia en nmap.py donde
-# windows y linux si cambia, segun yo.
-def nmap_lin_cli ():
-    print("\n Que problema queires resolver ? \n")
-    print("1) Internet Lento \n")
-    print("2) Internet Fallando \n")
-    print("3) Full Pack \n")
-    print("4) Detalles \n")
-    print("5) Personalizacion \n")
-    print("6) Regresar \n")
+    match contexto["tool"]:
+        case "Nmap":
+            nmap_cli(contexto)
+
+
+
+def nmap_cli(contexto):
+    subprocess.run(['clear'])
+    print("\n¿Qué problema quieres resolver?\n")
+    print("1) Internet Lento\n") # Si no se reconoce un dipositivo o servicio podria eliminarlo. 
+    print("2) Internet Fallando\n") # Si tiene alguna vulnerabilidad actual deberia formatear y actualizar el dispositivo o servicio.
+    print("3) Full Pack\n") # Saber todo de una vez, quitas lo que no y actualizas lo que si 
+    print("4) Detalles\n")
+    print("5) Personalización\n") # Aqui el usuario personalizara la busqueda de nmap
+    print("6) Regresar\n")
 
     opcion = int(input())
 
     match opcion:
         case 1:
-            tools.nmap.internetLento()
+            subprocess.run(['clear'])
+            context = ejec.ejecutar_herramienta(contexto["tool"], contexto["os_folder"])
+            tools.nmap.internet_lento(context)
         case 2:
-            pass
+            subprocess.run(['clear'])
+            context = ejec.ejecutar_herramienta(contexto["tool"], contexto["os_folder"])
+            tools.nmap.internet_fallando(context)
         case 3:
-            pass
+            ejec.ejecutar_herramienta(contexto["tool"], "full_pack", contexto["os_folder"])
         case 4:
-            nmap_detalles()
+            nmap_detalles(contexto)
         case 5:
             pass
         case 6:
-            subprocess.run(["clear"])
+            subprocess.run(['clear'])
             cli()
 
-
-def nmap_detalles ():
+def nmap_detalles (contexto):
     subprocess.run(["clear"])
     print("\n A countinuacion encontramos los detalles de cada opcion del menu principal \n")
     print("\n 1) Internet Lento \n")
@@ -67,21 +76,7 @@ def nmap_detalles ():
     match opcion:
         case 1:
             subprocess.run(["clear"])
-            if (frontend.option.os == "Linux"):
-                {
-                    frontend.CLI.nmap_lin_cli()
-                }
-            elif (frontend.option.os == "Windows"):
-                {
-                    # frontend.CLI.nmap_win_cli()
-                }
+            nmap_cli(contexto)
         case _:
             subprocess.run(["clear"])
-            if (frontend.option.os == "Linux"):
-                {
-                    frontend.CLI.nmap_lin_cli()
-                }
-            elif (frontend.option.os == "Windows"):
-                {
-                    # frontend.CLI.nmap_win_cli()
-                }
+            nmap_cli(contexto)

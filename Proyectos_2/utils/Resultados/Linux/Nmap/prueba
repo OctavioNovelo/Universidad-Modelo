@@ -1,4 +1,0 @@
-# Nmap 7.98 scan initiated Sat Apr  4 01:52:29 2026 as: /home/shuten-doji/Documents/Coding/Universidad_Modelo/Universidad-Modelo/Proyectos_2/tools/tools_bin/Linux/Nmap/nmap -sS -oN /home/shuten-doji/Documents/Coding/Universidad_Modelo/Universidad-Modelo/Proyectos_2/utils/Resultados/Linux/Nmap/prueba "10.0.0.0/24 172.17.0.0/16 172.18.0.0/16"
-Failed to resolve "10.0.0.0/24 172.17.0.0/16 172.18.0.0".
-WARNING: No targets were specified, so 0 hosts scanned.
-# Nmap done at Sat Apr  4 01:52:34 2026 -- 0 IP addresses (0 hosts up) scanned in 5.02 seconds

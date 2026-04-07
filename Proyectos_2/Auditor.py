@@ -1,7 +1,5 @@
 # This is the beginning of the Auditor project
-import core.executor
 import frontend.CLI
-import sys
 import subprocess
 
 
