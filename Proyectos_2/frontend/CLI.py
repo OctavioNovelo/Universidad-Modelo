@@ -50,10 +50,22 @@ def nmap_cli(contexto):
             tools.nmap.internet_lento(context)
         case 2:
             limpiar_pantalla()
+            print("\n Esto tardara un algo de tiempo, espera porfavor\n")
             context = ejec.ejecutar_herramienta(contexto["tool"], contexto["os_folder"])
             tools.nmap.internet_fallando(context)
         case 3:
-            ejec.ejecutar_herramienta(contexto["tool"], "full_pack", contexto["os_folder"])
+            limpiar_pantalla()
+            print("\n Esto puede tomar bastante tiempo, quieres continuar ? \n")
+            print("1) Si")
+            print("2) No \n")
+            confirm = int(input())
+            if confirm != 1:
+                limpiar_pantalla()
+                nmap_cli(contexto)
+            else:
+                limpiar_pantalla()
+                context = ejec.ejecutar_herramienta(contexto["tool"], contexto["os_folder"])
+                tools.nmap.full_pack(context)
         case 4:
             nmap_detalles(contexto)
         case 5:
