@@ -7,4 +7,5 @@ def main ():
     frontend.CLI.limpiar_pantalla()
     frontend.CLI.cli()
 
-main()
+while (1):
+    main()

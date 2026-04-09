@@ -19,14 +19,6 @@ def obtener_carpeta_os(os_name):
     else:
         raise ValueError(f"Sistema operativo no soportado: {os_name}")
 
-def obtener_ruta_binario(tool, os_folder):
-    base_path = Path(__file__).parent.parent
-    bin_name = nmap_bin[os_folder.lower()]['bin_name']
-    return base_path / "tools" / "tools_bin" / os_folder / tool / bin_name
-
-def obtener_ruta_resultado(tool, os_folder, nombre_archivo):
-    base_path = Path(__file__).parent.parent
-    return base_path / "utils" / "Resultados" / os_folder / tool / nombre_archivo
 
 def ejecutar_herramienta(tool, os_folder):
     base_path = Path(__file__).parent.parent
@@ -44,14 +36,14 @@ def ejecutar_herramienta(tool, os_folder):
 
     redes = []
     if os_name == "Windows":
-        # Ejecutamos ipconfig clásico (rápido y no muere como PowerShell)
+        # Ejecutamos ipconfig
         ip_result = subprocess.run("ipconfig", shell=True, capture_output=True, text=True)
         
         # ipconfig separa cada adaptador con una línea en blanco
         adaptadores = ip_result.stdout.split('\n\n')
         
         for adaptador in adaptadores:
-            # Filtramos virtualizaciones (Docker, VMware, VirtualBox, WSL)
+            # Filtramos virtualizaciones
             if re.search(r'(docker|vmware|virtual|wsl|vethernet|loopback)', adaptador, re.IGNORECASE):
                 continue
             

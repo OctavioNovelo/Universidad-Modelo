@@ -1,5 +1,5 @@
 # frontend/option.py
-from core.executor import obtener_carpeta_os, obtener_ruta_binario
+from core.executor import obtener_carpeta_os
 import platform
 
 def obtener_sistema_operativo():

@@ -16,7 +16,7 @@ def ejecutar_comando(args):
 def internet_lento(context):
     base_path = Path(__file__).parent.parent
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "internet_lento.txt"
+    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "internet_lento"
 
     hosts_file.parent.mkdir(parents=True, exist_ok=True)
 
@@ -28,14 +28,16 @@ def internet_lento(context):
     args = [str(context["bin_path"]), "-sS",
             "-F", "-Pn", "-n", "-O", "-T4", 
             "-iL", str(hosts_file),
-            "-oN", str(result_path)]
+            "-oN", f"{result_path}_normal.txt",
+            "-oG", f"{result_path}_grepable.txt",
+            "-oX", f"{result_path}.xml"]
 
     subprocess.run(ejecutar_comando(args))
 
 def internet_fallando(context):
     base_path = Path(__file__).parent.parent
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "vulnerabilidades.txt"
+    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "vulnerabilidades"
 
     hosts_file.parent.mkdir(parents=True, exist_ok=True)
 
@@ -46,14 +48,17 @@ def internet_fallando(context):
     args = [str(context["bin_path"]), "-sV",
             "--script", "vuln",
             "-Pn", "-n", "-T3", "-O",
-            "-iL", str(hosts_file), "-oN", str(result_path)]
+            "-iL", str(hosts_file),
+            "-oN", f"{result_path}_normal.txt",
+            "-oG", f"{result_path}_grepable.txt",
+            "-oX", f"{result_path}.xml"]
     
     subprocess.run(ejecutar_comando(args))
 
 def full_pack(context):
     base_path = Path(__file__).parent.parent
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "full_pack.txt"
+    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "full_pack"
 
     hosts_file.parent.mkdir(parents=True, exist_ok=True)
 
@@ -64,14 +69,19 @@ def full_pack(context):
     args = [str(context["bin_path"]), "-sS",
             "-F", "-Pn", "-n", "-O", "-T4", 
             "-iL", str(hosts_file),
-            "-oN", str(result_path)]
+            "-oN", f"{result_path}_normal.txt",
+            "-oG", f"{result_path}_grepable.txt",
+            "-oX", f"{result_path}.xml"]
 
     subprocess.run(ejecutar_comando(args))
 
     args = [str(context["bin_path"]), "-sV",
             "--script", "vuln",
             "-Pn", "-n", "-T3", "-O",
-            "-iL", str(hosts_file), "-oN", str(result_path)]
+            "-iL", str(hosts_file),
+            "-oN", f"{result_path}_normal.txt",
+            "-oG", f"{result_path}_grepable.txt",
+            "-oX", f"{result_path}.xml"]
     
     subprocess.run(ejecutar_comando(args))
     
@@ -86,7 +96,7 @@ import frontend.CLI # Asumo que lo importas arriba por la llamada a limpiar_pant
 def personalizado(context):
     base_path = Path(__file__).parent.parent
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "personalizado.txt"
+    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "personalizado"
 
     hosts_file.parent.mkdir(parents=True, exist_ok=True)
 
@@ -193,5 +203,5 @@ def personalizado(context):
             args.extend(["--script", "vuln"])
 
 
-    args.extend(["-iL", str(hosts_file), "-oN", str(result_path)])
+    args.extend(["-iL", str(hosts_file), "-oN", f"{result_path}_normal.txt", "-oG", f"{result_path}_grepable.txt", "-oX", f"{result_path}.xml"])
     subprocess.run(ejecutar_comando(args))
