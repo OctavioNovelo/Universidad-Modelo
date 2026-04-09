@@ -69,7 +69,9 @@ def nmap_cli(contexto):
         case 4:
             nmap_detalles(contexto)
         case 5:
-            pass
+            limpiar_pantalla()
+            context = ejec.ejecutar_herramienta(contexto["tool"], contexto["os_folder"])
+            tools.nmap.personalizado(context)
         case 6:
             limpiar_pantalla()
             cli()
