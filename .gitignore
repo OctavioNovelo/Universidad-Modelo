@@ -1,6 +1,5 @@
 *.log
 .vscode/*
-*.exe
 __pycache__/
 *.pyc
 *.txt
