@@ -16,4 +16,7 @@ def opciones(opcion, os_name):
         case 2:
             return {"tool": "JTR", "os_folder": obtener_carpeta_os(os_name)}
         case 3:
+            os_folder = obtener_carpeta_os(os_name)
+            return {"tool": "Resultados", "os_folder": os_folder}
+        case 4:
             return None
