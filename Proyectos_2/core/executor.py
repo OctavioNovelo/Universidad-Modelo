@@ -39,21 +39,35 @@ def ejecutar_herramienta(tool, os_folder):
         # Ejecutamos ipconfig
         ip_result = subprocess.run("ipconfig", shell=True, capture_output=True, text=True)
         
-        # ipconfig separa cada adaptador con una línea en blanco
-        adaptadores = ip_result.stdout.split('\n\n')
+        # Separamos por líneas para un procesamiento más granular
+        lineas = ip_result.stdout.split('\n')
+        adaptador_actual = ""
+        bloques = []
         
-        for adaptador in adaptadores:
-            # Filtramos virtualizaciones
-            if re.search(r'(docker|vmware|virtual|wsl|vethernet|loopback)', adaptador, re.IGNORECASE):
+        # Agrupamos líneas por adaptador
+        temp_bloque = []
+        for linea in lineas:
+            if linea.strip() and not linea.startswith(" "):
+                if temp_bloque:
+                    bloques.append("\n".join(temp_bloque))
+                temp_bloque = [linea]
+            elif linea.strip():
+                temp_bloque.append(linea)
+        if temp_bloque:
+            bloques.append("\n".join(temp_bloque))
+        
+        for bloque in bloques:
+            # Filtro agresivo de interfaces virtuales y no deseadas
+            # Incluimos VirtualBox, Host-Only, VMware, Docker, WSL, etc.
+            if re.search(r'(docker|vmware|virtual|vbox|wsl|vethernet|loopback|pseudo|teredo|isatap|host-only|npcap)', bloque, re.IGNORECASE):
                 continue
             
-            # Buscamos la línea de la IP (funciona en Español "Dirección IPv4" e Inglés "IPv4 Address")
-            match = re.search(r'IPv4.*:\s*(\d+\.\d+\.\d+\.)(\d+)', adaptador)
+            # Buscamos la línea de la IP
+            match = re.search(r'IPv4.*:\s*(\d+\.\d+\.\d+\.)(\d+)', bloque)
             if match:
-                # Tomamos los primeros 3 octetos y agregamos 0/24 para escanear la red completa
                 red_base = f"{match.group(1)}0/24"
                 
-                # Descartamos localhost o IPs raras de Windows (APIPA)
+                # Descartamos localhost y APIPA (169.254.x.x)
                 if not red_base.startswith('127.') and not red_base.startswith('169.254.'):
                     if red_base not in redes:
                         redes.append(red_base)
