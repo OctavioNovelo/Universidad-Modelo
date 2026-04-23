@@ -13,7 +13,7 @@ def ejecutar_comando(args):
         return ["sudo"] + args
     return args
 
-def internet_lento(context, timing_level=4):
+def internet_lento(context):
     base_path = Path(__file__).parent.parent
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
     result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "internet_lento"
@@ -22,14 +22,14 @@ def internet_lento(context, timing_level=4):
     with open(hosts_file, "w") as f:
         for red in context["redes"]: f.write(red + "\n")
 
-    args = [str(context["bin_path"]), "-sS", "-F", "-Pn", "-n", "-O", f"-T{timing_level}", 
+    args = [str(context["bin_path"]), "-sS", "-F", "-Pn", "-n", "-O", 
             "-iL", str(hosts_file),
             "-oN", f"{result_path}_normal.txt",
             "-oG", f"{result_path}_grepable.txt",
             "-oX", f"{result_path}.xml"]
     subprocess.run(ejecutar_comando(args))
 
-def internet_fallando(context, timing_level=3):
+def internet_fallando(context, timing_level = 3):
     base_path = Path(__file__).parent.parent
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
     result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "vulnerabilidades"
@@ -49,7 +49,7 @@ def full_pack(context):
     internet_lento(context)
     internet_fallando(context)
 
-def ghost_hunter(context, timing_level=2):
+def ghost_hunter(context, timing_level=3):
     """Detecta intrusos ocultos usando escaneos fragmentados y sin ping."""
     base_path = Path(__file__).parent.parent
     result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "ghost_hunter"
@@ -95,7 +95,7 @@ def detectar_os_agresivo(context, timing_level=4):
 def streaming_gaming_monitor(context, timing_level=4):
     """Busca protocolos de alto consumo (Streaming/Gaming)."""
     base_path = Path(__file__).parent.parent
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "streaming_gaming"
+    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "monitor_recursos"
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
 
     # Puertos de Steam, Netflix, Spotify, y juegos comunes

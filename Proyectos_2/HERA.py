@@ -9,3 +9,6 @@ def main ():
 
 while (1):
     main()
+# Hay que corregir agregar el apartado de agregar o no vulnerabiliades en el personalizado
+# Reducir el timming de Ghost Hunter
+# Corregir Full pack

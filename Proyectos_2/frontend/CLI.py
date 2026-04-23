@@ -1,4 +1,4 @@
-# frontend/CLI.py
+ # frontend/CLI.py
 import platform
 import subprocess
 import frontend.option
@@ -63,7 +63,7 @@ def nmap_cli(contexto):
         print("1) Internet Lento")
         print("2) Internet Fallando")
         print("3) Full Pack")
-        print("4) Shadow Hunter (Detectar Intrusos Ocultos)")
+        print("4) Ghost Hunter (Detectar Intrusos Ocultos)")
         print("5) Auditoría de Administracion (Paneles de Control Expuestos)")
         print("6) Ghost ID (Identificación de Dispositivos)")
         print("7) Monitor de consumo (Deteccion de consumo)")
@@ -123,44 +123,44 @@ def nmap_cli(contexto):
 def nmap_detalles (contexto):
     limpiar_pantalla()
     print("\n" + "="*80)
-    print(f"{'DETALLES TÉCNICOS Y FUNCIONALES DE HERA (Nmap Module)':^80}")
+    print(f"{'DETALLES TÉCNICOS Y FUNCIONALES DE HERA':^80}")
     print("="*80 + "\n")
 
-    print("1) Internet Lento (Escaneo de Host & Puertos Rápidos)")
+    print("1) Internet Lento")
     print("   - OBJETIVO: Identificar qué dispositivos están activos y qué servicios básicos consumen.")
-    print("   - TÉCNICA: Escaneo SYN (-sS) sobre los 100 puertos más comunes (-F).")
+    print("   - TÉCNICA: Escaneo SYN sobre los 100 puertos más comunes.")
     print("   - NOTA: Ideal para una vista rápida de la red sin generar mucho tráfico.\n")
 
-    print("2) Internet Fallando (Auditoría de Vulnerabilidades)")
+    print("2) Internet Fallando")
     print("   - OBJETIVO: Detectar si hay fallos de seguridad o servicios mal configurados.")
-    print("   - TÉCNICA: Detección de versiones (-sV) y ejecución del motor de scripts 'vuln'.")
+    print("   - TÉCNICA: Detección de versiones y ejecución del motor de scripts.")
     print("   - NOTA: Puede tardar varios minutos dependiendo del tamaño de la red.\n")
 
-    print("3) Full Pack (Diagnóstico Integral)")
-    print("   - OBJETIVO: Realizar un análisis completo (Lento + Fallando) de una sola vez.")
+    print("3) Full Pack")
+    print("   - OBJETIVO: Realizar un análisis completo.")
     print("   - TÉCNICA: Ejecución secuencial de los módulos 1 y 2.\n")
 
-    print("4) Cacería de Sombras (Ghost Hunter - Evasión de IDS/Firewalls)")
-    print("   - OBJETIVO: Detectar dispositivos 'invisibles' (intrusos) que no responden a Pings.")
-    print("   - TÉCNICA: Escaneo SYN fragmentado (-f), longitud de datos extra y omisión de Ping (-Pn).")
-    print("   - NOTA: Diseñado para saltar reglas básicas de firewalls que ocultan dispositivos.\n")
+    print("4) Ghost Hunter")
+    print("   - OBJETIVO: Detectar dispositivos 'invisibles' que no responden a Pings.")
+    print("   - TÉCNICA: Escaneo SYN fragmentado, longitud de datos extra y omisión de Ping.")
+    print("   - NOTA: Diseñado para saltar reglas básicas de firewalls que ocultan dispositivos. Evita IDS y Firewalls\n")
 
-    print("5) Auditoría Admin (Localizador de Paneles de Gestión)")
+    print("5) Auditoría de Administracion")
     print("   - OBJETIVO: Encontrar interfaces de administración expuestas (Routers, Cámaras, NAS).")
     print("   - TÉCNICA: Escaneo específico de puertos 21, 22, 23, 80, 443, 8080 y 8443 con -sV.")
     print("   - NOTA: Crucial para prevenir accesos no autorizados por credenciales por defecto.\n")
 
-    print("6) Ghost ID (Identificación de Dispositivos - Fingerprinting)")
+    print("6) Ghost ID")
     print("   - OBJETIVO: Saber exactamente qué marca y modelo es cada dirección IP detectada.")
     print("   - TÉCNICA: Escaneo Agresivo (-A) que incluye OS detection, Script scanning y Traceroute.")
     print("   - NOTA: Proporciona nombres claros como 'iPhone 13', 'Samsung SmartTV' o 'Tesla MCU'.\n")
 
-    print("7) Monitor de Streaming/Gaming (Análisis de Tráfico Pesado)")
+    print("7) Monitor de consumo")
     print("   - OBJETIVO: Identificar dispositivos que saturan el ancho de banda con video o juegos.")
     print("   - TÉCNICA: Escaneo de puertos UDP/TCP asociados a Steam, Netflix, Spotify y PSN/Xbox Live.")
     print("   - NOTA: Útil para diagnosticar 'Lag' en juegos o problemas de buffer en streaming.\n")
 
-    print("8) Personalización (Modo Experto)")
+    print("8) Personalización")
     print("   - OBJETIVO: Control total sobre las banderas de Nmap para casos específicos.")
     print("   - TÉCNICA: Selección manual de protocolos (TCP/UDP/SCTP), banderas SYN/Connect/FIN y timing (T1-T5).")
     print("   - NOTA: Recomendado solo para usuarios avanzados con conocimientos de redes.\n")
@@ -207,7 +207,7 @@ def resultados(context):
         print("1) Internet Lento")
         print("2) Internet Fallando")
         print("3) Full Pack")
-        print("4) Shadow Hunter")
+        print("4) Ghost Hunter")
         print("5) Auditoría de Administracion")
         print("6) Ghost ID")
         print("7) Monitor de consumo")
@@ -217,7 +217,7 @@ def resultados(context):
         nombres_archivos = {
             1: "internet_lento", 2: "vulnerabilidades", 3: "full_pack",
             4: "ghost_hunter", 5: "admin_audit", 6: "ghost_id",
-            7: "streaming_gaming", 8: "personalizado"
+            7: "monitor_recursos", 8: "personalizado"
         }
         
         file_name = nombres_archivos[cat]
