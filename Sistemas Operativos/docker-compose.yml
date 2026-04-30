@@ -1,0 +1,8 @@
+services:
+  phpapp:
+    build: .
+    container_name: phpapp_compose
+    ports:
+      - "90:85"
+    volumes:
+      - ./phpapp:/var/www/html
