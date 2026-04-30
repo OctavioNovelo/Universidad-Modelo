@@ -19,158 +19,232 @@ Se deben mostrar los horarios en un tabla.
 import random
 import os
 
-def generar_horario(horario, asignaturas, materias, sandwich = False):
-    # Limpiar horario
-    for fila in horario:
-        for dia in range(5):
-            fila[dia] = None
+def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich=False):
+    """
+    horarios_dict: diccionario de matrices 3x5 (los horarios vacios)
+    asignaturas_dict: diccionario de asignaturas (nombre, maestro y salon)
+    materias_dict: diccionario de las materias por semestre (Las materias del 2, 4, 6 y 8 semestre son diferentes)
+    """
 
-    if sandwich:
-        # Generar variedad de combinaciones por día (Sandwich, Entrada, Salida)
-        posibles = []
-        for d in range(5):
-            # Seleccionamos 2 bloques de 3 para asegurar variedad y cumplir la lógica de los comentarios:
-            # [0, 2] -> A y C activos (B será Sandwich si queda vacío)
-            # [0, 1] -> A y B activos (C será Salida)
-            # [1, 2] -> B y C activos (A será Entrada)
-            opcion = random.choice([[0, 2], [0, 1], [1, 2]])
-            for b in opcion:
-                posibles.append((b, d))
-        huecos = len(posibles) # 10 huecos totales
-    else:
-        # Todo lleno (15 huecos)
-        posibles = [(b, d) for d in range(5) for b in range(3)]
-        huecos = len(posibles)
+    semestres = sorted(horarios_dict.keys())   # [1,2,3,4]
+    # .keys sirve para acceder a los datos key del diccionario
+    # horarios_dict.keys() = ""
+    # En esta caso lit esta vacio porque son los horarios 3x5.
 
-    # Aquie hay que poner, que si la primera hora tiene una clase a primera hora, la segunda hora se considera
-    # el sandwich, pero que si no HAY clase a primera hora, la segunda hora se considera la entrada.
-    # Se aplica la misma logica a la salida, si la ultima hora es la segunda hora entonces no es horario sandwich, es la hora de la salida.
+    # ------------------------------------------------------------
+    # Logica
+    # 1. Determinar los slots ocupados para cada semestre
+    slots_por_semestre = {}   # sem -> lista de (dia, bloque)
+    for sem in semestres:
+        horario = horarios_dict[sem] # 1
 
-    # Aqui decidimos la frecuencia con la que aparece una asignatura mínimo 1, máximo 3, suma igual a huecos
-    frecuencias = [1] * 6
-    restantes = huecos - 6
-    while restantes > 0:
-        idx = random.randrange(6)
-        if frecuencias[idx] < 3:
-            frecuencias[idx] += 1
-            restantes -= 1
+        # Limpiamos los horarios 
+        for fila in horario:
+            for d in range(5):
+                fila[d] = None
 
-    # Crear lista de materias repetidas según frecuencias
-    pool = []
-    for mat, freq in zip(materias, frecuencias):
-        pool.extend([mat] * freq)
-    
-    # Mezclar para que no salgan bloques seguidos de la misma materia
-    random.shuffle(pool)
+        slots = [] # Otra variable de slots
 
-    # Rellenar los huecos seleccionados
-    idx_pool = 0
-    for b, d in posibles:
-        materia = pool[idx_pool]
-        idx_pool += 1
-        info = asignaturas[materia].copy()
-        info['Asignatura'] = materia
-        horario[b][d] = info
+        # ------------------------------------------------------------
+        # Logica para los diferentes combinaciones de los horarios libres
+        if sandwich:
+            # Si 0 < k < 1 entonces ese dia tendra una hora libre
+            k = random.randint(0, 1)                 
+            dias_libre = random.sample(range(5), k) # Como asi ?
+            libre_por_dia = {}
+            for d in dias_libre:
+                libre_por_dia[d] = random.choice([0, 1, 2])   # A, B o C libre
+                # Las combinaciones sirven para determinar si el dia tiene horario sandwich, entra tarde y sale temprano.
+
+            for d in range(5):
+                if d in libre_por_dia:
+                    bloque_libre = libre_por_dia[d]
+                    for b in range(3):
+                        if b != bloque_libre:
+                            slots.append((d, b))
+                else:
+                    for b in range(3):
+                        slots.append((d, b))
+
+        else:
+            for d in range(5):
+                for b in range(3):
+                    slots.append((d, b))
+
+        slots_por_semestre[sem] = slots
+        # ------------------------------------------------------------
+
+    # 2. Registro global de profesores ocupados en cada (dia, bloque)
+    ocupacion_profesor = {}   # (dia, bloque) -> set de nombres de profesores
+
+    # 3. Generar cada semestre secuencialmente
+    for sem in semestres:
+        horario = horarios_dict[sem]
+        materias = materias_dict[sem]
+        asignaturas = asignaturas_dict[sem]
+        slots = slots_por_semestre[sem]
+
+        # Frecuencias
+        frecuencias = [1] * 6
+        restantes = len(slots) - 6
+        while restantes > 0:
+            idx = random.randrange(6)
+            # que hace randrange ? 
+            if frecuencias[idx] < 3:
+                frecuencias[idx] += 1
+                restantes -= 1
+
+        # Pool de materias (con su profesor)
+        pool_original = []
+        for mat, freq in zip(materias, frecuencias):
+            # Que hace zip() ?
+            prof = asignaturas[mat]['Maestro'].strip()
+            pool_original.extend([(mat, prof)] * freq)
+
+        exito = False # Esto para que ? Lol lmao
+        max_intentos = 5000 # Maximo de intento para formar horarios
+        for _ in range(max_intentos):
+            pool = pool_original[:]
+            random.shuffle(pool)
+            
+            asignacion_temp = {}  # (d,b) -> (materia, profesor) o None
+            materias_colocadas = set()
+            
+            # ------------------------------------------------------------
+            # La logica de aqui es de lo mas importante ya que es lo que le estabilidad a los horarios
+            valido = True # Este igual, para que ?
+            for idx, (d, b) in enumerate(slots):
+                mat, prof = pool[idx]
+
+                # 1. Comprobar profesor ya ocupado (CONFLICTO)
+                # Si hay conflicto, esta hora se convierte en HORA LIBRE
+                if prof in ocupacion_profesor.get((d, b), set()):
+                    asignacion_temp[(d, b)] = None
+                    continue
+
+                # 2. Comprobar no repetir materia en bloque contiguo
+                if b == 1:   # Bloque B: verificar con A (0)
+                    if (d, 0) in asignacion_temp and asignacion_temp[(d, 0)] and asignacion_temp[(d, 0)][0] == mat:
+                        valido = False
+                        break
+                elif b == 2: # Bloque C: verificar con B (1)
+                    if (d, 1) in asignacion_temp and asignacion_temp[(d, 1)] and asignacion_temp[(d, 1)][0] == mat:
+                        valido = False
+                        break
+
+                asignacion_temp[(d, b)] = (mat, prof)
+                materias_colocadas.add(mat)
+            # ------------------------------------------------------------
+
+            # Verificar que TODAS las materias del semestre aparezcan al menos una vez
+            if valido and len(materias_colocadas) == 6:
+                # Asignación exitosa
+                for (d, b), data in asignacion_temp.items():
+                    if data:
+                        mat, prof = data
+                        info = asignaturas[mat].copy()
+                        info['Asignatura'] = mat
+                        info['Maestro'] = prof
+                        horario[b][d] = info
+                        ocupacion_profesor.setdefault((d, b), set()).add(prof)
+                    else:
+                        horario[b][d] = None # Queda como hora libre por conflicto
+                exito = True
+                break
+
+        # Wtf que esto ? 
+        if not exito:
+            # Fallback que TAMBIÉN respeta la ocupación de profesores
+            # (Si no se logra en max_intentos, asignamos lo que se pueda)
+            random.shuffle(pool_original)
+            materias_asignadas_fallback = set()
+            for idx, (d, b) in enumerate(slots):
+                mat, prof = pool_original[idx]
+                prof_stripped = prof.strip()
+                if prof_stripped not in ocupacion_profesor.get((d, b), set()):
+                    info = asignaturas[mat].copy()
+                    info['Asignatura'] = mat
+                    info['Maestro'] = prof_stripped
+                    horario[b][d] = info
+                    ocupacion_profesor.setdefault((d, b), set()).add(prof_stripped)
+                else:
+                    horario[b][d] = None # Libre por conflicto incluso en fallback
 
 
+# Esta funcion le da formato a las tablas 
 def format_horario(horario, semestre=None):
-    # Nuestra tabala es una matriz bidimencional
     dias = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES']
-    # Definimos los encabezados incluyendo la columna HORARIO
     encabezados = ['HORA'] + dias
-    # Definimos los nombres de los bloques para la primera columna
     bloques_nombre = ['7:00 - 9:00', '9:00 - 11:00', '11:00 - 13:00']
-    
-    # Mapeo de semestres para el título
+
     nombres_semestres = {
         1: "Segundo Semestre",
         2: "Cuarto Semestre",
         3: "Sexto Semestre",
         4: "Octavo Semestre"
     }
-    
     titulo = nombres_semestres.get(semestre, "Horario")
 
-    # Recolectar el contenido de cada celda
     filas_texto = []
     for i, fila in enumerate(horario):
-        # Iniciamos cada fila con la etiqueta del horario (A, B o C)
         fila_actual = [bloques_nombre[i]]
         for d, celda in enumerate(fila):
             if celda is None:
-                if i == 1:  # bloque B (9-11)
-                    # Lógica de Sandwich, Entrada y Salida basada en comentarios
-                    if horario[0][d] is not None and horario[2][d] is not None:
-                        texto = "" # Sandwich
-                    elif horario[0][d] is None:
-                        texto = "" # Entrada
-                    elif horario[2][d] is None:
-                        texto = "" # Salida
-                    else: # Este para que ? 
-                        texto = "Libre"
-                elif i == 0: # bloque A (7-9)
-                    texto = "" # Entrada 
-                elif i == 2: # bloque C (11-1)
-                    texto = "" # Salida
-                else: # RT este para que ? 
-                    texto = "Libre"
+                texto = ""
             else:
-                texto = celda['Asignatura']  # solo la materia
+                texto = celda['Asignatura']
             fila_actual.append(texto)
         filas_texto.append(fila_actual)
 
-    # Calcular ancho de cada columna (ahora son 6 columnas en total)
-    anchos = []
-    for col in range(6):
+    MAX_COL = 20
+    ANCHO_HORA = 13
+    anchos = [ANCHO_HORA]
+    for col in range(1, 6):
         max_len = len(encabezados[col])
         for fila in filas_texto:
             max_len = max(max_len, len(fila[col]))
-        anchos.append(max(max_len, 10))  # mínimo 10 para estética
+        anchos.append(min(max_len, MAX_COL))
+
+    def ajustar(texto, ancho):
+        if len(texto) > ancho:
+            return texto[:ancho-1] + '…'
+        return texto
+
+    for fila in filas_texto:
+        fila[0] = ajustar(fila[0], anchos[0])
+        for col in range(1, 6):
+            fila[col] = ajustar(fila[col], anchos[col])
 
     anchura_total = sum(anchos) + 7
-    
-    # Función para crear una línea separadora (|---|...|)
-    def separador():
-        return '|' + '|'.join('-' * ancho for ancho in anchos) + '|'
+    separador = '|' + '|'.join('-' * ancho for ancho in anchos) + '|'
 
     resultado = []
     resultado.append("=" * anchura_total)
     resultado.append(titulo.center(anchura_total))
     resultado.append("=" * anchura_total)
-    
-    # Encabezado de la tabla
-    encabezado_str = '|' + '|'.join(encabezados[col].center(anchos[col]) for col in range(6)) + '|'
+    encabezado_str = '|' + '|'.join(ajustar(encabezados[col], anchos[col]).center(anchos[col]) for col in range(6)) + '|'
     resultado.append(encabezado_str)
-    resultado.append(separador())
-
-    # Filas de datos
-    for i, fila in enumerate(filas_texto):
+    resultado.append(separador)
+    for fila in filas_texto:
         linea = '|' + '|'.join(fila[col].center(anchos[col]) for col in range(6)) + '|'
         resultado.append(linea)
-    
     return "\n".join(resultado)
 
 def mostrar_horario(horario, semestre=None):
     print(format_horario(horario, semestre))
 
 def guardar_horario(horario, nombre_archivo, semestre=None):
-    # Definir la ruta de la carpeta Horarios
     ruta_base = os.path.dirname(os.path.abspath(__file__))
     ruta_horarios = os.path.join(ruta_base, "Horarios")
-    
-    # Crear la carpeta si no existe
     if not os.path.exists(ruta_horarios):
         os.makedirs(ruta_horarios)
-        
     ruta_completa = os.path.join(ruta_horarios, f"{nombre_archivo}.txt")
-    
     with open(ruta_completa, "w", encoding="utf-8") as f:
         f.write("--- REPORTE DE HORARIO ---\n\n")
         f.write(format_horario(horario, semestre))
         f.write("\n\n" + "-"*30 + "\n")
         f.write("Detalles de las Asignaturas:\n")
         f.write("-"*30 + "\n")
-        
         materias_vistas = set()
         for fila in horario:
             for celda in fila:
@@ -180,11 +254,4 @@ def guardar_horario(horario, nombre_archivo, semestre=None):
                     f.write(f"Salón:   {celda['Salon']}\n")
                     f.write("-" * 20 + "\n")
                     materias_vistas.add(celda['Asignatura'])
-    
     return ruta_completa
-
-# Comentarlo.
-# Debemos crear un diccionario x semestre.
-# Agregar la verificacion de que el profe pueda dar clase a otros semestres en ese horarioc
-# Modificar los salones.
-# NO todos los dias deben tener horarios libres, agreguemos una aleatoriedad como en el laberinto.
