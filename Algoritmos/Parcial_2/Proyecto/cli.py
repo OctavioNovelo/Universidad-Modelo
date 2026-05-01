@@ -126,6 +126,7 @@ def seleccion():
             print("\n Presiona una tecla para continuar... \n")
             input()
             
+            
         case '3':
             subprocess.run(["clear"])
             print("\n Adios! \n")
