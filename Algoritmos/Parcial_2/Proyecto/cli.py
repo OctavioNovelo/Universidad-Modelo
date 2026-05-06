@@ -1,6 +1,11 @@
 import subprocess
 import horario
 
+# Arreglar aue cuando un horario NO se puede, automaticamente borre TODOS los horarios y diga que no se pudo.
+# Animal, se te fue poner restricciones diarias, en pla un profe puede especificar DIA y BLOQUE no quiere chambear. 
+# Cambiar la mamada e litzy, que por que huecos son SOLO los Sandwiches.
+# Exportar horarios de laboratorio
+
 # ------------------------------------------------------------
 # Estructura de horarios para los 4 semestres, los inicializamos todos en ""
 # [[Lista de los 5 dias de la semana] Esta parte toma la lista interna y la repite 3 veces]
@@ -20,108 +25,108 @@ horarios_semestres = {
 asignaturas_semestre_2 = {
     'Algoritmos': {
         'Maestro': 'Edson Geovanny Estrada Lopez',
-        'Salon': 'Computo 2', 'Bloques': 3, 'Tipo': 'computo'
+        'Salon': 'Computo 2', 'Bloques': 3, 'Tipo': 'laboratorio'
     },
     'Algebra matricial y vectorial': {
         'Maestro': 'Ing. Juan Norberto Peniche Munoz',
-        'Salon': 'A1', 'Bloques': 2, 'Tipo': 'convencional'
+        'Salon': 'A1', 'Bloques': 2, 'Tipo': 'normal'
     },
     'Fisica aplicada': {
         'Maestro': 'Dr. Alberto Gabriel Vega Poot',
-        'Salon': 'A1', 'Bloques': 3, 'Tipo': 'convencional'
+        'Salon': 'A1', 'Bloques': 3, 'Tipo': 'normal'
     },
     'Calculo diferencial': {
         'Maestro': 'Mtra. Aylin Garcia Reyes',
-        'Salon': 'A1', 'Bloques': 3, 'Tipo': 'convencional'
+        'Salon': 'A1', 'Bloques': 3, 'Tipo': 'normal'
     },
     'Sistemas Operativos': {
         'Maestro': 'Mtro. Alfredo Jose Bolio Dominguez',
-        'Salon': 'A1', 'Bloques': 2, 'Tipo': 'convencional'
+        'Salon': 'A1', 'Bloques': 2, 'Tipo': 'normal'
     },
     'Redes de computadoras': {
         'Maestro': 'Ing. Franklin Jesus Gonzales Torres',
-        'Salon': 'A1', 'Bloques': 2, 'Tipo': 'convencional'
+        'Salon': 'A1', 'Bloques': 2, 'Tipo': 'normal'
     },
 }
 
 asignaturas_semestre_4 = {
     'Estadistica Inferencial': {
         'Maestro': 'Mtra. Aylin Garcia Reyes',
-        'Salon': 'A2', 'Bloques': 2, 'Tipo': 'convencional'
+        'Salon': 'A2', 'Bloques': 2, 'Tipo': 'normal'
     },
     'Ingenieria ecnonomica': {
-        'Maestro': 'Ing. Juan Norberto Peniche Munoz',
-        'Salon': 'A2', 'Bloques': 1, 'Tipo': 'convencional'
+        'Maestro': 'Mtra. Grety del Socorro Basulto Morcillo',
+        'Salon': 'A2', 'Bloques': 1, 'Tipo': 'normal'
     },
     'Circuitos electricos y electronicos': {
-        'Maestro': 'Edson Geovanny Estrada Lopez',
-        'Salon': 'A2', 'Bloques': 3, 'Tipo': 'convencional'
+        'Maestro': 'Mtro. Roberto Carlos Gamboa Ek',
+        'Salon': 'A2', 'Bloques': 3, 'Tipo': 'normal'
     },
     'Programacion aplicada a videojuegos': {
         'Maestro': 'Ing. Jesus Alejandro Balam Sandoval',
-        'Salon': 'Computo 1', 'Bloques': 2, 'Tipo': 'computo'
+        'Salon': 'Computo 1', 'Bloques': 2, 'Tipo': 'laboratorio'
     },
     'Base de datos II': {
-        'Maestro': 'Mtro. Alfredo Jose Bolio Dominguez',
-        'Salon': 'A2', 'Bloques': 2, 'Tipo': 'convencional'
+        'Maestro': 'Mtro. Daniel Alejandro Martinez Lopez',
+        'Salon': 'A2', 'Bloques': 2, 'Tipo': 'normal'
     },
     'Fundamentos de diseno': {
-        'Maestro': 'Mtro. Daniel Alejandro Martinez Lopez',
-        'Salon': 'A2', 'Bloques': 2, 'Tipo': 'convencional'
+        'Maestro': 'Mtra. Ana Bolio Ayora',
+        'Salon': 'A2', 'Bloques': 2, 'Tipo': 'normal'
     },
 }
 
 asignaturas_semestre_6 = {
     'Sistemas graficos': {
-        'Maestro': 'Mtro. Alfredo Jose Bolio Dominguez',
-        'Salon': 'A3', 'Bloques': 2, 'Tipo': 'convencional'
+        'Maestro': 'Mtra. Ana Bolio Ayora',
+        'Salon': 'A3', 'Bloques': 2, 'Tipo': 'normal'
     },
     'Desarrollo Web II': {
         'Maestro': 'Mtro. Daniel Alejandro Martinez Lopez',
-        'Salon': 'A3', 'Bloques': 2, 'Tipo': 'convencional'
+        'Salon': 'A3', 'Bloques': 2, 'Tipo': 'normal'
     },
     'Proyeccion y modelado de software': {
         'Maestro': 'Edson Geovanny Estrada Lopez',
-        'Salon': 'Computo 2', 'Bloques': 2, 'Tipo': 'convencional'
+        'Salon': 'Computo 2', 'Bloques': 2, 'Tipo': 'laboratorio'
     },
     'Internet de las cosas': {
         'Maestro': 'Ing. Franklin Jesus Gonzales Torres',
-        'Salon': 'A3', 'Bloques': 2, 'Tipo': 'convencional'
+        'Salon': 'A3', 'Bloques': 2, 'Tipo': 'normal'
     },
     'Aministracion de procesos de negocios': {
-        'Maestro': 'Mtra. Vanessa Cob Gutierrez',
-        'Salon': 'A3', 'Bloques': 2, 'Tipo': 'convencional'
+        'Maestro': 'Mtra. Grety del Socorro Basulto Morcillo',
+        'Salon': 'A3', 'Bloques': 2, 'Tipo': 'normal'
     },
     'Desarrollo movil I': {
         'Maestro': 'Ing. Jesus Alejandro Balam Sandoval',
-        'Salon': 'A3', 'Bloques': 2, 'Tipo': 'convencional'
+        'Salon': 'A3', 'Bloques': 2, 'Tipo': 'normal'
     },
 }
 
 asignaturas_semestre_8 = {
     'Desarrollo de videojuegos': {
         'Maestro': 'Ing. Jesus Alejandro Balam Sandoval',
-        'Salon': 'A4', 'Bloques': 3, 'Tipo': 'convencional'
+        'Salon': 'A4', 'Bloques': 3, 'Tipo': 'normal'
     },
     'Analisis politico y socieconomico de mexico': {
         'Maestro': 'Mtra. Vanessa Cob Gutierrez',
-        'Salon': 'A4', 'Bloques': 2, 'Tipo': 'convencional'
+        'Salon': 'A4', 'Bloques': 2, 'Tipo': 'normal'
     },
     'Innovacion y emprendimiento': {
         'Maestro': 'Mtra. Kenia Nayrhovy Osorio Lopez',
-        'Salon': 'A4', 'Bloques': 2, 'Tipo': 'convencional'
+        'Salon': 'A4', 'Bloques': 2, 'Tipo': 'normal'
     },
     'Ambientes y arquitectura de microservidores': {
         'Maestro': 'Edson Geovanny Estrada Lopez',
-        'Salon': 'A4', 'Bloques': 3, 'Tipo': 'convencional'
+        'Salon': 'A4', 'Bloques': 3, 'Tipo': 'normal'
     },
     'Seguridad de software': {
         'Maestro': 'Mtro. Alfredo Jose Bolio Dominguez',
-        'Salon': 'A4', 'Bloques': 2, 'Tipo': 'convencional'
+        'Salon': 'A4', 'Bloques': 2, 'Tipo': 'normal'
     },
     'Desarrollo basado en agentes': {
         'Maestro': 'Mtro. Daniel Alejandro Martinez Lopez',
-        'Salon': 'Computo 1', 'Bloques': 3, 'Tipo': 'computo'
+        'Salon': 'Computo 1', 'Bloques': 3, 'Tipo': 'laboratorio'
     },
 }
 
@@ -186,14 +191,27 @@ disponibilidad_profesores = {
     'Mtra. Kenia Nayrhovy Osorio Lopez': {
         'max_horas': 6,
         'disponibilidad': [[True, True, True] for _ in range(5)]
+    },
+    'Mtra. Ana Bolio Ayora': {
+        'max_horas': 10,
+        'disponibilidad': [[True, True, True] for _ in range(5)]
+    },
+    'Mtra. Grety del Socorro Basulto Morcillo': {
+        'max_horas': 10,
+        'disponibilidad': [[True, True, True] for _ in range(5)]
+    },
+    'Mtro. Roberto Carlos Gamboa Ek': {
+        'max_horas': 10,
+        'disponibilidad': [[True, True, True] for _ in range(5)]
     }
+
 }
 
 def menu():
     print("\n --- Generador de horarios --- \n")
     print("\n 1) Generar Horarios.")
     print("\n 2) Ver horarios.")
-    print("\n 3) Ver horarios de laboratorios de cómputo.")
+    print("\n 3) Ver horarios de los laboratorios.")
     print("\n 4) Salir. \n")
 
 def seleccion():
@@ -203,7 +221,7 @@ def seleccion():
     match opcion:
         case '1':
             subprocess.run(["clear"])
-            a = input("¿Permitir horas muertas? (s/n): ").lower()
+            a = input("¿El horario puede tener horas muertas? (s/n): ").lower()
             sandwich = False
             if a == 's':
                 sandwich = True
@@ -223,10 +241,7 @@ def seleccion():
             }
 
             print("\nGenerando horarios...\n")
-            horario.generar_horarios(
-                horarios_semestres, asignaturas_por_sem, materias_por_sem,
-                sandwich, disponibilidad_profesores
-            )
+            horario.generar_horarios(horarios_semestres, asignaturas_por_sem, materias_por_sem, sandwich, disponibilidad_profesores)
 
             # Guardar horarios generados
             for i in range(1, 5):
@@ -237,6 +252,9 @@ def seleccion():
                     4: "Octavo Semestre"
                 }
                 horario.guardar_horario(horarios_semestres[i], nombres[i], i)
+            
+            # Exportar horarios de laboratorio
+            horario.guardar_horarios_laboratorios(horarios_semestres)
 
             print("\nTodos los horarios han sido generados.\n")
             input("Presiona una tecla para continuar...")
