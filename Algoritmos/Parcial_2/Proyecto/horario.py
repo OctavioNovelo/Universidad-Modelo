@@ -207,7 +207,7 @@ def restricciones(horario, materias, requeridos, asignaturas, huecos_ocupados, p
             horario[b][d] = info
         return True
     return False
-# Nota mental: NO se exactamente para que es est ultimo, no se su utilidad.
+# Nota mental: NO se exactamente para que es est ultimo 0, no se su utilidad.
 
 
 def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich, disponibilidad_profesores):

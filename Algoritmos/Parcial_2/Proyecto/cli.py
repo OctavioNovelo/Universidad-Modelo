@@ -1,14 +1,6 @@
 import subprocess
 import horario
 
-# Arreglar aue cuando un horario NO se puede, automaticamente borre TODOS los horarios y diga que no se pudo, porque asi debe ser.
-# Animal, se te fue poner restricciones diarias, un profe puede especificar DIA y BLOQUE no quiere/puede chambear. Actualmente
-# solo podemos cambiar que bloques no chambea, sin embargo eso afecta todos los dias ese bloque.
-# Resulta que cuando preguntamos si queremos horarios sandwich/muerto/libres y ponemos que si, las entradas tarde y salidas temprano no cuenta como
-# "huecos" cuando nosotros apretamos que SI le decimos al algoritmos que SI permita que alla espacios entre clase (bloque B) y cuando apretamos que NO 
-# el algoritmo NO debe permitir horarios entre clases, sin embargo independetiemente de esta opcion los horarios pueden entrar tarde y salir temprano 
-# (que los bloques A y C esten vacios es idependiente que si el usuario quiere permitir horario sandwich o no)
-
 # ------------------------------------------------------------
 # Estructura de horarios para los 4 semestres, los inicializamos todos en ""
 # [[Lista de los 5 dias de la semana] Esta parte toma la lista interna y la repite 3 veces]
