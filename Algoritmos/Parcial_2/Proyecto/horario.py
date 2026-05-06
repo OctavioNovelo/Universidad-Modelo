@@ -25,7 +25,9 @@ Se deben mostrar los horarios en un tabla.
 # NOTA MENTAL: El codigo creo que se construye en el camino.
 import random
 import os
-# Comprensiones de listas
+
+# List Comprehension
+# Dictionary Comprehension
 
 # ---------------------------------------------------------------------
 # Constantes
@@ -64,7 +66,7 @@ def restricciones(horario, materias, requeridos, asignaturas, huecos_ocupados, p
         dia: set() # TRUCASO GENTE
         # Resulta que set() es una funcion que CREA CONJUNTOS.
         # Los conjuntos son estructuras que solo almacenan datos (Lit no tienen orden ni nada, solo los almacena)
-        # pero con la ventaja de que NO permite valores duplicados, elimina el duplicado y que es mucho mas rapida
+        # pero con la ventaja de que NO permite datos duplicados, elimina el duplicado y que es mucho mas rapida
         # cuando queremos hacer operaciones "in" "not in" que es justo lo que necesitamos para saber si el conjunto (el dia)
         # ya tiene la materia que estamos intentando agregar.
         
@@ -78,14 +80,14 @@ def restricciones(horario, materias, requeridos, asignaturas, huecos_ocupados, p
 
     # 
     def backtrack(index):
-        # Si index == al tamano de la lista huecos
+        # Si index == al tamano de la lista huecos significa que acabamos. 
         if index == len(huecos):
             # all regresa verdadero UNICAMENTE si TODOS los argumentos dentro del parentesi son verdaderos.
             # Comparamos si la cantidad de veces que aparece una materia es igual a la cantidad de veces que se requiere que aparezca
             # Esta info la sacamos de la lista usadas con el parametro como el nombre de la materia, que es mat por cada materia en el diccionario de materias. XDXDXD
             return all(usadas[mat] == requeridos[mat] for mat in materias)
         
-        # Sacamos la tupla/coordenadas/bloque
+        # Sacamos la tupla/coordenadas/bloques
         # dias, bloques
         d, b = huecos[index]
 
@@ -210,18 +212,17 @@ def restricciones(horario, materias, requeridos, asignaturas, huecos_ocupados, p
 
 def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich, disponibilidad_profesores):
     """
-    Genera todos los semestres con backtracking y restricciones completas:
     - Bloques fijos
     - No repetición en el mismo día
     - Disponibilidad y horas máximas de profesores
-    - Laboratorios de cómputo (salones reales)
+    - Laboratorios de cómputo
     - Huecos (entrada/salida/sandwich) según parámetro
     """
 
     # Ordena los semestres de menor a mayor
     semestres = sorted(horarios_dict.keys())
 
-    # ---- Sumamos las horas totales que el profe debe impartir dependiendo de las materias ----
+    # Sumamos las horas totales que el profe debe impartir dependiendo de las materias ----
     # .items basicamente es la tupla de datos.
     for prof, datos in disponibilidad_profesores.items(): # Agarra a un prof junto con sus horas_max
         horas_necesarias = 0
@@ -279,51 +280,48 @@ def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich, d
                     break
             if not exito:
                 print(f"Falló la generación de horario del semestre {sem}.")
+                for s in semestres:
+                    h = horarios_dict[s]
+                    for fila in h:
+                        for d in range(DIAS):
+                            fila[d] = None
+                return False
+    return True
 
 
-
+# Terminar de entender como funciona este bloque.
 def _definir_huecos_ocupados(sandwich, total_bloques):
     """
     Devuelve una lista de (d,b) que estarán ocupados (len == total_bloques).
-    Si sandwich = True, se reparten huecos de forma que como máximo un bloque
-    libre por día (entrada, sandwich o salida) y se respeta el total de bloques.
-    Si no, se eligen aleatoriamente los slots necesarios.
+    Si sandwich = True, se permite que haya espacios entre clases (bloque B libre con A y C ocupados).
+    Si sandwich = False, NO se permiten espacios entre clases, pero se permite entrar tarde o salir temprano.
     """
 
-    # Dictionary Comprehension
-    # Creamos un diccionario todos_huecos en formato "d, b" siendo de 5 (0-4/Lunes-Viernes) por 3 (0-3/A, B, C). 
     todos_huecos = [(d, b) for d in range(DIAS) for b in range(BLOQUES)]
-    # Sabemos que son 5 dias y 3 bloques, dando un total de todos_huecos = 15.
-    # Podriamos agregar un condicionardor a que si es menor a 10 no se pueden acomodar los horarios
 
-
-    # Aleatoriedad en los dias con dia libre y los dias sin dia libre
     if sandwich:
-        libres = 15 - total_bloques
-        # random.sample() escoge de 
-        dias_con_hueco = random.sample(range(5), libres) if libres > 0 else []
-
-        # bloques_libres = Por cada dia con hueco guardaremos los bloques libre en formatos aletorios, 
-        # de A, B y C.
-        bloques_libres = {d: random.choice([0,1,2]) for d in dias_con_hueco}
-        slots = []
-
-        # Avanzamos dia a dia
-        for d in range(5):
-            # Si el dia de hoy esta dentro de los bloques_libres
-            if d in bloques_libres:
-                bloque_libre = bloques_libres[d]
-                for b in range(3):
-                    if b != bloque_libre:
-                        slots.append((d, b))
-            else:
-                for b in range(3):
-                    slots.append((d, b))
-        return slots
+        # Si se permiten sandwiches, cualquier combinación de slots es válida
+        # random.sample retorna OTRA lists 
+        return random.sample(todos_huecos, total_bloques)
     else:
+        # Si NO se permiten sandwiches, evitamos el patrón (A ocupado, B libre, C ocupado)
+        # Intentamos encontrar una combinación válida aleatoriamente
+        for _ in range(1000):
+            slots = random.sample(todos_huecos, total_bloques)
+            es_valido = True
+            for d in range(DIAS):
+                # Un "sandwich" es cuando el bloque A (0) y C (2) están ocupados, pero el B (1) está libre.
+                if (d, 0) in slots and (d, 2) in slots and (d, 1) not in slots:
+                    es_valido = False
+                    break
+            if es_valido:
+                return slots
+        
+        # Si por alguna razón estadística no encuentra uno al azar, forzamos uno (aunque con 15 slots es muy probable)
         return random.sample(todos_huecos, total_bloques)
 
-# -------- Funciones de formato y visualización ---------
+
+# Formato y visualización ---------
 def format_horario(horario, semestre = None):
     dias = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES']
     encabezados = ['HORA'] + dias
@@ -390,6 +388,7 @@ def mostrar_horario(horario, semestre = None):
     print(format_horario(horario, semestre))
 
 
+# --------------------------------------------------------------------------------------
 # Exporta los horarios 
 def guardar_horario(horario, nombre_archivo, semestre = None, titulo_custom = None):
     ruta_base = os.path.dirname(os.path.abspath(__file__))
@@ -401,7 +400,6 @@ def guardar_horario(horario, nombre_archivo, semestre = None, titulo_custom = No
     ruta_completa = os.path.join(ruta_horarios, f"{nombre_archivo}.txt")
 
     with open(ruta_completa, "w", encoding = "utf-8") as f:
-        f.write("--- REPORTE DE HORARIO ---\n\n")
         
         # Si titulo_custom existe, lo usamos para el reporte
         if titulo_custom:
@@ -430,6 +428,7 @@ def mostrar_horarios_laboratorios(horarios_semestres):
     """
     labs = {'Computo 1': None, 'Computo 2': None}
     # Inicializar matrices vacías (5 días x 3 bloques)
+
     for lab in labs:
         labs[lab] = [[None for _ in range(5)] for _ in range(3)]
 
@@ -472,3 +471,5 @@ def guardar_horarios_laboratorios(horarios_semestres):
     for nombre_lab, matriz in labs.items():
         nombre_archivo = f"Horario_{nombre_lab.replace(' ', '_')}"
         guardar_horario(matriz, nombre_archivo, semestre=None, titulo_custom=f"Laboratorio {nombre_lab}")
+
+# --------------------------------------------------------------------------------------
