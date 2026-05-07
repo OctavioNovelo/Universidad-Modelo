@@ -56,15 +56,12 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
 
     # Este es un diccionario llamado usadas que guarda las materias de la lista materias con un value de 0. 
     # Este es el diccionario donde veremos con que frecuencia aparece cada materia. 
-    
-    # Reemplazamos Dictionary Comprehension por ciclo FOR tradicional
     usadas = {}
     for m in materias:
         usadas[m] = 0
     
+
     # Esta diccionario lo cree con el unico objetivo de que no se dupliquen las mateiras
-    
-    # Reemplazamos Dictionary Comprehension por ciclo FOR tradicional
     materias_por_dia = {}
     for dia in range(DIAS):
         materias_por_dia[dia] = set() # TRUCASO GENTE
@@ -120,7 +117,7 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
         # La sintaxis de sorted es (iterable, regla (en este caso que despues de restar acomoden de menor a mayor pero como reverse == True va de mayor a menor), reverse = bool)
         ''' 
         
-        # Reemplazamos la Generator Expression dentro de sorted por un ciclo FOR tradicional para filtrar candidatas
+        # Si la materia pasa los filtros, entonces se agrega a la lista_filtrada. 
         lista_filtrada = []
         for materia in materias:
             if usadas[materia] < requeridos[materia] and materia not in materias_por_dia[d]:
@@ -146,15 +143,13 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
             # 2. Disponibilidad del profesor
             # Si no encontramos al profesor en la lista creamos un perfil temporal donde SIEMPRE esta dispo ese nuevo profesor
             # No me gusta pero si no me da error XDXDXD
-            
-            # Reemplazamos la List Comprehension dentro de dict temporal por ciclo FOR tradicional
             dispo_default = []
             for _ in range(5):
                 fila_dispo = []
                 for _ in range(3):
                     fila_dispo.append(True)
                 dispo_default.append(fila_dispo)
-                
+            
             disp = disponibilidad_profesores.get(prof, {'disponibilidad': dispo_default})
             # Si ese dia y bloque NO es True, continue y pasamos al otro profesor
             if not disp['disponibilidad'][d][b]:
@@ -272,15 +267,10 @@ def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich, d
     lab_ocupado = {}
 
 
-    # Aprovehcando que este esta solo lo explicao.
-    # Esto se le conoce (no me preguntes porque existe) como Dictionary Comprehension,
-    # creamos otro diccionario llamado prof_horas_restantes, pasandole info especifica, nos ayuda evitando escribir
-    # nuevos diccionarios de agrapa.
+    # Creamos otro diccionario llamado prof_horas_restantes, pasandole info especifica.
     # Cuando se itera sobre disponibilidad guardamos la tupla nombre, max_horas en prof y datos respectivamente
     # y estas tuplas clave-valor se agregan al diccionario PROF_HORAS_RESTANTES en formato
     # prof: datos['max_horas'] 
-    
-    # Reemplazamos Dictionary Comprehension por ciclo FOR tradicional
     prof_horas_restantes = {}
     for prof, datos in disponibilidad_profesores.items():
         prof_horas_restantes[prof] = datos['max_horas']
@@ -295,7 +285,6 @@ def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich, d
         materias = materias_dict[sem] # Guardamos la materia actual (nombres)
         asignaturas = asignaturas_dict[sem] # Guardamos la asignatura actual (datos)
         
-        # Reemplazamos Dictionary Comprehension por ciclo FOR tradicional
         requeridos = {}
         for mat in materias:
             requeridos[mat] = asignaturas[mat]['Bloques']
@@ -331,7 +320,6 @@ def _definir_huecos_ocupados(sandwich, total_bloques):
     Si sandwich = False, NO se permiten espacios entre clases, pero se permite entrar tarde o salir temprano.
     """
 
-    # Reemplazamos List Comprehension por ciclo FOR tradicional
     todos_huecos = []
     for d in range(DIAS):
         for b in range(BLOQUES):
@@ -359,7 +347,7 @@ def _definir_huecos_ocupados(sandwich, total_bloques):
         return random.sample(todos_huecos, total_bloques)
 
 
-# Formato y visualización ---------
+# Formato y visualización
 def format_horario(horario, semestre = None):
     dias = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES']
     encabezados = ['HORA'] + dias
