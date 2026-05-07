@@ -60,7 +60,7 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
     for m in materias:
         usadas[m] = 0
     
-
+    # FILTRO MATERIAS -----------------------------------------------------------------------
     # Esta diccionario lo cree con el unico objetivo de que no se dupliquen las mateiras
     materias_por_dia = {}
     for dia in range(DIAS):
@@ -72,30 +72,38 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
         # ya tiene la materia que estamos intentando agregar.
         
         # Creamos 5 conjuntos vacios (dias)
-    
-    # Huecos guarda la lista de huecos_ocupados (actualemente vacia), la funcion _definir_huecos_ocupados es quien define esta lista.
+    # ACABA FILTRO MATERIAS ----------------------------------------------------------------------------------------
+
+    # Huecos guarda la lista de huecos_ocupados, la funcion definir_huecos_ocupados es quien define esta lista.
     # sorted es una funciona que por default ordena de menor a mayor, sin embargo con key = '' podemos definir como queremos que ordene.
     huecos = sorted(huecos_ocupados)
 
-    # 
+
     def generar_horarios(index):
         # Si index == al tamano de la lista huecos significa que acabamos. 
         if index == len(huecos):
-            # all regresa verdadero UNICAMENTE si TODOS los argumentos dentro del parentesi son verdaderos.
             # Comparamos si la cantidad de veces que aparece una materia es igual a la cantidad de veces que se requiere que aparezca
             # Esta info la sacamos de la lista usadas con el parametro como el nombre de la materia, que es mat por cada materia en el diccionario de materias. XDXDXD
-            
-            # Reemplazamos Generator Expression por ciclo FOR tradicional
-            todos_completos = True
+            chi = True
             for mat in materias:
                 if usadas[mat] != requeridos[mat]:
-                    todos_completos = False
+                    chi = False
                     break
-            return todos_completos
+            return chi # Exito, se acabo
         
+        
+        # FILTROS MATERIA ------------------------------------------------------------------
         # Sacamos la tupla/coordenadas/bloques
         # dias, bloques
         d, b = huecos[index]
+
+
+        # Si la materia pasa los filtros, entonces se agrega a la lista_filtrada. 
+        lista_filtrada = []
+        for materia in materias:
+            if usadas[materia] < requeridos[materia] and materia not in materias_por_dia[d]:
+                lista_filtrada.append(materia)
+        # ACABA FILTRO MATERIA -----------------------------------------------------------------------------------
 
         '''
         # Materias candidatas para asignar ese dia
@@ -116,17 +124,14 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
         # NO confundir con un ciclo FOR, son similares pero no iguales.
         # La sintaxis de sorted es (iterable, regla (en este caso que despues de restar acomoden de menor a mayor pero como reverse == True va de mayor a menor), reverse = bool)
         ''' 
-        
-        # Si la materia pasa los filtros, entonces se agrega a la lista_filtrada. 
-        lista_filtrada = []
-        for materia in materias:
-            if usadas[materia] < requeridos[materia] and materia not in materias_por_dia[d]:
-                lista_filtrada.append(materia)
-        
+
+        # Aqui ordenamos de mayor a menor (reverse = True) las materias en base a su urgencia (requeridos[m] - usadas[m])
+        # Se priorizara poner materias con 4 bloques disponibles (en ese momento) sobre las materias con menor cantidad de bloques
+        # (en ese momento) 
         candidatas = sorted(lista_filtrada, key = lambda m: requeridos[m] - usadas[m], reverse = True)
 
         # Por cada materia en candidatos ahora revisamos si el PROFESOR de esa materia esta disponible
-        # Filtro del profesor
+        # FILTRO PROFESOR  -----------------------------------------------------------------------
         for mat in candidatas:
             # NOTA MENTAL: Me puse a pensar si es mas eficiente guardarlo en variables o llamarlas directamente cuando quiera eso en especifico
             prof = asignaturas[mat]['Maestro'] # Nombre del profe
@@ -171,13 +176,16 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
                 if salon in lab_ocupado.get((d, b), set()):
                     continue  # ocupado
 
+            # ACABA FILTRO DEL PROFESOR ---------------------------------------------------------------------------
+
+
             # Asignar provisionalmente
             asignacion[(d, b)] = (mat, prof, salon)
 
             usadas[mat] += 1 # Aumentamos un uso a la materia.
             materias_por_dia[d].add(mat) # Agregamos la materia a la lista.
 
-            # setdefault sirve similar el get pero para escribir y asegurar.
+            # setdefault sirve similar el get pero para escribir.
             # Si SI eiste algo en el bloque (d, b) devuelve la informacion que hay en ese bloque
             # Si NO existe nada en el bloque (d, b) se creara un conjunto vacio y se asignara el profesor.
             prof_ocupado.setdefault((d, b), set()).add(prof)
@@ -232,9 +240,7 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
         return True
     return False
 
-def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich, disponibilidad_profesores):
-
-    # Ordena los semestres de menor a mayor
+def llenar_horario(horarios_dict, asignaturas_dict, materias_dict, sandwich, disponibilidad_profesores):
     semestres = horarios_dict.keys()
 
     # Sumamos las horas totales que el profe debe impartir dependiendo de las materias
@@ -291,29 +297,32 @@ def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich, d
             
         total_bloques = sum(requeridos.values()) # Se suma la cantidad bloques totales para saber cuantos bloques se llenaran 
 
-        huecos_ocupados = _definir_huecos_ocupados(sandwich, total_bloques)
+        huecos_ocupados = definir_huecos_ocupados(sandwich, total_bloques)
 
+        # --------------------------------------------------------------------------------------
+        # Aqui se comienza a ejecutar 
         exito = generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_ocupado, lab_ocupado, disponibilidad_profesores, prof_horas_restantes)
+        # Si no lo logra a la primera, chance habria que quitar esto no ? 
         if not exito:
             print(f"No se pudo generar el horario del semestre {sem}. Reintentando...")
-            for _ in range(10):
-                huecos_ocupados = _definir_huecos_ocupados(sandwich, total_bloques)
+            for _ in range(100000):
+                huecos_ocupados = definir_huecos_ocupados(sandwich, total_bloques)
                 exito = generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_ocupado, lab_ocupado, disponibilidad_profesores, prof_horas_restantes)
                 if exito:
                     break
             if not exito:
                 print(f"Falló la generación de horario del semestre {sem}.")
+                # Borramos todo bro
                 for s in semestres:
                     h = horarios_dict[s]
                     for fila in h:
                         for d in range(DIAS):
                             fila[d] = None
                 return False
+        # --------------------------------------------------------------------------------------
     return True
 
-
-# Terminar de entender como funciona este bloque.
-def _definir_huecos_ocupados(sandwich, total_bloques):
+def definir_huecos_ocupados(sandwich, total_bloques):
     """
     Devuelve una lista de (d,b) que estarán ocupados (len == total_bloques).
     Si sandwich = True, se permite que haya espacios entre clases (bloque B libre con A y C ocupados).
@@ -332,7 +341,7 @@ def _definir_huecos_ocupados(sandwich, total_bloques):
     else:
         # Si NO se permiten sandwiches, evitamos el patrón (A ocupado, B libre, C ocupado)
         # Intentamos encontrar una combinación válida aleatoriamente
-        for _ in range(1000):
+        for _ in range(500000):
             slots = random.sample(todos_huecos, total_bloques)
             es_valido = True
             for d in range(DIAS):
@@ -347,6 +356,9 @@ def _definir_huecos_ocupados(sandwich, total_bloques):
         return random.sample(todos_huecos, total_bloques)
 
 
+
+
+# --------------------------------------------------------------------------------------
 # Formato y visualización
 def format_horario(horario, semestre = None):
     dias = ['LUNES', 'MARTES', 'MIÉRCOLES', 'JUEVES', 'VIERNES']
@@ -419,13 +431,10 @@ def format_horario(horario, semestre = None):
         resultado.append(linea)
     return "\n".join(resultado)
 
-
 # Muetra el horario 
 def mostrar_horario(horario, semestre = None):
     print(format_horario(horario, semestre))
 
-
-# --------------------------------------------------------------------------------------
 # Exporta los horarios 
 def guardar_horario(horario, nombre_archivo, semestre = None, titulo_custom = None):
     ruta_base = os.path.dirname(os.path.abspath(__file__))
@@ -459,6 +468,8 @@ def guardar_horario(horario, nombre_archivo, semestre = None, titulo_custom = No
                     materias_vistas.add(celda['Asignatura'])
     return ruta_completa
 
+
+# Profe estas dos se las pedi a chat ya me habia cansado uwu.
 def mostrar_horarios_laboratorios(horarios_semestres):
     """
     Muestra dos tablas (Computo 1 y Computo 2) con las materias que los ocupan.
@@ -522,5 +533,4 @@ def guardar_horarios_laboratorios(horarios_semestres):
     for nombre_lab, matriz in labs.items():
         nombre_archivo = f"Horario_{nombre_lab.replace(' ', '_')}"
         guardar_horario(matriz, nombre_archivo, semestre=None, titulo_custom=f"Laboratorio {nombre_lab}")
-
 # --------------------------------------------------------------------------------------
