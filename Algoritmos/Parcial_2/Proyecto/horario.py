@@ -56,23 +56,25 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
 
     # Este es un diccionario llamado usadas que guarda las materias de la lista materias con un value de 0. 
     # Este es el diccionario donde veremos con que frecuencia aparece cada materia. 
-    usadas = {
-        m: 0 
-        for m in materias
-        }
+    
+    # Reemplazamos Dictionary Comprehension por ciclo FOR tradicional
+    usadas = {}
+    for m in materias:
+        usadas[m] = 0
     
     # Esta diccionario lo cree con el unico objetivo de que no se dupliquen las mateiras
-    materias_por_dia = {
-        dia: set() # TRUCASO GENTE
+    
+    # Reemplazamos Dictionary Comprehension por ciclo FOR tradicional
+    materias_por_dia = {}
+    for dia in range(DIAS):
+        materias_por_dia[dia] = set() # TRUCASO GENTE
         # Resulta que set() es una funcion que CREA CONJUNTOS.
         # Los conjuntos son estructuras que solo almacenan datos (Lit no tienen orden ni nada, solo los almacena)
         # pero con la ventaja de que NO permite datos duplicados, elimina el duplicado y que es mucho mas rapida
         # cuando queremos hacer operaciones "in" "not in" que es justo lo que necesitamos para saber si el conjunto (el dia)
         # ya tiene la materia que estamos intentando agregar.
         
-        for dia in range(DIAS)
         # Creamos 5 conjuntos vacios (dias)
-        }
     
     # Huecos guarda la lista de huecos_ocupados (actualemente vacia), la funcion _definir_huecos_ocupados es quien define esta lista.
     # sorted es una funciona que por default ordena de menor a mayor, sin embargo con key = '' podemos definir como queremos que ordene.
@@ -85,7 +87,14 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
             # all regresa verdadero UNICAMENTE si TODOS los argumentos dentro del parentesi son verdaderos.
             # Comparamos si la cantidad de veces que aparece una materia es igual a la cantidad de veces que se requiere que aparezca
             # Esta info la sacamos de la lista usadas con el parametro como el nombre de la materia, que es mat por cada materia en el diccionario de materias. XDXDXD
-            return all(usadas[mat] == requeridos[mat] for mat in materias)
+            
+            # Reemplazamos Generator Expression por ciclo FOR tradicional
+            todos_completos = True
+            for mat in materias:
+                if usadas[mat] != requeridos[mat]:
+                    todos_completos = False
+                    break
+            return todos_completos
         
         # Sacamos la tupla/coordenadas/bloques
         # dias, bloques
@@ -110,7 +119,14 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
         # NO confundir con un ciclo FOR, son similares pero no iguales.
         # La sintaxis de sorted es (iterable, regla (en este caso que despues de restar acomoden de menor a mayor pero como reverse == True va de mayor a menor), reverse = bool)
         ''' 
-        candidatas = sorted([materia for materia in materias if usadas[materia] < requeridos[materia] and materia not in materias_por_dia[d]], key = lambda m: requeridos[m] - usadas[m], reverse = True)
+        
+        # Reemplazamos la Generator Expression dentro de sorted por un ciclo FOR tradicional para filtrar candidatas
+        lista_filtrada = []
+        for materia in materias:
+            if usadas[materia] < requeridos[materia] and materia not in materias_por_dia[d]:
+                lista_filtrada.append(materia)
+        
+        candidatas = sorted(lista_filtrada, key = lambda m: requeridos[m] - usadas[m], reverse = True)
 
         # Por cada materia en candidatos ahora revisamos si el PROFESOR de esa materia esta disponible
         # Filtro del profesor
@@ -130,7 +146,16 @@ def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_
             # 2. Disponibilidad del profesor
             # Si no encontramos al profesor en la lista creamos un perfil temporal donde SIEMPRE esta dispo ese nuevo profesor
             # No me gusta pero si no me da error XDXDXD
-            disp = disponibilidad_profesores.get(prof, {'disponibilidad': [[True]*3 for _ in range(5)]})
+            
+            # Reemplazamos la List Comprehension dentro de dict temporal por ciclo FOR tradicional
+            dispo_default = []
+            for _ in range(5):
+                fila_dispo = []
+                for _ in range(3):
+                    fila_dispo.append(True)
+                dispo_default.append(fila_dispo)
+                
+            disp = disponibilidad_profesores.get(prof, {'disponibilidad': dispo_default})
             # Si ese dia y bloque NO es True, continue y pasamos al otro profesor
             if not disp['disponibilidad'][d][b]:
                 continue
@@ -254,7 +279,11 @@ def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich, d
     # Cuando se itera sobre disponibilidad guardamos la tupla nombre, max_horas en prof y datos respectivamente
     # y estas tuplas clave-valor se agregan al diccionario PROF_HORAS_RESTANTES en formato
     # prof: datos['max_horas'] 
-    prof_horas_restantes = {prof: datos['max_horas'] for prof, datos in disponibilidad_profesores.items()} 
+    
+    # Reemplazamos Dictionary Comprehension por ciclo FOR tradicional
+    prof_horas_restantes = {}
+    for prof, datos in disponibilidad_profesores.items():
+        prof_horas_restantes[prof] = datos['max_horas']
 
     # Llenamos todo con None, otra vez ...
     for sem in semestres:
@@ -265,7 +294,12 @@ def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich, d
 
         materias = materias_dict[sem] # Guardamos la materia actual (nombres)
         asignaturas = asignaturas_dict[sem] # Guardamos la asignatura actual (datos)
-        requeridos = {mat: asignaturas[mat]['Bloques'] for mat in materias} # Dictionary Comprehension
+        
+        # Reemplazamos Dictionary Comprehension por ciclo FOR tradicional
+        requeridos = {}
+        for mat in materias:
+            requeridos[mat] = asignaturas[mat]['Bloques']
+            
         total_bloques = sum(requeridos.values()) # Se suma la cantidad bloques totales para saber cuantos bloques se llenaran 
 
         huecos_ocupados = _definir_huecos_ocupados(sandwich, total_bloques)
@@ -297,7 +331,11 @@ def _definir_huecos_ocupados(sandwich, total_bloques):
     Si sandwich = False, NO se permiten espacios entre clases, pero se permite entrar tarde o salir temprano.
     """
 
-    todos_huecos = [(d, b) for d in range(DIAS) for b in range(BLOQUES)]
+    # Reemplazamos List Comprehension por ciclo FOR tradicional
+    todos_huecos = []
+    for d in range(DIAS):
+        for b in range(BLOQUES):
+            todos_huecos.append((d, b))
 
     if sandwich:
         # Si se permiten sandwiches, cualquier combinación de slots es válida
@@ -374,11 +412,22 @@ def format_horario(horario, semestre = None):
     resultado.append("=" * anchura_total)
     resultado.append(titulo.center(anchura_total))
     resultado.append("=" * anchura_total)
-    encabezado_str = '|' + '|'.join(ajustar(encabezados[col], anchos[col]).center(anchos[col]) for col in range(6)) + '|'
+    
+    # Reemplazamos Generator Expression dentro de join por ciclo FOR tradicional
+    encabezado_piezas = []
+    for col in range(6):
+        texto_ajustado = ajustar(encabezados[col], anchos[col])
+        encabezado_piezas.append(texto_ajustado.center(anchos[col]))
+    encabezado_str = '|' + '|'.join(encabezado_piezas) + '|'
+    
     resultado.append(encabezado_str)
     resultado.append(separador)
     for fila in filas_texto:
-        linea = '|' + '|'.join(fila[col].center(anchos[col]) for col in range(6)) + '|'
+        # Reemplazamos Generator Expression dentro de join por ciclo FOR tradicional
+        fila_piezas = []
+        for col in range(6):
+            fila_piezas.append(fila[col].center(anchos[col]))
+        linea = '|' + '|'.join(fila_piezas) + '|'
         resultado.append(linea)
     return "\n".join(resultado)
 
@@ -430,7 +479,14 @@ def mostrar_horarios_laboratorios(horarios_semestres):
     # Inicializar matrices vacías (5 días x 3 bloques)
 
     for lab in labs:
-        labs[lab] = [[None for _ in range(5)] for _ in range(3)]
+        # Reemplazamos List Comprehension por ciclo FOR tradicional
+        matriz_lab = []
+        for _ in range(3):
+            fila_lab = []
+            for _ in range(5):
+                fila_lab.append(None)
+            matriz_lab.append(fila_lab)
+        labs[lab] = matriz_lab
 
     # Recorrer todos los semestres y rellenar
     for sem, horario in horarios_semestres.items():
@@ -457,7 +513,14 @@ def guardar_horarios_laboratorios(horarios_semestres):
     """
     labs = {'Computo 1': None, 'Computo 2': None}
     for lab in labs:
-        labs[lab] = [[None for _ in range(5)] for _ in range(3)]
+        # Reemplazamos List Comprehension por ciclo FOR tradicional
+        matriz_lab = []
+        for _ in range(3):
+            fila_lab = []
+            for _ in range(5):
+                fila_lab.append(None)
+            matriz_lab.append(fila_lab)
+        labs[lab] = matriz_lab
 
     for sem, horario in horarios_semestres.items():
         for b in range(3):

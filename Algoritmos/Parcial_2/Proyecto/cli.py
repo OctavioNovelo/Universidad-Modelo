@@ -11,12 +11,18 @@ def limpiar_pantalla():
 # None, None, None, None, None
 # None, None, None, None, None
 # None, None, None, None, None
-horarios_semestres = {
-    1: [[None for _ in range(5)] for _ in range(3)],
-    2: [[None for _ in range(5)] for _ in range(3)],
-    3: [[None for _ in range(5)] for _ in range(3)],
-    4: [[None for _ in range(5)] for _ in range(3)]
-}
+
+# Reemplazamos la List Comprehension por un ciclo FOR tradicional para inicializar horarios_semestres
+horarios_semestres = {}
+for i in range(1, 5):
+    matriz_semestre = []
+    for _ in range(3):
+        # Creamos una fila de 5 elementos None (Lunes a Viernes)
+        fila = []
+        for _ in range(5):
+            fila.append(None)
+        matriz_semestre.append(fila)
+    horarios_semestres[i] = matriz_semestre
 
 # ------------------------------------------------------------
 # Asignaturas por semestre
@@ -149,61 +155,40 @@ materias_semestre_8 = list(asignaturas_semestre_8.keys())
         # True, True, True  Miercoles
         # True, True, True  Jueves
         # True, True, True  Viernes
-disponibilidad_profesores = { 
-    'Edson Geovanny Estrada Lopez': {
-        'max_horas': 12, # 6 bloques
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Ing. Juan Norberto Peniche Munoz': {
-        'max_horas': 10,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Dr. Alberto Gabriel Vega Poot': {
-        'max_horas': 10,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Mtra. Aylin Garcia Reyes': {
-        'max_horas': 12,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Mtro. Alfredo Jose Bolio Dominguez': {
-        'max_horas': 10,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Ing. Franklin Jesus Gonzales Torres': {
-        'max_horas': 10,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Ing. Jesus Alejandro Balam Sandoval': {
-        'max_horas': 10,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Mtro. Daniel Alejandro Martinez Lopez': {
-        'max_horas': 10,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Mtra. Vanessa Cob Gutierrez': {
-        'max_horas': 8,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Mtra. Kenia Nayrhovy Osorio Lopez': {
-        'max_horas': 6,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Mtra. Ana Bolio Ayora': {
-        'max_horas': 10,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Mtra. Grety del Socorro Basulto Morcillo': {
-        'max_horas': 10,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    },
-    'Mtro. Roberto Carlos Gamboa Ek': {
-        'max_horas': 10,
-        'disponibilidad': [[True, True, True] for _ in range(5)]
-    }
 
-}
+#--------------------------------------------------------------------------
+disponibilidad_profesores = {}
+
+profesores_datos = [
+    ('Edson Geovanny Estrada Lopez', 12),
+    ('Ing. Juan Norberto Peniche Munoz', 10),
+    ('Dr. Alberto Gabriel Vega Poot', 10),
+    ('Mtra. Aylin Garcia Reyes', 12),
+    ('Mtro. Alfredo Jose Bolio Dominguez', 10),
+    ('Ing. Franklin Jesus Gonzales Torres', 10),
+    ('Ing. Jesus Alejandro Balam Sandoval', 10),
+    ('Mtro. Daniel Alejandro Martinez Lopez', 10),
+    ('Mtra. Vanessa Cob Gutierrez', 8),
+    ('Mtra. Kenia Nayrhovy Osorio Lopez', 6),
+    ('Mtra. Ana Bolio Ayora', 10),
+    ('Mtra. Grety del Socorro Basulto Morcillo', 10),
+    ('Mtro. Roberto Carlos Gamboa Ek', 10)
+]
+
+for nombre, horas in profesores_datos:
+    matriz_dispo = []
+    for _ in range(5):
+        # Cada día tiene 3 bloques disponibles (True)
+        dia_dispo = []
+        for _ in range(3):
+            dia_dispo.append(True)
+        matriz_dispo.append(dia_dispo)
+    
+    disponibilidad_profesores[nombre] = {
+        'max_horas': horas,
+        'disponibilidad': matriz_dispo
+    }
+#--------------------------------------------------------------------------------
 
 def menu():
     print("\n --- Generador de horarios --- \n")
