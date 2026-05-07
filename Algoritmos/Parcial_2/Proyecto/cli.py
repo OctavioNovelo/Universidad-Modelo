@@ -205,7 +205,7 @@ def gestionar_profesores():
             nombre = seleccionar_profesor()
             if nombre:
                 dias_nombres = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
-                bloques_nombres = ["7-9", "9-11", "11-1"]
+                bloques_nombres = [" ", " ", " ", "7-9", "9-11", "11-1"]
                 while True:
                     limpiar_pantalla()
                     print(f"\n--- Horario de {nombre} ---")
@@ -234,8 +234,9 @@ def gestionar_profesores():
                         print(f"{dia:10} {'      '.join(estado)}")
 
                     print("\n(O = Disponible, X = NO Disponible)")
-                    print("\nIngrese el número de día (1-5) y bloque (1-3) para cambiar " \
-                    "Ej. '1 1' es Lunes 7am, o '0' para volver.")
+                    print("\nIngrese el número de día (1-5) y bloque (1-3) para cambiar")
+                    print("Ej. '1 1' es Lunes 7am")
+                    print("'0' para volver.")
                     try:
                         a = input(": ").split() # Es para separar ambos numeros, hay muchas formas de escribirlo asi que decidi limitarlo a este formato
                         if not a: continue
