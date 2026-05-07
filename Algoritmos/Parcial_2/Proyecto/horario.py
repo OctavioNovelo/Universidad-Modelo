@@ -36,7 +36,7 @@ BLOQUES = 3                  # A, B, C
 # ---------------------------------------------------------------------
 
 
-def restricciones(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_ocupado, lab_ocupado, disponibilidad_profesores, prof_horas_restantes):
+def generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_ocupado, lab_ocupado, disponibilidad_profesores, prof_horas_restantes):
     """
     Argumentos:
         horario: matriz 3x5 (Bloques x Dias)
@@ -79,7 +79,7 @@ def restricciones(horario, materias, requeridos, asignaturas, huecos_ocupados, p
     huecos = sorted(huecos_ocupados)
 
     # 
-    def backtrack(index):
+    def generar_horarios(index):
         # Si index == al tamano de la lista huecos significa que acabamos. 
         if index == len(huecos):
             # all regresa verdadero UNICAMENTE si TODOS los argumentos dentro del parentesi son verdaderos.
@@ -168,7 +168,7 @@ def restricciones(horario, materias, requeridos, asignaturas, huecos_ocupados, p
             prof_horas_restantes[prof] -= 1 
 
             # BACKTRACKING !!!
-            if backtrack(index + 1):
+            if generar_horarios(index + 1):
                 return True
                 # SI las asignaciones en los otros semestres es exitosa entonces retornaremos True indicando que los horarios se 
                 # generaron correctamente.
@@ -194,52 +194,52 @@ def restricciones(horario, materias, requeridos, asignaturas, huecos_ocupados, p
 
         # No se logro realizar los horarios    
         return False
-
-    if backtrack(0):
-        # Volcar asignación al horario
-        # Sabemos que asignacion contiene toda la info del bloque actual
-        # La sacamos de ahi y la guardamos en info (un diccionario copia de asignaturas)
+    
+    # Empezamos con el bloque index 0 
+    if generar_horarios(0):
+        # Hay que sacarlo de ahi y la guardamos en info (un diccionario copia de asignaturas)
         # prof esta puesto para no romper la sintaxis de la informacion.
+        # Asignacion ya tiene el horario resuelto.
         for (d, b), (mat, prof, salon) in asignacion.items():
+            # Copiamos la PLANTILLA de asignaturas[mat] en info
+            # NO confundir plantilla con informacion
             info = asignaturas[mat].copy()
+            
+            # Le pasamos la info especifica
             info['Asignatura'] = mat
             info['Salon'] = salon
             horario[b][d] = info
         return True
     return False
-# Nota mental: NO se exactamente para que es est ultimo 0, no se su utilidad.
-
 
 def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich, disponibilidad_profesores):
-    """
-    - Bloques fijos
-    - No repetición en el mismo día
-    - Disponibilidad y horas máximas de profesores
-    - Laboratorios de cómputo
-    - Huecos (entrada/salida/sandwich) según parámetro
-    """
 
     # Ordena los semestres de menor a mayor
-    semestres = sorted(horarios_dict.keys())
+    semestres = horarios_dict.keys()
 
-    # Sumamos las horas totales que el profe debe impartir dependiendo de las materias ----
-    # .items basicamente es la tupla de datos.
+    # Sumamos las horas totales que el profe debe impartir dependiendo de las materias
+    # .items basicamente son todas las tupla del diccionario DISPONIBILIDAD_PROFESORES.
     for prof, datos in disponibilidad_profesores.items(): # Agarra a un prof junto con sus horas_max
         horas_necesarias = 0
 
-        for sem in semestres: # Revisamos cada diccionario de materias
+        for sem in semestres: # Revisamos cada diccionario de materias (materias_semestre_2, 4, 6, 8)
+            # Asignaturas guarda el DICCIONARIO de las materias que contiene (profesores, salones, bloques, tipo)
+            # Por cada hueco/espacio en la cuadricula del horario (semestres) asignaturas guarda todas las keys 
+            # de la materia de turno. 
             asignaturas = asignaturas_dict[sem]
 
-            for mat, info in asignaturas.items(): # Revisa cada materia de cada diccionario
+            for mat, profe in asignaturas.items(): # Revisa cada materia de cada diccionario (las materias individuales)
                 # Si el maestro de esa materia es igual al nombre del profesor entonces se le suman
-                # la cantidad de bloques esa materia es necesario que aparezca
-                if info['Maestro'] == prof:
-                    horas_necesarias += info['Bloques']
-
+                # la cantidad de bloques que esa materia tiene que aparecer
+                # De esta forma calculamos la cantidad de bloques que cada profesor debe ensenar. 
+                if profe['Maestro'] == prof:
+                    horas_necesarias += profe['Bloques']
+                    
         # Si las horas necesarias TOTALES (ya considerando todas las materias que da en todos los semestres) es
         # MAS que el maximo de horas que el profesor puede dar, mostramos un error.
         if horas_necesarias > datos['max_horas']:
-            raise ValueError(f"El profesor {prof} requiere {horas_necesarias} bloques, "f"pero su máximo es {datos['max_horas']}.")
+            print(f"El profesor {prof} requiere {horas_necesarias} bloques, "f"pero su máximo es {datos['max_horas']}.")
+            input()
 
 
     # Estructuras globales
@@ -270,12 +270,12 @@ def generar_horarios(horarios_dict, asignaturas_dict, materias_dict, sandwich, d
 
         huecos_ocupados = _definir_huecos_ocupados(sandwich, total_bloques)
 
-        exito = restricciones(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_ocupado, lab_ocupado, disponibilidad_profesores, prof_horas_restantes)
+        exito = generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_ocupado, lab_ocupado, disponibilidad_profesores, prof_horas_restantes)
         if not exito:
             print(f"No se pudo generar el horario del semestre {sem}. Reintentando...")
             for _ in range(10):
                 huecos_ocupados = _definir_huecos_ocupados(sandwich, total_bloques)
-                exito = restricciones(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_ocupado, lab_ocupado, disponibilidad_profesores, prof_horas_restantes)
+                exito = generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_ocupado, lab_ocupado, disponibilidad_profesores, prof_horas_restantes)
                 if exito:
                     break
             if not exito:

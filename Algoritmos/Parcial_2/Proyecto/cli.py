@@ -1,5 +1,8 @@
-import subprocess
 import horario
+import os
+
+def limpiar_pantalla():
+    os.system('cls' if os.name == 'nt' else 'clear')
 
 # ------------------------------------------------------------
 # Estructura de horarios para los 4 semestres, los inicializamos todos en ""
@@ -210,24 +213,25 @@ def menu():
     print("\n 4) Salir. \n")
 
 def seleccion():
-    subprocess.run(["clear"])
+    limpiar_pantalla()
     menu()
     opcion = input("Selecciona una opción: ")
     match opcion:
         case '1':
-            subprocess.run(["clear"])
+            limpiar_pantalla()
             a = input("¿El horario puede tener horas muertas? (s/n): ").lower()
             sandwich = False
             if a == 's':
                 sandwich = True
 
-            # Diccionarios de asignaturas (incluye profesores, salones, bloques, tipo)
+            # Diccionarios de asignaturas (incluye profesores, salones, bloques, tipo) Aqui solo VEMOS la info
             asignaturas_por_sem = {
                 1: asignaturas_semestre_2,
                 2: asignaturas_semestre_4,
                 3: asignaturas_semestre_6,
                 4: asignaturas_semestre_8
             }
+            # Lista de asignaturas (incluye profesores, salones, bloques, tipo) Aqui LA podemos MODIFICAR
             materias_por_sem = {
                 1: materias_semestre_2,
                 2: materias_semestre_4,
@@ -255,7 +259,7 @@ def seleccion():
             input("Presiona una tecla para continuar...")
 
         case '2':
-            subprocess.run(["clear"])
+            limpiar_pantalla()
             print("\n Horario de qué semestre desea ver? ")
             print("\n 1) Segundo semestre.")
             print("\n 2) Cuarto semestre.")
@@ -263,7 +267,7 @@ def seleccion():
             print("\n 4) Octavo semestre.\n")
             a = int(input(": "))
             if a in horarios_semestres:
-                subprocess.run(["clear"])
+                limpiar_pantalla()
                 horario.mostrar_horario(horarios_semestres[a], a)
             else:
                 print("Opción no válida.")
@@ -271,12 +275,12 @@ def seleccion():
             input()
 
         case '3':
-            subprocess.run(["clear"])
+            limpiar_pantalla()
             horario.mostrar_horarios_laboratorios(horarios_semestres)
             input("\nPresiona una tecla para continuar...")
 
         case '4':
-            subprocess.run(["clear"])
+            limpiar_pantalla()
             print("\n Adios! \n")
             exit()
 
