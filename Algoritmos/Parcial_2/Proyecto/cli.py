@@ -312,15 +312,22 @@ def gestionar_materias():
                     tipo = input("Tipo (normal/laboratorio): ")
                     
                     asig, mats = asignaturas_por_sem[sem_val]
-                    asig[nombre] = {
-                        'Maestro': maestro,
-                        'Salon': salon,
-                        'Bloques': bloques,
-                        'Tipo': tipo
-                    }
-                    if nombre not in mats:
-                        mats.append(nombre)
-                    print("Materia agregada.")
+                    
+                    # Validamos que no exceda los 15 bloques
+                    total_actual = sum(d['Bloques'] for d in asig.values())
+                    if total_actual + bloques > 15:
+                        print(f"\n[!] Error: No se pueden agregar {bloques} bloques.")
+                        print(f"El semestre ya tiene {total_actual} bloques ocupados de 15 disponibles.")
+                    else:
+                        asig[nombre] = {
+                            'Maestro': maestro,
+                            'Salon': salon,
+                            'Bloques': bloques,
+                            'Tipo': tipo
+                        }
+                        if nombre not in mats:
+                            mats.append(nombre)
+                        print("Materia agregada.")
             except ValueError:
                 print("Entrada inválida.")
             input("\nPresiona una tecla para continuar...")
@@ -353,13 +360,19 @@ def gestionar_materias():
                         bloques_val = asig[nombre]['Bloques']
                     tipo = input(f"Nuevo Tipo (normal/laboratorio) [{asig[nombre]['Tipo']}]: ") or asig[nombre]['Tipo']
                     
-                    asig[nombre] = {
-                        'Maestro': maestro,
-                        'Salon': salon,
-                        'Bloques': bloques_val,
-                        'Tipo': tipo
-                    }
-                    print("Materia modificada.")
+                    # Validamos que no exceda los 15 bloques (excluyendo el valor anterior de esta misma materia)
+                    total_otros = sum(d['Bloques'] for k, d in asig.items() if k != nombre)
+                    if total_otros + bloques_val > 15:
+                        print(f"\n[!] Error: No se pueden asignar {bloques_val} bloques.")
+                        print(f"Las demás materias ya ocupan {total_otros} bloques de 15 disponibles.")
+                    else:
+                        asig[nombre] = {
+                            'Maestro': maestro,
+                            'Salon': salon,
+                            'Bloques': bloques_val,
+                            'Tipo': tipo
+                        }
+                        print("Materia modificada.")
             if not encontrada:
                 print("Materia no encontrada.")
             input("\nPresiona una tecla para continuar...")

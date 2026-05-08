@@ -297,6 +297,12 @@ def llenar_horario(horarios_dict, asignaturas_dict, materias_dict, sandwich, dis
             
         total_bloques = sum(requeridos.values()) # Se suma la cantidad bloques totales para saber cuantos bloques se llenaran 
 
+        # Validamos si hay mas bloques que espacios
+        if total_bloques > (DIAS * BLOQUES):
+            print(f"\n El semestre {sem} requiere {total_bloques} bloques, pero solo hay {DIAS * BLOQUES} espacios.")
+            print("Elimina o modifica materias para reducir los bloques.")
+            return False
+
         huecos_ocupados = definir_huecos_ocupados(sandwich, total_bloques)
 
         # --------------------------------------------------------------------------------------
@@ -305,7 +311,7 @@ def llenar_horario(horarios_dict, asignaturas_dict, materias_dict, sandwich, dis
         # Si no lo logra a la primera, chance habria que quitar esto no ? 
         if not exito:
             print(f"No se pudo generar el horario del semestre {sem}. Reintentando...")
-            for _ in range(100000):
+            for _ in range(500000):
                 huecos_ocupados = definir_huecos_ocupados(sandwich, total_bloques)
                 exito = generador(horario, materias, requeridos, asignaturas, huecos_ocupados, prof_ocupado, lab_ocupado, disponibilidad_profesores, prof_horas_restantes)
                 if exito:
