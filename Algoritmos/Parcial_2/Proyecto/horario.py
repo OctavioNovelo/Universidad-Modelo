@@ -265,7 +265,8 @@ def llenar_horario(horarios_dict, asignaturas_dict, materias_dict, sandwich, dis
         # MAS que el maximo de horas que el profesor puede dar, mostramos un error.
         if horas_necesarias > datos['max_horas']:
             print(f"El profesor {prof} requiere {horas_necesarias} bloques, "f"pero su máximo es {datos['max_horas']}.")
-            input()
+            input("Presione una tecla para continuar...")
+            return False
 
 
     # Estructuras globales
