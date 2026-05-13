@@ -73,6 +73,11 @@ def generador(horario, materias, requeridos, asignaturas, prof_ocupado, lab_ocup
         # cuando queremos hacer operaciones "in" "not in" que es justo lo que necesitamos para saber si el conjunto (el dia)
         # ya tiene la materia que estamos intentando agregar.
         
+        # ME CONFUNDI YO SOLO SOY IDIOTA
+        # AQUI ESTA LA EXPLICACION DEL SET NA MAS PORQUE ESTA SOLITO
+        # LAS MATERIAS QUE AGREGAMOS TIENEN UN CONJUTO VACIO COMO KEY PUES NO NECESITAMOS SU INFO, SOLO SU NOMBRE
+
+
         # Creamos 5 conjuntos vacios (dias)
     # ACABA FILTRO MATERIAS ----------------------------------------------------------------------------------------
 
@@ -83,6 +88,7 @@ def generador(horario, materias, requeridos, asignaturas, prof_ocupado, lab_ocup
         for b in range(BLOQUES):
             huecos.append((d, b))
 
+    #random.shuffle(huecos)
 
     def generar_horarios(index):
         # Si index == al tamano de la lista huecos significa que acabamos. 
@@ -135,9 +141,9 @@ def generador(horario, materias, requeridos, asignaturas, prof_ocupado, lab_ocup
         # (en ese momento) 
         candidatas = sorted(lista_filtrada, key = lambda m: requeridos[m] - usadas[m], reverse = True)
 
-        # Por cada materia en candidatos ahora revisamos si el PROFESOR de esa materia esta disponible
+
         for mat in candidatas:
-            if not sandwich and b == 2:
+            if sandwich and b == 2:
                 # Si el bloque A (0) tiene materia y el bloque B (1) esta vacio, no podemos poner materia en C
                 a = (d, 0) in asignacion and asignacion[(d, 0)] is not None
                 b = (d, 1) in asignacion and asignacion[(d, 1)] is None

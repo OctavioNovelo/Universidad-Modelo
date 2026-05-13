@@ -59,7 +59,7 @@ asignaturas_semestre_8 = {
     'Innovacion y emprendimiento': {'Maestro': 'Mtra. Kenia Nayrhovy Osorio Lopez', 'Salon': 'A4', 'Bloques': 2, 'Tipo': 'normal'},
     'Ambientes y arquitectura de microservidores': {'Maestro': 'Edson Geovanny Estrada Lopez', 'Salon': 'A4', 'Bloques': 3, 'Tipo': 'normal'},
     'Seguridad de software': {'Maestro': 'Mtro. Alfredo Jose Bolio Dominguez', 'Salon': 'A4', 'Bloques': 3, 'Tipo': 'normal'},
-    'Desarrollo basado en agentes': {'Maestro': 'Mtro. Daniel Alejandro Martinez Lopez', 'Salon': 'Computo 1', 'Bloques': 3, 'Tipo': 'laboratorio'},
+    'Desarrollo basado en agentes': {'Maestro': 'Mtro. Daniel Alejandro Martinez Lopez', 'Salon': 'Computo 1', 'Bloques': 2, 'Tipo': 'laboratorio'},
 }
 
 # Listas de materias por semestre
