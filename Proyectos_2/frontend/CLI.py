@@ -170,6 +170,7 @@ def nmap_detalles (contexto):
     return
 
 def mostrar_resultados_formateados(resultados):
+    # Hay que personalizar los outputs de cada herramienta para poder mostrar la info pertinente de cada caso. 
     if not resultados:
         print("No se encontraron coincidencias.")
         return

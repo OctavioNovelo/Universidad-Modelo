@@ -45,6 +45,8 @@ def internet_fallando(context, timing_level = 3):
             "-oX", f"{result_path}.xml"]
     subprocess.run(ejecutar_comando(args))
 
+# Esto debe ser la misma logica de ambos, no la llamada de ambos
+# O modificar la exportacion
 def full_pack(context):
     internet_lento(context)
     internet_fallando(context)
@@ -78,6 +80,8 @@ def admin_audit(context, timing_level=4):
     
     subprocess.run(ejecutar_comando(args))
 
+# Cambiar nombre
+# Explota si no encuentra hosts.txt al principio, por lo que no lo esta generando.
 def detectar_os_agresivo(context, timing_level=4):
     """Identificación profunda de dispositivos (Ghost ID)."""
     base_path = Path(__file__).parent.parent
