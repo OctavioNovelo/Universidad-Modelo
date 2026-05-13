@@ -169,9 +169,12 @@ def gestionar_profesores():
         if op == '1':
             limpiar_pantalla()
             print("\n--- Lista de Profesores ---")
-            # Imprimimos  los maestros y sus horas maximas en formato (prof, datos)
-            for prof, datos in disponibilidad_profesores.items():
-                print(f"- {prof} (Max bloques: {datos['max_horas']})")
+            # Imprimimos los maestros con un ID (indice + 1) para que sea mas facil identificarlos
+            # Tambien mostramos sus horas maximas de trabajo.
+            profesores = list(disponibilidad_profesores.keys())
+            for i, prof in enumerate(profesores):
+                datos = disponibilidad_profesores[prof]
+                print(f"{i + 1}) {prof:40} | Max bloques: {datos['max_horas']}")
             input("\nPresiona una tecla para continuar...")
         elif op == '2':
             nombre = input("Nombre del profesor: ")
@@ -205,57 +208,56 @@ def gestionar_profesores():
             nombre = seleccionar_profesor()
             if nombre:
                 dias_nombres = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"]
-                bloques_nombres = [" ", " ", " ", "7-9", "9-11", "11-1"]
+                bloques_nombres = ["7-9", "9-11", "11-1"]
                 while True:
                     limpiar_pantalla()
-                    print(f"\n--- Horario de {nombre} ---")
-                    # .join sirve para unificar todos los elementos de un iterable en uno solo.
-                    # Literalmente es lo mismo que + pero es mas "pythonico" segun google XDXDXDXD
-                    # Osea que bloques_nombres ya no seran varios, sera solo 1 y estara separado por " "
-                    print("   " + "  ".join(bloques_nombres))
-                    # Gente esto esta muy hard.
-                    # enumerate es una funcion que itera sobre dias_nombres y le da a la tupla de datos el indice actual
-                    # Es como darle esteroides a un FOR. 
+                    print(f"\n--- Disponibilidad de {nombre} ---")
+                    # Encabezado de los bloques
+                    print("            " + "     ".join(bloques_nombres))
+                    
+                    # Dibujamos la tabla numerada del 1 al 15
                     for i, dia in enumerate(dias_nombres):
                         estado = []
                         for b in range(3):
-                            # Revisamos toda la tabla de disponibilidad del profesor acutal y le asignamos
-                            # O (queria ponerle SI y NO pero no me termino de gusta como se veia, obte por tictac toe)
-                            # si se encuentra en la lista de profes disponibles y una X si NO se encuentra. 
-                            # Esto lo revisa dia, lo que nos permite la correcta visualizacion.
+                            # Calculamos el numero del slot (1-15)
+                            n_slot = (i * 3) + b + 1
+                            
+                            # Si esta disponible mostramos el numero, si no, una X
                             if disponibilidad_profesores[nombre]['disponibilidad'][i][b]:
-                                val = "O"
+                                val = f"[{n_slot:2}]"
                             else: 
-                                val = "X"
+                                val = "[ X ]"
 
-                            # Agregamos val a la lista que estamos mostrando
                             estado.append(val)
 
-                        print(f"{dia:10} {'      '.join(estado)}")
+                        print(f"{dia:10}  {'   '.join(estado)}")
 
-                    print("\n(O = Disponible, X = NO Disponible)")
-                    print("\nIngrese el número de día (1-5) y bloque (1-3) para cambiar")
-                    print("Ej. '1 1' es Lunes 7am")
+                    print("\n( # = Disponible, X = NO Disponible)")
+                    print("\nIngrese los números de los bloques a cambiar")
+                    print("Ej. '1 2 3' para cambiar todo el Lunes")
                     print("'0' para volver.")
+                    
                     try:
-                        a = input(": ").split() # Es para separar ambos numeros, hay muchas formas de escribirlo asi que decidi limitarlo a este formato
-                        if not a: continue
-                        if a[0] == '0': break
+                        seleccion_slots = input(": ").split()
+                        if not seleccion_slots: continue
+                        if seleccion_slots[0] == '0': break
 
-                        d_idx = int(a[0]) - 1 # indice del dia
-                        b_idx = int(a[1]) - 1 # indice del bloque
+                        for s_str in seleccion_slots:
+                            slot = int(s_str)
+                            if 1 <= slot <= 15:
+                                # Convertimos el numero de slot de vuelta a indices (i, b)
+                                d_idx = (slot - 1) // 3
+                                b_idx = (slot - 1) % 3
+                                
+                                # Invertimos el estado actual
+                                curr = disponibilidad_profesores[nombre]['disponibilidad'][d_idx][b_idx]
+                                disponibilidad_profesores[nombre]['disponibilidad'][d_idx][b_idx] = not curr
+                            else:
+                                print(f"Bloque {slot} fuera de rango.")
                         
-                        if 0 <= d_idx < 5 and 0 <= b_idx < 3:
-                            # Justificar o cambiar a algo mas simple
-                            curr = disponibilidad_profesores[nombre]['disponibilidad'][d_idx][b_idx]
-                            disponibilidad_profesores[nombre]['disponibilidad'][d_idx][b_idx] = not curr
-                        else:
-                            print("Indices fuera de rango.")
-                            input()
-                    # Siento que aqui se nota lo util que es try y except 
                     except (ValueError, IndexError):
-                        print("Entrada inválida.")
-                        input()
+                        print("Entrada inválida detectada.")
+                        input("Presiona una tecla para continuar...")
             else:
                 input("\nPresiona una tecla para continuar...")
         elif op == '5':
