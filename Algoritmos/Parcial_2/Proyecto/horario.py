@@ -143,11 +143,11 @@ def generador(horario, materias, requeridos, asignaturas, prof_ocupado, lab_ocup
 
 
         for mat in candidatas:
-            if sandwich and b == 2:
+            if not sandwich and b == 2:
                 # Si el bloque A (0) tiene materia y el bloque B (1) esta vacio, no podemos poner materia en C
                 a = (d, 0) in asignacion and asignacion[(d, 0)] is not None
-                b = (d, 1) in asignacion and asignacion[(d, 1)] is None
-                if a and b:
+                medio_vacio = (d, 1) in asignacion and asignacion[(d, 1)] is None
+                if a and medio_vacio:
                     continue
 
             # FILTRO PROFESOR  -----------------------------------------------------------------------
