@@ -1,5 +1,43 @@
 import horario
 import os
+import json
+
+def load_json(filename):
+    ruta_base = os.path.dirname(os.path.abspath(__file__))
+    ruta_json = os.path.join(ruta_base, "json", filename)
+    with open(ruta_json, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+# NOTA: Esta funcion es como el "Guardar Partida". Como ahora los datos no estan pegados aqui en el codigo
+# si cambiamos algo en el menu (como un profe o una materia) solo se cambia en la RAM. 
+# Si no "escribimos" ese cambio de vuelta al archivo .json, al cerrar el programa todo muere y explota y es lo mismo uk ? .
+def save_json(filename, data):
+    ruta_base = os.path.dirname(os.path.abspath(__file__))
+    ruta_json = os.path.join(ruta_base, "json", filename)
+    
+    # Si es la disponibilidad, la guardamos con un formato especial para que siga pareciendo una matriz
+    # y no un tripal de mil lineas que no se entiende. Si es cualquier otra cosa, json.dump normal y ya.
+    if filename == 'disponibilidad_profesores.json':
+        def format_dispo(dispo):
+            rows = []
+            for row in dispo:
+                rows.append('            ' + json.dumps(row))
+            return '[\n' + ',\n'.join(rows) + '\n        ]'
+
+        output = '{\n'
+        items = []
+        for key, info in data.items():
+            item_json = '    \"' + key + '\": {\n'
+            item_json += '        \"max_horas\": ' + str(info['max_horas']) + ',\n'
+            item_json += '        \"disponibilidad\": ' + format_dispo(info['disponibilidad']) + '\n'
+            item_json += '    }'
+            items.append(item_json)
+        output += ',\n'.join(items) + '\n}'
+        with open(ruta_json, "w", encoding="utf-8") as f:
+            f.write(output)
+    else:
+        with open(ruta_json, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
 
 def limpiar_pantalla():
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -12,7 +50,7 @@ def limpiar_pantalla():
 # None, None, None, None, None
 # None, None, None, None, None
 
-# Reemplazamos la List Comprehension por un ciclo FOR tradicional para inicializar horarios_semestres
+
 horarios_semestres = {}
 for i in range(1, 5):
     matriz_semestre = []
@@ -26,41 +64,10 @@ for i in range(1, 5):
 
 # ------------------------------------------------------------
 # Asignaturas por semestre
-asignaturas_semestre_2 = {
-    'Algoritmos': {'Maestro': 'Edson Geovanny Estrada Lopez','Salon': 'Computo 2', 'Bloques': 2, 'Tipo': 'laboratorio'},
-    'Algebra matricial y vectorial': {'Maestro': 'Ing. Juan Norberto Peniche Munoz','Salon': 'A1', 'Bloques': 2, 'Tipo': 'normal'},
-    'Fisica aplicada': {'Maestro': 'Dr. Alberto Gabriel Vega Poot','Salon': 'A1', 'Bloques': 2, 'Tipo': 'normal'},
-    'Calculo diferencial': {'Maestro': 'Mtra. Aylin Garcia Reyes','Salon': 'A1', 'Bloques': 3, 'Tipo': 'normal'},
-    'Sistemas Operativos': {'Maestro': 'Mtro. Alfredo Jose Bolio Dominguez','Salon': 'A1', 'Bloques': 2, 'Tipo': 'normal'},
-    'Redes de computadoras': {'Maestro': 'Ing. Franklin Jesus Gonzales Torres','Salon': 'A1', 'Bloques': 2, 'Tipo': 'normal'}
-}
-
-asignaturas_semestre_4 = {
-    'Estadistica Inferencial': {'Maestro': 'Mtra. Aylin Garcia Reyes', 'Salon': 'A2', 'Bloques': 2, 'Tipo': 'normal'},
-    'Ingenieria ecnonomica': {'Maestro': 'Mtra. Grety del Socorro Basulto Morcillo', 'Salon': 'A2', 'Bloques': 1, 'Tipo': 'normal'},
-    'Circuitos electricos y electronicos': {'Maestro': 'Mtro. Roberto Carlos Gamboa Ek', 'Salon': 'A2', 'Bloques': 3, 'Tipo': 'normal'},
-    'Programacion aplicada a videojuegos': {'Maestro': 'Ing. Jesus Alejandro Balam Sandoval', 'Salon': 'Computo 1', 'Bloques': 2, 'Tipo': 'laboratorio'},
-    'Base de datos II': {'Maestro': 'Mtro. Daniel Alejandro Martinez Lopez', 'Salon': 'A2', 'Bloques': 2, 'Tipo': 'normal'},
-    'Fundamentos de diseno': {'Maestro': 'Mtra. Ana Bolio Ayora', 'Salon': 'A2', 'Bloques': 2, 'Tipo': 'normal'},
-}
-
-asignaturas_semestre_6 = {
-    'Sistemas graficos': {'Maestro': 'Mtra. Ana Bolio Ayora', 'Salon': 'A3', 'Bloques': 2, 'Tipo': 'normal'},
-    'Desarrollo Web II': {'Maestro': 'Mtro. Daniel Alejandro Martinez Lopez', 'Salon': 'A3', 'Bloques': 2, 'Tipo': 'normal'},
-    'Proyeccion y modelado de software': {'Maestro': 'Edson Geovanny Estrada Lopez', 'Salon': 'Computo 2', 'Bloques': 2, 'Tipo': 'laboratorio'},
-    'Internet de las cosas': {'Maestro': 'Ing. Franklin Jesus Gonzales Torres', 'Salon': 'A3', 'Bloques': 2, 'Tipo': 'normal'},
-    'Aministracion de procesos de negocios': {'Maestro': 'Mtra. Grety del Socorro Basulto Morcillo', 'Salon': 'A3', 'Bloques': 2, 'Tipo': 'normal'},
-    'Desarrollo movil I': {'Maestro': 'Ing. Jesus Alejandro Balam Sandoval', 'Salon': 'A3', 'Bloques': 2, 'Tipo': 'normal'},
-}
-
-asignaturas_semestre_8 = {
-    'Desarrollo de videojuegos': {'Maestro': 'Ing. Jesus Alejandro Balam Sandoval', 'Salon': 'A4', 'Bloques': 3, 'Tipo': 'normal'},
-    'Analisis politico y socieconomico de mexico': {'Maestro': 'Mtra. Vanessa Cob Gutierrez', 'Salon': 'A4', 'Bloques': 2, 'Tipo': 'normal'},
-    'Innovacion y emprendimiento': {'Maestro': 'Mtra. Kenia Nayrhovy Osorio Lopez', 'Salon': 'A4', 'Bloques': 2, 'Tipo': 'normal'},
-    'Ambientes y arquitectura de microservidores': {'Maestro': 'Edson Geovanny Estrada Lopez', 'Salon': 'A4', 'Bloques': 3, 'Tipo': 'normal'},
-    'Seguridad de software': {'Maestro': 'Mtro. Alfredo Jose Bolio Dominguez', 'Salon': 'A4', 'Bloques': 3, 'Tipo': 'normal'},
-    'Desarrollo basado en agentes': {'Maestro': 'Mtro. Daniel Alejandro Martinez Lopez', 'Salon': 'Computo 1', 'Bloques': 2, 'Tipo': 'laboratorio'},
-}
+asignaturas_semestre_2 = load_json('asignaturas_semestre_2.json')
+asignaturas_semestre_4 = load_json('asignaturas_semestre_4.json')
+asignaturas_semestre_6 = load_json('asignaturas_semestre_6.json')
+asignaturas_semestre_8 = load_json('asignaturas_semestre_8.json')
 
 # Listas de materias por semestre
 # La funcion list sirve para poder convertir un objeto en una lista para poder manipularla
@@ -85,37 +92,8 @@ materias_semestre_8 = list(asignaturas_semestre_8.keys())
         # True, True, True  Viernes
 
 #--------------------------------------------------------------------------
-disponibilidad_profesores = {}
-
-profesores_datos = [
-    ('Edson Geovanny Estrada Lopez', 15),
-    ('Ing. Juan Norberto Peniche Munoz', 10),
-    ('Dr. Alberto Gabriel Vega Poot', 8),
-    ('Mtra. Aylin Garcia Reyes', 7),
-    ('Mtro. Alfredo Jose Bolio Dominguez', 9),
-    ('Ing. Franklin Jesus Gonzales Torres', 6),
-    ('Ing. Jesus Alejandro Balam Sandoval', 8),
-    ('Mtro. Daniel Alejandro Martinez Lopez', 10),
-    ('Mtra. Vanessa Cob Gutierrez', 7),
-    ('Mtra. Kenia Nayrhovy Osorio Lopez', 6),
-    ('Mtra. Ana Bolio Ayora', 8),
-    ('Mtra. Grety del Socorro Basulto Morcillo', 7),
-    ('Mtro. Roberto Carlos Gamboa Ek', 9)
-]
-
-for nombre, horas in profesores_datos:
-    matriz_dispo = []
-    for _ in range(5):
-        # Cada día tiene 3 bloques disponibles (True)
-        dia_dispo = []
-        for _ in range(3):
-            dia_dispo.append(True)
-        matriz_dispo.append(dia_dispo)
-    
-    disponibilidad_profesores[nombre] = {
-        'max_horas': horas,
-        'disponibilidad': matriz_dispo
-    }
+# Cada día tiene 3 bloques disponibles (True)
+disponibilidad_profesores = load_json('disponibilidad_profesores.json')
 #--------------------------------------------------------------------------------
 
 def menu():
@@ -186,11 +164,12 @@ def gestionar_profesores():
                 try:
                     horas = int(input("Máximo de horas (1 bloque = 2 horas): "))
                     # YA sabemos como funciona esto gente no se hagan. 
-                    dispo = [[True for _ in range(3)] for _ in range(5)]
+                    dispo = [[True for _ in range(5)] for _ in range(3)]
                     disponibilidad_profesores[nombre] = {
                         'max_horas': horas,
                         'disponibilidad': dispo
                     }
+                    save_json('disponibilidad_profesores.json', disponibilidad_profesores)
                     print("Profesor agregado.")
                 except ValueError:
                     print("Horas inválidas.")
@@ -201,6 +180,7 @@ def gestionar_profesores():
             if nombre:
                 # Borramos con del al profesor
                 del disponibilidad_profesores[nombre]
+                save_json('disponibilidad_profesores.json', disponibilidad_profesores)
                 print(f"Profesor {nombre} eliminado.")
             input("\nPresiona una tecla para continuar...")
         elif op == '4':
@@ -223,7 +203,7 @@ def gestionar_profesores():
                             n_slot = (i * 3) + b + 1
                             
                             # Si esta disponible mostramos el numero, si no, una X
-                            if disponibilidad_profesores[nombre]['disponibilidad'][i][b]:
+                            if disponibilidad_profesores[nombre]['disponibilidad'][b][i]:
                                 val = f"[{n_slot:2}]"
                             else: 
                                 val = "[ X ]"
@@ -240,7 +220,9 @@ def gestionar_profesores():
                     try:
                         seleccion_slots = input(": ").split()
                         if not seleccion_slots: continue
-                        if seleccion_slots[0] == '0': break
+                        if seleccion_slots[0] == '0':
+                            save_json('disponibilidad_profesores.json', disponibilidad_profesores)
+                            break
 
                         for s_str in seleccion_slots:
                             slot = int(s_str)
@@ -250,8 +232,8 @@ def gestionar_profesores():
                                 b_idx = (slot - 1) % 3
                                 
                                 # Invertimos el estado actual
-                                curr = disponibilidad_profesores[nombre]['disponibilidad'][d_idx][b_idx]
-                                disponibilidad_profesores[nombre]['disponibilidad'][d_idx][b_idx] = not curr
+                                curr = disponibilidad_profesores[nombre]['disponibilidad'][b_idx][d_idx]
+                                disponibilidad_profesores[nombre]['disponibilidad'][b_idx][d_idx] = not curr
                             else:
                                 print(f"Bloque {slot} fuera de rango.")
                         
@@ -268,6 +250,7 @@ def gestionar_profesores():
                     print(f"Máximo actual de horas para {nombre}: {disponibilidad_profesores[nombre]['max_horas']}")
                     nuevas_horas = int(input("Ingrese el nuevo máximo de horas: "))
                     disponibilidad_profesores[nombre]['max_horas'] = nuevas_horas
+                    save_json('disponibilidad_profesores.json', disponibilidad_profesores)
                     print("Máximo de horas actualizado.")
                 except ValueError:
                     print("Entrada inválida.")
@@ -277,6 +260,14 @@ def gestionar_profesores():
             break
 
 def gestionar_materias():
+    # Mapeo de semestre a su respectivo archivo JSON
+    archivos_json = {
+        1: 'asignaturas_semestre_2.json',
+        2: 'asignaturas_semestre_4.json',
+        3: 'asignaturas_semestre_6.json',
+        4: 'asignaturas_semestre_8.json'
+    }
+    
     asignaturas_por_sem = {
         1: (asignaturas_semestre_2, materias_semestre_2),
         2: (asignaturas_semestre_4, materias_semestre_4),
@@ -329,6 +320,8 @@ def gestionar_materias():
                         }
                         if nombre not in mats:
                             mats.append(nombre)
+                        
+                        save_json(archivos_json[sem_val], asig)
                         print("Materia agregada.")
             except ValueError:
                 print("Entrada inválida.")
@@ -342,6 +335,7 @@ def gestionar_materias():
                     if nombre in mats:
                         mats.remove(nombre)
                     encontrada = True
+                    save_json(archivos_json[sem_key], asig)
                     print(f"Materia eliminada del semestre {sem_key*2}.")
             if not encontrada:
                 print("Materia no encontrada.")
@@ -374,6 +368,7 @@ def gestionar_materias():
                             'Bloques': bloques_val,
                             'Tipo': tipo
                         }
+                        save_json(archivos_json[sem_key], asig)
                         print("Materia modificada.")
             if not encontrada:
                 print("Materia no encontrada.")
@@ -428,13 +423,9 @@ def seleccion():
             horario.llenar_horario(horarios_semestres, asignaturas_por_sem, materias_por_sem, sandwich, disponibilidad_profesores)
 
             # Guardar horarios generados
+            nombres_raw = load_json('nombres_semestres.json')
+            nombres = {int(k): v for k, v in nombres_raw.items()}
             for i in range(1, 5):
-                nombres = {
-                    1: "Segundo Semestre",
-                    2: "Cuarto Semestre",
-                    3: "Sexto Semestre",
-                    4: "Octavo Semestre"
-                }
                 horario.guardar_horario(horarios_semestres[i], nombres[i], i)
             
             # Exportar horarios de laboratorio

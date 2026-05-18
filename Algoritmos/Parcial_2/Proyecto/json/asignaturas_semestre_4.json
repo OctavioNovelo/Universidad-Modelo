@@ -1,0 +1,38 @@
+{
+    "Estadistica Inferencial": {
+        "Maestro": "Mtra. Aylin Garcia Reyes",
+        "Salon": "A2",
+        "Bloques": 2,
+        "Tipo": "normal"
+    },
+    "Ingenieria ecnonomica": {
+        "Maestro": "Mtra. Grety del Socorro Basulto Morcillo",
+        "Salon": "A2",
+        "Bloques": 1,
+        "Tipo": "normal"
+    },
+    "Circuitos electricos y electronicos": {
+        "Maestro": "Mtro. Roberto Carlos Gamboa Ek",
+        "Salon": "A2",
+        "Bloques": 3,
+        "Tipo": "normal"
+    },
+    "Programacion aplicada a videojuegos": {
+        "Maestro": "Ing. Jesus Alejandro Balam Sandoval",
+        "Salon": "Computo 1",
+        "Bloques": 2,
+        "Tipo": "laboratorio"
+    },
+    "Base de datos II": {
+        "Maestro": "Mtro. Daniel Alejandro Martinez Lopez",
+        "Salon": "A2",
+        "Bloques": 2,
+        "Tipo": "normal"
+    },
+    "Fundamentos de diseno": {
+        "Maestro": "Mtra. Ana Bolio Ayora",
+        "Salon": "A2",
+        "Bloques": 2,
+        "Tipo": "normal"
+    }
+}

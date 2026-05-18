@@ -1,0 +1,38 @@
+{
+    "Sistemas graficos": {
+        "Maestro": "Mtra. Ana Bolio Ayora",
+        "Salon": "A3",
+        "Bloques": 2,
+        "Tipo": "normal"
+    },
+    "Desarrollo Web II": {
+        "Maestro": "Mtro. Daniel Alejandro Martinez Lopez",
+        "Salon": "A3",
+        "Bloques": 2,
+        "Tipo": "normal"
+    },
+    "Proyeccion y modelado de software": {
+        "Maestro": "Edson Geovanny Estrada Lopez",
+        "Salon": "Computo 2",
+        "Bloques": 2,
+        "Tipo": "laboratorio"
+    },
+    "Internet de las cosas": {
+        "Maestro": "Ing. Franklin Jesus Gonzales Torres",
+        "Salon": "A3",
+        "Bloques": 2,
+        "Tipo": "normal"
+    },
+    "Aministracion de procesos de negocios": {
+        "Maestro": "Mtra. Grety del Socorro Basulto Morcillo",
+        "Salon": "A3",
+        "Bloques": 2,
+        "Tipo": "normal"
+    },
+    "Desarrollo movil I": {
+        "Maestro": "Ing. Jesus Alejandro Balam Sandoval",
+        "Salon": "A3",
+        "Bloques": 2,
+        "Tipo": "normal"
+    }
+}

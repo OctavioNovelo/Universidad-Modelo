@@ -1,0 +1,38 @@
+{
+    "Algoritmos": {
+        "Maestro": "Edson Geovanny Estrada Lopez",
+        "Salon": "Computo 2",
+        "Bloques": 2,
+        "Tipo": "laboratorio"
+    },
+    "Algebra matricial y vectorial": {
+        "Maestro": "Ing. Juan Norberto Peniche Munoz",
+        "Salon": "A1",
+        "Bloques": 2,
+        "Tipo": "normal"
+    },
+    "Fisica aplicada": {
+        "Maestro": "Dr. Alberto Gabriel Vega Poot",
+        "Salon": "A1",
+        "Bloques": 2,
+        "Tipo": "normal"
+    },
+    "Calculo diferencial": {
+        "Maestro": "Mtra. Aylin Garcia Reyes",
+        "Salon": "A1",
+        "Bloques": 3,
+        "Tipo": "normal"
+    },
+    "Sistemas Operativos": {
+        "Maestro": "Mtro. Alfredo Jose Bolio Dominguez",
+        "Salon": "A1",
+        "Bloques": 2,
+        "Tipo": "normal"
+    },
+    "Redes de computadoras": {
+        "Maestro": "Ing. Franklin Jesus Gonzales Torres",
+        "Salon": "A1",
+        "Bloques": 2,
+        "Tipo": "normal"
+    }
+}

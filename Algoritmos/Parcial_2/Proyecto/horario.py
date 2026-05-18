@@ -25,9 +25,14 @@ Se deben mostrar los horarios en un tabla.
 # NOTA MENTAL: El codigo creo que se construye en el camino.
 import random
 import os
+import json
 
-# List Comprehension
-# Dictionary Comprehension
+# Con esta funciona procesamos los json 
+def load_json(filename):
+    ruta_base = os.path.dirname(os.path.abspath(__file__))
+    ruta_json = os.path.join(ruta_base, "json", filename)
+    with open(ruta_json, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 # ---------------------------------------------------------------------
 # Constantes
@@ -88,7 +93,6 @@ def generador(horario, materias, requeridos, asignaturas, prof_ocupado, lab_ocup
         for b in range(BLOQUES):
             huecos.append((d, b))
 
-    #random.shuffle(huecos)
 
     def generar_horarios(index):
         # Si index == al tamano de la lista huecos significa que acabamos. 
@@ -167,15 +171,15 @@ def generador(horario, materias, requeridos, asignaturas, prof_ocupado, lab_ocup
             # Si no encontramos al profesor en la lista creamos un perfil temporal donde SIEMPRE esta dispo ese nuevo profesor
             # No me gusta pero si no me da error XDXDXD
             dispo_default = []
-            for _ in range(5):
+            for _ in range(3):
                 fila_dispo = []
-                for _ in range(3):
+                for _ in range(5):
                     fila_dispo.append(True)
                 dispo_default.append(fila_dispo)
             
             disp = disponibilidad_profesores.get(prof, {'disponibilidad': dispo_default})
             # Si ese dia y bloque NO es True, continue y pasamos al otro profesor
-            if not disp['disponibilidad'][d][b]:
+            if not disp['disponibilidad'][b][d]:
                 continue
             # Si ese dia es True entonces avanzamos al siguiente filtro
 
@@ -362,12 +366,10 @@ def format_horario(horario, semestre = None):
     encabezados = ['HORA'] + dias
     bloques_nombre = ['7:00 - 9:00', '9:00 - 11:00', '11:00 - 13:00']
 
-    nombres_semestres = {
-        1: "Segundo Semestre",
-        2: "Cuarto Semestre",
-        3: "Sexto Semestre",
-        4: "Octavo Semestre"
-    }
+    nombres_semestres_raw = load_json('nombres_semestres.json')
+    nombres_semestres = {}
+    for k, v in nombres_semestres_raw.items():
+        nombres_semestres[int(k)] = v
     titulo = nombres_semestres.get(semestre, "Horario")
 
     filas_texto = []
@@ -471,7 +473,7 @@ def mostrar_horarios_laboratorios(horarios_semestres):
     """
     Muestra dos tablas (Computo 1 y Computo 2) con las materias que los ocupan.
     """
-    labs = {'Computo 1': None, 'Computo 2': None}
+    labs = load_json('labs.json')
     # Inicializar matrices vacías (5 días x 3 bloques)
 
     for lab in labs:
@@ -507,7 +509,7 @@ def guardar_horarios_laboratorios(horarios_semestres):
     """
     Exporta los horarios de los laboratorios a archivos .txt
     """
-    labs = {'Computo 1': None, 'Computo 2': None}
+    labs = load_json('labs.json')
     for lab in labs:
         # Reemplazamos List Comprehension por ciclo FOR tradicional
         matriz_lab = []
