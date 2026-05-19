@@ -1,0 +1,106 @@
+{
+    "Edson Geovanny Estrada Lopez": {
+        "max_horas": 15,
+        "disponibilidad": [
+            [true, true, false, true, true],
+            [true, false, true, true, false],
+            [true, true, true, false, true]
+        ]
+    },
+    "Ing. Juan Norberto Peniche Munoz": {
+        "max_horas": 10,
+        "disponibilidad": [
+            [true, false, true, true, false],
+            [true, true, false, true, true],
+            [false, true, true, false, true]
+        ]
+    },
+    "Dr. Alberto Gabriel Vega Poot": {
+        "max_horas": 8,
+        "disponibilidad": [
+            [false, true, true, false, true],
+            [true, true, false, true, false],
+            [true, false, true, true, true]
+        ]
+    },
+    "Mtra. Aylin Garcia Reyes": {
+        "max_horas": 7,
+        "disponibilidad": [
+            [true, true, false, true, false],
+            [false, true, true, false, true],
+            [true, false, true, true, false]
+        ]
+    },
+    "Mtro. Alfredo Jose Bolio Dominguez": {
+        "max_horas": 9,
+        "disponibilidad": [
+            [true, false, true, true, true],
+            [true, true, false, false, true],
+            [false, true, true, true, false]
+        ]
+    },
+    "Ing. Franklin Jesus Gonzales Torres": {
+        "max_horas": 6,
+        "disponibilidad": [
+            [false, true, true, false, true],
+            [true, false, true, true, false],
+            [true, true, false, true, false]
+        ]
+    },
+    "Ing. Jesus Alejandro Balam Sandoval": {
+        "max_horas": 8,
+        "disponibilidad": [
+            [true, true, false, true, false],
+            [true, false, true, true, true],
+            [false, true, true, false, true]
+        ]
+    },
+    "Mtro. Daniel Alejandro Martinez Lopez": {
+        "max_horas": 10,
+        "disponibilidad": [
+            [true, false, true, false, true],
+            [true, true, true, false, true],
+            [false, true, false, true, true]
+        ]
+    },
+    "Mtra. Vanessa Cob Gutierrez": {
+        "max_horas": 7,
+        "disponibilidad": [
+            [false, true, true, true, false],
+            [true, false, true, true, true],
+            [true, true, false, false, true]
+        ]
+    },
+    "Mtra. Kenia Nayrhovy Osorio Lopez": {
+        "max_horas": 6,
+        "disponibilidad": [
+            [true, false, true, true, false],
+            [false, true, true, false, true],
+            [true, true, false, true, true]
+        ]
+    },
+    "Mtra. Ana Bolio Ayora": {
+        "max_horas": 8,
+        "disponibilidad": [
+            [true, true, false, false, true],
+            [true, false, true, true, false],
+            [false, true, true, true, true]
+        ]
+    },
+    "Mtra. Grety del Socorro Basulto Morcillo": {
+        "max_horas": 7,
+        "disponibilidad": [
+            [true, false, true, true, false],
+            [true, true, false, true, true],
+            [false, true, true, false, true]
+        ]
+    },
+    "Mtro. Roberto Carlos Gamboa Ek": {
+        "max_horas": 9,
+        "disponibilidad": [
+            [true, true, false, true, true],
+            [false, true, true, false, true],
+            [true, false, true, true, false]
+        ]
+    }
+}
