@@ -17,7 +17,7 @@ def save_json(filename, data):
     
     # Si es la disponibilidad, la guardamos con un formato especial para que siga pareciendo una matriz
     # y no un tripal de mil lineas que no se entiende. Si es cualquier otra cosa, json.dump normal y ya.
-    if filename == 'disponibilidad_profesores_3.json':
+    if filename == 'disponibilidad_profesores.json':
         def format_dispo(dispo):
             rows = []
             for row in dispo:
@@ -93,7 +93,7 @@ materias_semestre_8 = list(asignaturas_semestre_8.keys())
 
 #--------------------------------------------------------------------------
 # Cada día tiene 3 bloques disponibles (True)
-disponibilidad_profesores = load_json('disponibilidad_profesores_3.json')
+disponibilidad_profesores = load_json('disponibilidad_profesores.json')
 #--------------------------------------------------------------------------------
 
 def menu():
@@ -169,7 +169,7 @@ def gestionar_profesores():
                         'max_horas': horas,
                         'disponibilidad': dispo
                     }
-                    save_json('disponibilidad_profesores_3.json', disponibilidad_profesores)
+                    save_json('disponibilidad_profesores.json', disponibilidad_profesores)
                     print("Profesor agregado.")
                 except ValueError:
                     print("Horas inválidas.")
@@ -180,7 +180,7 @@ def gestionar_profesores():
             if nombre:
                 # Borramos con del al profesor
                 del disponibilidad_profesores[nombre]
-                save_json('disponibilidad_profesores_3.json', disponibilidad_profesores)
+                save_json('disponibilidad_profesores.json', disponibilidad_profesores)
                 print(f"Profesor {nombre} eliminado.")
             input("\nPresiona una tecla para continuar...")
         elif op == '4':
@@ -221,7 +221,7 @@ def gestionar_profesores():
                         seleccion_slots = input(": ").split()
                         if not seleccion_slots: continue
                         if seleccion_slots[0] == '0':
-                            save_json('disponibilidad_profesores_3.json', disponibilidad_profesores)
+                            save_json('disponibilidad_profesores.json', disponibilidad_profesores)
                             break
 
                         for s_str in seleccion_slots:
@@ -250,7 +250,7 @@ def gestionar_profesores():
                     print(f"Máximo actual de horas para {nombre}: {disponibilidad_profesores[nombre]['max_horas']}")
                     nuevas_horas = int(input("Ingrese el nuevo máximo de horas: "))
                     disponibilidad_profesores[nombre]['max_horas'] = nuevas_horas
-                    save_json('disponibilidad_profesores_3.json', disponibilidad_profesores)
+                    save_json('disponibilidad_profesores.json', disponibilidad_profesores)
                     print("Máximo de horas actualizado.")
                 except ValueError:
                     print("Entrada inválida.")
@@ -311,6 +311,8 @@ def gestionar_materias():
                     if total_actual + bloques > 15:
                         print(f"\n[!] Error: No se pueden agregar {bloques} bloques.")
                         print(f"El semestre ya tiene {total_actual} bloques ocupados de 15 disponibles.")
+                    elif any(d['Maestro'] == maestro for d in asig.values()):
+                        print(f"\n[!] Error: El profesor '{maestro}' ya tiene una materia asignada en este semestre.")
                     else:
                         asig[nombre] = {
                             'Maestro': maestro,
@@ -361,6 +363,8 @@ def gestionar_materias():
                     if total_otros + bloques_val > 15:
                         print(f"\n[!] Error: No se pueden asignar {bloques_val} bloques.")
                         print(f"Las demás materias ya ocupan {total_otros} bloques de 15 disponibles.")
+                    elif any(d['Maestro'] == maestro and k != nombre for k, d in asig.items()):
+                        print(f"\n[!] Error: El profesor '{maestro}' ya tiene otra materia en este semestre.")
                     else:
                         asig[nombre] = {
                             'Maestro': maestro,
