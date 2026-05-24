@@ -58,9 +58,9 @@
     "Mtro. Daniel Alejandro Martinez Lopez": {
         "max_horas": 10,
         "disponibilidad": [
-            [true, false, true, false, true],
-            [true, true, true, false, true],
-            [false, true, false, true, true]
+            [true, false, true, false, false],
+            [true, true, true, false, false],
+            [false, true, false, false, false]
         ]
     },
     "Mtra. Vanessa Cob Gutierrez": {
