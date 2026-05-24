@@ -100,16 +100,19 @@ def generador(horarios_dict,materias_dict,asignaturas_dict,prof_ocupado,lab_ocup
         for b in range(BLOQUES):
             huecos.append((d, b))
 
+
+    #El algoritmo esta probando colocar la materia en todos los huecos, es un backtracking raro, No agarra el hueco y en ese mismo prueba varias
+    #materias, sino que agarra las materias y las va probando en los huecos. Sigue funcionando pero es de esa manera
     def generar_horarios(index):
         # Caso base: si ya procesamos todas las materias de pendientes,verificamos que todas quedaron completas
-        if index == len(pendientes):
+        if index == len(pendientes):  #Ya se recorrieron todas
             for clave in usadas:
-                if usadas[clave] != requeridos[clave]:
+                if usadas[clave] != requeridos[clave]:  #todas las materias tienen los bloques correctos
                     return False
             return True
         
         # Tomamos la materia que toca colocar en este nivel de recursion
-        sem, mat_actual = pendientes[index]
+        sem, mat_actual = pendientes[index]  #Guarda la materia actual y su semestre
         # Si esta materia ya tiene todos sus bloques colocados por una instancia anterior, simplemente avanzamos sin hacer nada
         if usadas[(sem, mat_actual)] >= requeridos[(sem, mat_actual)]:
             return generar_horarios(index + 1)
@@ -171,6 +174,7 @@ def generador(horarios_dict,materias_dict,asignaturas_dict,prof_ocupado,lab_ocup
                     continue
 
         #  El hueco paso todos los filtros, lo asignamos provisionalmente 
+            print("  " * index + f"[PROBANDO] {mat_actual} -> Dia {d} Bloque {b}")
             asignacion[(sem,d, b)] = (sem, mat_actual, prof, salon)
             horario_actual[b][d] = mat_actual
             usadas[(sem, mat_actual)] += 1
@@ -182,10 +186,11 @@ def generador(horarios_dict,materias_dict,asignaturas_dict,prof_ocupado,lab_ocup
 
             # Avanzamos a la siguiente materia en pendientes
             # Si toda la rama que sigue funciona, retornamos True hacia arriba
-            if generar_horarios(index + 1):
+            if generar_horarios(index + 1):  #Pasa a la siguiente materia
                 return True
 
         # La rama fallo, deshacemos este hueco y probamos el siguiente
+            print("  " * index + f"[BACKTRACK] Quitando {mat_actual} de Dia {d} Bloque {b}")
             del asignacion[(sem,d, b)]
             horario_actual[b][d] = None
             usadas[(sem, mat_actual)] -= 1
@@ -205,7 +210,7 @@ def generador(horarios_dict,materias_dict,asignaturas_dict,prof_ocupado,lab_ocup
         # Ningún hueco funciono para esta materia en este nivel,
        # le avisamos al nivel anterior que retroceda y pruebe otro hueco    
         return False
-    resultado = generar_horarios(0)
+    resultado = generar_horarios(0)   #Empieza en 0
 
     if resultado:
         for sem in horarios_dict:
@@ -276,7 +281,7 @@ def llenar_horario(horarios_dict, asignaturas_dict, materias_dict, sandwich, dis
         for fila in horario:
             for d in range(DIAS):
                 fila[d] = None
-    pendientes = []
+    pendientes = [] #se guardan todos los bloques que se deben agregar, aprox, 52
 
     for sem in semestres:
         materias = materias_dict[sem]
