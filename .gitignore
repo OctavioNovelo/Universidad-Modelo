@@ -4,3 +4,8 @@ __pycache__/
 *.pyc
 *.txt
 Algoritmos/Parcial_2/Proyecto/Nando/*
+Sistemas Operativos/Ordinario/Ordinario_Octavio/db_data/
+Sistemas Operativos/php/db_data/
+**/db_data/
+.DS_Store
+*.swp

@@ -1,0 +1,40 @@
+services:
+  backend:
+    container_name: octavio_backend
+    restart: always
+    build: .
+    ports:
+      - "9080:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - db
+
+  frontend:
+    container_name: octavio_frontend
+    restart: always
+    build: .
+    ports:
+      - "9081:80"
+    volumes:
+      - ./src-frontend:/var/www/html
+    depends_on:
+      - backend
+
+  db:
+    image: mariadb:11.4
+    container_name: octavio_db_container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: octavio_root_pass
+      MYSQL_DATABASE: octavio_db
+      MYSQL_USER: octavio_user
+      MYSQL_PASSWORD: octavio_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db_data:/var/lib/mysql
+      - ./octavio_db.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  db_data:

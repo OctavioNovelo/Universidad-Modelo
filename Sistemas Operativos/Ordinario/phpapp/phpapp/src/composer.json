@@ -1,0 +1,6 @@
+{
+    "name": "alfredobolio/php-hello-world",
+    "description": "A simple Hello World PHP application with Docker",
+    "type": "project",
+    "require": {}
+}

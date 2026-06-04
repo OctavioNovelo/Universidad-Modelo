@@ -42,7 +42,7 @@ BLOQUES = 3                  # A, B, C
 
 
 # AGREGAMOS SANDWICH Y TOTAL BLOQUES
-def generador(horarios_dict,materias_dict,asignaturas_dict,prof_ocupado,lab_ocupado,disponibilidad_profesores,prof_horas_restantes,sandwich,pendientes):
+def generador(horario, materias, requeridos, asignaturas, prof_ocupado, lab_ocupado, disponibilidad_profesores, prof_horas_restantes, sandwich, total_bloques):
     """
     Argumentos:
         horario: matriz 3x5 (Bloques x Dias)
@@ -64,15 +64,8 @@ def generador(horarios_dict,materias_dict,asignaturas_dict,prof_ocupado,lab_ocup
     # Este es un diccionario llamado usadas que guarda las materias de la lista materias con un value de 0. 
     # Este es el diccionario donde veremos con que frecuencia aparece cada materia. 
     usadas = {}
-    requeridos = {}
-    semestres = list(horarios_dict.keys())
-    #NO sirven aun
-    for sem in semestres:
-        materias_sem = materias_dict[sem]
-        asignaturas_sem = asignaturas_dict[sem]
-        for mat in materias_sem:
-            usadas[(sem, mat)] = 0
-            requeridos[(sem, mat)] = asignaturas_sem[mat]['Bloques']
+    for m in materias:
+        usadas[m] = 0
     
     # FILTRO MATERIAS -----------------------------------------------------------------------
     # Esta diccionario lo cree con el unico objetivo de que no se dupliquen las mateiras
@@ -101,137 +94,190 @@ def generador(horarios_dict,materias_dict,asignaturas_dict,prof_ocupado,lab_ocup
             huecos.append((d, b))
 
 
-    #El algoritmo esta probando colocar la materia en todos los huecos, es un backtracking raro, No agarra el hueco y en ese mismo prueba varias
-    #materias, sino que agarra las materias y las va probando en los huecos. Sigue funcionando pero es de esa manera
     def generar_horarios(index):
-        # Caso base: si ya procesamos todas las materias de pendientes,verificamos que todas quedaron completas
-        if index == len(pendientes):  #Ya se recorrieron todas
-            for clave in usadas:
-                if usadas[clave] != requeridos[clave]:  #todas las materias tienen los bloques correctos
-                    return False
-            return True
+        # Si index == al tamano de la lista huecos significa que acabamos. 
+        if index == len(huecos):
+            # Comparamos si la cantidad de veces que aparece una materia es igual a la cantidad de veces que se requiere que aparezca
+            # Esta info la sacamos de la lista usadas con el parametro como el nombre de la materia, que es mat por cada materia en el diccionario de materias. XDXDXD
+            chi = True
+            for mat in materias:
+                if usadas[mat] != requeridos[mat]:
+                    chi = False
+                    break
+            return chi # Exito, se acabo
         
-        # Tomamos la materia que toca colocar en este nivel de recursion
-        sem, mat_actual = pendientes[index]  #Guarda la materia actual y su semestre
-        # Si esta materia ya tiene todos sus bloques colocados por una instancia anterior, simplemente avanzamos sin hacer nada
-        if usadas[(sem, mat_actual)] >= requeridos[(sem, mat_actual)]:
-            return generar_horarios(index + 1)
+        
+        # FILTROS MATERIA ------------------------------------------------------------------
+        # Sacamos la tupla/coordenadas/bloques
+        # dias, bloques
+        d, b = huecos[index]
 
 
-        horario_actual = horarios_dict[sem]
-        asignaturas_actual = asignaturas_dict[sem]
-        # Probamos cada hueco disponible (dia, bloque) uno por uno
-        for d, b in huecos:
-        # El hueco ya esta ocupado por otra materia, lo saltamos
-            if horario_actual[b][d] is not None:
-                continue
+        # Si la materia pasa los filtros, entonces se agrega a la lista_filtrada. 
+        lista_filtrada = []
+        for materia in materias:
+            if usadas[materia] < requeridos[materia] and materia not in materias_por_dia[d]:
+                lista_filtrada.append(materia)
+        # ACABA FILTRO MATERIA -----------------------------------------------------------------------------------
 
-        # Esta materia ya aparece en este dia, no puede repetirse
-            if mat_actual in materias_por_dia[d]:
-                continue
+        '''
+        # Materias candidatas para asignar ese dia
+        # Es basicamente un "filtro" donde por nivel de urgencia se decide que materias poner en que bloque
+        # Por cada materia en materias se revisa si en la lista "usadas" el numero de veces que YA APARECIO para ver si es menor
+        # que el numero de veces que esa materia se REQUIERE que aparezca Y se revisa si esa materia NO ESTA en MATERIAS_POR_DIA[dias]
+        # El nivel de urgencia se mide con la cantidad requerida - la cantidad de veces que ya salio.
+        # Basicamente:
+            - sorted() sirve para ordenar la lista que se le pase, en este caso usamos reverse = True. 
+            - La materia se agrega a la lista unicamente si pasa por el filtro.
+            - Se ordena 
+        # Este metodo (materia for materia in materias if usadas[materia] < requeridos[materias] and materia not in materias_por_dia[d]]) se le conoce como 
+        # expresiones generadoras y nos sirve para aumentar la velocidad del codigo, ya que 
+        # permite solicitar elementos de un GRAN conjuntos de datos ya que no almacena todos los datos en la RAM si no que los crea
+        # por cada iteracion. Como caracteristica los objetos generadores solo se pueden iterar una vez, una vez consumido este esapcio en memoria
+        # se libera. En este caso cada materia pasa a ser materia (iterable) y se consume en la misma linea al agregarlo a la lista de
+        # candidatas, libnerando la memoria y dejando espacio para la siguiente materia.
+        # NO confundir con un ciclo FOR, son similares pero no iguales.
+        # La sintaxis de sorted es (iterable, regla (en este caso que despues de restar acomoden de menor a mayor pero como reverse == True va de mayor a menor), reverse = bool)
+        ''' 
 
-        # Ya colocamos todos los bloques necesarios de esta materia
-            if usadas[(sem, mat_actual)] >= requeridos[(sem, mat_actual)]:
-                continue
+        # Aqui ordenamos de mayor a menor (reverse = True) las materias en base a su urgencia (requeridos[m] - usadas[m])
+        # Se priorizara poner materias con 4 bloques disponibles (en ese momento) sobre las materias con menor cantidad de bloques
+        # (en ese momento) 
+        candidatas = sorted(lista_filtrada, key = lambda m: requeridos[m] - usadas[m], reverse = True)
 
-        # FILTRO SANDWICH
-        # Si sandwich=False, no podemos poner algo en C (bloque 2) si A tiene materia pero B está vacío
+
+        for mat in candidatas:
             if not sandwich and b == 2:
-                bloque_a = horario_actual[0][d]
-                bloque_b = horario_actual[1][d]
-                if bloque_a is not None and bloque_b is None:
+                # Si el bloque A (0) tiene materia y el bloque B (1) esta vacio, no podemos poner materia en C
+                a = (d, 0) in asignacion and asignacion[(d, 0)] is not None
+                medio_vacio = (d, 1) in asignacion and asignacion[(d, 1)] is None
+                if a and medio_vacio:
                     continue
 
-        # FILTROS DE PROFESOR
-            prof = asignaturas_actual[mat_actual]['Maestro']
-            tipo = asignaturas_actual[mat_actual].get('Tipo', 'normal')
-            salon = asignaturas_actual[mat_actual]['Salon']
+            # FILTRO PROFESOR  -----------------------------------------------------------------------
+            # NOTA MENTAL: Me puse a pensar si es mas eficiente guardarlo en variables o llamarlas directamente cuando quiera eso en especifico
+            prof = asignaturas[mat]['Maestro'] # Nombre del profe
+            tipo = asignaturas[mat].get('Tipo', 'normal') # Tipo de materias
 
-        # El profesor ya esta ocupado en este dia y bloque en otro semestre
+            # 1. Profesor ya ocupado en este mismo (d,b)?
+            # prof_ocupado ocupa el diccionario de disponibilidad_profesores (3 x 5)
+            # .get funciona asi: get busca el bloque d, b en prof_ocupado, SI LO ENCUENTRA, entonces entramos a la condicion y continuamos
+            # con el siguiente profesor (Recuerden como funciona continue), SI NO LO ENCUENTRA, entonces get retorna un 
+            # conjunto vacio "set()", lo que significa que el maestro esta libre en esa hora.
             if prof in prof_ocupado.get((d, b), set()):
                 continue
 
-        # Disponibilidad del profesor
+            # 2. Disponibilidad del profesor
+            # Si no encontramos al profesor en la lista creamos un perfil temporal donde SIEMPRE esta dispo ese nuevo profesor
+            # No me gusta pero si no me da error XDXDXD
             dispo_default = []
             for _ in range(3):
                 fila_dispo = []
                 for _ in range(5):
                     fila_dispo.append(True)
                 dispo_default.append(fila_dispo)
-
+            
             disp = disponibilidad_profesores.get(prof, {'disponibilidad': dispo_default})
-            # El profesor no esta disponible en este dia y bloque
+            # Si ese dia y bloque NO es True, continue y pasamos al otro profesor
             if not disp['disponibilidad'][b][d]:
                 continue
+            # Si ese dia es True entonces avanzamos al siguiente filtro
 
-        # El profesor ya agoto sus horas maximas permitidas
+            # 3. Horas restantes del profesor
+            # Revisamos si las horas restantes son mayores a 0, en ese caso el profesor aun puede impartir materias
+            # Si las horas restantes del profesor es menor o igual a 0 (osea que ya no puede dar clases) entonces pasamos al siguente
+            # profesor. 
             if prof_horas_restantes.get(prof, 0) <= 0:
                 continue
 
-        # El laboratorio ya esta ocupado en este dia y bloque
+            # 4. Laboratorio
+            salon = asignaturas[mat]['Salon']
+            # Solo nos preocupamos si la materia requiere un laboratorio
             if tipo == 'laboratorio':
+                # Buscamos en lab_ocupado, si retorna un conjunto vacio entonces SI podemos usar ese laboratorio
                 if salon in lab_ocupado.get((d, b), set()):
-                    continue
+                    continue  # ocupado
 
-        #  El hueco paso todos los filtros, lo asignamos provisionalmente 
-            print("  " * index + f"[PROBANDO] {mat_actual} -> Dia {d} Bloque {b}")
-            asignacion[(sem,d, b)] = (sem, mat_actual, prof, salon)
-            horario_actual[b][d] = mat_actual
-            usadas[(sem, mat_actual)] += 1
-            materias_por_dia[d].add(mat_actual)
+            # ACABA FILTRO DEL PROFESOR ---------------------------------------------------------------------------
+
+
+            # Asignar provisionalmente
+            asignacion[(d, b)] = (mat, prof, salon)
+
+            usadas[mat] += 1 # Aumentamos un uso a la materia.
+            materias_por_dia[d].add(mat) # Agregamos la materia a la lista.
+
+            # setdefault sirve similar el get pero para escribir.
+            # Si SI eiste algo en el bloque (d, b) devuelve la informacion que hay en ese bloque
+            # Si NO existe nada en el bloque (d, b) se creara un conjunto vacio y se asignara el profesor.
             prof_ocupado.setdefault((d, b), set()).add(prof)
+
             if tipo == 'laboratorio':
                 lab_ocupado.setdefault((d, b), set()).add(salon)
-            prof_horas_restantes[prof] -= 1
 
-            # Avanzamos a la siguiente materia en pendientes
-            # Si toda la rama que sigue funciona, retornamos True hacia arriba
-            if generar_horarios(index + 1):  #Pasa a la siguiente materia
+            prof_horas_restantes[prof] -= 1 
+
+            # BACKTRACKING !!!
+            if generar_horarios(index + 1):
                 return True
+                # SI las asignaciones en los otros semestres es exitosa entonces retornaremos True indicando que los horarios se 
+                # generaron correctamente.
+            # Me causa mucha gracia el backtracking, siento que estoy tirando un blackflash iyk yk, osea nada q ver vrd.
 
-        # La rama fallo, deshacemos este hueco y probamos el siguiente
-            print("  " * index + f"[BACKTRACK] Quitando {mat_actual} de Dia {d} Bloque {b}")
-            del asignacion[(sem,d, b)]
-            horario_actual[b][d] = None
-            usadas[(sem, mat_actual)] -= 1
-            materias_por_dia[d].remove(mat_actual)
-            prof_ocupado[(d, b)].remove(prof)
+
+            # Deshacer cambios
+            del asignacion[(d, b)] # Eliminamos la primera asignacion
+            usadas[mat] -= 1 # Eliminamos su uso
+            materias_por_dia[d].remove(mat) # Eliminamos la materia de la lista de materias diaria
+            prof_ocupado[(d, b)].remove(prof) # Eliminamos el profesor de la lista de prof_ocupado
 
             if not prof_ocupado[(d, b)]:
                 del prof_ocupado[(d, b)]
-
+            
             if tipo == 'laboratorio':
                 lab_ocupado[(d, b)].remove(salon)
+
                 if not lab_ocupado[(d, b)]:
                     del lab_ocupado[(d, b)]
-            prof_horas_restantes[prof] += 1
-            # El for continua automaticamente al siguiente hueco (d, b)
+            
+            prof_horas_restantes[prof] += 1 # Le sumamos las horas que le habiamos quitado al profesor
 
-        # Ningún hueco funciono para esta materia en este nivel,
-       # le avisamos al nivel anterior que retroceda y pruebe otro hueco    
+        # Dejamos los espacios vacios
+        usadas_actual = sum(usadas.values())
+        if (len(huecos) - index) > (total_bloques - usadas_actual):
+            # Si no se permiten sandwiches y estamos en el bloque B (1)
+            # validar si se acepta o no dejar ese espacio vacío.
+            
+            # Ponemos vacios
+            asignacion[(d, b)] = None
+            if generar_horarios(index + 1):
+                return True # Si todo bien continuamos
+            # Si no, borramos el anterior
+            del asignacion[(d, b)]
+
+        # No se logro realizar los horarios    
         return False
-    resultado = generar_horarios(0)   #Empieza en 0
-
-    if resultado:
-        for sem in horarios_dict:
-            for fila in horarios_dict[sem]:
-                for d in range(DIAS):
-                    fila[d] = None
-
-     
-        for (sem,d, b), data in asignacion.items():
+    
+    # Empezamos con el bloque index 0 
+    if generar_horarios(0):
+        # Hay que sacarlo de ahi y la guardamos en info (un diccionario copia de asignaturas)
+        # prof esta puesto para no romper la sintaxis de la informacion.
+        # Asignacion ya tiene el horario resuelto.
+        for (d, b), data in asignacion.items():
             if data is None:
                 continue
-            _, mat, _, salon = data
-            info = asignaturas_dict[sem][mat].copy()
+            mat, prof, salon = data
+            
+            # Copiamos la PLANTILLA de asignaturas[mat] en info
+            # NO confundir plantilla con informacion
+            info = asignaturas[mat].copy()
+            
+            # Le pasamos la info especifica
             info['Asignatura'] = mat
             info['Salon'] = salon
-            horarios_dict[sem][b][d] = info
+            horario[b][d] = info
         return True
-
     return False
-
-
 
 def llenar_horario(horarios_dict, asignaturas_dict, materias_dict, sandwich, disponibilidad_profesores):
     semestres = horarios_dict.keys()
@@ -281,28 +327,36 @@ def llenar_horario(horarios_dict, asignaturas_dict, materias_dict, sandwich, dis
         for fila in horario:
             for d in range(DIAS):
                 fila[d] = None
-    pendientes = [] #se guardan todos los bloques que se deben agregar, aprox, 52
 
-    for sem in semestres:
-        materias = materias_dict[sem]
-        asignaturas = asignaturas_dict[sem]
+        materias = materias_dict[sem] # Guardamos la materia actual (nombres)
+        asignaturas = asignaturas_dict[sem] # Guardamos la asignatura actual (datos)
+        
+        requeridos = {}
         for mat in materias:
-            bloques = asignaturas[mat]['Bloques']
-            for _ in range(bloques):
-                pendientes.append((sem, mat))               
-          
+            requeridos[mat] = asignaturas[mat]['Bloques']
+            
+        total_bloques = sum(requeridos.values()) # Se suma la cantidad bloques totales para saber cuantos bloques se llenaran 
 
-    exito = generador(horarios_dict,materias_dict, asignaturas_dict,prof_ocupado,lab_ocupado,disponibilidad_profesores,prof_horas_restantes,sandwich,pendientes)     
-          
-    if not exito:
-        print("No se pudo generar un horario válido.")
+        # Validamos si hay mas bloques que espacios
+        if total_bloques > (DIAS * BLOQUES):
+            print(f"\n El semestre {sem} requiere {total_bloques} bloques, pero solo hay {DIAS * BLOQUES} espacios.")
+            print("Elimina o modifica materias para reducir los bloques.")
+            return False
 
-        for s in semestres:
-            h = horarios_dict[s]
-            for fila in h:
-                for d in range(DIAS):
-                    fila[d] = None
-        return False
+        # --------------------------------------------------------------------------------------
+        # Aqui se comienza a ejecutar 
+        exito = generador(horario, materias, requeridos, asignaturas, prof_ocupado, lab_ocupado, disponibilidad_profesores, prof_horas_restantes, sandwich, total_bloques)
+
+        if not exito:
+            print(f"Falló la generación de horario del semestre {sem}.")
+            # Borramos todo bro
+            for s in semestres:
+                h = horarios_dict[s]
+                for fila in h:
+                    for d in range(DIAS):
+                        fila[d] = None
+            return False
+        # --------------------------------------------------------------------------------------
     return True
 
 # --------------------------------------------------------------------------------------

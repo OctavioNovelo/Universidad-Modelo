@@ -17,7 +17,7 @@ def save_json(filename, data):
     
     # Si es la disponibilidad, la guardamos con un formato especial para que siga pareciendo una matriz
     # y no un tripal de mil lineas que no se entiende. Si es cualquier otra cosa, json.dump normal y ya.
-    if filename == 'disponibilidad_profesores_2.json':
+    if filename == 'disponibilidad_profesores.json':
         def format_dispo(dispo):
             rows = []
             for row in dispo:
@@ -93,7 +93,7 @@ materias_semestre_8 = list(asignaturas_semestre_8.keys())
 
 #--------------------------------------------------------------------------
 # Cada día tiene 3 bloques disponibles (True)
-disponibilidad_profesores_2 = load_json('disponibilidad_profesores_2.json')
+disponibilidad_profesores = load_json('disponibilidad_profesores.json')
 #--------------------------------------------------------------------------------
 
 def menu():
@@ -108,7 +108,7 @@ def menu():
 # Esta funcion lista a los profesores para poder llamar el listado cuando se necesario
 # en vez de escribir esto como 4 veces mas XDXDXD
 def seleccionar_profesor():
-    profesores = list(disponibilidad_profesores_2.keys())
+    profesores = list(disponibilidad_profesores.keys())
     if not profesores:
         print("No hay profesores registrados.")
         return None
@@ -149,14 +149,14 @@ def gestionar_profesores():
             print("\n--- Lista de Profesores ---")
             # Imprimimos los maestros con un ID (indice + 1) para que sea mas facil identificarlos
             # Tambien mostramos sus horas maximas de trabajo.
-            profesores = list(disponibilidad_profesores_2.keys())
+            profesores = list(disponibilidad_profesores.keys())
             for i, prof in enumerate(profesores):
-                datos = disponibilidad_profesores_2[prof]
+                datos = disponibilidad_profesores[prof]
                 print(f"{i + 1}) {prof:40} | Max bloques: {datos['max_horas']}")
             input("\nPresiona una tecla para continuar...")
         elif op == '2':
             nombre = input("Nombre del profesor: ")
-            if nombre in disponibilidad_profesores_2:
+            if nombre in disponibilidad_profesores:
                 print("El profesor ya existe.")
             else:
                 # Uso try para manejar los errores mas facilmente, tambien resulta que es ligeramente mas rapido.
@@ -165,11 +165,11 @@ def gestionar_profesores():
                     horas = int(input("Máximo de horas (1 bloque = 2 horas): "))
                     # YA sabemos como funciona esto gente no se hagan. 
                     dispo = [[True for _ in range(5)] for _ in range(3)]
-                    disponibilidad_profesores_2[nombre] = {
+                    disponibilidad_profesores[nombre] = {
                         'max_horas': horas,
                         'disponibilidad': dispo
                     }
-                    save_json('disponibilidad_profesores_2.json', disponibilidad_profesores_2)
+                    save_json('disponibilidad_profesores.json', disponibilidad_profesores)
                     print("Profesor agregado.")
                 except ValueError:
                     print("Horas inválidas.")
@@ -179,8 +179,8 @@ def gestionar_profesores():
             nombre = seleccionar_profesor()
             if nombre:
                 # Borramos con del al profesor
-                del disponibilidad_profesores_2[nombre]
-                save_json('disponibilidad_profesores_2.json', disponibilidad_profesores_2)
+                del disponibilidad_profesores[nombre]
+                save_json('disponibilidad_profesores.json', disponibilidad_profesores)
                 print(f"Profesor {nombre} eliminado.")
             input("\nPresiona una tecla para continuar...")
         elif op == '4':
@@ -203,7 +203,7 @@ def gestionar_profesores():
                             n_slot = (i * 3) + b + 1
                             
                             # Si esta disponible mostramos el numero, si no, una X
-                            if disponibilidad_profesores_2[nombre]['disponibilidad'][b][i]:
+                            if disponibilidad_profesores[nombre]['disponibilidad'][b][i]:
                                 val = f"[{n_slot:2}]"
                             else: 
                                 val = "[ X ]"
@@ -221,7 +221,7 @@ def gestionar_profesores():
                         seleccion_slots = input(": ").split()
                         if not seleccion_slots: continue
                         if seleccion_slots[0] == '0':
-                            save_json('disponibilidad_profesores_2.json', disponibilidad_profesores_2)
+                            save_json('disponibilidad_profesores.json', disponibilidad_profesores)
                             break
 
                         for s_str in seleccion_slots:
@@ -232,8 +232,8 @@ def gestionar_profesores():
                                 b_idx = (slot - 1) % 3
                                 
                                 # Invertimos el estado actual
-                                curr = disponibilidad_profesores_2[nombre]['disponibilidad'][b_idx][d_idx]
-                                disponibilidad_profesores_2[nombre]['disponibilidad'][b_idx][d_idx] = not curr
+                                curr = disponibilidad_profesores[nombre]['disponibilidad'][b_idx][d_idx]
+                                disponibilidad_profesores[nombre]['disponibilidad'][b_idx][d_idx] = not curr
                             else:
                                 print(f"Bloque {slot} fuera de rango.")
                         
@@ -247,10 +247,10 @@ def gestionar_profesores():
             nombre = seleccionar_profesor()
             if nombre:
                 try:
-                    print(f"Máximo actual de horas para {nombre}: {disponibilidad_profesores_2[nombre]['max_horas']}")
+                    print(f"Máximo actual de horas para {nombre}: {disponibilidad_profesores[nombre]['max_horas']}")
                     nuevas_horas = int(input("Ingrese el nuevo máximo de horas: "))
-                    disponibilidad_profesores_2[nombre]['max_horas'] = nuevas_horas
-                    save_json('disponibilidad_profesores_2.json', disponibilidad_profesores_2)
+                    disponibilidad_profesores[nombre]['max_horas'] = nuevas_horas
+                    save_json('disponibilidad_profesores.json', disponibilidad_profesores)
                     print("Máximo de horas actualizado.")
                 except ValueError:
                     print("Entrada inválida.")
@@ -311,8 +311,6 @@ def gestionar_materias():
                     if total_actual + bloques > 15:
                         print(f"\n[!] Error: No se pueden agregar {bloques} bloques.")
                         print(f"El semestre ya tiene {total_actual} bloques ocupados de 15 disponibles.")
-                    elif any(d['Maestro'] == maestro for d in asig.values()):
-                        print(f"\n[!] Error: El profesor '{maestro}' ya tiene una materia asignada en este semestre.")
                     else:
                         asig[nombre] = {
                             'Maestro': maestro,
@@ -363,8 +361,6 @@ def gestionar_materias():
                     if total_otros + bloques_val > 15:
                         print(f"\n[!] Error: No se pueden asignar {bloques_val} bloques.")
                         print(f"Las demás materias ya ocupan {total_otros} bloques de 15 disponibles.")
-                    elif any(d['Maestro'] == maestro and k != nombre for k, d in asig.items()):
-                        print(f"\n[!] Error: El profesor '{maestro}' ya tiene otra materia en este semestre.")
                     else:
                         asig[nombre] = {
                             'Maestro': maestro,
@@ -424,14 +420,13 @@ def seleccion():
             }
 
             print("\nGenerando horarios...\n")
-            horario.llenar_horario(horarios_semestres, asignaturas_por_sem, materias_por_sem, sandwich, disponibilidad_profesores_2)
+            horario.llenar_horario(horarios_semestres, asignaturas_por_sem, materias_por_sem, sandwich, disponibilidad_profesores)
 
             # Guardar horarios generados
             nombres_raw = load_json('nombres_semestres.json')
             nombres = {int(k): v for k, v in nombres_raw.items()}
             for i in range(1, 5):
                 horario.guardar_horario(horarios_semestres[i], nombres[i], i)
-        
             
             # Exportar horarios de laboratorio
             horario.guardar_horarios_laboratorios(horarios_semestres)
