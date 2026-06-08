@@ -9,6 +9,7 @@ def main ():
 
 while (1):
     main()
-# Hay que corregir agregar el apartado de agregar o no vulnerabiliades en el personalizado
-# Reducir el timming de Ghost Hunter
-# Corregir Full pack
+
+# TODO: Add option to include/exclude vulnerabilities in the customized scan
+# TODO: Reduce timing level for Ghost Hunter
+# TODO: Fix Full Pack logic

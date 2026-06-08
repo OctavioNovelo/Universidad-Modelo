@@ -3,6 +3,7 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 def buscar_en_gnmap(ruta_gnmap, termino_busqueda):
+    """Searches for a term within a .gnmap file."""
     resultados = []
     try:
         with open(ruta_gnmap, "r") as f:
@@ -14,6 +15,7 @@ def buscar_en_gnmap(ruta_gnmap, termino_busqueda):
         return ["Error: No se encontró el archivo de resultados. Ejecuta un escaneo primero."]
 
 def generar_tabla_xml(ruta_xml):
+    """Parses an Nmap XML file and returns a list of results."""
     try:
         tree = ET.parse(ruta_xml)
         root = tree.getroot()
@@ -46,13 +48,13 @@ def generar_tabla_xml(ruta_xml):
     return filas_tabla
 
 def comparar_escaneos(ruta_xml_nuevo, ruta_xml_base):
-    """Compara dos escaneos y devuelve lo que es NUEVO en el escaneo actual."""
+    """Compares two scans and returns what is NEW in the current scan."""
     nuevo = generar_tabla_xml(ruta_xml_nuevo)
     base = generar_tabla_xml(ruta_xml_base)
     
-    if not base or "Error" in base[0]: return nuevo # Si no hay base, todo es nuevo
+    if not base or "Error" in base[0]: return nuevo # If no base exists, everything is new
     
-    # Crear un set de IPs y Puertos conocidos
+    # Create a set of known IPs and Ports
     conocidos = set((f['IP'], f['Puerto']) for f in base)
     
     diferencias = []

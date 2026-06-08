@@ -36,15 +36,15 @@ def ejecutar_herramienta(tool, os_folder):
 
     redes = []
     if os_name == "Windows":
-        # Ejecutamos ipconfig
+        # Execute ipconfig
         ip_result = subprocess.run("ipconfig", shell=True, capture_output=True, text=True)
         
-        # Separamos por líneas para un procesamiento más granular
+        # Split into lines for granular processing
         lineas = ip_result.stdout.split('\n')
         adaptador_actual = ""
         bloques = []
         
-        # Agrupamos líneas por adaptador
+        # Group lines by adapter
         temp_bloque = []
         for linea in lineas:
             if linea.strip() and not linea.startswith(" "):
@@ -57,17 +57,17 @@ def ejecutar_herramienta(tool, os_folder):
             bloques.append("\n".join(temp_bloque))
         
         for bloque in bloques:
-            # Filtro agresivo de interfaces virtuales y no deseadas
-            # Incluimos VirtualBox, Host-Only, VMware, Docker, WSL, etc.
+            # Aggressive filtering for virtual and unwanted interfaces
+            # Including VirtualBox, Host-Only, VMware, Docker, WSL, etc.
             if re.search(r'(docker|vmware|virtual|vbox|wsl|vethernet|loopback|pseudo|teredo|isatap|host-only|npcap)', bloque, re.IGNORECASE):
                 continue
             
-            # Buscamos la línea de la IP
+            # Searching for IP line
             match = re.search(r'IPv4.*:\s*(\d+\.\d+\.\d+\.)(\d+)', bloque)
             if match:
                 red_base = f"{match.group(1)}0/24"
                 
-                # Descartamos localhost y APIPA (169.254.x.x)
+                # Discard localhost and APIPA (169.254.x.x)
                 if not red_base.startswith('127.') and not red_base.startswith('169.254.'):
                     if red_base not in redes:
                         redes.append(red_base)

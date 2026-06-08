@@ -8,6 +8,27 @@ nmap_bin = {
     'macos':   {'bin_name': 'nmap'}
 }
 
+def file_number(base_path):
+    """Calculates the next available filename (e.g., internet_lento, internet_lento_1, etc.)
+    Checks for .xml, _normal.txt, and _grepable.txt availability.
+    """
+    xml_path = base_path.with_suffix('.xml')
+    normal_path = Path(f"{base_path}_normal.txt")
+    grepable_path = Path(f"{base_path}_grepable.txt")
+    
+    if not xml_path.exists() and not normal_path.exists() and not grepable_path.exists():
+        return str(base_path)
+    
+    contador = 1
+    while True:
+        nuevo_path_str = f"{base_path}_{contador}"
+        nuevo_path = Path(nuevo_path_str)
+        if not nuevo_path.with_suffix('.xml').exists() and \
+           not Path(f"{nuevo_path_str}_normal.txt").exists() and \
+           not Path(f"{nuevo_path_str}_grepable.txt").exists():
+            return nuevo_path_str
+        contador += 1
+
 def ejecutar_comando(args):
     if frontend.CLI.obtener_os() != "Windows":
         return ["sudo"] + args
@@ -16,7 +37,8 @@ def ejecutar_comando(args):
 def internet_lento(context):
     base_path = Path(__file__).parent.parent
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "internet_lento"
+    result_path_base = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "internet_lento"
+    result_path = file_number(result_path_base)
 
     hosts_file.parent.mkdir(parents=True, exist_ok=True)
     with open(hosts_file, "w") as f:
@@ -24,15 +46,16 @@ def internet_lento(context):
 
     args = [str(context["bin_path"]), "-sS", "-F", "-Pn", "-n", "-O", 
             "-iL", str(hosts_file),
-            "-oN", f"{result_path}_normal.txt",
+            "-oN", f"{result_path}_normal.txt", 
             "-oG", f"{result_path}_grepable.txt",
             "-oX", f"{result_path}.xml"]
     subprocess.run(ejecutar_comando(args))
 
-def internet_fallando(context, timing_level = 3):
+def vulnerabilidades(context, timing_level = 3):
     base_path = Path(__file__).parent.parent
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "vulnerabilidades"
+    result_path_base = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "vulnerabilidades"
+    result_path = file_number(result_path_base)
 
     hosts_file.parent.mkdir(parents=True, exist_ok=True)
     with open(hosts_file, "w") as f:
@@ -45,16 +68,17 @@ def internet_fallando(context, timing_level = 3):
             "-oX", f"{result_path}.xml"]
     subprocess.run(ejecutar_comando(args))
 
-# Esto debe ser la misma logica de ambos, no la llamada de ambos
-# O modificar la exportacion
+# This should be the same logic for both, not calling both
+# Or modify the export
 def full_pack(context):
     internet_lento(context)
-    internet_fallando(context)
+    vulnerabilidades(context)
 
-def ghost_hunter(context, timing_level=3):
-    """Detecta intrusos ocultos usando escaneos fragmentados y sin ping."""
+def dispositivos_ocultos(context, timing_level=3):
+    """Detects hidden intruders using fragmented scans and no ping."""
     base_path = Path(__file__).parent.parent
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "ghost_hunter"
+    result_path_base = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "dispositivos_ocultos"
+    result_path = file_number(result_path_base)
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
 
     args = [str(context["bin_path"]), "-sS", "-Pn", "-f", "--data-length", "24", f"-T{timing_level}", "-n",
@@ -65,27 +89,54 @@ def ghost_hunter(context, timing_level=3):
     
     subprocess.run(ejecutar_comando(args))
 
-def admin_audit(context, timing_level=4):
-    """Busca paneles de administración expuestos."""
+def admin_audit(context):
+    """Searches for exposed management panels."""
     base_path = Path(__file__).parent.parent
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "admin_audit"
+    result_path_base = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "admin_audit"
+    result_path = file_number(result_path_base)
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
 
-    # Puertos comunes de gestión: HTTP, HTTPS, Telnet, SSH, FTP, etc.
-    args = [str(context["bin_path"]), "-p", "21,22,23,80,443,8080,8443", f"-T{timing_level}", "-sV",
+    # Common management ports: HTTP, HTTPS, Telnet, SSH, FTP, etc.
+    args = [str(context["bin_path"]), "-p", "21,22,23,80,443,623,902,1433,2082,2083,2086,2087,3306,3389,3391,5900,5985,8080,8443,8880", 
+            "-T", str(4), 
+            "-sV",
             "-iL", str(hosts_file),
             "-oN", f"{result_path}_normal.txt",
             "-oG", f"{result_path}_grepable.txt",
             "-oX", f"{result_path}.xml"]
     
+    # cPanel HTTP = 2082
+    # cPanel SSL/HTTPS = 2083
+    # WHM HTTP = 2086
+    # WHM SSL = 2087
+
+    # # RDP (Remote Desktop Protocol)
+    # Remote access for windows (TCP) = 3389
+    # (UDP) = 3391
+
+    # Admin servers & virtualization
+    # VMware vSphere (TCP/UDP) = 902
+    # SSH = 22
+    # VNC (TCP) = 5900
+    # IPMI/ASF (UDP) = 623
+
+    # Web Admin & API
+    # WinRM and Powershell (TCP) = 5985
+    # Proxy or alt = 8080
+    # 
+    # Databases
+    # MySQL (TCP) = 3306
+    # Microsoft SQL Server (TCP) = 1433 
+
     subprocess.run(ejecutar_comando(args))
 
-# Cambiar nombre
-# Explota si no encuentra hosts.txt al principio, por lo que no lo esta generando.
-def detectar_os_agresivo(context, timing_level=4):
-    """Identificación profunda de dispositivos (Ghost ID)."""
+# Change name
+# Crashes if it doesn't find hosts.txt at the beginning, so it's not generating it.
+def indentificar_dispositivos(context, timing_level=4):
+    """Deep device identification."""
     base_path = Path(__file__).parent.parent
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "ghost_id"
+    result_path_base = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "ind_disp"
+    result_path = file_number(result_path_base)
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
 
     args = [str(context["bin_path"]), "-A", f"-T{timing_level}", "-Pn",
@@ -96,13 +147,14 @@ def detectar_os_agresivo(context, timing_level=4):
     
     subprocess.run(ejecutar_comando(args))
 
-def streaming_gaming_monitor(context, timing_level=4):
-    """Busca protocolos de alto consumo (Streaming/Gaming)."""
+def monitor_consumo(context, timing_level=4):
+    """Searches for high-consumption protocols (Streaming/Gaming)."""
     base_path = Path(__file__).parent.parent
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "monitor_recursos"
+    result_path_base = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "consumo"
+    result_path = file_number(result_path_base)
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
 
-    # Puertos de Steam, Netflix, Spotify, y juegos comunes
+    # Steam, Netflix, Spotify, and common games ports
     args = [str(context["bin_path"]), "-p", "1935,3478,3479,3480,5060,5061,80,443,27015-27030", f"-T{timing_level}", "-sV",
             "-iL", str(hosts_file),
             "-oN", f"{result_path}_normal.txt",
@@ -114,7 +166,8 @@ def streaming_gaming_monitor(context, timing_level=4):
 def personalizado(context):
     base_path = Path(__file__).parent.parent
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
-    result_path = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "personalizado"
+    result_path_base = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "personalizado"
+    result_path = file_number(result_path_base)
 
     hosts_file.parent.mkdir(parents=True, exist_ok=True)
     with open(hosts_file, "w") as f:
