@@ -34,10 +34,10 @@ def ejecutar_comando(args):
         return ["sudo"] + args
     return args
 
-def internet_lento(context):
+def escaneo_rapido(context):
     base_path = Path(__file__).parent.parent
     hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
-    result_path_base = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "internet_lento"
+    result_path_base = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "escaneo_rapido"
     result_path = file_number(result_path_base)
 
     hosts_file.parent.mkdir(parents=True, exist_ok=True)
@@ -68,11 +68,45 @@ def vulnerabilidades(context, timing_level = 3):
             "-oX", f"{result_path}.xml"]
     subprocess.run(ejecutar_comando(args))
 
-# This should be the same logic for both, not calling both
-# Or modify the export
+# Consolida todas las técnicas en un único escaneo exhaustivo
 def full_pack(context):
-    internet_lento(context)
-    vulnerabilidades(context)
+    """
+    FULL PACK: Ejecuta un análisis integral combinando las 6 categorías del auditor.
+    1. Escaneo Rapido
+    2. Vulnerabilidades
+    3. Ghost Hunter
+    4. Auditoría Admin (Puertos de gestión)
+    5. Ghost ID (Identificación agresiva de dispositivos)
+    6. Monitor Consumo (Puertos de multimedia/juegos)
+    """
+    base_path = Path(__file__).parent.parent
+    result_path_base = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "full_pack"
+    result_path = file_number(result_path_base)
+    hosts_file = base_path / "utils" / "Resultados" / context["os_folder"] / "Nmap" / "hosts.txt"
+
+    # Puertos combinados de Auditoría Admin y Monitor Consumo
+    # Admin: 21,22,23,80,443,623,902,1433,2082,2083,2086,2087,3306,3389,3391,5900,5985,8080,8443,8880
+    # Consumo: 1935,3478,3479,3480,5060,5061,80,443,27015-27030
+    puertos = "21,22,23,80,443,623,902,1433,1935,2082,2083,2086,2087,3306,3389,3391,3478-3480,5060,5061,5900,5985,8080,8443,8880,27015-27030"
+
+    args = [
+        str(context["bin_path"]),
+        "-A",                # Ghost ID: OS detection, Version detection, Script scanning, Traceroute
+        "-sS",               # Internet Lento/Ghost Hunter: Stealth SYN scan
+        "-Pn",               # Ghost Hunter: No ping (salta firewalls)
+        "-f",                # Ghost Hunter: Fragmentación de paquetes
+        "--data-length", "24", # Ghost Hunter: Tamaño de datos extra para evadir firmas
+        "--script", "vuln",  # Vulnerabilidades: Motor de scripts para fallos conocidos
+        "-p", puertos,       # Combinación de puertos críticos de Admin y Consumo
+        "-T4",               # Balance entre velocidad y agresividad
+        "-iL", str(hosts_file),
+        "-oN", f"{result_path}_normal.txt",
+        "-oG", f"{result_path}_grepable.txt",
+        "-oX", f"{result_path}.xml"
+    ]
+    
+    print(f"\n[+] Iniciando FULL PACK. Este proceso es exhaustivo y tomará tiempo...\n")
+    subprocess.run(ejecutar_comando(args))
 
 def dispositivos_ocultos(context, timing_level=3):
     """Detects hidden intruders using fragmented scans and no ping."""
