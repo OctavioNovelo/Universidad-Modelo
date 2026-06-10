@@ -1,6 +1,7 @@
 # utils/parser.py
 import xml.etree.ElementTree as ET
 from pathlib import Path
+import os
 
 def buscar_en_gnmap(ruta_gnmap, termino_busqueda):
     """Searches for a term within a .gnmap file."""
@@ -13,6 +14,17 @@ def buscar_en_gnmap(ruta_gnmap, termino_busqueda):
         return resultados
     except FileNotFoundError:
         return ["Error: No se encontró el archivo de resultados. Ejecuta un escaneo primero."]
+
+def categorizar_severidad(script_id, output):
+    """Categoriza la severidad basada en palabras clave en el output del script."""
+    out_lower = output.lower()
+    if any(k in out_lower for k in ["critical", "rce", "remote code execution", "fatal"]):
+        return "critical", "Crítica"
+    if any(k in out_lower for k in ["high", "vulnerable", "exploit", "cve-20"]):
+        return "high", "Alta"
+    if any(k in out_lower for k in ["medium", "warning", "bypass", "weak"]):
+        return "medium", "Media"
+    return "low", "Baja"
 
 def generar_tabla_xml(ruta_xml):
     """Parses an Nmap XML file and returns a list of results."""
@@ -27,6 +39,10 @@ def generar_tabla_xml(ruta_xml):
         address = host.find("address[@addrtype='ipv4']")
         ip = address.get('addr') if address is not None else "Desconocido"
         
+        # Estado del host
+        status_el = host.find('status')
+        host_status = status_el.get('state') if status_el is not None else "unknown"
+
         for port in host.findall('.//port'):
             estado_el = port.find('state')
             servicio_el = port.find('service')
@@ -36,17 +52,27 @@ def generar_tabla_xml(ruta_xml):
                 'Puerto': port.get('portid'),
                 'Estado': estado_el.get('state') if estado_el is not None else "N/D",
                 'Servicio': servicio_el.get('name') if servicio_el is not None else "N/D",
+                'HostStatus': host_status,
                 'Vulnerabilidades': [] 
             }
             
             for script in port.findall('script'):
                 script_id = script.get('id')
                 script_output = script.get('output').strip() if script.get('output') else ""
-                fila['Vulnerabilidades'].append(f"[{script_id}] {script_output}")
+                
+                sev_key, sev_label = categorizar_severidad(script_id, script_output)
+                
+                fila['Vulnerabilidades'].append({
+                    'id': script_id,
+                    'output': script_output,
+                    'severity': sev_key,
+                    'sev_label': sev_label
+                })
 
             filas_tabla.append(fila)
     return filas_tabla
 
+<<<<<<< HEAD
 def buscar_escaneos(directorio, base_name, extension=".xml"):
     """
     Finds all scan files for a category and sorts them by modification time (newest first).
@@ -70,6 +96,60 @@ def buscar_escaneos(directorio, base_name, extension=".xml"):
     # Sort by modification time, newest first
     archivos.sort(key=lambda x: x.stat().st_mtime, reverse=True)
     return [str(a) for a in archivos]
+=======
+def obtener_datos_completos(os_folder):
+    """Lee todos los archivos XML en el directorio de resultados y los combina."""
+    base_path = Path(__file__).parent.parent
+    resultados_dir = base_path / "utils" / "Resultados" / os_folder / "Nmap"
+    
+    todos_los_datos = []
+    if not resultados_dir.exists():
+        return todos_los_datos
+
+    for archivo in resultados_dir.glob("*.xml"):
+        if archivo.suffix == ".xml":
+            datos = generar_tabla_xml(str(archivo))
+            if datos and "Error" not in datos[0]:
+                todos_los_datos.extend(datos)
+    
+    return todos_los_datos
+
+def obtener_estadisticas_dashboard(os_folder):
+    datos = obtener_datos_completos(os_folder)
+    
+    ips_unicas = set()
+    vulns_por_sev = {"critical": 0, "high": 0, "medium": 0, "low": 0}
+    total_vulns = 0
+    
+    vulnerabilidades_lista = []
+    
+    for d in datos:
+        ips_unicas.add(d['IP'])
+        for v in d['Vulnerabilidades']:
+            vulns_por_sev[v['severity']] += 1
+            total_vulns += 1
+            vulnerabilidades_lista.append({
+                'severity': v['severity'],
+                'sev_label': v['sev_label'],
+                'desc': f"[{v['id']}] {v['output'][:100]}...",
+                'device': d['IP'],
+                'status': 'open'
+            })
+            
+    riesgo = "BAJO"
+    if vulns_por_sev["critical"] > 0: riesgo = "CRÍTICO"
+    elif vulns_por_sev["high"] > 0: riesgo = "ALTO"
+    elif vulns_por_sev["medium"] > 0: riesgo = "MEDIO"
+
+    return {
+        "active_devices": len(ips_unicas),
+        "total_vulns": total_vulns,
+        "risk_level": riesgo,
+        "vulns_by_severity": vulns_por_sev,
+        "vulnerabilities": vulnerabilidades_lista,
+        "devices": list(ips_unicas)
+    }
+>>>>>>> bce0701 (Fix: SI)
 
 def comparar_escaneos(ruta_xml_nuevo, ruta_xml_base):
     """Compares two scans and returns what is NEW in the current scan."""

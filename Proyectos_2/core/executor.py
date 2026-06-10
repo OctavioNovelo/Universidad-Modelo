@@ -4,23 +4,10 @@ import platform
 import os
 import re
 from pathlib import Path
-from tools.nmap import nmap_bin
-
-def obtener_sistema_operativo():
-    return platform.system()
-
-def obtener_carpeta_os(os_name):
-    if 'Win' in os_name:
-        return 'Windows'
-    elif 'Darwin' in os_name or 'mac' in os_name:
-        return 'macos'
-    elif 'Linux' in os_name:
-        return 'Linux'
-    else:
-        raise ValueError(f"Sistema operativo no soportado: {os_name}")
-
+from utils.system_info import obtener_sistema_operativo, obtener_carpeta_os
 
 def ejecutar_herramienta(tool, os_folder):
+    from tools.nmap import nmap_bin # Importación local para evitar círculo
     base_path = Path(__file__).parent.parent
     os_name = platform.system()
     

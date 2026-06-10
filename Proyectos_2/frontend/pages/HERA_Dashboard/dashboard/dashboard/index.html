@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HERA — Auditor de Seguridad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════
+     MOBILE HEADER (visible solo en <768px)
+     ══════════════════════════════════════════════ -->
+<header class="mobile-header">
+  <div class="mobile-brand">
+    <div class="sidebar-logo" style="width:32px;height:32px;font-size:13px">H</div>
+    HERA
+  </div>
+  <button class="hamburger" id="hamburger-btn" aria-label="Abrir menú">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+  </button>
+</header>
+
+<!-- Overlay para cerrar sidebar en móvil -->
+<div class="overlay" id="overlay"></div>
+
+<!-- ══════════════════════════════════════════════
+     APP SHELL
+     ══════════════════════════════════════════════ -->
+<div class="app-shell">
+
+  <!-- ───────────── SIDEBAR ───────────── -->
+  <aside class="sidebar">
+
+    <!-- Brand -->
+    <div class="sidebar-brand">
+      <div class="sidebar-logo">H</div>
+      <div class="sidebar-brand-text">
+        <h2>HERA</h2>
+        <p>Auditor de seguridad</p>
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <button class="nav-item" data-page="dashboard">
+            <!-- icon: home -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/>
+              <polyline points="9 21 9 12 15 12 15 21"/>
+            </svg>
+            Dashboard
+          </button>
+        </li>
+        <li>
+          <button class="nav-item" data-page="vulnerabilities">
+            <!-- icon: alert-triangle -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+            Vulnerabilidades
+          </button>
+        </li>
+        <li>
+          <button class="nav-item" data-page="network-scan">
+            <!-- icon: network -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="2" width="6" height="6" rx="1"/>
+              <rect x="1" y="16" width="6" height="6" rx="1"/>
+              <rect x="17" y="16" width="6" height="6" rx="1"/>
+              <path d="M12 8v4M8 19H4.5a2.5 2.5 0 0 1 0-5H12m7.5 5H12m0-5v5"/>
+            </svg>
+            Escaneo de red
+          </button>
+        </li>
+        <li>
+          <button class="nav-item" data-page="reports">
+            <!-- icon: file-text -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+            </svg>
+            Reportes de seguridad
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Footer nav -->
+    <div class="sidebar-footer">
+      <button class="nav-item" data-page="settings">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+        Ajustes
+      </button>
+    </div>
+  </aside>
+
+  <!-- ───────────── MAIN ───────────── -->
+  <main class="main-content">
+
+    <!-- ══════════════════════════════════
+         PAGE: DASHBOARD
+         ══════════════════════════════════ -->
+    <section class="page" id="page-dashboard">
+      <h1 class="page-title">Dashboard</h1>
+
+      <!-- Banner estado de red -->
+      <div class="banner">
+        <div class="banner-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/>
+            <path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>
+          </svg>
+        </div>
+        <div>
+          <div class="banner-title">
+            Estado de la red: <span class="status-ok">CONECTADO</span>
+            <!-- Tooltip -->
+            <span class="tooltip-wrap" style="vertical-align:middle;margin-left:4px">
+              <span class="tooltip-icon">?</span>
+              <span class="tooltip-box">Es necesario que el sistema esté conectado y funcionando correctamente con tu red.</span>
+            </span>
+          </div>
+          <div class="banner-sub">RED: 192.168.1.0/24 &bull; Gateway: activo</div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon blue">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="stat-label">
+            Dispositivos activos
+            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Equipos conectados actualmente a tu red.</span></span>
+          </div>
+          <!-- BACKEND: reemplazar con dato dinámico -->
+          <div class="stat-value" data-key="active-devices">24</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon orange">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <div class="stat-label">
+            Vulnerabilidades
+            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Fallas de seguridad detectadas que deben corregirse.</span></span>
+          </div>
+          <div class="stat-value" data-key="total-vulns">12</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon purple">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <div class="stat-label">Último escaneo</div>
+          <!-- BACKEND: reemplazar con fecha real -->
+          <div class="stat-value" style="font-size:18px" data-key="last-scan">14/mar/26</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-icon yellow">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="stat-label">
+            Nivel de riesgo
+            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Calificación general de seguridad: Bajo, Medio o Alto.</span></span>
+          </div>
+          <!-- BACKEND: reemplazar con dato dinámico -->
+          <div class="stat-value medium" data-key="risk-level">MEDIO</div>
+        </div>
+      </div>
+
+      <!-- Botón escaneo -->
+      <div style="margin-bottom:28px">
+        <button class="btn btn-primary btn-lg" onclick="startScan('btn-scan-dashboard','scan-progress-dashboard')">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Iniciar escaneo
+        </button>
+        <div id="scan-progress-dashboard" class="progress-wrap" style="display:none;max-width:360px;margin-top:12px">
+          <div class="progress-header"><span>Progreso</span><span class="progress-pct">0%</span></div>
+          <div class="progress-bar"><div class="progress-fill"></div></div>
+        </div>
+        <!-- id oculto para startScan -->
+        <span id="btn-scan-dashboard" style="display:none"></span>
+      </div>
+
+      <!-- Chart + Recomendaciones -->
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-body">
+            <div class="section-title">
+              Vulnerabilidades por severidad
+              <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Distribución de vulnerabilidades según su nivel de gravedad.</span></span>
+            </div>
+            <div class="chart-container" style="height:280px">
+              <!-- BACKEND: alimentar con datos reales vía Chart.js -->
+              <canvas id="chart-bar-vuln"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="section-title">
+              Acciones Recomendadas
+              <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Tareas prioritarias para mejorar la seguridad de tu red.</span></span>
+            </div>
+            <!-- BACKEND: lista dinámica de recomendaciones -->
+            <ul class="action-list">
+              <li><span class="action-bullet">•</span> Parchear 2 sistemas con vulnerabilidades críticas</li>
+              <li><span class="action-bullet">•</span> Deshabilitar puertos abiertos innecesarios</li>
+              <li><span class="action-bullet">•</span> Revisar credenciales débiles en dispositivos</li>
+              <li><span class="action-bullet">•</span> Actualizar certificados SSL expirados</li>
+              <li><span class="action-bullet">•</span> Configurar reglas de firewall actualizadas</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         PAGE: VULNERABILIDADES
+         ══════════════════════════════════ -->
+    <section class="page" id="page-vulnerabilities">
+      <h1 class="page-title">Vulnerabilidades</h1>
+
+      <!-- Resumen por severidad -->
+      <div class="severity-grid">
+        <div class="severity-card low">
+          <!-- BACKEND: dato dinámico -->
+          <div class="severity-number" data-key="count-low">2</div>
+          <div class="severity-label">
+            Bajo
+            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Problemas menores que no representan un peligro inmediato.</span></span>
+          </div>
+        </div>
+        <div class="severity-card medium">
+          <div class="severity-number" data-key="count-medium">3</div>
+          <div class="severity-label">
+            Medio
+            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Podrían ser explotados si se combinan con otras fallas.</span></span>
+          </div>
+        </div>
+        <div class="severity-card high">
+          <div class="severity-number" data-key="count-high">5</div>
+          <div class="severity-label">
+            Alto
+            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Fallas graves que pueden exponer información sensible.</span></span>
+          </div>
+        </div>
+        <div class="severity-card critical">
+          <div class="severity-number" data-key="count-critical">2</div>
+          <div class="severity-label">
+            Crítico
+            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Las más peligrosas; pueden comprometer sistemas completos.</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tendencia -->
+      <div class="card" style="margin-bottom:24px">
+        <div class="card-body">
+          <div class="section-title">
+            Tendencia de vulnerabilidades (Últimos 7 escaneos)
+            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Si las líneas bajan, la seguridad está mejorando.</span></span>
+          </div>
+          <div class="chart-container" style="height:280px">
+            <!-- BACKEND: alimentar con historial real de escaneos -->
+            <canvas id="chart-line-trend"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filtros -->
+      <div class="filters-bar">
+        <div class="search-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input class="input" id="vuln-search" type="text" placeholder="Buscar vulnerabilidades o IP..." />
+        </div>
+        <div class="select-wrap">
+          <select id="vuln-severity">
+            <option value="all">Todas las severidades</option>
+            <option value="critical">Crítica</option>
+            <option value="high">Alta</option>
+            <option value="medium">Media</option>
+            <option value="low">Baja</option>
+          </select>
+        </div>
+        <div class="select-wrap">
+          <select id="vuln-status">
+            <option value="all">Todos los estados</option>
+            <option value="open">Abierta</option>
+            <option value="review">En revisión</option>
+            <option value="closed">Cerrada</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tabla de vulnerabilidades -->
+      <div class="card">
+        <div class="card-body">
+          <div class="section-title">
+            Lista de vulnerabilidades
+            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Detalle de cada vulnerabilidad encontrada: severidad, descripción, dispositivo afectado y estado de resolución.</span></span>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>Severidad</th>
+                  <th>Vulnerabilidad</th>
+                  <th>Dispositivo</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <!-- BACKEND: poblar filas desde API -->
+              <tbody id="vuln-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         PAGE: ESCANEO DE RED
+         ══════════════════════════════════ -->
+    <section class="page" id="page-network-scan">
+      <h1 class="page-title">Escaneo de red</h1>
+
+      <!-- Control escaneo -->
+      <div class="card" style="margin-bottom:24px">
+        <div class="card-body">
+          <button class="btn btn-primary btn-lg" id="btn-scan-net" onclick="startScan('btn-scan-net','scan-progress-net')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            Iniciar escaneo
+          </button>
+          <div id="scan-progress-net" class="progress-wrap" style="display:none;max-width:420px">
+            <div class="progress-header"><span>Progreso del escaneo</span><span class="progress-pct">0%</span></div>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabla de dispositivos -->
+      <div class="card">
+        <div class="card-body">
+          <div class="section-title">Dispositivos detectados</div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <div class="th-inner">
+                      IP
+                      <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Identificación única de cada dispositivo en la red.</span></span>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="th-inner">
+                      Puertos abiertos
+                      <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Puertas por donde entra y sale información. Muchos puertos abiertos innecesariamente pueden ser un riesgo.</span></span>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="th-inner">
+                      Servicios detectados
+                      <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Programas o aplicaciones accesibles desde la red.</span></span>
+                    </div>
+                  </th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <!-- BACKEND: poblar con resultados del escaneo -->
+              <tbody>
+                <tr>
+                  <td class="mono">192.168.1.1</td>
+                  <td class="mono">22, 80, 443</td>
+                  <td>SSH, HTTP, HTTPS</td>
+                  <td><span class="badge badge-online">Conectado</span></td>
+                </tr>
+                <tr>
+                  <td class="mono">192.168.1.100</td>
+                  <td class="mono">80, 3306</td>
+                  <td>HTTP, MySQL</td>
+                  <td><span class="badge badge-online">Conectado</span></td>
+                </tr>
+                <tr>
+                  <td class="mono">192.168.1.105</td>
+                  <td class="mono">22, 8080</td>
+                  <td>SSH, HTTP-ALT</td>
+                  <td><span class="badge badge-suspect">Sospechoso</span></td>
+                </tr>
+                <tr>
+                  <td class="mono">192.168.1.110</td>
+                  <td class="mono">—</td>
+                  <td>—</td>
+                  <td><span class="badge badge-offline">Fuera de línea</span></td>
+                </tr>
+                <tr>
+                  <td class="mono">192.168.1.115</td>
+                  <td class="mono">443</td>
+                  <td>HTTPS</td>
+                  <td><span class="badge badge-online">Conectado</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         PAGE: REPORTES DE SEGURIDAD
+         ══════════════════════════════════ -->
+    <section class="page" id="page-reports">
+      <h1 class="page-title">Reportes de seguridad</h1>
+
+      <!-- Generar reporte -->
+      <div class="card" style="margin-bottom:24px">
+        <div class="card-body">
+          <div class="section-title">
+            Generar Reporte
+            <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Crea un documento completo con los resultados del último escaneo: dispositivos, vulnerabilidades, nivel de riesgo y recomendaciones.</span></span>
+          </div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+            <!-- BACKEND: llamar endpoint /api/reports/generate -->
+            <button class="btn btn-primary" id="btn-generate-report">Generar reporte</button>
+            <button class="btn btn-outline" id="btn-download-report">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Descargar último reporte
+            </button>
+          </div>
+          <div class="info-row" style="margin-top:16px">
+            <strong>Último análisis:</strong>
+            <!-- BACKEND: fecha del último análisis -->
+            <span id="last-analysis-date">28/02/2026 15:20:17</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Historial -->
+      <div class="card">
+        <div class="card-body">
+          <div class="section-title">Historial de Reportes</div>
+          <div class="table-wrapper">
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    <div class="th-inner">
+                      Fecha y Hora
+                      <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Momento exacto en que se generó este reporte.</span></span>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="th-inner">
+                      Dispositivos
+                      <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Cantidad total de equipos analizados en ese escaneo.</span></span>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="th-inner">
+                      Vulnerabilidades
+                      <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Total de problemas de seguridad encontrados.</span></span>
+                    </div>
+                  </th>
+                  <th>
+                    <div class="th-inner">
+                      Nivel de Riesgo
+                      <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Calificación general: Bajo (seguro), Medio (algunos problemas), Alto (situación crítica).</span></span>
+                    </div>
+                  </th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <!-- BACKEND: poblar con GET /api/reports -->
+              <tbody id="reports-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════════
+         PAGE: AJUSTES
+         ══════════════════════════════════ -->
+    <section class="page" id="page-settings">
+      <h1 class="page-title">Ajustes</h1>
+
+      <div style="max-width:600px;display:flex;flex-direction:column;gap:20px">
+
+        <!-- Rango de IP -->
+        <div class="card">
+          <div class="card-body">
+            <div class="section-subtitle">
+              Rango de IP
+              <span class="tooltip-wrap" style="vertical-align:middle"><span class="tooltip-icon">?</span><span class="tooltip-box">Define qué parte de tu red será analizada. Las IPs son los "números de casa" de cada dispositivo.</span></span>
+            </div>
+            <!-- BACKEND: cargar valores actuales desde GET /api/settings -->
+            <div class="form-group">
+              <label class="label" for="ip-start">Inicio</label>
+              <input class="input-field" id="ip-start" name="ip_start" type="text" placeholder="192.168.1.1" />
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label class="label" for="ip-end">Fin</label>
+              <input class="input-field" id="ip-end" name="ip_end" type="text" placeholder="192.168.1.254" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Tipo de escaneo -->
+        <div class="card">
+          <div class="card-body">
+            <div class="section-subtitle">Tipo de escaneo</div>
+            <!-- BACKEND: cargar preferencia del usuario -->
+            <select class="select-field" id="scan-type" name="scan_type">
+              <option value="ping">Ping</option>
+              <option value="port-scan">Port Scan</option>
+              <option value="full-scan">Full Scan</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Ajustes del sistema -->
+        <div class="card">
+          <div class="card-body">
+            <div class="section-subtitle">Ajustes del Sistema</div>
+            <div class="checkbox-row">
+              <input type="checkbox" id="notifications" name="notifications" checked />
+              <label for="notifications">
+                Notificaciones activas
+                <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Recibirás alertas automáticas cuando se detecten vulnerabilidades críticas o dispositivos sospechosos.</span></span>
+              </label>
+            </div>
+            <div class="checkbox-row">
+              <input type="checkbox" id="auto-updates" name="auto_updates" checked />
+              <label for="auto-updates">
+                Actualizaciones automáticas
+                <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">HERA descargará e instalará actualizaciones de seguridad automáticamente. Muy recomendado.</span></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guardar -->
+        <!-- BACKEND: POST /api/settings con los valores del formulario -->
+        <div style="text-align:center">
+          <button class="btn btn-primary btn-lg" id="btn-save-settings" style="padding-left:48px;padding-right:48px">
+            Guardar configuración
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+  </main><!-- /main-content -->
+</div><!-- /app-shell -->
+
+<!-- ══════════════════════════════════════════════
+     SCRIPT DE CORRECCIÓN: startScan con el btn real
+     ══════════════════════════════════════════════ -->
+<script>
+  /* Sobrescribir startScan para usar el botón real del DOM */
+  document.addEventListener('DOMContentLoaded', () => {
+
+    /* Dashboard scan */
+    const btnDash = document.querySelector('#page-dashboard .btn-primary');
+    if (btnDash) {
+      btnDash.addEventListener('click', function() {
+        const progressContainer = document.getElementById('scan-progress-dashboard');
+        const fill  = progressContainer.querySelector('.progress-fill');
+        const pctEl = progressContainer.querySelector('.progress-pct');
+        this.disabled = true;
+        this.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Escaneando...`;
+        progressContainer.style.display = 'block';
+        let pct = 0;
+        const iv = setInterval(() => {
+          pct += 2;
+          fill.style.width = pct + '%';
+          pctEl.textContent = pct + '%';
+          if (pct >= 100) {
+            clearInterval(iv);
+            this.disabled = false;
+            this.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Iniciar escaneo`;
+            showToast('Escaneo completado', 'success');
+            setTimeout(() => { progressContainer.style.display='none'; fill.style.width='0%'; }, 3000);
+          }
+        }, 80);
+      });
+    }
+
+    /* Network scan */
+    const btnNet = document.getElementById('btn-scan-net');
+    if (btnNet) {
+      btnNet.addEventListener('click', function() {
+        const progressContainer = document.getElementById('scan-progress-net');
+        const fill  = progressContainer.querySelector('.progress-fill');
+        const pctEl = progressContainer.querySelector('.progress-pct');
+        this.disabled = true;
+        this.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Escaneando...`;
+        progressContainer.style.display = 'block';
+        let pct = 0;
+        const iv = setInterval(() => {
+          pct += 2;
+          fill.style.width = pct + '%';
+          pctEl.textContent = pct + '%';
+          if (pct >= 100) {
+            clearInterval(iv);
+            this.disabled = false;
+            this.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg> Iniciar escaneo`;
+            showToast('Escaneo de red completado', 'success');
+            setTimeout(() => { progressContainer.style.display='none'; fill.style.width='0%'; }, 3000);
+          }
+        }, 80);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
