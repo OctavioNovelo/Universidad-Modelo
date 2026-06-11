@@ -6,7 +6,7 @@ from pathlib import Path
 import utils.parser as parser
 from utils.system_info import obtener_sistema_operativo, obtener_carpeta_os
 
-PORT = 8080
+PORT = 8081
 DIRECTORY = "frontend/pages/HERA_Dashboard/dashboard/dashboard"
 
 class HeraAPIHandler(http.server.SimpleHTTPRequestHandler):
@@ -60,9 +60,12 @@ class HeraAPIHandler(http.server.SimpleHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps(response_data).encode('utf-8'))
 
+class HeraTCPServer(socketserver.TCPServer):
+    allow_reuse_address = True
+
 if __name__ == "__main__":
     os.chdir(os.path.dirname(os.path.abspath(__file__)))
-    with socketserver.TCPServer(("", PORT), HeraAPIHandler) as httpd:
+    with HeraTCPServer(("", PORT), HeraAPIHandler) as httpd:
         print(f"Servidor HERA Dashboard activo en http://localhost:{PORT}")
         try:
             httpd.serve_forever()

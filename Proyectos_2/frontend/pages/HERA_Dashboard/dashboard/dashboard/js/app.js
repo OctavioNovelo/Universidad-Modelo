@@ -72,9 +72,11 @@ function updateDashboardUI() {
   const elDevices = document.querySelector('[data-key="active-devices"]');
   const elVulns = document.querySelector('[data-key="total-vulns"]');
   const elRisk = document.querySelector('[data-key="risk-level"]');
+  const elLastScan = document.querySelector('[data-key="last-scan"]');
 
   if (elDevices) elDevices.textContent = DASHBOARD_STATS.active_devices;
   if (elVulns) elVulns.textContent = DASHBOARD_STATS.total_vulns;
+  if (elLastScan) elLastScan.textContent = DASHBOARD_STATS.last_scan || 'N/A';
   if (elRisk) {
     elRisk.textContent = DASHBOARD_STATS.risk_level;
     elRisk.className = 'stat-value ' + DASHBOARD_STATS.risk_level.toLowerCase();

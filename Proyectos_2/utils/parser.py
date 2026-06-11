@@ -72,7 +72,6 @@ def generar_tabla_xml(ruta_xml):
             filas_tabla.append(fila)
     return filas_tabla
 
-<<<<<<< HEAD
 def buscar_escaneos(directorio, base_name, extension=".xml"):
     """
     Finds all scan files for a category and sorts them by modification time (newest first).
@@ -96,7 +95,7 @@ def buscar_escaneos(directorio, base_name, extension=".xml"):
     # Sort by modification time, newest first
     archivos.sort(key=lambda x: x.stat().st_mtime, reverse=True)
     return [str(a) for a in archivos]
-=======
+
 def obtener_datos_completos(os_folder):
     """Lee todos los archivos XML en el directorio de resultados y los combina."""
     base_path = Path(__file__).parent.parent
@@ -141,15 +140,26 @@ def obtener_estadisticas_dashboard(os_folder):
     elif vulns_por_sev["high"] > 0: riesgo = "ALTO"
     elif vulns_por_sev["medium"] > 0: riesgo = "MEDIO"
 
+    # Obtener la fecha del último escaneo
+    base_path = Path(__file__).parent.parent
+    resultados_dir = base_path / "utils" / "Resultados" / os_folder / "Nmap"
+    last_scan = "N/A"
+    if resultados_dir.exists():
+        archivos = list(resultados_dir.glob("*.xml"))
+        if archivos:
+            latest_file = max(archivos, key=lambda x: x.stat().st_mtime)
+            from datetime import datetime
+            last_scan = datetime.fromtimestamp(latest_file.stat().st_mtime).strftime('%d/%m/%y')
+
     return {
         "active_devices": len(ips_unicas),
         "total_vulns": total_vulns,
         "risk_level": riesgo,
         "vulns_by_severity": vulns_por_sev,
         "vulnerabilities": vulnerabilidades_lista,
-        "devices": list(ips_unicas)
+        "devices": list(ips_unicas),
+        "last_scan": last_scan
     }
->>>>>>> bce0701 (Fix: SI)
 
 def comparar_escaneos(ruta_xml_nuevo, ruta_xml_base):
     """Compares two scans and returns what is NEW in the current scan."""
