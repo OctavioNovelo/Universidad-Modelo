@@ -1,1 +1,0 @@
-# Licencias y atribuciones
