@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/aka_manto/Documentos/Github/Universidad/Universidad-Modelo/3 Semestre/Data Structures/PruebaDesigner/PruebaDesigner.csproj": {}
+  },
+  "projects": {
+    "/home/aka_manto/Documentos/Github/Universidad/Universidad-Modelo/3 Semestre/Data Structures/PruebaDesigner/PruebaDesigner.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/aka_manto/Documentos/Github/Universidad/Universidad-Modelo/3 Semestre/Data Structures/PruebaDesigner/PruebaDesigner.csproj",
+        "projectName": "PruebaDesigner",
+        "projectPath": "/home/aka_manto/Documentos/Github/Universidad/Universidad-Modelo/3 Semestre/Data Structures/PruebaDesigner/PruebaDesigner.csproj",
+        "packagesPath": "/home/aka_manto/.nuget/packages/",
+        "outputPath": "/home/aka_manto/Documentos/Github/Universidad/Universidad-Modelo/3 Semestre/Data Structures/PruebaDesigner/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/aka_manto/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0-windows"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0-windows7.0": {
+            "targetAlias": "net8.0-windows",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "10.0.100"
+      },
+      "frameworks": {
+        "net8.0-windows7.0": {
+          "targetAlias": "net8.0-windows",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.30, 8.0.30]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[8.0.30, 8.0.30]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[8.0.30, 8.0.30]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WindowsForms": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/10.0.111/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
