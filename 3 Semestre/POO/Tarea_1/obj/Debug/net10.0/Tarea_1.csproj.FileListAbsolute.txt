@@ -1,0 +1,15 @@
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/Debug/net10.0/Tarea_1.GeneratedMSBuildEditorConfig.editorconfig
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/Debug/net10.0/Tarea_1.AssemblyInfoInputs.cache
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/Debug/net10.0/Tarea_1.AssemblyInfo.cs
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/Debug/net10.0/Tarea_1.csproj.CoreCompileInputs.cache
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/Debug/net10.0/Tarea_1.sourcelink.json
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/bin/Debug/net10.0/Tarea_1
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/bin/Debug/net10.0/Tarea_1.deps.json
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/bin/Debug/net10.0/Tarea_1.runtimeconfig.json
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/bin/Debug/net10.0/Tarea_1.dll
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/bin/Debug/net10.0/Tarea_1.pdb
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/Debug/net10.0/Tarea_1.dll
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/Debug/net10.0/refint/Tarea_1.dll
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/Debug/net10.0/Tarea_1.pdb
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/Debug/net10.0/Tarea_1.genruntimeconfig.cache
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/Debug/net10.0/ref/Tarea_1.dll
