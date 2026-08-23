@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "F6rcQSnVTWU=",
+  "success": true,
+  "projectFilePath": "/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Referencias/Referencias.csproj",
+  "expectedPackageFiles": [
+    "/home/shuten-doji/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.11/microsoft.aspnetcore.app.ref.10.0.11.nupkg.sha512"
+  ],
+  "logs": []
+}

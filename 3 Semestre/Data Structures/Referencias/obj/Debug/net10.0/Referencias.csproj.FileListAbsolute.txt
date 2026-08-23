@@ -1,0 +1,5 @@
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Referencias/obj/Debug/net10.0/Referencias.GeneratedMSBuildEditorConfig.editorconfig
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Referencias/obj/Debug/net10.0/Referencias.AssemblyInfoInputs.cache
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Referencias/obj/Debug/net10.0/Referencias.AssemblyInfo.cs
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Referencias/obj/Debug/net10.0/Referencias.csproj.CoreCompileInputs.cache
+/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Referencias/obj/Debug/net10.0/Referencias.sourcelink.json

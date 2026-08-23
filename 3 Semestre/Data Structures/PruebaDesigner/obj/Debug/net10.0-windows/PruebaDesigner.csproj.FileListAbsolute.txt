@@ -1,5 +1,0 @@
-/home/aka_manto/Documentos/Github/Universidad/Universidad-Modelo/3 Semestre/Data Structures/PruebaDesigner/obj/Debug/net10.0-windows/PruebaDesigner.GeneratedMSBuildEditorConfig.editorconfig
-/home/aka_manto/Documentos/Github/Universidad/Universidad-Modelo/3 Semestre/Data Structures/PruebaDesigner/obj/Debug/net10.0-windows/PruebaDesigner.AssemblyInfoInputs.cache
-/home/aka_manto/Documentos/Github/Universidad/Universidad-Modelo/3 Semestre/Data Structures/PruebaDesigner/obj/Debug/net10.0-windows/PruebaDesigner.AssemblyInfo.cs
-/home/aka_manto/Documentos/Github/Universidad/Universidad-Modelo/3 Semestre/Data Structures/PruebaDesigner/obj/Debug/net10.0-windows/PruebaDesigner.csproj.CoreCompileInputs.cache
-/home/aka_manto/Documentos/Github/Universidad/Universidad-Modelo/3 Semestre/Data Structures/PruebaDesigner/obj/Debug/net10.0-windows/PruebaDesigner.sourcelink.json
