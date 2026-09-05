@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj": {}
+    "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj": {}
   },
   "projects": {
-    "/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj": {
+    "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj",
+        "projectUniqueName": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj",
         "projectName": "Stack_dev",
-        "projectPath": "/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj",
-        "packagesPath": "/home/shuten-doji/.nuget/packages/",
-        "outputPath": "/home/shuten-doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/obj/",
+        "projectPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj",
+        "packagesPath": "/home/shuten_doji/.nuget/packages/",
+        "outputPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/shuten-doji/.nuget/NuGet/NuGet.Config"
+          "/home/shuten_doji/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"

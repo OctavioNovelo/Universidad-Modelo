@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/Referencias.csproj",
-      "projectName": "Referencias",
-      "projectPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/Referencias.csproj",
+      "projectUniqueName": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Pokemon/Pokemon.csproj",
+      "projectName": "Pokemon",
+      "projectPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Pokemon/Pokemon.csproj",
       "packagesPath": "/home/shuten_doji/.nuget/packages/",
-      "outputPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/obj/",
+      "outputPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Pokemon/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/home/shuten_doji/.nuget/NuGet/NuGet.Config"

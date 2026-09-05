@@ -1,0 +1,5 @@
+/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Pokemon/obj/Debug/net10.0/Pokemon.GeneratedMSBuildEditorConfig.editorconfig
+/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Pokemon/obj/Debug/net10.0/Pokemon.AssemblyInfoInputs.cache
+/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Pokemon/obj/Debug/net10.0/Pokemon.AssemblyInfo.cs
+/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Pokemon/obj/Debug/net10.0/Pokemon.csproj.CoreCompileInputs.cache
+/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Pokemon/obj/Debug/net10.0/Pokemon.sourcelink.json
