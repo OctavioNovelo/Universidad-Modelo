@@ -8,19 +8,19 @@
     "net10.0": []
   },
   "packageFolders": {
-    "/home/shuten_doji/.nuget/packages/": {}
+    "/home/johnny_silverhand/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj",
+      "projectUniqueName": "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj",
       "projectName": "Stack_dev",
-      "projectPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj",
-      "packagesPath": "/home/shuten_doji/.nuget/packages/",
-      "outputPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/obj/",
+      "projectPath": "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/Stack_dev.csproj",
+      "packagesPath": "/home/johnny_silverhand/.nuget/packages/",
+      "outputPath": "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Stack_dev/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/shuten_doji/.nuget/NuGet/NuGet.Config"
+        "/home/johnny_silverhand/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"

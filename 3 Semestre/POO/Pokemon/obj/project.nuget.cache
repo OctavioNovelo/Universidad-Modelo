@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "maa5xmE3oZY=",
+  "dgSpecHash": "KU+ge2mz5yg=",
   "success": true,
-  "projectFilePath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Pokemon/Pokemon.csproj",
+  "projectFilePath": "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Pokemon/Pokemon.csproj",
   "expectedPackageFiles": [
-    "/home/shuten_doji/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.11/microsoft.aspnetcore.app.ref.10.0.11.nupkg.sha512"
+    "/home/johnny_silverhand/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.11/microsoft.aspnetcore.app.ref.10.0.11.nupkg.sha512"
   ],
   "logs": []
 }

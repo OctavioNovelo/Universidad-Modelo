@@ -8,19 +8,19 @@
     "net10.0": []
   },
   "packageFolders": {
-    "/home/shuten_doji/.nuget/packages/": {}
+    "/home/johnny_silverhand/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Tarea_1/Tarea_1.csproj",
+      "projectUniqueName": "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/Tarea_1.csproj",
       "projectName": "Tarea_1",
-      "projectPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Tarea_1/Tarea_1.csproj",
-      "packagesPath": "/home/shuten_doji/.nuget/packages/",
-      "outputPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/",
+      "projectPath": "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/Tarea_1.csproj",
+      "packagesPath": "/home/johnny_silverhand/.nuget/packages/",
+      "outputPath": "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/shuten_doji/.nuget/NuGet/NuGet.Config"
+        "/home/johnny_silverhand/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"

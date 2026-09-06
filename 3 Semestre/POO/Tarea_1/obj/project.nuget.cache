@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "tc+tXYX2RdY=",
+  "dgSpecHash": "UeebdKBLb/w=",
   "success": true,
-  "projectFilePath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/POO/Tarea_1/Tarea_1.csproj",
+  "projectFilePath": "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Tarea_1/Tarea_1.csproj",
   "expectedPackageFiles": [
-    "/home/shuten_doji/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.11/microsoft.aspnetcore.app.ref.10.0.11.nupkg.sha512"
+    "/home/johnny_silverhand/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.11/microsoft.aspnetcore.app.ref.10.0.11.nupkg.sha512"
   ],
   "logs": []
 }

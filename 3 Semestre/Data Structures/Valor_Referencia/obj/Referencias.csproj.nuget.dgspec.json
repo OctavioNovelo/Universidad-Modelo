@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/Referencias.csproj": {}
+    "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/Referencias.csproj": {}
   },
   "projects": {
-    "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/Referencias.csproj": {
+    "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/Referencias.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/Referencias.csproj",
+        "projectUniqueName": "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/Referencias.csproj",
         "projectName": "Referencias",
-        "projectPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/Referencias.csproj",
-        "packagesPath": "/home/shuten_doji/.nuget/packages/",
-        "outputPath": "/home/shuten_doji/Documentos/GitHub/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/obj/",
+        "projectPath": "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/Referencias.csproj",
+        "packagesPath": "/home/johnny_silverhand/.nuget/packages/",
+        "outputPath": "/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Valor_Referencia/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/home/shuten_doji/.nuget/NuGet/NuGet.Config"
+          "/home/johnny_silverhand/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
