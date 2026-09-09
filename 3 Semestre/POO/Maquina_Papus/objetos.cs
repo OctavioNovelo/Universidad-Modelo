@@ -16,8 +16,14 @@ namespace MaquinaPapus
             this.Quantity = Quantity;
         }
 
+        // Constructor vacio, usado por System.Text.Json al deserializar.
+        public Money() { }
+
         // Metodos
-        // El dinero no usa metodos. Es un objeto que no tendria sentido modificar. 
+        public override string ToString()
+        {
+            return $"{Type} ${Value} x{Quantity}";
+        }
     }
     internal class Papu
     {
@@ -25,8 +31,11 @@ namespace MaquinaPapus
         public string Name { get; set;}
         public int Password;
         
-        public List<Money> Dinero { get; private set; }
+        public List<Money> Dinero { get; set; }
 
+
+        // Constructor vacio, usado por System.Text.Json al deserializar.
+        public Papu() { }
 
         // Contructor 
         public Papu(string name, int password, List<Money> dinero = null)
@@ -94,6 +103,9 @@ namespace MaquinaPapus
         public int Price;
         public string Ubi = "";
 
+
+        // Constructor vacio, usado por System.Text.Json al deserializar.
+        public Productos() { }
 
         // Contructor 
         public Productos(string name, int price, string ubi)

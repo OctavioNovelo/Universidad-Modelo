@@ -55,6 +55,21 @@ namespace MaquinaPapus
         {
             elementos.Clear();
         }
+
+        // Convierte la Lista a un List<T> normal (util para serializar a JSON).
+        public List<T> ToList()
+        {
+            return new List<T>(elementos);
+        }
+
+        // Reemplaza todo el contenido con los valores dados (util al cargar desde JSON).
+        public void CargarDesde(IEnumerable<T> valores)
+        {
+            elementos.Clear();
+            if (valores != null)
+                elementos.AddRange(valores);
+        }
+
         
         public T this[int indice]
         {

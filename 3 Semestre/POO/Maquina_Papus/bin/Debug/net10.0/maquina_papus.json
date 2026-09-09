@@ -1,0 +1,326 @@
+{
+  "Productos": [
+    {
+      "Name": "Coca Cola",
+      "Stock": 9,
+      "Price": 18,
+      "Ubi": "A1"
+    },
+    {
+      "Name": "Sprite",
+      "Stock": 10,
+      "Price": 18,
+      "Ubi": "A2"
+    },
+    {
+      "Name": "Agua Ciel",
+      "Stock": 15,
+      "Price": 15,
+      "Ubi": "A3"
+    },
+    {
+      "Name": "Jugo Del Valle",
+      "Stock": 8,
+      "Price": 20,
+      "Ubi": "A4"
+    },
+    {
+      "Name": "Gatorade",
+      "Stock": 6,
+      "Price": 25,
+      "Ubi": "A5"
+    },
+    {
+      "Name": "Sabritas Original",
+      "Stock": 10,
+      "Price": 17,
+      "Ubi": "B1"
+    },
+    {
+      "Name": "Doritos Nacho",
+      "Stock": 10,
+      "Price": 18,
+      "Ubi": "B2"
+    },
+    {
+      "Name": "Cheetos Torciditos",
+      "Stock": 10,
+      "Price": 17,
+      "Ubi": "B3"
+    },
+    {
+      "Name": "Ruffles Queso",
+      "Stock": 8,
+      "Price": 18,
+      "Ubi": "B4"
+    },
+    {
+      "Name": "Cheetos Flamin Hot",
+      "Stock": 10,
+      "Price": 19,
+      "Ubi": "B5"
+    },
+    {
+      "Name": "Gansito",
+      "Stock": 10,
+      "Price": 16,
+      "Ubi": "C1"
+    },
+    {
+      "Name": "Choco Roles",
+      "Stock": 10,
+      "Price": 15,
+      "Ubi": "C2"
+    },
+    {
+      "Name": "Barritas Marinela",
+      "Stock": 10,
+      "Price": 14,
+      "Ubi": "C3"
+    },
+    {
+      "Name": "Oreo",
+      "Stock": 10,
+      "Price": 15,
+      "Ubi": "C4"
+    },
+    {
+      "Name": "Principe",
+      "Stock": 10,
+      "Price": 15,
+      "Ubi": "C5"
+    },
+    {
+      "Name": "Snickers",
+      "Stock": 10,
+      "Price": 20,
+      "Ubi": "D1"
+    },
+    {
+      "Name": "Kit Kat",
+      "Stock": 10,
+      "Price": 20,
+      "Ubi": "D2"
+    },
+    {
+      "Name": "Skittles",
+      "Stock": 10,
+      "Price": 17,
+      "Ubi": "D3"
+    },
+    {
+      "Name": "M\u0026Ms",
+      "Stock": 10,
+      "Price": 18,
+      "Ubi": "D4"
+    },
+    {
+      "Name": "Trident",
+      "Stock": 15,
+      "Price": 12,
+      "Ubi": "D5"
+    }
+  ],
+  "Papus": [
+    {
+      "Name": "Juan",
+      "Dinero": [
+        {
+          "Type": "Billete",
+          "Value": 200,
+          "Quantity": 3
+        },
+        {
+          "Type": "Billete",
+          "Value": 100,
+          "Quantity": 5
+        },
+        {
+          "Type": "Billete",
+          "Value": 50,
+          "Quantity": 10
+        },
+        {
+          "Type": "Billete",
+          "Value": 20,
+          "Quantity": 20
+        },
+        {
+          "Type": "Moneda",
+          "Value": 20,
+          "Quantity": 10
+        },
+        {
+          "Type": "Moneda",
+          "Value": 10,
+          "Quantity": 20
+        },
+        {
+          "Type": "Moneda",
+          "Value": 5,
+          "Quantity": 80
+        },
+        {
+          "Type": "Moneda",
+          "Value": 2,
+          "Quantity": 20
+        },
+        {
+          "Type": "Moneda",
+          "Value": 1,
+          "Quantity": 50
+        }
+      ],
+      "Password": 1111
+    },
+    {
+      "Name": "Pedro",
+      "Dinero": [
+        {
+          "Type": "Billete",
+          "Value": 200,
+          "Quantity": 5
+        },
+        {
+          "Type": "Billete",
+          "Value": 100,
+          "Quantity": 8
+        },
+        {
+          "Type": "Billete",
+          "Value": 50,
+          "Quantity": 10
+        },
+        {
+          "Type": "Billete",
+          "Value": 20,
+          "Quantity": 20
+        },
+        {
+          "Type": "Moneda",
+          "Value": 20,
+          "Quantity": 10
+        },
+        {
+          "Type": "Moneda",
+          "Value": 10,
+          "Quantity": 50
+        },
+        {
+          "Type": "Moneda",
+          "Value": 5,
+          "Quantity": 40
+        },
+        {
+          "Type": "Moneda",
+          "Value": 2,
+          "Quantity": 20
+        },
+        {
+          "Type": "Moneda",
+          "Value": 1,
+          "Quantity": 60
+        }
+      ],
+      "Password": 2222
+    },
+    {
+      "Name": "Luis",
+      "Dinero": [
+        {
+          "Type": "Billete",
+          "Value": 200,
+          "Quantity": 5
+        },
+        {
+          "Type": "Billete",
+          "Value": 100,
+          "Quantity": 10
+        },
+        {
+          "Type": "Billete",
+          "Value": 50,
+          "Quantity": 15
+        },
+        {
+          "Type": "Billete",
+          "Value": 20,
+          "Quantity": 20
+        },
+        {
+          "Type": "Moneda",
+          "Value": 20,
+          "Quantity": 15
+        },
+        {
+          "Type": "Moneda",
+          "Value": 10,
+          "Quantity": 50
+        },
+        {
+          "Type": "Moneda",
+          "Value": 5,
+          "Quantity": 80
+        },
+        {
+          "Type": "Moneda",
+          "Value": 2,
+          "Quantity": 25
+        },
+        {
+          "Type": "Moneda",
+          "Value": 1,
+          "Quantity": 50
+        }
+      ],
+      "Password": 3333
+    }
+  ],
+  "Money": [
+    {
+      "Type": "Billete",
+      "Value": 200,
+      "Quantity": 0
+    },
+    {
+      "Type": "Billete",
+      "Value": 100,
+      "Quantity": 0
+    },
+    {
+      "Type": "Billete",
+      "Value": 50,
+      "Quantity": 2
+    },
+    {
+      "Type": "Billete",
+      "Value": 20,
+      "Quantity": 5
+    },
+    {
+      "Type": "Moneda",
+      "Value": 20,
+      "Quantity": 5
+    },
+    {
+      "Type": "Moneda",
+      "Value": 10,
+      "Quantity": 11
+    },
+    {
+      "Type": "Moneda",
+      "Value": 5,
+      "Quantity": 21
+    },
+    {
+      "Type": "Moneda",
+      "Value": 2,
+      "Quantity": 21
+    },
+    {
+      "Type": "Moneda",
+      "Value": 1,
+      "Quantity": 31
+    }
+  ]
+}
