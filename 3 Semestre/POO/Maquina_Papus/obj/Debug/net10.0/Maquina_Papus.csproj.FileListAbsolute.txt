@@ -1,0 +1,15 @@
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/obj/Debug/net10.0/Maquina_Papus.GeneratedMSBuildEditorConfig.editorconfig
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/obj/Debug/net10.0/Maquina_Papus.AssemblyInfoInputs.cache
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/obj/Debug/net10.0/Maquina_Papus.AssemblyInfo.cs
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/obj/Debug/net10.0/Maquina_Papus.csproj.CoreCompileInputs.cache
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/obj/Debug/net10.0/Maquina_Papus.sourcelink.json
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/bin/Debug/net10.0/Maquina_Papus
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/bin/Debug/net10.0/Maquina_Papus.deps.json
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/bin/Debug/net10.0/Maquina_Papus.runtimeconfig.json
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/bin/Debug/net10.0/Maquina_Papus.dll
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/bin/Debug/net10.0/Maquina_Papus.pdb
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/obj/Debug/net10.0/Maquina_Papus.dll
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/obj/Debug/net10.0/refint/Maquina_Papus.dll
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/obj/Debug/net10.0/Maquina_Papus.pdb
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/obj/Debug/net10.0/Maquina_Papus.genruntimeconfig.cache
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/POO/Maquina_Papus/obj/Debug/net10.0/ref/Maquina_Papus.dll

@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Reflection.Metadata.Ecma335;
 using Microsoft.VisualBasic;
 
@@ -5,11 +6,11 @@ namespace MaquinaPapus
 {
     internal class CLI
     {
-        public Lista<Productos> productos = new Lista<Productos>();
-        public Lista<Papu> papus = new Lista<Papu>();
-        public Lista<Money> money = new Lista<Money>();
+        public static Lista<Productos> productos = new Lista<Productos>();
+        public static Lista<Papu> papus = new Lista<Papu>();
+        public static Lista<Money> money = new Lista<Money>();
 
-        public string Normalizer(string input)
+        public static string Normalizer(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
                 return "";
@@ -27,36 +28,41 @@ namespace MaquinaPapus
                 .Replace("ü", "u");
         }   
 
-        public void Commmand_Line_Interface(string input)
+        public static void Commmand_Line_Interface()
         {
+            string input = Console.ReadLine();
             switch(input)
             {
                 case "clear": Console.Clear(); break;
+                case "exit": ; break;
                 case "help": Mostrar("help"); break; // Imprimir Comandos
                 case "productos": Mostrar("productos"); break; // Mostrar matriz de prodcutos
                 case "buy": ; break; // Mostrar CLI del apartado de compra
+                case "papu": 
+                {
+                    Console.WriteLine("password:\n");
+                    int password = int.Parse(Console.ReadLine());
+                    Admin_Command_Line_Interface(Admin_Verif(password, papus));
+                    break;
+                }
                 default: Console.WriteLine($"Papu: Unknow Command: {input}"); break;  
             }
         }
 
-        public bool Admin_Verif(int password, List<Papu> distribuidores)
+        public static bool Admin_Verif(int password, Lista<Papu> distribuidores)
         {
-            foreach (var item in distribuidores)
+            for (int i = 0; i < distribuidores.Size(); i++)
             {
-                var existente = distribuidores.Find(m => m.Password == password);
-                if (existente != null)
+                if (distribuidores[i].Password == password)
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }                  
             }
-            throw new Exception("No se que hiciste para llegar aca");
+
+            return false;
         }
 
-        public void Admin_Command_Line_Interface(bool verif)
+        public static void Admin_Command_Line_Interface(bool verif)
         {
             if (verif)
             {
@@ -104,7 +110,7 @@ namespace MaquinaPapus
         }
 
         // Todos los comandos mostrar son arreglos.
-        public void Mostrar(string input)
+        public static void Mostrar(string input)
         {
             switch (input)
             {

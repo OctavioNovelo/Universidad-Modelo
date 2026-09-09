@@ -19,8 +19,6 @@ namespace MaquinaPapus
         // Metodos
         // El dinero no usa metodos. Es un objeto que no tendria sentido modificar. 
     }
-
-
     internal class Papu
     {
         // Atributos
@@ -88,7 +86,6 @@ namespace MaquinaPapus
         }
         
     }
-
     internal class Productos
     {
         // Atributos
@@ -108,7 +105,7 @@ namespace MaquinaPapus
         }
         public Productos(string name, int stock, int price, string ubi)
         {
-            this.Name = name;
+            Name = name;
             Stock = stock;
             this.Price = price;
             this.Ubi = ubi;
