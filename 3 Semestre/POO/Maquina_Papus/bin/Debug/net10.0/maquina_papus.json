@@ -62,7 +62,7 @@
     },
     {
       "Name": "Gansito",
-      "Stock": 10,
+      "Stock": 9,
       "Price": 16,
       "Ubi": "C1"
     },
@@ -290,12 +290,12 @@
     {
       "Type": "Billete",
       "Value": 50,
-      "Quantity": 2
+      "Quantity": 3
     },
     {
       "Type": "Billete",
       "Value": 20,
-      "Quantity": 5
+      "Quantity": 4
     },
     {
       "Type": "Moneda",
@@ -305,7 +305,7 @@
     {
       "Type": "Moneda",
       "Value": 10,
-      "Quantity": 11
+      "Quantity": 10
     },
     {
       "Type": "Moneda",
@@ -315,7 +315,7 @@
     {
       "Type": "Moneda",
       "Value": 2,
-      "Quantity": 21
+      "Quantity": 19
     },
     {
       "Type": "Moneda",

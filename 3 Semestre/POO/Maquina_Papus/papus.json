@@ -1,0 +1,155 @@
+[
+  {
+    "Name": "Papu_Pro",
+    "Password": 1,
+    "Dinero": [
+      {
+        "Type": "Billete",
+        "Value": 200,
+        "Quantity": 3
+      },
+      {
+        "Type": "Billete",
+        "Value": 100,
+        "Quantity": 5
+      },
+      {
+        "Type": "Billete",
+        "Value": 50,
+        "Quantity": 10
+      },
+      {
+        "Type": "Billete",
+        "Value": 20,
+        "Quantity": 20
+      },
+      {
+        "Type": "Moneda",
+        "Value": 20,
+        "Quantity": 10
+      },
+      {
+        "Type": "Moneda",
+        "Value": 10,
+        "Quantity": 20
+      },
+      {
+        "Type": "Moneda",
+        "Value": 5,
+        "Quantity": 80
+      },
+      {
+        "Type": "Moneda",
+        "Value": 2,
+        "Quantity": 20
+      },
+      {
+        "Type": "Moneda",
+        "Value": 1,
+        "Quantity": 50
+      }
+    ]
+  },
+  {
+    "Name": "Papu_Master",
+    "Password": 2,
+    "Dinero": [
+      {
+        "Type": "Billete",
+        "Value": 200,
+        "Quantity": 5
+      },
+      {
+        "Type": "Billete",
+        "Value": 100,
+        "Quantity": 8
+      },
+      {
+        "Type": "Billete",
+        "Value": 50,
+        "Quantity": 10
+      },
+      {
+        "Type": "Billete",
+        "Value": 20,
+        "Quantity": 20
+      },
+      {
+        "Type": "Moneda",
+        "Value": 20,
+        "Quantity": 10
+      },
+      {
+        "Type": "Moneda",
+        "Value": 10,
+        "Quantity": 50
+      },
+      {
+        "Type": "Moneda",
+        "Value": 5,
+        "Quantity": 40
+      },
+      {
+        "Type": "Moneda",
+        "Value": 2,
+        "Quantity": 20
+      },
+      {
+        "Type": "Moneda",
+        "Value": 1,
+        "Quantity": 60
+      }
+    ]
+  },
+  {
+    "Name": "Papu_Hacker",
+    "Password": 3,
+    "Dinero": [
+      {
+        "Type": "Billete",
+        "Value": 200,
+        "Quantity": 5
+      },
+      {
+        "Type": "Billete",
+        "Value": 100,
+        "Quantity": 10
+      },
+      {
+        "Type": "Billete",
+        "Value": 50,
+        "Quantity": 15
+      },
+      {
+        "Type": "Billete",
+        "Value": 20,
+        "Quantity": 20
+      },
+      {
+        "Type": "Moneda",
+        "Value": 20,
+        "Quantity": 15
+      },
+      {
+        "Type": "Moneda",
+        "Value": 10,
+        "Quantity": 50
+      },
+      {
+        "Type": "Moneda",
+        "Value": 5,
+        "Quantity": 80
+      },
+      {
+        "Type": "Moneda",
+        "Value": 2,
+        "Quantity": 25
+      },
+      {
+        "Type": "Moneda",
+        "Value": 1,
+        "Quantity": 50
+      }
+    ]
+  }
+]

@@ -12,82 +12,114 @@ namespace MaquinaPapus
         public static Lista<Papu> papus = new Lista<Papu>();
         public static Lista<Money> money = new Lista<Money>();
 
-        // Ruta del archivo donde se guardan los datos de la maquina.
-        private static readonly string RutaArchivo =
-            Path.Combine(AppContext.BaseDirectory, "maquina_papus.json");
+        private static readonly string CarpetaProyecto = ObtenerCarpetaProyecto();
+        private static readonly string RutaProductos = Path.Combine(CarpetaProyecto, "productos.json");
+        private static readonly string RutaPapus = Path.Combine(CarpetaProyecto, "papus.json");
+        private static readonly string RutaMoney = Path.Combine(CarpetaProyecto, "dinero_maquina.json");
+
+        private static string ObtenerCarpetaProyecto()
+        {
+            DirectoryInfo carpeta = new DirectoryInfo(AppContext.BaseDirectory);
+
+            while (carpeta != null && carpeta.GetFiles("*.csproj").Length == 0)
+            {
+                carpeta = carpeta.Parent;
+            }
+
+            return carpeta?.FullName ?? AppContext.BaseDirectory;
+        }
 
         private static readonly JsonSerializerOptions JsonOpciones = new JsonSerializerOptions
         {
-            WriteIndented = true,           // Para que el .json sea legible
-            IncludeFields = true,           // Money y Productos guardan datos en campos publicos, no propiedades
+            WriteIndented = true,           
+            IncludeFields = true,           
             PropertyNameCaseInsensitive = true
         };
 
-        // Se ejecuta una sola vez, al usarse la clase CLI por primera vez.
         static CLI()
         {
-            // Si ya existe un archivo de datos guardado, lo cargamos.
-            // Si no existe (o esta corrupto), se usan los valores default.
-            if (!CargarDatos())
-            {
-                InicializarProductos();
-                InicializarPapus();
-                InicializarDineroMaquina();
+            bool cargoProductos = CargarProductos();
+            bool cargoPapus = CargarPapus();
+            bool cargoMoney = CargarMoney();
+
+            if (!cargoProductos) InicializarProductos();
+            if (!cargoPapus) InicializarPapus();
+            if (!cargoMoney) InicializarDineroMaquina();
+
+            if (!cargoProductos || !cargoPapus || !cargoMoney)
                 GuardarDatos();
-            }
         }
 
-        // ---------------------------------------------------------
-        //  Persistencia en JSON
-        // ---------------------------------------------------------
 
-        // Intenta cargar productos, papus y dinero desde el archivo JSON.
-        // Devuelve true si se cargo correctamente.
-        public static bool CargarDatos()
+        public static bool CargarProductos()
         {
             try
             {
-                if (!File.Exists(RutaArchivo))
-                    return false;
+                if (!File.Exists(RutaProductos)) return false;
 
-                string json = File.ReadAllText(RutaArchivo);
-                DatosMaquina datos = JsonSerializer.Deserialize<DatosMaquina>(json, JsonOpciones);
+                var lista = JsonSerializer.Deserialize<List<Productos>>(File.ReadAllText(RutaProductos), JsonOpciones);
+                if (lista == null) return false;
 
-                if (datos == null)
-                    return false;
-
-                productos.CargarDesde(datos.Productos);
-                papus.CargarDesde(datos.Papus);
-                money.CargarDesde(datos.Money);
-
+                productos.CargarDesde(lista);
                 return true;
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"No se pudo leer {Path.GetFileName(RutaArchivo)}, se usaran los valores default. ({ex.Message})");
+                Console.WriteLine($"No se pudo leer productos.json, se usaran los valores default. ({ex.Message})");
                 return false;
             }
         }
 
-        // Guarda productos, papus y dinero en el archivo JSON.
-        // Se llama automaticamente despues de cada operacion que modifica datos.
+        public static bool CargarPapus()
+        {
+            try
+            {
+                if (!File.Exists(RutaPapus)) return false;
+
+                var lista = JsonSerializer.Deserialize<List<Papu>>(File.ReadAllText(RutaPapus), JsonOpciones);
+                if (lista == null) return false;
+
+                papus.CargarDesde(lista);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"No se pudo leer papus.json, se usaran los valores default. ({ex.Message})");
+                return false;
+            }
+        }
+
+        public static bool CargarMoney()
+        {
+            try
+            {
+                if (!File.Exists(RutaMoney)) return false;
+
+                var lista = JsonSerializer.Deserialize<List<Money>>(File.ReadAllText(RutaMoney), JsonOpciones);
+                if (lista == null) return false;
+
+                money.CargarDesde(lista);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"No se pudo leer dinero_maquina.json, se usaran los valores default. ({ex.Message})");
+                return false;
+            }
+        }
+
         public static void GuardarDatos()
         {
             try
             {
-                var datos = new DatosMaquina
-                {
-                    Productos = productos.ToList(),
-                    Papus = papus.ToList(),
-                    Money = money.ToList()
-                };
-
-                string json = JsonSerializer.Serialize(datos, JsonOpciones);
-                File.WriteAllText(RutaArchivo, json);
+                File.WriteAllText(RutaProductos, JsonSerializer.Serialize(productos.ToList(), JsonOpciones));
+                File.WriteAllText(RutaPapus, JsonSerializer.Serialize(papus.ToList(), JsonOpciones));
+                File.WriteAllText(RutaMoney, JsonSerializer.Serialize(money.ToList(), JsonOpciones));
+                Console.WriteLine($"[Datos guardados en: {CarpetaProyecto}]");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"No se pudo guardar {Path.GetFileName(RutaArchivo)}: {ex.Message}");
+                Console.WriteLine($"No se pudieron guardar los .json: {ex.Message}");
             }
         }
 
@@ -128,7 +160,7 @@ namespace MaquinaPapus
 
         private static void InicializarPapus()
         {
-            // Cada papu (distribuidor) inicia con un fondo propio distinto.
+            // Cada papu inicia con un fondo propio distinto.
             // Las denominaciones que no se especifican aqui usan el default
             // definido dentro del constructor de Papu.
             var dineroJuan = new List<Money>
@@ -194,7 +226,7 @@ namespace MaquinaPapus
         }
 
         // ---------------------------------------------------------
-        //  CLI principal (cliente)
+        //  CLI 
         // ---------------------------------------------------------
 
         public static void Commmand_Line_Interface()
@@ -241,7 +273,7 @@ namespace MaquinaPapus
         }
 
         // ---------------------------------------------------------
-        //  CLI de administracion (papu)
+        //  Papi CLI
         // ---------------------------------------------------------
 
         public static void Admin_Command_Line_Interface(Papu papu)
@@ -345,7 +377,7 @@ namespace MaquinaPapus
                     Console.WriteLine();
                     Console.WriteLine("-- buy        Buy a product");
                     Console.WriteLine();
-                    Console.WriteLine("-- papu       Enter papu mode");
+                    Console.WriteLine("-- papu       Enter admin mode");
                     Console.WriteLine();
                     Console.WriteLine("-- exit       Exit the program");
                     Console.WriteLine();
@@ -387,7 +419,7 @@ namespace MaquinaPapus
         public static void Buy()
         {
             Mostrar("productos");
-            Console.WriteLine("Ingresa la ubicacion del producto:");
+            Console.WriteLine("Ingresa la ubicacion del producto (ej: A1):");
             string ubi = (Console.ReadLine() ?? "").Trim().ToUpper();
 
             Productos producto = null;
@@ -449,14 +481,14 @@ namespace MaquinaPapus
         }
 
         // ---------------------------------------------------------
-        //  Modificaciones (admin)
+        //  Mod
         // ---------------------------------------------------------
 
         public static void Mod_Prod()
         {
             // Modificar un producto es: Mod Name, Mod Stock, Mod Price, Mod Ubi
             Mostrar("productos");
-            Console.WriteLine("Modificar: (ubi o nombre)");
+            Console.WriteLine("Que producto quieres modificar? (nombre o ubicacion)");
             string input = Console.ReadLine() ?? "";
             string normalizado = Normalizer(input);
             string ubiInput = input.Trim().ToUpper();
@@ -507,10 +539,8 @@ namespace MaquinaPapus
 
         public static void Mod_Money(Papu papu)
         {
-            // Quitar dinero de lo que tiene el papu y rellenar la maquina expendedora,
-            // o agregar dinero sobrante (ganancias) de la maquina expendedora al papu.
             Console.WriteLine("1. Ver dinero de la maquina");
-            Console.WriteLine("2. Rellenar cambio de la maquina");
+            Console.WriteLine("2. Rellenar cambio de la maquina (con tu dinero)");
             Console.WriteLine("3. Retirar ganancias de la maquina");
             string opcion = Console.ReadLine();
 
@@ -536,7 +566,6 @@ namespace MaquinaPapus
 
         public static void Mod_Papu(Papu papu)
         {
-            // Modificar un papu es: Mod su nombre, Mod su password, Ver su dinero.
             Console.WriteLine($"--- {papu.Name} ---");
             Console.WriteLine("1. Cambiar nombre");
             Console.WriteLine("2. Cambiar password");
@@ -583,7 +612,6 @@ namespace MaquinaPapus
         }
 
         // ---------------------------------------------------------
-        //  Helpers de dinero
         // ---------------------------------------------------------
 
         private static List<Money> ListaAList(Lista<Money> lista)

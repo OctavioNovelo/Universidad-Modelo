@@ -1,0 +1,122 @@
+[
+  {
+    "Name": "Papu Cola",
+    "Stock": 10,
+    "Price": 18,
+    "Ubi": "A1"
+  },
+  {
+    "Name": "Papuprite",
+    "Stock": 10,
+    "Price": 18,
+    "Ubi": "A2"
+  },
+  {
+    "Name": "Papu Ciel",
+    "Stock": 15,
+    "Price": 15,
+    "Ubi": "A3"
+  },
+  {
+    "Name": "Papu Del Valle",
+    "Stock": 8,
+    "Price": 20,
+    "Ubi": "A4"
+  },
+  {
+    "Name": "Papurade",
+    "Stock": 6,
+    "Price": 25,
+    "Ubi": "A5"
+  },
+  {
+    "Name": "Papubritas Original",
+    "Stock": 10,
+    "Price": 17,
+    "Ubi": "B1"
+  },
+  {
+    "Name": "Papuritos Nacho",
+    "Stock": 10,
+    "Price": 18,
+    "Ubi": "B2"
+  },
+  {
+    "Name": "PapuCheetos Torciditos",
+    "Stock": 10,
+    "Price": 17,
+    "Ubi": "B3"
+  },
+  {
+    "Name": "PapuRuffles Queso",
+    "Stock": 8,
+    "Price": 18,
+    "Ubi": "B4"
+  },
+  {
+    "Name": "PapuCheetos Flamin Hot",
+    "Stock": 10,
+    "Price": 19,
+    "Ubi": "B5"
+  },
+  {
+    "Name": "PapuGansito",
+    "Stock": 10,
+    "Price": 16,
+    "Ubi": "C1"
+  },
+  {
+    "Name": "Choco Papus",
+    "Stock": 10,
+    "Price": 15,
+    "Ubi": "C2"
+  },
+  {
+    "Name": "Papus Marinela",
+    "Stock": 10,
+    "Price": 14,
+    "Ubi": "C3"
+  },
+  {
+    "Name": "PapuOreo",
+    "Stock": 10,
+    "Price": 15,
+    "Ubi": "C4"
+  },
+  {
+    "Name": "PapuPrincipe",
+    "Stock": 10,
+    "Price": 15,
+    "Ubi": "C5"
+  },
+  {
+    "Name": "PapuSnickers",
+    "Stock": 10,
+    "Price": 20,
+    "Ubi": "D1"
+  },
+  {
+    "Name": "Kit Papu Kat",
+    "Stock": 10,
+    "Price": 20,
+    "Ubi": "D2"
+  },
+  {
+    "Name": "PapuSkittles",
+    "Stock": 10,
+    "Price": 17,
+    "Ubi": "D3"
+  },
+  {
+    "Name": "M\u0026Ps",
+    "Stock": 10,
+    "Price": 18,
+    "Ubi": "D4"
+  },
+  {
+    "Name": "Papu",
+    "Stock": 15,
+    "Price": 12,
+    "Ubi": "D5"
+  }
+]
