@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZaQf588dbw4=",
+  "success": true,
+  "projectFilePath": "/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Tarea_1/Tarea_1.csproj",
+  "expectedPackageFiles": [
+    "/home/shuten_doji/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.12/microsoft.aspnetcore.app.ref.10.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}

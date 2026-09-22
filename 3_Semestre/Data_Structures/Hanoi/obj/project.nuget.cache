@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "vlA2FWuLuvI=",
+  "success": true,
+  "projectFilePath": "/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi/Hanoi.csproj",
+  "expectedPackageFiles": [
+    "/home/shuten_doji/.nuget/packages/microsoft.aspnetcore.app.ref/10.0.12/microsoft.aspnetcore.app.ref.10.0.12.nupkg.sha512"
+  ],
+  "logs": []
+}
