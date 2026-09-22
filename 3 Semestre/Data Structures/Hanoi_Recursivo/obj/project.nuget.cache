@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "2w9plGYUdPU=",
+  "success": true,
+  "projectFilePath": "/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Recursivo/Hanoi_Recursivo.csproj",
+  "expectedPackageFiles": [
+    "/home/shuten_doji/.nuget/packages/microsoft.netcore.app.ref/8.0.31/microsoft.netcore.app.ref.8.0.31.nupkg.sha512",
+    "/home/shuten_doji/.nuget/packages/microsoft.aspnetcore.app.ref/8.0.31/microsoft.aspnetcore.app.ref.8.0.31.nupkg.sha512",
+    "/home/shuten_doji/.nuget/packages/microsoft.netcore.app.host.linux-x64/8.0.31/microsoft.netcore.app.host.linux-x64.8.0.31.nupkg.sha512"
+  ],
+  "logs": []
+}

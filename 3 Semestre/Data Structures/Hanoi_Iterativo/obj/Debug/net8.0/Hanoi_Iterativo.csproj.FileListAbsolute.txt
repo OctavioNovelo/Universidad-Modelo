@@ -1,0 +1,29 @@
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/bin/Debug/net8.0/Hanoi_Iterativo
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/bin/Debug/net8.0/Hanoi_Iterativo.deps.json
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/bin/Debug/net8.0/Hanoi_Iterativo.runtimeconfig.json
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/bin/Debug/net8.0/Hanoi_Iterativo.dll
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/bin/Debug/net8.0/Hanoi_Iterativo.pdb
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.GeneratedMSBuildEditorConfig.editorconfig
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.AssemblyInfoInputs.cache
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.AssemblyInfo.cs
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.csproj.CoreCompileInputs.cache
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.dll
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/obj/Debug/net8.0/refint/Hanoi_Iterativo.dll
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.pdb
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.genruntimeconfig.cache
+/home/shuten_doji/Documentos/Prueba_V.2/Hanoi_Iterativo/obj/Debug/net8.0/ref/Hanoi_Iterativo.dll
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/bin/Debug/net8.0/Hanoi_Iterativo
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/bin/Debug/net8.0/Hanoi_Iterativo.deps.json
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/bin/Debug/net8.0/Hanoi_Iterativo.runtimeconfig.json
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/bin/Debug/net8.0/Hanoi_Iterativo.dll
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/bin/Debug/net8.0/Hanoi_Iterativo.pdb
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.GeneratedMSBuildEditorConfig.editorconfig
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.AssemblyInfoInputs.cache
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.AssemblyInfo.cs
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.csproj.CoreCompileInputs.cache
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.sourcelink.json
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.dll
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/obj/Debug/net8.0/refint/Hanoi_Iterativo.dll
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.pdb
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/obj/Debug/net8.0/Hanoi_Iterativo.genruntimeconfig.cache
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Iterativo/obj/Debug/net8.0/ref/Hanoi_Iterativo.dll
