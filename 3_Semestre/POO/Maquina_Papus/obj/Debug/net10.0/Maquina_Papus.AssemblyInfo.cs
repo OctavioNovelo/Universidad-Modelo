@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Maquina_Papus")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+833d7b202c31abb52b026923d7a354346d3dbb07")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+dc6184c055cc3d5bf7d2184937f3fa25309ebe82")]
 [assembly: System.Reflection.AssemblyProductAttribute("Maquina_Papus")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Maquina_Papus")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
