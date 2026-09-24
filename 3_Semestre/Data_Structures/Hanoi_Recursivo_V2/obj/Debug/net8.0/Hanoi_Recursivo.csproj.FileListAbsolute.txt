@@ -27,3 +27,18 @@
 /home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/Hanoi_Recursivo.pdb
 /home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/Hanoi_Recursivo.genruntimeconfig.cache
 /home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3 Semestre/Data Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/ref/Hanoi_Recursivo.dll
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/bin/Debug/net8.0/Hanoi_Recursivo
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/bin/Debug/net8.0/Hanoi_Recursivo.deps.json
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/bin/Debug/net8.0/Hanoi_Recursivo.runtimeconfig.json
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/bin/Debug/net8.0/Hanoi_Recursivo.dll
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/bin/Debug/net8.0/Hanoi_Recursivo.pdb
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/Hanoi_Recursivo.GeneratedMSBuildEditorConfig.editorconfig
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/Hanoi_Recursivo.AssemblyInfoInputs.cache
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/Hanoi_Recursivo.AssemblyInfo.cs
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/Hanoi_Recursivo.csproj.CoreCompileInputs.cache
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/Hanoi_Recursivo.sourcelink.json
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/Hanoi_Recursivo.dll
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/refint/Hanoi_Recursivo.dll
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/Hanoi_Recursivo.pdb
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/Hanoi_Recursivo.genruntimeconfig.cache
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/Data_Structures/Hanoi_Recursivo_V2/obj/Debug/net8.0/ref/Hanoi_Recursivo.dll

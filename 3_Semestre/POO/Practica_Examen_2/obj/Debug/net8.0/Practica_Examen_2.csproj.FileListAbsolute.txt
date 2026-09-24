@@ -1,0 +1,15 @@
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/bin/Debug/net8.0/Practica_Examen_2
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/bin/Debug/net8.0/Practica_Examen_2.deps.json
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/bin/Debug/net8.0/Practica_Examen_2.runtimeconfig.json
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/bin/Debug/net8.0/Practica_Examen_2.dll
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/bin/Debug/net8.0/Practica_Examen_2.pdb
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/obj/Debug/net8.0/Practica_Examen_2.GeneratedMSBuildEditorConfig.editorconfig
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/obj/Debug/net8.0/Practica_Examen_2.AssemblyInfoInputs.cache
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/obj/Debug/net8.0/Practica_Examen_2.AssemblyInfo.cs
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/obj/Debug/net8.0/Practica_Examen_2.csproj.CoreCompileInputs.cache
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/obj/Debug/net8.0/Practica_Examen_2.sourcelink.json
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/obj/Debug/net8.0/Practica_Examen_2.dll
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/obj/Debug/net8.0/refint/Practica_Examen_2.dll
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/obj/Debug/net8.0/Practica_Examen_2.pdb
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/obj/Debug/net8.0/Practica_Examen_2.genruntimeconfig.cache
+/home/johnny_silverhand/Documents/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Practica_Examen_2/obj/Debug/net8.0/ref/Practica_Examen_2.dll

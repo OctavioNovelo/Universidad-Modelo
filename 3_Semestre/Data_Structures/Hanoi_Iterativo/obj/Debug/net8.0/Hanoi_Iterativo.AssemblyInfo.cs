@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Hanoi_Iterativo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+37b6a3b63fc99e29161d4a35d154c0e9fc43b2ad")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5f18706ab10b9b2ad2a2f9a1f5083bb3b7453375")]
 [assembly: System.Reflection.AssemblyProductAttribute("Hanoi_Iterativo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Hanoi_Iterativo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
