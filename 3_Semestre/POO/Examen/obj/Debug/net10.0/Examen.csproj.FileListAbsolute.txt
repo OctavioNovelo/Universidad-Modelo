@@ -1,0 +1,15 @@
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/bin/Debug/net10.0/Examen
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/bin/Debug/net10.0/Examen.deps.json
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/bin/Debug/net10.0/Examen.runtimeconfig.json
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/bin/Debug/net10.0/Examen.dll
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/bin/Debug/net10.0/Examen.pdb
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/obj/Debug/net10.0/Examen.GeneratedMSBuildEditorConfig.editorconfig
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/obj/Debug/net10.0/Examen.AssemblyInfoInputs.cache
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/obj/Debug/net10.0/Examen.AssemblyInfo.cs
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/obj/Debug/net10.0/Examen.csproj.CoreCompileInputs.cache
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/obj/Debug/net10.0/Examen.sourcelink.json
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/obj/Debug/net10.0/Examen.dll
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/obj/Debug/net10.0/refint/Examen.dll
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/obj/Debug/net10.0/Examen.pdb
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/obj/Debug/net10.0/Examen.genruntimeconfig.cache
+/home/shuten_doji/Documentos/GitHub/Universidad_Modelo/Universidad-Modelo/3_Semestre/POO/Examen/obj/Debug/net10.0/ref/Examen.dll
