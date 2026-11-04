@@ -1,1 +1,13 @@
+# Artefactos de compilación de .NET
+[Bb]in/
+[Oo]bj/
 
+# Visual Studio / Rider
+.vs/
+*.user
+*.suo
+.idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
