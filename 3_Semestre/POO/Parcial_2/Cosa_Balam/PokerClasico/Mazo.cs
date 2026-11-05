@@ -58,8 +58,7 @@ public class Mazo
     {
         if (cantidad < 0 || cantidad > _cartas.Count)
         {
-            throw new ArgumentOutOfRangeException(nameof(cantidad), cantidad,
-                $"Solo quedan {_cartas.Count} cartas en el mazo.");
+            throw new ArgumentOutOfRangeException(nameof(cantidad), cantidad, $"Solo quedan {_cartas.Count} cartas en el mazo.");
         }
 
         var cartas = new List<Carta>(cantidad);

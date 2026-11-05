@@ -29,9 +29,7 @@ public class ReglasPoker : ReglasJuegoBase
         EscaleraReal = 9
     }
 
-    public ReglasPoker()
-        : base("Póker Clásico (5 Cartas)",
-               "Showdown de 5 cartas: cada jugador recibe 5 naipes y gana la mejor jugada de la mesa.")
+    public ReglasPoker() : base("Póker Clásico (5 Cartas)", "Showdown de 5 cartas: cada jugador recibe 5 naipes y gana la mejor jugada de la mesa.")
     {
     }
 
@@ -42,8 +40,7 @@ public class ReglasPoker : ReglasJuegoBase
 
         if (mazo.CartasRestantes < jugadores.Count * CartasPorMano)
         {
-            throw new InvalidOperationException(
-                $"No hay cartas suficientes para {jugadores.Count} jugadores.");
+            throw new InvalidOperationException($"No hay cartas suficientes para {jugadores.Count} jugadores.");
         }
 
         foreach (Jugador jugador in jugadores)

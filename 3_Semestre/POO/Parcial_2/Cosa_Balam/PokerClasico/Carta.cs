@@ -50,8 +50,7 @@ public class Carta
     };
 
     /// <summary>Color de consola asociado al palo (rojo para ♥ ♦, blanco para ♣ ♠).</summary>
-    public ConsoleColor Color =>
-        Palo is Palo.Corazones or Palo.Diamantes ? ConsoleColor.Red : ConsoleColor.White;
+    public ConsoleColor Color => Palo is Palo.Corazones or Palo.Diamantes ? ConsoleColor.Red : ConsoleColor.White;
 
     public override string ToString() => $"{ValorCorto} {Simbolo}";
 
@@ -111,8 +110,7 @@ public class Carta
     {
         if (valorNumerico < (int)ValorCarta.Dos || valorNumerico > (int)ValorCarta.As)
         {
-            throw new ArgumentOutOfRangeException(nameof(valorNumerico), valorNumerico,
-                "El valor numérico debe estar entre 2 y 14.");
+            throw new ArgumentOutOfRangeException(nameof(valorNumerico), valorNumerico, "El valor numérico debe estar entre 2 y 14.");
         }
 
         return (ValorCarta)valorNumerico;
