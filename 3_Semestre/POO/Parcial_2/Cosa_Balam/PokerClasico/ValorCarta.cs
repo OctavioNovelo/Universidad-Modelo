@@ -1,4 +1,4 @@
-namespace PokerClasico.Enums;
+namespace PokerClasico;
 
 public enum ValorCarta
 {

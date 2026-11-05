@@ -1,7 +1,5 @@
-using PokerClasico.Modelos;
-using PokerClasico.Reglas;
 
-namespace PokerClasico.Motor;
+namespace PokerClasico;
 
 /// <summary>
 /// Orquestador genérico de una mesa de cartas. No conoce ninguna regla concreta:

@@ -1,6 +1,5 @@
-using PokerClasico.Enums;
 
-namespace PokerClasico.Modelos;
+namespace PokerClasico;
 
 /// <summary>
 /// Baraja estándar de 52 cartas.

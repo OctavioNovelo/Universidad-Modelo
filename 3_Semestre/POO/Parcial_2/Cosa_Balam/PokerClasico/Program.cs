@@ -1,7 +1,5 @@
 using System.Text;
-using PokerClasico.Modelos;
-using PokerClasico.Motor;
-using PokerClasico.Reglas;
+using PokerClasico;
 
 Console.OutputEncoding = Encoding.UTF8;
 

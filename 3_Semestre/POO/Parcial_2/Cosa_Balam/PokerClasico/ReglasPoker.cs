@@ -1,7 +1,5 @@
-using PokerClasico.Enums;
-using PokerClasico.Modelos;
 
-namespace PokerClasico.Reglas;
+namespace PokerClasico;
 
 /// <summary>
 /// Reglas del Póker Clásico (Showdown de 5 cartas).

@@ -1,6 +1,5 @@
-using PokerClasico.Modelos;
 
-namespace PokerClasico.Reglas;
+namespace PokerClasico;
 
 /// <summary>
 /// Contrato que cualquier conjunto de reglas debe proporcionar al motor.

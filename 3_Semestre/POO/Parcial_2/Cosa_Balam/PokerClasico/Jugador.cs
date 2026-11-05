@@ -1,4 +1,4 @@
-namespace PokerClasico.Modelos;
+namespace PokerClasico;
 
 /// <summary>
 /// Participante de la mesa.

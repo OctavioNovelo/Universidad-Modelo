@@ -1,6 +1,5 @@
-using PokerClasico.Modelos;
 
-namespace PokerClasico.Reglas;
+namespace PokerClasico;
 
 /// <summary>
 /// Clase base abstracta para cualquier juego de cartas.

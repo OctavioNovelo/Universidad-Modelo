@@ -1,6 +1,5 @@
-using PokerClasico.Enums;
 
-namespace PokerClasico.Modelos;
+namespace PokerClasico;
 
 /// <summary>
 /// Representa un naipe de la baraja francesa (palo + valor).
