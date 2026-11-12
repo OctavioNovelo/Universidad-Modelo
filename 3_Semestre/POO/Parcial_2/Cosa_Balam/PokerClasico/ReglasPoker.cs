@@ -251,11 +251,11 @@ public class ReglasPoker : ReglasJuegoBase
         if (ganadores.Count == 1)
         {
             Jugador ganador = ganadores[0];
-            return $"🏆 Gana {ganador.Nombre} con {ganador.DetalleJugada}.";
+            return $"Gana {ganador.Nombre} con {ganador.DetalleJugada}.";
         }
         // Si hay empate, unimos los nombres de los ganadores con " y ".
         string nombres = string.Join(" y ", ganadores.Select(j => j.Nombre));
-        return $"🤝 Empate entre {nombres} con {ganadores[0].DetalleJugada}. El bote se divide.";
+        return $"Empate entre {nombres} con {ganadores[0].DetalleJugada}. El bote se divide.";
     }
 
     private static int CalcularPuntuacion(Categoria categoria, List<ValorCarta> desempates)
