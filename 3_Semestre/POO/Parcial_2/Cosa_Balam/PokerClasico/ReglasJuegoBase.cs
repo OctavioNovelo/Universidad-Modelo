@@ -12,8 +12,7 @@ public abstract class ReglasJuegoBase : IReglasJuego
         NombreJuego = nombreJuego;
         Descripcion = descripcion;
     }
-
     public abstract void Repartir(Mazo mazo, List<Jugador> jugadores);
-    public abstract int EvaluarPuntuacion(List<Carta> mano, out string descripcionJugada);
+    public abstract int EvaluarPuntuacion(List<Carta> mano, out string descripcion);
     public abstract string DeterminarGanador(List<Jugador> jugadores);
 }

@@ -9,14 +9,11 @@ public class Jugador
     public int Puntuacion { get; private set; }
     public string DetalleJugada { get; private set; }
 
-    public Jugador(string nombre) : this(nombre, 0)
-    {
-    }   
-
-
+    
     // Constructor
     public Jugador(string nombre, int id)
     {
+        // Comprobacin de chill
         if (string.IsNullOrWhiteSpace(nombre))
         {
             throw new ArgumentException("El nombre del jugador no puede estar vacío.", nameof(nombre));
@@ -29,27 +26,36 @@ public class Jugador
         DetalleJugada = string.Empty;
     }
 
+    // Con : el constructor delega la incializacion a otro contructor de la misma clase, en este casi el de arriba
+    public Jugador(string nombre) : this(nombre, 0)
+    {
+    }  
 
     // Metodos
     // Recibir UNA carta
     public void RecibirCarta(Carta carta)
     {
-        ArgumentNullException.ThrowIfNull(carta); // throw new exception => nullable carta
+        if (carta == null)
+        {
+            throw new ArgumentNullException(nameof(carta));
+        }
         Mano.Add(carta); // Agregamos la carta a la mano. 
     }
 
     // Recibir VARIAS cartas
     public void RecibirCarta(List<Carta> cartas)
     {
-        ArgumentNullException.ThrowIfNull(cartas); // throw new exception => nullable carta
+        if (cartas == null)
+        {
+            throw new ArgumentNullException(nameof(cartas));
+        }
         foreach (Carta carta in cartas)
         {
-            RecibirCarta(carta);
+            RecibirCarta(carta); // omg parece recursivo pero no es xdxdxxdxdxdxd
         }
     }
 
-    /// <summary>Guarda el resultado de la evaluación de la mano.</summary>
-    /// Constructor ? 
+    // Guarda el resultado de la evaluación de la mano.  
     public void AsignarResultado(int puntuacion, string detalleJugada)
     {
         Puntuacion = puntuacion;
