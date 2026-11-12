@@ -1,19 +1,18 @@
 
 namespace PokerClasico;
 
-/// <summary>
-/// Baraja estándar de 52 cartas.
-/// </summary>
+// Mazo de 52 cartas
 public class Mazo
 {
-    private readonly List<Carta> _cartas = new();
-    private readonly Random _random;
+    private readonly List<Carta> _cartas = new(); // Lista de cartas == Mano
+    private readonly Random _random; // Seed
 
+    // Crear mazoS
     public Mazo() : this(Random.Shared)
     {
     }
 
-    /// <summary>Permite inyectar un generador aleatorio (útil para pruebas reproducibles).</summary>
+    // Crear un mazo con una seed.
     public Mazo(Random random)
     {
         _random = random ?? throw new ArgumentNullException(nameof(random));
@@ -27,9 +26,11 @@ public class Mazo
         }
     }
 
+
     public int CartasRestantes => _cartas.Count;
 
-    /// <summary>Barajado aleatorio con el algoritmo de Fisher-Yates.</summary>
+    // Metodos
+    // Checar algoritmo
     public void Barajar()
     {
         for (int i = _cartas.Count - 1; i > 0; i--)
@@ -39,9 +40,10 @@ public class Mazo
         }
     }
 
-    /// <summary>Extrae y devuelve la carta superior del mazo.</summary>
+    // Toma la primera carta del mazo
     public Carta TomarCarta()
     {
+        // Si el MAZO esta vacio
         if (_cartas.Count == 0)
         {
             throw new InvalidOperationException("El mazo está vacío.");
@@ -53,9 +55,10 @@ public class Mazo
         return carta;
     }
 
-    /// <summary>Devuelve una lista con la cantidad de cartas solicitadas.</summary>
+    // Devuelve una lista con la cantidad de cartas solicitadas
     public List<Carta> Repartir(int cantidad)
     {
+        // Que NO se 0 o que no sea mayor a la cantidad de cartas que quedan.
         if (cantidad < 0 || cantidad > _cartas.Count)
         {
             throw new ArgumentOutOfRangeException(nameof(cantidad), cantidad, $"Solo quedan {_cartas.Count} cartas en el mazo.");
@@ -69,6 +72,6 @@ public class Mazo
         return cartas;
     }
 
-    /// <summary>Devuelve una sola carta.</summary>
+    // Devuelve SOLO 1 cartas
     public Carta Repartir() => TomarCarta();
 }

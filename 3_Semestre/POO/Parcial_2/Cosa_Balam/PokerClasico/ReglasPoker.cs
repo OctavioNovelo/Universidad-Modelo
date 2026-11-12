@@ -1,20 +1,16 @@
 
 namespace PokerClasico;
 
-/// <summary>
-/// Reglas del Póker Clásico (Showdown de 5 cartas).
-/// </summary>
+// Reglas del Póker Clásico (Showdown de 5 cartas).
 public class ReglasPoker : ReglasJuegoBase
 {
     private const int CartasPorMano = 5;
 
-    /// <summary>
-    /// Base numérica de la puntuación ponderada. Los valores de carta van de 2 a 14,
-    /// por lo que una base de 15 permite codificar cada desempate como un "dígito".
-    /// </summary>
+    // Base numérica de la puntuación ponderada. Los valores de carta van de 2 a 14,
+    // por lo que una base de 15 permite codificar cada desempate como un "dígito".
     private const int Base = 15;
 
-    /// <summary>Categorías de jugada, de menor a mayor.</summary>
+    // Categorías de jugada, de menor a mayor puntaje.
     private enum Categoria
     {
         CartaAlta = 0,
@@ -33,16 +29,19 @@ public class ReglasPoker : ReglasJuegoBase
     {
     }
 
+    // Se sobreescribe el metodo Repartir. 
     public override void Repartir(Mazo mazo, List<Jugador> jugadores)
     {
         ArgumentNullException.ThrowIfNull(mazo);
         ArgumentNullException.ThrowIfNull(jugadores);
 
+        // Verificamos si las cartas del mazo son suficientes para repartir a los jugadores actuales
         if (mazo.CartasRestantes < jugadores.Count * CartasPorMano)
         {
             throw new InvalidOperationException($"No hay cartas suficientes para {jugadores.Count} jugadores.");
         }
 
+        // Limpiamos todas las manos. Nos preparamos para iniciar la ronda.
         foreach (Jugador jugador in jugadores)
         {
             jugador.LimpiarMano();
@@ -58,9 +57,12 @@ public class ReglasPoker : ReglasJuegoBase
         }
     }
 
+    // Se sobreescribe EvaluarPuntuacion. 
     public override int EvaluarPuntuacion(List<Carta> mano, out string descripcionJugada)
     {
         ArgumentNullException.ThrowIfNull(mano);
+
+        // Le faltan cartas a la mano
         if (mano.Count != CartasPorMano)
         {
             throw new ArgumentException($"La mano debe tener exactamente {CartasPorMano} cartas.", nameof(mano));

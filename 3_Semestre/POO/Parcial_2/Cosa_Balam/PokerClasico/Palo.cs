@@ -1,5 +1,6 @@
 namespace PokerClasico;
 
+// Palos posibles.
 public enum Palo
 {
     Corazones,

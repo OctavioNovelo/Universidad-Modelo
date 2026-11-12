@@ -1,5 +1,6 @@
 namespace PokerClasico;
 
+// Valor de cada carta
 public enum ValorCarta
 {
     Dos = 2,

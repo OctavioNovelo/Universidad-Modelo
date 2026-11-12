@@ -1,10 +1,7 @@
 
 namespace PokerClasico;
 
-/// <summary>
-/// Orquestador genérico de una mesa de cartas. No conoce ninguna regla concreta:
-/// toda la lógica del juego se delega al contrato <see cref="IReglasJuego"/>.
-/// </summary>
+
 public class MotorJuego
 {
     private readonly IReglasJuego _reglas;

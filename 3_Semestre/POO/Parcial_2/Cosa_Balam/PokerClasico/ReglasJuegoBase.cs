@@ -1,12 +1,10 @@
 
 namespace PokerClasico;
 
-/// <summary>
-/// Clase base abstracta para cualquier juego de cartas.
-/// </summary>
+// Clase base abstracta para cualquier juego de cartas.
 public abstract class ReglasJuegoBase : IReglasJuego
 {
-    public string NombreJuego { get; protected set; }
+    public string NombreJuego { get; protected set; } 
     public string Descripcion { get; protected set; }
 
     protected ReglasJuegoBase(string nombreJuego, string descripcion)

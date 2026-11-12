@@ -1,9 +1,7 @@
 
 namespace PokerClasico;
 
-/// <summary>
-/// Contrato que cualquier conjunto de reglas debe proporcionar al motor.
-/// </summary>
+// Conjunto de reglas
 public interface IReglasJuego
 {
     string NombreJuego { get; }

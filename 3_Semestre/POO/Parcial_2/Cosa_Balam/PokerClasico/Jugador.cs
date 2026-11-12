@@ -1,8 +1,6 @@
 namespace PokerClasico;
 
-/// <summary>
-/// Participante de la mesa.
-/// </summary>
+// Jugador
 public class Jugador
 {
     public int Id { get; private set; }
@@ -13,8 +11,10 @@ public class Jugador
 
     public Jugador(string nombre) : this(nombre, 0)
     {
-    }
+    }   
 
+
+    // Constructor
     public Jugador(string nombre, int id)
     {
         if (string.IsNullOrWhiteSpace(nombre))
@@ -29,15 +29,19 @@ public class Jugador
         DetalleJugada = string.Empty;
     }
 
+
+    // Metodos
+    // Recibir UNA carta
     public void RecibirCarta(Carta carta)
     {
-        ArgumentNullException.ThrowIfNull(carta);
-        Mano.Add(carta);
+        ArgumentNullException.ThrowIfNull(carta); // throw new exception => nullable carta
+        Mano.Add(carta); // Agregamos la carta a la mano. 
     }
 
+    // Recibir VARIAS cartas
     public void RecibirCarta(List<Carta> cartas)
     {
-        ArgumentNullException.ThrowIfNull(cartas);
+        ArgumentNullException.ThrowIfNull(cartas); // throw new exception => nullable carta
         foreach (Carta carta in cartas)
         {
             RecibirCarta(carta);
@@ -45,13 +49,14 @@ public class Jugador
     }
 
     /// <summary>Guarda el resultado de la evaluación de la mano.</summary>
+    /// Constructor ? 
     public void AsignarResultado(int puntuacion, string detalleJugada)
     {
         Puntuacion = puntuacion;
         DetalleJugada = detalleJugada ?? string.Empty;
     }
 
-    /// <summary>Vacía la mano y reinicia el resultado para una nueva ronda.</summary>
+    // Borramos la mano. 
     public void LimpiarMano()
     {
         Mano.Clear();
